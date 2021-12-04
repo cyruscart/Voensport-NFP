@@ -8,24 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */; };
-		6EC4BA94275B7BF000A4FD4A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA93275B7BF000A4FD4A /* SceneDelegate.swift */; };
-		6EC4BA96275B7BF000A4FD4A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA95275B7BF000A4FD4A /* ViewController.swift */; };
-		6EC4BA99275B7BF000A4FD4A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4BA97275B7BF000A4FD4A /* Main.storyboard */; };
-		6EC4BA9C275B7BF000A4FD4A /* Voensport_NFP.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA9A275B7BF000A4FD4A /* Voensport_NFP.xcdatamodeld */; };
 		6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */; };
-		6EC4BAA1275B7BF100A4FD4A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4BA9F275B7BF100A4FD4A /* LaunchScreen.storyboard */; };
+		6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6EC4BA8E275B7BF000A4FD4A /* Voensport-NFP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voensport-NFP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6EC4BA93275B7BF000A4FD4A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6EC4BA95275B7BF000A4FD4A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6EC4BA98275B7BF000A4FD4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		6EC4BA9B275B7BF000A4FD4A /* Voensport_NFP.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Voensport_NFP.xcdatamodel; sourceTree = "<group>"; };
 		6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		6EC4BAA0275B7BF100A4FD4A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6EC4BAA2275B7BF100A4FD4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,16 +50,84 @@
 		6EC4BA90275B7BF000A4FD4A /* Voensport-NFP */ = {
 			isa = PBXGroup;
 			children = (
-				6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */,
-				6EC4BA93275B7BF000A4FD4A /* SceneDelegate.swift */,
-				6EC4BA95275B7BF000A4FD4A /* ViewController.swift */,
-				6EC4BA97275B7BF000A4FD4A /* Main.storyboard */,
-				6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */,
-				6EC4BA9F275B7BF100A4FD4A /* LaunchScreen.storyboard */,
-				6EC4BAA2275B7BF100A4FD4A /* Info.plist */,
-				6EC4BA9A275B7BF000A4FD4A /* Voensport_NFP.xcdatamodeld */,
+				6EC4BAA8275B7C2B00A4FD4A /* Application */,
+				6EC4BAB0275B7EC300A4FD4A /* SplashScreen */,
+				6EC4BAAC275B7CB300A4FD4A /* Resources */,
 			);
 			path = "Voensport-NFP";
+			sourceTree = "<group>";
+		};
+		6EC4BAA8275B7C2B00A4FD4A /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				6EC4BAAD275B7DA800A4FD4A /* Model */,
+				6EC4BAAE275B7DAF00A4FD4A /* Veiw */,
+				6EC4BAAF275B7DB400A4FD4A /* Controller */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		6EC4BAAC275B7CB300A4FD4A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6EC4BAA2275B7BF100A4FD4A /* Info.plist */,
+				6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		6EC4BAAD275B7DA800A4FD4A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6EC4BAAE275B7DAF00A4FD4A /* Veiw */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Veiw;
+			sourceTree = "<group>";
+		};
+		6EC4BAAF275B7DB400A4FD4A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6EC4BAB0275B7EC300A4FD4A /* SplashScreen */ = {
+			isa = PBXGroup;
+			children = (
+				6EC4BAB1275B7ED300A4FD4A /* Model */,
+				6EC4BAB2275B7EDA00A4FD4A /* View */,
+				6EC4BAB3275B7EE000A4FD4A /* Controller */,
+			);
+			path = SplashScreen;
+			sourceTree = "<group>";
+		};
+		6EC4BAB1275B7ED300A4FD4A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6EC4BAB2275B7EDA00A4FD4A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6EC4BAB3275B7EE000A4FD4A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */,
+			);
+			path = Controller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -128,9 +188,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EC4BAA1275B7BF100A4FD4A /* LaunchScreen.storyboard in Resources */,
 				6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */,
-				6EC4BA99275B7BF000A4FD4A /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,33 +199,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6EC4BA96275B7BF000A4FD4A /* ViewController.swift in Sources */,
-				6EC4BA9C275B7BF000A4FD4A /* Voensport_NFP.xcdatamodeld in Sources */,
+				6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */,
 				6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */,
-				6EC4BA94275B7BF000A4FD4A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		6EC4BA97275B7BF000A4FD4A /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EC4BA98275B7BF000A4FD4A /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		6EC4BA9F275B7BF100A4FD4A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6EC4BAA0275B7BF100A4FD4A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		6EC4BAA3275B7BF100A4FD4A /* Debug */ = {
@@ -295,12 +332,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B5K6K9GB7Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Voensport-NFP/Info.plist";
+				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +347,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -323,12 +360,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = B5K6K9GB7Y;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Voensport-NFP/Info.plist";
+				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,7 +375,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -364,19 +401,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		6EC4BA9A275B7BF000A4FD4A /* Voensport_NFP.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				6EC4BA9B275B7BF000A4FD4A /* Voensport_NFP.xcdatamodel */,
-			);
-			currentVersion = 6EC4BA9B275B7BF000A4FD4A /* Voensport_NFP.xcdatamodel */;
-			path = Voensport_NFP.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 6EC4BA86275B7BEF00A4FD4A /* Project object */;
 }
