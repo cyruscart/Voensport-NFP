@@ -7,17 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6E074262275C953E00907B35 /* Sex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074261275C953E00907B35 /* Sex.swift */; };
+		6E074264275C957C00907B35 /* MaleAgeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074263275C957C00907B35 /* MaleAgeCategory.swift */; };
+		6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074265275C95D500907B35 /* FemaleAgeCategory.swift */; };
+		6E074268275C95F100907B35 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074267275C95F100907B35 /* Category.swift */; };
+		6E07426A275C962C00907B35 /* NumberOfExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074269275C962C00907B35 /* NumberOfExercises.swift */; };
+		6E07426C275CB35C00907B35 /* HapticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E07426B275CB35C00907B35 /* HapticTableViewCell.swift */; };
 		6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */; };
 		6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */; };
 		6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */; };
+		6ED04549275C6B4700D048B4 /* NfpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04548275C6B4700D048B4 /* NfpViewController.swift */; };
+		6ED0454F275C6C2A00D048B4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0454E275C6C2A00D048B4 /* SettingsViewController.swift */; };
+		6ED04551275C6C4500D048B4 /* DetailSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04550275C6C4500D048B4 /* DetailSettingsViewController.swift */; };
+		6ED04553275C791A00D048B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ED04552275C791A00D048B4 /* LaunchScreen.storyboard */; };
+		6ED04555275C91B800D048B4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04554275C91B800D048B4 /* Settings.swift */; };
+		6ED04558275C922100D048B4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04557275C922100D048B4 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6E074261275C953E00907B35 /* Sex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sex.swift; sourceTree = "<group>"; };
+		6E074263275C957C00907B35 /* MaleAgeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaleAgeCategory.swift; sourceTree = "<group>"; };
+		6E074265275C95D500907B35 /* FemaleAgeCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FemaleAgeCategory.swift; sourceTree = "<group>"; };
+		6E074267275C95F100907B35 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		6E074269275C962C00907B35 /* NumberOfExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfExercises.swift; sourceTree = "<group>"; };
+		6E07426B275CB35C00907B35 /* HapticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticTableViewCell.swift; sourceTree = "<group>"; };
 		6EC4BA8E275B7BF000A4FD4A /* Voensport-NFP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voensport-NFP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6EC4BAA2275B7BF100A4FD4A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
+		6ED04548275C6B4700D048B4 /* NfpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpViewController.swift; sourceTree = "<group>"; };
+		6ED0454E275C6C2A00D048B4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6ED04550275C6C4500D048B4 /* DetailSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSettingsViewController.swift; sourceTree = "<group>"; };
+		6ED04552275C791A00D048B4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6ED04554275C91B800D048B4 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		6ED04557275C922100D048B4 /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +76,8 @@
 			children = (
 				6EC4BAA8275B7C2B00A4FD4A /* Application */,
 				6EC4BAB0275B7EC300A4FD4A /* SplashScreen */,
+				6ED04544275C6AB800D048B4 /* Nfp */,
+				6ED0454A275C6BAF00D048B4 /* Settings */,
 				6EC4BAAC275B7CB300A4FD4A /* Resources */,
 			);
 			path = "Voensport-NFP";
@@ -63,6 +89,7 @@
 				6EC4BAAD275B7DA800A4FD4A /* Model */,
 				6EC4BAAE275B7DAF00A4FD4A /* Veiw */,
 				6EC4BAAF275B7DB400A4FD4A /* Controller */,
+				6ED04556275C91EA00D048B4 /* Service */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -70,6 +97,7 @@
 		6EC4BAAC275B7CB300A4FD4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6ED04552275C791A00D048B4 /* LaunchScreen.storyboard */,
 				6EC4BAA2275B7BF100A4FD4A /* Info.plist */,
 				6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */,
 			);
@@ -128,6 +156,86 @@
 				6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		6ED04544275C6AB800D048B4 /* Nfp */ = {
+			isa = PBXGroup;
+			children = (
+				6ED04547275C6AEC00D048B4 /* Model */,
+				6ED04546275C6AE500D048B4 /* View */,
+				6ED04545275C6ADA00D048B4 /* Controller */,
+			);
+			path = Nfp;
+			sourceTree = "<group>";
+		};
+		6ED04545275C6ADA00D048B4 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6ED04548275C6B4700D048B4 /* NfpViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6ED04546275C6AE500D048B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6ED04547275C6AEC00D048B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6ED0454A275C6BAF00D048B4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				6ED0454D275C6BCD00D048B4 /* Model */,
+				6ED0454C275C6BC500D048B4 /* View */,
+				6ED0454B275C6BBC00D048B4 /* ViewController */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		6ED0454B275C6BBC00D048B4 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				6ED0454E275C6C2A00D048B4 /* SettingsViewController.swift */,
+				6ED04550275C6C4500D048B4 /* DetailSettingsViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		6ED0454C275C6BC500D048B4 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6E07426B275CB35C00907B35 /* HapticTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6ED0454D275C6BCD00D048B4 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6ED04554275C91B800D048B4 /* Settings.swift */,
+				6E074263275C957C00907B35 /* MaleAgeCategory.swift */,
+				6E074261275C953E00907B35 /* Sex.swift */,
+				6E074265275C95D500907B35 /* FemaleAgeCategory.swift */,
+				6E074267275C95F100907B35 /* Category.swift */,
+				6E074269275C962C00907B35 /* NumberOfExercises.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6ED04556275C91EA00D048B4 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6ED04557275C922100D048B4 /* StorageManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +297,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */,
+				6ED04553275C791A00D048B4 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +309,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */,
+				6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */,
+				6E07426C275CB35C00907B35 /* HapticTableViewCell.swift in Sources */,
+				6ED04549275C6B4700D048B4 /* NfpViewController.swift in Sources */,
+				6ED04555275C91B800D048B4 /* Settings.swift in Sources */,
+				6ED04558275C922100D048B4 /* StorageManager.swift in Sources */,
+				6E074262275C953E00907B35 /* Sex.swift in Sources */,
 				6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */,
+				6E07426A275C962C00907B35 /* NumberOfExercises.swift in Sources */,
+				6E074264275C957C00907B35 /* MaleAgeCategory.swift in Sources */,
+				6ED0454F275C6C2A00D048B4 /* SettingsViewController.swift in Sources */,
+				6ED04551275C6C4500D048B4 /* DetailSettingsViewController.swift in Sources */,
+				6E074268275C95F100907B35 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -258,7 +378,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -313,7 +433,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -334,6 +454,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -362,6 +483,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

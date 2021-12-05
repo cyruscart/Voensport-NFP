@@ -8,7 +8,7 @@
 import UIKit
 
 class SplashViewController: UIViewController {
-
+    
     private var logoImageView = UIImageView()
     
     override func viewDidLoad() {
@@ -21,17 +21,51 @@ class SplashViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        showLogo(images: 27)
+        
+        
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        showLogo(images: 27)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
+            self.createAndShowTabBar()
+        }
+        
+        
+    }
+    // MARK: - Navigation
+    
+    private func createAndShowTabBar() {
+        
+        let tabBarVC = UITabBarController()
+        
+        let nfpVC = UINavigationController(rootViewController: NfpViewController())
+        nfpVC.title = "Сдача ФП"
+        
+        tabBarVC.modalPresentationStyle = .fullScreen
+        
+        tabBarVC.setViewControllers([nfpVC], animated: false)
+        
+       
+        nfpVC.tabBarItem.image = UIImage(named: "nfp")
+        
+        present(tabBarVC, animated: true)
+        
+    }
+    
+    
+    
 }
-
 // MARK: - Show logo method
 
 extension SplashViewController {
     
     private func showLogo(images count: Int) {
         var logoImages: [UIImage] = []
-
+        
         for image in 0...count {
             logoImages.append(UIImage(named: "\(image)")!)
         }
@@ -45,6 +79,7 @@ extension SplashViewController {
 }
 
 // MARK: - Layout
+
 extension SplashViewController {
     
     private func setConstraints() {
@@ -52,9 +87,11 @@ extension SplashViewController {
         
         NSLayoutConstraint.activate([
             logoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-            logoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20),
+            logoImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
+            logoImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -30),
             logoImageView.widthAnchor.constraint(equalTo: logoImageView.heightAnchor, multiplier: 1)
         ])
     }
 }
+
+
