@@ -17,19 +17,19 @@ final class Settings: Codable {
     var hapticOn = true
     
     var isManOlderThirtyFive: Bool {
-            maleAgeCategory == .fourthAgeGroup
-            || maleAgeCategory == .fifthAgeGroup
-            || maleAgeCategory == .sixthAgeGroup
-            || maleAgeCategory == .seventhAgeGroup
-            || maleAgeCategory == .eighthAgeGroup
-        }
+        maleAgeCategory == .fourthAgeGroup
+        || maleAgeCategory == .fifthAgeGroup
+        || maleAgeCategory == .sixthAgeGroup
+        || maleAgeCategory == .seventhAgeGroup
+        || maleAgeCategory == .eighthAgeGroup
+    }
     
     var isWomanOlderThirty: Bool {
-            femaleAgeCategory == .thirdAgeGroup
-            || femaleAgeCategory == .fourthAgeGroup
-            || femaleAgeCategory == .fifthAgeGroup
-            || femaleAgeCategory == .sixthAgeGroup
-        }
+        femaleAgeCategory == .thirdAgeGroup
+        || femaleAgeCategory == .fourthAgeGroup
+        || femaleAgeCategory == .fifthAgeGroup
+        || femaleAgeCategory == .sixthAgeGroup
+    }
     
     private var shouldShowCategoryInsteadExercise: Bool {
         sex == .male
@@ -120,11 +120,11 @@ final class Settings: Codable {
     }
     
     func settingGroupDidSelect(_ indexPath: IndexPath, _ selectedSetting: inout String) -> Bool {
-        var shouldPerform = true
+        var shouldShowDetailSettings = true
         
         switch indexPath.section {
         case getNumberOfSectionForSettings() - 1:
-            shouldPerform = false
+            shouldShowDetailSettings = false
         case 0:
             selectedSetting = "sex"
         case 1:
@@ -138,7 +138,7 @@ final class Settings: Codable {
         default:
             selectedSetting = "category"
         }
-        return shouldPerform
+        return shouldShowDetailSettings
     }
     
     func settingDidSelect(didSelectRowAt indexPath: IndexPath, currentSetting: String) {
@@ -148,7 +148,7 @@ final class Settings: Codable {
             sex = Sex.allCases[indexPath.row]
             StorageManager.shared.saveSettings(self)
         case "maleAge":
-           maleAgeCategory = MaleAgeCategory.allCases[indexPath.row]
+            maleAgeCategory = MaleAgeCategory.allCases[indexPath.row]
             changeNumberOfExercise()
             StorageManager.shared.saveSettings(self)
         case "femaleAge":
@@ -200,6 +200,22 @@ final class Settings: Codable {
         }
     }
     
+//    func getTitleForDetailSettings(currentSetting: String) -> String {
+//        
+//        switch currentSetting {
+//        case "sex":
+//            return "Пол"
+//        case "maleAge", "femaleAge":
+//            return "Возраст"
+//        case "category":
+//            return "Категория"
+//        case "numberOfExercise":
+//            return "Количество упражнений"
+//        default:
+//            return "Количество упражнений"
+//        }
+//    }
+    
     func getTextForCell(section: Int) -> String {
         
         switch section {
@@ -235,5 +251,5 @@ final class Settings: Codable {
             numberOfExercise = .three
         }
     }
-
+    
 }

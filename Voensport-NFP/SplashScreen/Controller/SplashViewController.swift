@@ -17,47 +17,22 @@ class SplashViewController: UIViewController {
         view.addSubview(logoImageView)
         setConstraints()
     }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        
-        
-    }
+  
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         showLogo(images: 27)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0) {
-            self.createAndShowTabBar()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.showTabBar()
         }
-        
-        
     }
-    // MARK: - Navigation
-    
-    private func createAndShowTabBar() {
-        
-        let tabBarVC = UITabBarController()
-        
-        let nfpVC = UINavigationController(rootViewController: NfpViewController())
-        nfpVC.title = "Сдача ФП"
-        
-        tabBarVC.modalPresentationStyle = .fullScreen
-        
-        tabBarVC.setViewControllers([nfpVC], animated: false)
-        
-       
-        nfpVC.tabBarItem.image = UIImage(named: "nfp")
-        
-        present(tabBarVC, animated: true)
-        
+
+    private func showTabBar() {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        present(appDelegate.tabBarFactory(), animated: true)
     }
-    
-    
-    
 }
 // MARK: - Show logo method
 

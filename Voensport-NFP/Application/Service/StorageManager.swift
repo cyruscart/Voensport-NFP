@@ -13,7 +13,7 @@ final class StorageManager {
     static let shared = StorageManager()
     
     private init() {}
-    
+ 
     
     //MARK: - Settings
     

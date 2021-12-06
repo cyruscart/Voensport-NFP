@@ -9,11 +9,16 @@ import UIKit
 
 class NfpViewController: UIViewController  {
     
-    var settings = Settings()
+    var settings: Settings!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
         setupNavigationBar()
     }

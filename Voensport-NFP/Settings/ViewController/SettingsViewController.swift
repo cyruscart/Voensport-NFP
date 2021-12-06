@@ -8,21 +8,22 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    
     var settings: Settings!
     private var tableView: UITableView!
-    private var selectedSetting = ""
+    private var selectedSetting: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        navigationController?.navigationBar.prefersLargeTitles = false
+       
+        title = "Настройки"
+        selectedSetting = ""
+     
         setTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         settings.setNumberOfExercise()
         tableView.reloadData()
@@ -34,6 +35,8 @@ class SettingsViewController: UIViewController {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(HapticTableViewCell.self, forCellReuseIdentifier: "hapticCell")
+        
         tableView.separatorStyle = .none
         
         tableView.dataSource = self
@@ -43,51 +46,43 @@ class SettingsViewController: UIViewController {
 
 extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
-     func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         settings.getNumberOfSectionForSettings()
         
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
     }
     
-     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         settings.getTitleForSectionForSettingsList(section: section)
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.numberOfSections == indexPath.section + 1
-//        ? tableView.dequeueReusableCell(withIdentifier: "hapticCell", for: indexPath) as! HapticTableViewCell
-//        : tableView.dequeueReusableCell(withIdentifier: "settingsCell", for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.numberOfSections == indexPath.section + 1
+        ? tableView.dequeueReusableCell(withIdentifier: "hapticCell", for: indexPath) as! HapticTableViewCell
+        : tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
         
-//        if let cell = cell as? HapticTableViewCell {
-//            cell.settingLabel.text = "При выборе результата"
-//        } else {
-//            var content = cell.defaultContentConfiguration()
-//            content.text = SettingsManager.shared.getTextForCell(section: indexPath.section)
-//            cell.contentConfiguration = content
-//        }
-         
-         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-         var content = cell.defaultContentConfiguration()
-         cell.accessoryType = .disclosureIndicator
-         content.text = settings.getTextForCell(section: indexPath.section)
-         
-         cell.contentConfiguration = content
-         
+        if let cell = cell as? HapticTableViewCell {
+            cell.configure(settings: settings)
+            
+        } else {
+            var content = cell.defaultContentConfiguration()
+            cell.accessoryType = .disclosureIndicator
+            content.text = settings.getTextForCell(section: indexPath.section)
+            cell.contentConfiguration = content
+        }
         return cell
     }
     
-     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if settings.settingGroupDidSelect(indexPath, &selectedSetting) {
             let detailSettingsVC = DetailSettingsViewController()
+            detailSettingsVC.currentSetting = selectedSetting
+            detailSettingsVC.settings = settings
             navigationController?.pushViewController(detailSettingsVC, animated: true)
         }
     }
-    
-    // MARK: - Navigation
-    
-    
 }
