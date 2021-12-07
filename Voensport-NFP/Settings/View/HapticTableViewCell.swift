@@ -9,9 +9,10 @@ import UIKit
 
 class HapticTableViewCell: UITableViewCell {
     
-    private var hapticSwitch = UISwitch()
-    private var settingNameLabel = UILabel()
+    static let identifier = "HapticTableViewCell"
     
+    var hapticSwitch = UISwitch()
+    private var settingNameLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -45,6 +46,7 @@ class HapticTableViewCell: UITableViewCell {
     func configure(settings: Settings) {
         settingNameLabel.text = "При выборе результата"
         hapticSwitch.isOn = settings.hapticOn
+        
     }
     
 }

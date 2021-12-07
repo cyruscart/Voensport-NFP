@@ -27,20 +27,24 @@ class SettingsViewController: UIViewController {
         
         settings.setNumberOfExercise()
         tableView.reloadData()
-        
     }
+        
     
     private func setTableView() {
         
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(HapticTableViewCell.self, forCellReuseIdentifier: "hapticCell")
+        tableView.register(HapticTableViewCell.self, forCellReuseIdentifier: HapticTableViewCell.identifier)
         
         tableView.separatorStyle = .none
         
         tableView.dataSource = self
         tableView.delegate = self
+    }
+    
+    @objc private func hapticSwitchDidChange(hapticSwitch: UISwitch) {
+        settings.hapticOn = hapticSwitch.isOn
     }
 }
 
@@ -61,12 +65,12 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.numberOfSections == indexPath.section + 1
-        ? tableView.dequeueReusableCell(withIdentifier: "hapticCell", for: indexPath) as! HapticTableViewCell
+        ? tableView.dequeueReusableCell(withIdentifier: HapticTableViewCell.identifier, for: indexPath) as! HapticTableViewCell
         : tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        
         
         if let cell = cell as? HapticTableViewCell {
             cell.configure(settings: settings)
+            cell.hapticSwitch.addTarget(self, action: #selector(hapticSwitchDidChange), for: .valueChanged)
             
         } else {
             var content = cell.defaultContentConfiguration()
