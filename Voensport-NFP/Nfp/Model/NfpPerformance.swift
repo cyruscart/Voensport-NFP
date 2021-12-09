@@ -9,16 +9,13 @@ import Foundation
 
 final class NfpPerformance {
     
-    var exercises: [NfpExercise] = []
     var settings: Settings
     
-    var manExercises: [NfpExercise] {
-        getExercisesFromJsonFile()
+    var exercises: [[NfpExercise]] {
+        getExercises()
     }
-
-    var womanExercises: [NfpExercise] {
-        getExercisesFromJsonFile()
-    }
+    
+    var selectedExercises: [NfpExercise] = []
     
     
     var isEditing = false
@@ -53,7 +50,7 @@ final class NfpPerformance {
     }
     
     var totalScore: Int {
-        exercises.map { $0.score }.reduce(0, +)
+        selectedExercises.map { $0.score }.reduce(0, +)
     }
     
     var minimumScore: Int {
@@ -132,20 +129,22 @@ final class NfpPerformance {
         var exerciseTypes: [ExerciseType] = [.speed, .power, .endurance, .militarySkill, .agility]
         var exercisesList: [[NfpExercise]] = []
         
+        let exercisesFromJSON = getExercisesFromJsonFile()
+        
         for _ in 1...settings.getIntegerNumberOfExercises() {
             var exercises: [NfpExercise] = []
             
             exerciseTypes.forEach { type in
         
                 if settings.sex == .male {
-                    exercises.append(contentsOf: manExercises.filter { $0.type == type })
+                    exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
                     
                     exercises = settings.isManOlderThirtyFive
                     ? exercises.filter { $0.forManOlderThirtyFive != false }
                     : exercises.filter { $0.forManOlderThirtyFive != true }
                     
                 } else {
-                    exercises.append(contentsOf: womanExercises.filter { $0.type == type })
+                    exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
                     
                     exercises = settings.isWomanOlderThirty
                     ? exercises.filter { $0.forWomanOlderThirty != false }
@@ -177,31 +176,31 @@ final class NfpPerformance {
             } catch {
                 print(error.localizedDescription)
             }
+        } else {
+            fatalError("File not found")
         }
-        print("From json - \(exercises.count)")
+        
         return exercises
     }
     
-    func getTotalScoreLabelText() -> String {
+    func getTextForGradeLabel() -> String {
         if calculateGrade() == Grade.highLevel.rawValue ||
             calculateGrade() == Grade.firstLevel.rawValue ||
             calculateGrade() == Grade.secondLevel.rawValue {
             return """
-                Количество баллов - \(totalScore)
                 Оценка - 5
                 \(calculateGrade())
                 """
         } else {
             return """
-                Количество баллов - \(totalScore)
                 Оценка - \(calculateGrade())
                 """
         }
     }
     
-    func getMinimumScoreForLabel(exercise number: Int) -> Int {
-        exercises[number].getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
-    }
+//    func getMinimumScoreForLabel(exercise number: Int) -> Int {
+//        exercises[number].getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
+//    }
     
     func getTitleForSection(with section: Int) -> String {
         section == settings.getIntegerNumberOfExercises()
@@ -211,7 +210,7 @@ final class NfpPerformance {
     
     func calculateGrade() -> String {
         
-        if !exercises.filter({ $0.score < minimumScore }).isEmpty {
+        if !selectedExercises.filter({ $0.score < minimumScore }).isEmpty {
             return Grade.two.rawValue
         }
         

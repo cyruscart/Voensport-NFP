@@ -24,16 +24,16 @@ class SplashViewController: UIViewController {
         
         showLogo(images: 27)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.showTabBar()
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+//            self.showTabBar()
         }
     }
 
-    private func showTabBar() {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        present(appDelegate.tabBarFactory(), animated: true)
-    }
-}
+//    private func showTabBar() {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        present(appDelegate.tabBarFactory(), animated: true)
+//    }
+
 // MARK: - Show logo method
 
 extension SplashViewController {

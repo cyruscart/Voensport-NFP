@@ -18,35 +18,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
-        
-        let splashVC = SplashViewController()
-        window?.rootViewController = splashVC
-        
         settings = StorageManager.shared.getSettings()
+        let mainTabBarVC = generateTabBarController(settings: settings)
+       
+        window?.rootViewController = mainTabBarVC
+        
         return true
     }
     
-     func tabBarFactory() -> UITabBarController {
-        
-        let tabBarVC = UITabBarController()
-        
-        let nfpVC = NfpViewController()
-        nfpVC.settings = settings
-        
-        let navController = UINavigationController(rootViewController: nfpVC)
-        navController.tabBarItem.image = UIImage(named: "nfp")
-        
-        
-        tabBarVC.modalPresentationStyle = .fullScreen
-        
-        tabBarVC.setViewControllers([navController], animated: false)
-        
-        
-        return tabBarVC
+    func applicationWillTerminate(_ application: UIApplication) {
+        StorageManager.shared.saveSettings(settings)
         
     }
-
-    func applicationDidFinishLaunching(_ application: UIApplication) {
-        StorageManager.shared.saveSettings(settings)
+// MARK: - Creating UITabBarController
+    
+    private func generateTabBarController(settings: Settings) -> UITabBarController {
+        let tabBarVC = UITabBarController()
+        
+        let nfpViewController = NfpViewController()
+        let nfpTabBarImage = UIImage(named: "nfp")
+        nfpViewController.settings = settings
+        
+        tabBarVC.viewControllers = [
+        generateNavigationController(rootViewController: nfpViewController, title: "Сдача ФП", image: nfpTabBarImage!)
+        ]
+        
+        return tabBarVC
+    }
+    
+    private func generateNavigationController(rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
+        let navigationVC = UINavigationController(rootViewController: rootViewController)
+        
+        navigationVC.tabBarItem.title = title
+        navigationVC.tabBarItem.image = image
+        
+        return navigationVC
     }
 }

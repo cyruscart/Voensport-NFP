@@ -13,18 +13,23 @@
 		6E074268275C95F100907B35 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074267275C95F100907B35 /* Category.swift */; };
 		6E07426A275C962C00907B35 /* NumberOfExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E074269275C962C00907B35 /* NumberOfExercises.swift */; };
 		6E07426C275CB35C00907B35 /* HapticTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E07426B275CB35C00907B35 /* HapticTableViewCell.swift */; };
-		6E90DDEF275F19DD004B618A /* ExerciseCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDEE275F19DD004B618A /* ExerciseCollectionView.swift */; };
-		6E90DDF1275F1A2D004B618A /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF0275F1A2D004B618A /* ExerciseCollectionViewCell.swift */; };
+		6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */; };
 		6E90DDF4275F3201004B618A /* NfpExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF3275F3201004B618A /* NfpExercise.swift */; };
 		6E90DDF6275F4BBE004B618A /* NfpPerformance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF5275F4BBE004B618A /* NfpPerformance.swift */; };
-		6E90DDF8275F50F1004B618A /* ResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF7275F50F1004B618A /* ResultTableViewCell.swift */; };
+		6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF7275F50F1004B618A /* ResultCellView.swift */; };
+		6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */; };
+		6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C6002762064200D51135 /* TotalScoreCell.swift */; };
+		6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */; };
+		6EB3C623276222E600D51135 /* WinterTriathlonExercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61F276222E600D51135 /* WinterTriathlonExercises.json */; };
+		6EB3C624276222E600D51135 /* NfpManExercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C620276222E600D51135 /* NfpManExercises.json */; };
+		6EB3C625276222E600D51135 /* NfpWomanExercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C621276222E600D51135 /* NfpWomanExercises.json */; };
+		6EB3C626276222E600D51135 /* SummerTriathlonExercises.json in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C622276222E600D51135 /* SummerTriathlonExercises.json */; };
 		6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */; };
 		6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */; };
 		6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */; };
 		6ED04549275C6B4700D048B4 /* NfpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04548275C6B4700D048B4 /* NfpViewController.swift */; };
 		6ED0454F275C6C2A00D048B4 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED0454E275C6C2A00D048B4 /* SettingsViewController.swift */; };
 		6ED04551275C6C4500D048B4 /* DetailSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04550275C6C4500D048B4 /* DetailSettingsViewController.swift */; };
-		6ED04553275C791A00D048B4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6ED04552275C791A00D048B4 /* LaunchScreen.storyboard */; };
 		6ED04555275C91B800D048B4 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04554275C91B800D048B4 /* Settings.swift */; };
 		6ED04558275C922100D048B4 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6ED04557275C922100D048B4 /* StorageManager.swift */; };
 /* End PBXBuildFile section */
@@ -36,11 +41,17 @@
 		6E074267275C95F100907B35 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		6E074269275C962C00907B35 /* NumberOfExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberOfExercises.swift; sourceTree = "<group>"; };
 		6E07426B275CB35C00907B35 /* HapticTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticTableViewCell.swift; sourceTree = "<group>"; };
-		6E90DDEE275F19DD004B618A /* ExerciseCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionView.swift; sourceTree = "<group>"; };
-		6E90DDF0275F1A2D004B618A /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
+		6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		6E90DDF3275F3201004B618A /* NfpExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpExercise.swift; sourceTree = "<group>"; };
 		6E90DDF5275F4BBE004B618A /* NfpPerformance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpPerformance.swift; sourceTree = "<group>"; };
-		6E90DDF7275F50F1004B618A /* ResultTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTableViewCell.swift; sourceTree = "<group>"; };
+		6E90DDF7275F50F1004B618A /* ResultCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCellView.swift; sourceTree = "<group>"; };
+		6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpCompositionalLayout.swift; sourceTree = "<group>"; };
+		6EB3C6002762064200D51135 /* TotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreCell.swift; sourceTree = "<group>"; };
+		6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6EB3C61F276222E600D51135 /* WinterTriathlonExercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = WinterTriathlonExercises.json; path = ../../../WinterTriathlonExercises.json; sourceTree = "<group>"; };
+		6EB3C620276222E600D51135 /* NfpManExercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = NfpManExercises.json; sourceTree = "<group>"; };
+		6EB3C621276222E600D51135 /* NfpWomanExercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = NfpWomanExercises.json; path = ../../../NfpWomanExercises.json; sourceTree = "<group>"; };
+		6EB3C622276222E600D51135 /* SummerTriathlonExercises.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = SummerTriathlonExercises.json; path = ../../../SummerTriathlonExercises.json; sourceTree = "<group>"; };
 		6EC4BA8E275B7BF000A4FD4A /* Voensport-NFP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voensport-NFP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,7 +60,6 @@
 		6ED04548275C6B4700D048B4 /* NfpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpViewController.swift; sourceTree = "<group>"; };
 		6ED0454E275C6C2A00D048B4 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		6ED04550275C6C4500D048B4 /* DetailSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSettingsViewController.swift; sourceTree = "<group>"; };
-		6ED04552275C791A00D048B4 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6ED04554275C91B800D048B4 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		6ED04557275C922100D048B4 /* StorageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,13 +75,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		6E90DDF2275F1A54004B618A /* CollectionView */ = {
+		6EB3C5FE276203A100D51135 /* Layout */ = {
 			isa = PBXGroup;
 			children = (
-				6E90DDEE275F19DD004B618A /* ExerciseCollectionView.swift */,
-				6E90DDF0275F1A2D004B618A /* ExerciseCollectionViewCell.swift */,
+				6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */,
 			);
-			path = CollectionView;
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		6EB3C5FF276203C500D51135 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */,
+				6E90DDF7275F50F1004B618A /* ResultCellView.swift */,
+				6EB3C6002762064200D51135 /* TotalScoreCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		6EC4BA85275B7BEF00A4FD4A = {
@@ -116,7 +135,11 @@
 		6EC4BAAC275B7CB300A4FD4A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6ED04552275C791A00D048B4 /* LaunchScreen.storyboard */,
+				6EB3C620276222E600D51135 /* NfpManExercises.json */,
+				6EB3C621276222E600D51135 /* NfpWomanExercises.json */,
+				6EB3C622276222E600D51135 /* SummerTriathlonExercises.json */,
+				6EB3C61F276222E600D51135 /* WinterTriathlonExercises.json */,
+				6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */,
 				6EC4BAA2275B7BF100A4FD4A /* Info.plist */,
 				6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */,
 			);
@@ -198,8 +221,8 @@
 		6ED04546275C6AE500D048B4 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6E90DDF7275F50F1004B618A /* ResultTableViewCell.swift */,
-				6E90DDF2275F1A54004B618A /* CollectionView */,
+				6EB3C5FF276203C500D51135 /* Cell */,
+				6EB3C5FE276203A100D51135 /* Layout */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -320,7 +343,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */,
-				6ED04553275C791A00D048B4 /* LaunchScreen.storyboard in Resources */,
+				6EB3C625276222E600D51135 /* NfpWomanExercises.json in Resources */,
+				6EB3C626276222E600D51135 /* SummerTriathlonExercises.json in Resources */,
+				6EB3C623276222E600D51135 /* WinterTriathlonExercises.json in Resources */,
+				6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */,
+				6EB3C624276222E600D51135 /* NfpManExercises.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -331,23 +358,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */,
 				6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */,
 				6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */,
 				6E07426C275CB35C00907B35 /* HapticTableViewCell.swift in Sources */,
 				6ED04549275C6B4700D048B4 /* NfpViewController.swift in Sources */,
 				6ED04555275C91B800D048B4 /* Settings.swift in Sources */,
-				6E90DDEF275F19DD004B618A /* ExerciseCollectionView.swift in Sources */,
+				6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */,
 				6ED04558275C922100D048B4 /* StorageManager.swift in Sources */,
 				6E074262275C953E00907B35 /* Sex.swift in Sources */,
 				6E90DDF4275F3201004B618A /* NfpExercise.swift in Sources */,
 				6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */,
 				6E07426A275C962C00907B35 /* NumberOfExercises.swift in Sources */,
 				6E074264275C957C00907B35 /* MaleAgeCategory.swift in Sources */,
-				6E90DDF1275F1A2D004B618A /* ExerciseCollectionViewCell.swift in Sources */,
+				6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */,
 				6ED0454F275C6C2A00D048B4 /* SettingsViewController.swift in Sources */,
 				6ED04551275C6C4500D048B4 /* DetailSettingsViewController.swift in Sources */,
 				6E90DDF6275F4BBE004B618A /* NfpPerformance.swift in Sources */,
-				6E90DDF8275F50F1004B618A /* ResultTableViewCell.swift in Sources */,
+				6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */,
 				6E074268275C95F100907B35 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

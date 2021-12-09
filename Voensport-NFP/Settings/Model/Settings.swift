@@ -16,6 +16,10 @@ final class Settings: Codable {
     var numberOfExercise: NumberOfExercise = .three
     var hapticOn = true
     
+    var sectionKind: [Int] {
+        Array(0..<getIntegerNumberOfExercises())
+    }
+    
     var isManOlderThirtyFive: Bool {
         maleAgeCategory == .fourthAgeGroup
         || maleAgeCategory == .fifthAgeGroup
@@ -200,21 +204,21 @@ final class Settings: Codable {
         }
     }
     
-//    func getTitleForDetailSettings(currentSetting: String) -> String {
-//        
-//        switch currentSetting {
-//        case "sex":
-//            return "Пол"
-//        case "maleAge", "femaleAge":
-//            return "Возраст"
-//        case "category":
-//            return "Категория"
-//        case "numberOfExercise":
-//            return "Количество упражнений"
-//        default:
-//            return "Количество упражнений"
-//        }
-//    }
+    //    func getTitleForDetailSettings(currentSetting: String) -> String {
+    //
+    //        switch currentSetting {
+    //        case "sex":
+    //            return "Пол"
+    //        case "maleAge", "femaleAge":
+    //            return "Возраст"
+    //        case "category":
+    //            return "Категория"
+    //        case "numberOfExercise":
+    //            return "Количество упражнений"
+    //        default:
+    //            return "Количество упражнений"
+    //        }
+    //    }
     
     func getTextForCell(section: Int) -> String {
         

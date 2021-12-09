@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ExerciseType: String, CaseIterable, Codable {
+enum ExerciseType: String, CaseIterable, Codable, Hashable {
     case power = "Сила"
     case agility = "Ловкость"
     case speed = "Быстрота"
@@ -15,8 +15,7 @@ enum ExerciseType: String, CaseIterable, Codable {
     case militarySkill = "Военно-прикладной навык"
 }
 
-struct NfpExercise: Codable {
-    
+struct NfpExercise: Codable, Hashable{
     let number: String
     var name: String
     let type: ExerciseType
@@ -25,6 +24,7 @@ struct NfpExercise: Codable {
     var exerciseDescription: String? = nil
     let scoreList: [String: Int]
     var score = 0
+    private let identifier = UUID()
     
     var result: String? {
         scoreList.first(where: {$0.value == score})?.key ?? nil
@@ -33,6 +33,10 @@ struct NfpExercise: Codable {
     
     func getScoreList() -> [Int] {
         scoreList.values.sorted()
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.identifier)
     }
     
 }
