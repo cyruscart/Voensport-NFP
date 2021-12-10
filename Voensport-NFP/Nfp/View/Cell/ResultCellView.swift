@@ -11,31 +11,29 @@ class ResultCellView: UICollectionReusableView {
     
     static let identifier = "ResultCellView"
     
-    private var scoreLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Результат: 100"
-        label.textAlignment = .center
-        return label
-    }()
+    var exercise: NfpExercise! = nil
+    var minimumScore = 0
     
     private var resultLabel: UILabel = {
         let label = UILabel()
-        label.text = "Баллов: 100"
-        label.textAlignment = .center
+        label.textAlignment = .right
+        return label
+    }()
+    
+    private var scoreLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .left
         return label
     }()
     
     private var resultSlider: UISlider = {
         let slider = UISlider()
-        slider.maximumValue = 100
-        slider.minimumValue = 0
-        slider.value = 50
+        slider.addTarget(self, action: #selector(resultSliderMoved), for: .valueChanged)
         return slider
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
         setupCell()
     }
     
@@ -65,11 +63,36 @@ class ResultCellView: UICollectionReusableView {
         ])
     }
     
-    func configureCell(_ collectionView: UICollectionView, _ exercise: NfpExercise) {
+    func configureCell() {
         resultSlider.minimumValue = Float(exercise.getScoreList().first ?? 0)
         resultSlider.maximumValue = Float(exercise.getScoreList().last ?? 100)
+        resultSlider.value = Float(minimumScore)
         
+        setResults()
         
+    }
+    
+     func setSliderTrackColor() {
+     
+        resultSlider.minimumTrackTintColor = lrintf(resultSlider.value) < minimumScore ?
+         UIColor.systemRed :
+         UIColor.systemBlue
+    }
+    
+    private func setResults() {
+        scoreLabel.text = "Баллов: \(exercise.score)"
+        resultLabel.text = "Результат: \(exercise.result ?? "0")"
+    }
+    
+     @objc func resultSliderMoved() {
+        setSliderTrackColor()
+        
+         
+        if exercise.getScoreList().contains(lrintf(resultSlider.value)) && lrintf(resultSlider.value) != exercise.score  {
+            exercise.score = lrintf(resultSlider.value)
+            
+        }
+         setResults()
     }
     
 }

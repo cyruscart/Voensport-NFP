@@ -10,13 +10,8 @@ import Foundation
 final class NfpPerformance {
     
     var settings: Settings
-    
-    var exercises: [[NfpExercise]] {
-        getExercises()
-    }
-    
+    var exercises: [[NfpExercise]] = []
     var selectedExercises: [NfpExercise] = []
-    
     
     var isEditing = false
 //    var editingPerformance = PerformanceResult(totalScore: 0, grade: "", date: Date())
@@ -124,14 +119,27 @@ final class NfpPerformance {
     }
     
     //MARK: - Methods
+    func loadInitialData() {
+        loadExercises()
+        loadInitialSelectedExercise()
+    }
     
-    func getExercises() -> [[NfpExercise]] {
+   private func loadInitialSelectedExercise() {
+        exercises.forEach { exercises in
+            if let exercise = exercises.first {
+                selectedExercises.append(exercise)
+            }
+        }
+    }
+    
+    private func loadExercises() {
         var exerciseTypes: [ExerciseType] = [.speed, .power, .endurance, .militarySkill, .agility]
         var exercisesList: [[NfpExercise]] = []
         
         let exercisesFromJSON = getExercisesFromJsonFile()
         
         for _ in 1...settings.getIntegerNumberOfExercises() {
+            let exercisesFromJSON = getExercisesFromJsonFile()
             var exercises: [NfpExercise] = []
             
             exerciseTypes.forEach { type in
@@ -157,7 +165,7 @@ final class NfpPerformance {
             
             exercisesList.append(exercises)
         }
-        return exercisesList
+        exercises = exercisesList
     }
     
     
@@ -198,9 +206,9 @@ final class NfpPerformance {
         }
     }
     
-//    func getMinimumScoreForLabel(exercise number: Int) -> Int {
-//        exercises[number].getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
-//    }
+    func getMinimumScore(indexPath: IndexPath) -> Int {
+        exercises[indexPath.section][indexPath.row].getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
+    }
     
     func getTitleForSection(with section: Int) -> String {
         section == settings.getIntegerNumberOfExercises()

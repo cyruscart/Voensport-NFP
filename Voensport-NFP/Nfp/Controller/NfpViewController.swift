@@ -11,7 +11,7 @@ class NfpViewController: UIViewController  {
     
     var settings: Settings! = nil
     var nfpPerformance: NfpPerformance! = nil
-    
+    var isAppear = false
     var collectionView: UICollectionView! = nil
     
     var exerciseDataSource: UICollectionViewDiffableDataSource<Int, NfpExercise>! = nil
@@ -20,7 +20,9 @@ class NfpViewController: UIViewController  {
         super.viewDidLoad()
 
         nfpPerformance = NfpPerformance(settings: settings)
+        nfpPerformance.loadInitialData()
         setupCollectionView()
+        
         configureDataSource()
     
     }
@@ -29,13 +31,17 @@ class NfpViewController: UIViewController  {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
-        applyInitialSnapshots()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-       
+        isAppear = true
     }
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(settings: settings))
+        collectionView.delegate = self
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
         view.addSubview(collectionView)
@@ -53,13 +59,16 @@ class NfpViewController: UIViewController  {
         )
     }
     
-    
-    
-    @objc private func showSettings() {
+
+    @objc private func s1howSettings() {
         let settingsVC = SettingsViewController()
         settingsVC.settings = settings
         
         navigationController?.pushViewController(settingsVC, animated: true)
+    }
+    
+    @objc private func showSettings() {
+        print(nfpPerformance.selectedExercises.first?.number)
     }
 }
 
@@ -78,25 +87,32 @@ extension NfpViewController {
 //        }
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration<ResultCellView >(elementKind: "Footer") { view, elementKind, indexPath in
-            
-            
+            let exercise = self.nfpPerformance.exercises[indexPath.section][indexPath.row]
+            view.minimumScore = self.nfpPerformance.getMinimumScore(indexPath: indexPath)
+            view.exercise = exercise
+            view.configureCell()
+            view.setSliderTrackColor()
                   
         }
         
         exerciseDataSource = UICollectionViewDiffableDataSource <Int, NfpExercise>(collectionView: collectionView) {
             (collectionView, indexPath, exercise) -> UICollectionViewCell? in
             
-            print(indexPath.section)
             return collectionView.dequeueConfiguredReusableCell(using: exerciseCellRegistration, for: indexPath, item: exercise)
 
         }
         
-        exerciseDataSource.supplementaryViewProvider = { view, kind, index in
-            return self.collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: index)
+        
+        exerciseDataSource.supplementaryViewProvider = { [self] view, kind, index in
+            return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: index)
         }
         
         applyInitialSnapshots()
         
+    }
+
+    private func testCompletion() {
+        navigationController?.navigationBar.isHidden.toggle()
     }
     
     private func applyInitialSnapshots() {
@@ -105,12 +121,38 @@ extension NfpViewController {
         for numberOfSection in 0..<settings.getIntegerNumberOfExercises() {
             exerciseSnapshot.appendSections([numberOfSection])
             exerciseSnapshot.appendItems(nfpPerformance.exercises[numberOfSection], toSection: numberOfSection)
+            
         }
         
         exerciseDataSource.apply(exerciseSnapshot)
         
     }
     
+}
+
+extension NfpViewController: UICollectionViewDelegate {
     
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+//        if indexPath.item == 0 {
+//
+//
+//        } else if indexPath.item == nfpPerformance.exercises[indexPath.section].count - 1 {
+//            nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPath.section][indexPath.item]
+//
+//        } else {
+//
+//
+//        }
+        if isAppear {
+        nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPath.section][indexPath.item - 1]
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+     
+    }
 }
 

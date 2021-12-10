@@ -15,7 +15,11 @@ enum ExerciseType: String, CaseIterable, Codable, Hashable {
     case militarySkill = "Военно-прикладной навык"
 }
 
-struct NfpExercise: Codable, Hashable{
+class NfpExercise: Codable, Hashable {
+    static func == (lhs: NfpExercise, rhs: NfpExercise) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
+    
     let number: String
     var name: String
     let type: ExerciseType
