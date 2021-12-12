@@ -69,7 +69,7 @@ class ResultCellView: UICollectionReusableView {
         resultSlider.value = Float(minimumScore)
         
         setResults()
-        
+        print("set")
     }
     
      func setSliderTrackColor() {
