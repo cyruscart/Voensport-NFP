@@ -16,10 +16,6 @@ enum ExerciseType: String, CaseIterable, Codable, Hashable {
 }
 
 class NfpExercise: Codable, Hashable {
-    static func == (lhs: NfpExercise, rhs: NfpExercise) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-    
     let number: String
     var name: String
     let type: ExerciseType
@@ -34,6 +30,16 @@ class NfpExercise: Codable, Hashable {
         scoreList.first(where: {$0.value == score})?.key ?? nil
     }
     
+    init(number: String, name: String, type: ExerciseType, scoreList: [String: Int]) {
+        self.number = number
+        self.name = name
+        self.scoreList = scoreList
+        self.type = type
+    }
+    
+    static func == (lhs: NfpExercise, rhs: NfpExercise) -> Bool {
+        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
+    }
     
     func getScoreList() -> [Int] {
         scoreList.values.sorted()

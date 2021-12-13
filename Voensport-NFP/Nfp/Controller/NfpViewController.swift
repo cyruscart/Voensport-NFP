@@ -7,6 +7,8 @@
 
 import UIKit
 
+
+
 class NfpViewController: UIViewController  {
     
     var settings: Settings! = nil
@@ -63,11 +65,11 @@ class NfpViewController: UIViewController  {
     
     
     @objc private func showSettings() {
-//        let settingsVC = SettingsViewController()
-//        settingsVC.settings = settings
-//
-//        navigationController?.pushViewController(settingsVC, animated: true)
-        nfpPerformance.selectedExercises.forEach { print($0.number) }
+        let settingsVC = SettingsViewController()
+        settingsVC.settings = settings
+
+        navigationController?.pushViewController(settingsVC, animated: true)
+
     }
     
 }
@@ -82,33 +84,38 @@ extension NfpViewController {
             cell.layer.cornerRadius = 15
         }
         
-        //        let totalScoreCellRegistration = UICollectionView.CellRegistration<TotalScoreCell, NfpPerformance> { (cell, indexPath, nfpPerformance) in
-        //            cell.configureCell(with: nfpPerformance)
-        //        }
+        let totalScoreCellRegistration = UICollectionView.CellRegistration<TotalScoreCell, Int> { (cell, indexPath, number) in
+            cell.configureCell(with: self.nfpPerformance)
+        }
         
         let supplementaryRegistration = UICollectionView.SupplementaryRegistration<ResultCellView >(elementKind: "Footer") { view, elementKind, indexPath in
-//            let exercise = self.nfpPerformance.exercises[indexPath.section][indexPath.row]
             
-            let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
-            view.minimumScore = self.nfpPerformance.getMinimumScore(indexPath: indexPath)
-            view.exercise = exercise
-            view.configureCell()
-            view.setSliderTrackColor()
+            
+                let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
+                let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
+                exercise.score = minimumScore
+                
+                view.minimumScore = minimumScore
+                view.exercise = exercise
+                view.section = indexPath.section
+                view.configureCell()
+    
             
         }
         
         exerciseDataSource = UICollectionViewDiffableDataSource <Int, NfpExercise>(collectionView: collectionView) {
             (collectionView, indexPath, exercise) -> UICollectionViewCell? in
             
-            return collectionView.dequeueConfiguredReusableCell(using: exerciseCellRegistration, for: indexPath, item: exercise)
-            
-        }
+            if indexPath.section == self.settings.getIntegerNumberOfExercises() {
+                return collectionView.dequeueConfiguredReusableCell(using: totalScoreCellRegistration, for: indexPath, item: indexPath.section)
+            }
+                return collectionView.dequeueConfiguredReusableCell(using: exerciseCellRegistration, for: indexPath, item: exercise)
+            }
         
         
-        exerciseDataSource.supplementaryViewProvider = { [self] view, kind, index in
-            
-            return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: index)
-            
+        exerciseDataSource.supplementaryViewProvider = { [self] view, kind, indexPath in
+          
+            return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
         }
         
         applyInitialSnapshots()
@@ -119,12 +126,24 @@ extension NfpViewController {
     private func applyInitialSnapshots() {
         var exerciseSnapshot = NSDiffableDataSourceSnapshot<Int, NfpExercise>()
         
-        for numberOfSection in 0..<settings.getIntegerNumberOfExercises() {
+        for numberOfSection in 0...settings.getIntegerNumberOfExercises() {
+            if numberOfSection == settings.getIntegerNumberOfExercises() {
+                exerciseSnapshot.appendSections([numberOfSection])
+                
+                let nfpExercise = NfpExercise(number: "",
+                                              name: "",
+                                              type: .agility,
+                                              scoreList: [:])
+                
+                exerciseSnapshot.appendItems([nfpExercise], toSection: numberOfSection)
+                
+            } else {
+                
             exerciseSnapshot.appendSections([numberOfSection])
             exerciseSnapshot.appendItems(nfpPerformance.exercises[numberOfSection], toSection: numberOfSection)
             
         }
-        
+        }
         exerciseDataSource.apply(exerciseSnapshot)
         
     }
@@ -140,7 +159,7 @@ extension NfpViewController: UICollectionViewDelegate {
         
         if shouldReplaceSelectedItem {
             updateSelectedExercises(collectionView, forItemAt: indexPath)
-            updateSection(collectionView, indexPath: indexPath)
+            updateSupplementaryView(collectionView, indexPath: indexPath)
         }
         
     }
@@ -159,12 +178,26 @@ extension NfpViewController: UICollectionViewDelegate {
         }
     }
     
-    private func updateSection(_ collectionView: UICollectionView, indexPath: IndexPath) {
-        let supplView = exerciseDataSource.collectionView(collectionView, viewForSupplementaryElementOfKind: "Footer", at: indexPath) as! ResultCellView
-        supplView.exercise = nfpPerformance.selectedExercises[indexPath.section]
-        supplView.configureCell()
+    private func updateSupplementaryView(_ collectionView: UICollectionView, indexPath: IndexPath) {
         
-    }
+        collectionView.visibleSupplementaryViews(ofKind: "Footer").forEach { supplView in
+            let view = supplView as! ResultCellView
+            
+            if view.section == indexPath.section {
+            
+            let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
+            let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
+            exercise.score = minimumScore
+                
+            view.minimumScore = minimumScore
+            view.exercise = exercise
+            view.configureCell()
+            }
+        }
+            
+        }
+      
+    
    
     
     private func updateSelectedExercises(_ collectionView: UICollectionView, forItemAt indexPath: IndexPath) {

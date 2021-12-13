@@ -14,33 +14,33 @@ final class NfpPerformance {
     var selectedExercises: [NfpExercise] = []
     
     var isEditing = false
-//    var editingPerformance = PerformanceResult(totalScore: 0, grade: "", date: Date())
+    //    var editingPerformance = PerformanceResult(totalScore: 0, grade: "", date: Date())
     
     var maleAgeCategory: MaleAgeCategory {
-//        isEditing
-//        ? editingPerformance.maleAgeCategory!
-//        : settings.maleAgeCategory
+        //        isEditing
+        //        ? editingPerformance.maleAgeCategory!
+        //        : settings.maleAgeCategory
         settings.maleAgeCategory
     }
     
     var femaleAgeCategory: FemaleAgeCategory {
-//        isEditing
-//        ? editingPerformance.femaleAgeCategory!
-//        : settings.femaleAgeCategory
+        //        isEditing
+        //        ? editingPerformance.femaleAgeCategory!
+        //        : settings.femaleAgeCategory
         settings.femaleAgeCategory
     }
     
     var category: Category {
-//        isEditing
-//        ? editingPerformance.category!
-//        : settings.category
+        //        isEditing
+        //        ? editingPerformance.category!
+        //        : settings.category
         settings.category
     }
     
     var numberOfExercise: NumberOfExercise {
-//        isEditing
-//        ? editingPerformance.numberOfExercise!
-//        : settings.numberOfExercise
+        //        isEditing
+        //        ? editingPerformance.numberOfExercise!
+        //        : settings.numberOfExercise
         settings.numberOfExercise
     }
     
@@ -124,7 +124,7 @@ final class NfpPerformance {
         loadInitialSelectedExercise()
     }
     
-   private func loadInitialSelectedExercise() {
+    private func loadInitialSelectedExercise() {
         exercises.forEach { exercises in
             if let exercise = exercises.first {
                 selectedExercises.append(exercise)
@@ -143,7 +143,7 @@ final class NfpPerformance {
             var exercises: [NfpExercise] = []
             
             exerciseTypes.forEach { type in
-        
+                
                 if settings.sex == .male {
                     exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
                     
@@ -206,8 +206,8 @@ final class NfpPerformance {
         }
     }
     
-    func getMinimumScore(indexPath: IndexPath) -> Int {
-        exercises[indexPath.section][indexPath.row].getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
+    func getMinimumScore(for exercise: NfpExercise) -> Int {
+        exercise.getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
     }
     
     func getTitleForSection(with section: Int) -> String {

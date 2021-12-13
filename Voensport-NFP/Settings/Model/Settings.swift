@@ -16,6 +16,7 @@ final class Settings: Codable {
     var numberOfExercise: NumberOfExercise = .three
     var hapticOn = true
     
+    
     var sectionKind: [Int] {
         Array(0..<getIntegerNumberOfExercises())
     }
