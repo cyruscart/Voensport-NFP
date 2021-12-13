@@ -14,7 +14,10 @@ class NfpViewController: UIViewController  {
     var settings: Settings! = nil
     var nfpPerformance: NfpPerformance! = nil
     var isAppear = false
-    var collectionView: UICollectionView! = nil
+    
+    var collectionView: UICollectionView!
+   
+    
     
     var exerciseDataSource: UICollectionViewDiffableDataSource<Int, NfpExercise>! = nil
     
@@ -33,7 +36,8 @@ class NfpViewController: UIViewController  {
         super.viewWillAppear(animated)
         
         setupNavigationBar()
-        configureDataSource()
+        nfpPerformance.loadInitialData()
+        collectionView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -42,9 +46,19 @@ class NfpViewController: UIViewController  {
         isAppear = true
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        isAppear = false
+    }
+    
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(settings: settings))
         collectionView.delegate = self
+        collectionView.dataSource = self
+        
+        collectionView.register(ExerciseCell.self, forCellWithReuseIdentifier: ExerciseCell.identifier)
+        collectionView.register(TotalScoreCell.self, forCellWithReuseIdentifier: TotalScoreCell.identifier)
+        collectionView.register(ResultCellView.self, forSupplementaryViewOfKind: "Footer", withReuseIdentifier: ResultCellView.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
@@ -74,81 +88,60 @@ class NfpViewController: UIViewController  {
     
 }
 
-// MARK: UICollectionViewDiffableDataSource
-extension NfpViewController {
+extension NfpViewController: UICollectionViewDataSource {
     
-    private func configureDataSource() {
-        
-        let exerciseCellRegistration = UICollectionView.CellRegistration<ExerciseCell, NfpExercise> { (cell, indexPath, exercise) in
-            cell.configureCell(with: exercise)
-            cell.layer.cornerRadius = 15
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        settings.getIntegerNumberOfExercises() + 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if section == settings.getIntegerNumberOfExercises() {
+            return 1
+        } else {
+            return nfpPerformance.exercises[section].count
         }
-        
-        let totalScoreCellRegistration = UICollectionView.CellRegistration<TotalScoreCell, Int> { (cell, indexPath, number) in
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.section == settings.getIntegerNumberOfExercises() {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalScoreCell.identifier, for: indexPath) as! TotalScoreCell
             cell.configureCell(with: self.nfpPerformance)
+            return cell
+            
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExerciseCell.identifier, for: indexPath) as! ExerciseCell
+            cell.configureCell(with: nfpPerformance.exercises[indexPath.section][indexPath.row])
+            cell.layer.cornerRadius = 15
+            return cell
         }
-        
-        let supplementaryRegistration = UICollectionView.SupplementaryRegistration<ResultCellView >(elementKind: "Footer") { view, elementKind, indexPath in
             
-            
-                let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
-                let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
-                exercise.score = minimumScore
-                
-                view.minimumScore = minimumScore
-                view.exercise = exercise
-                view.section = indexPath.section
-                view.configureCell()
-    
-            
-        }
-        
-        exerciseDataSource = UICollectionViewDiffableDataSource <Int, NfpExercise>(collectionView: collectionView) {
-            (collectionView, indexPath, exercise) -> UICollectionViewCell? in
-            
-            if indexPath.section == self.settings.getIntegerNumberOfExercises() {
-                return collectionView.dequeueConfiguredReusableCell(using: totalScoreCellRegistration, for: indexPath, item: indexPath.section)
-            }
-                return collectionView.dequeueConfiguredReusableCell(using: exerciseCellRegistration, for: indexPath, item: exercise)
-            }
-        
-        
-        exerciseDataSource.supplementaryViewProvider = { [self] view, kind, indexPath in
-          
-            return collectionView.dequeueConfiguredReusableSupplementary(using: supplementaryRegistration, for: indexPath)
-        }
-        
-        applyInitialSnapshots()
-        
     }
     
     
-    private func applyInitialSnapshots() {
-        var exerciseSnapshot = NSDiffableDataSourceSnapshot<Int, NfpExercise>()
+    
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        for numberOfSection in 0...settings.getIntegerNumberOfExercises() {
-            if numberOfSection == settings.getIntegerNumberOfExercises() {
-                exerciseSnapshot.appendSections([numberOfSection])
-                
-                let nfpExercise = NfpExercise(number: "",
-                                              name: "",
-                                              type: .agility,
-                                              scoreList: [:])
-                
-                exerciseSnapshot.appendItems([nfpExercise], toSection: numberOfSection)
-                
-            } else {
-                
-            exerciseSnapshot.appendSections([numberOfSection])
-            exerciseSnapshot.appendItems(nfpPerformance.exercises[numberOfSection], toSection: numberOfSection)
+        if indexPath.section < settings.getIntegerNumberOfExercises() {
+            let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
+            let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
+            exercise.score = minimumScore
             
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Footer", withReuseIdentifier: ResultCellView.identifier, for: indexPath) as! ResultCellView
+            
+            view.minimumScore = minimumScore
+            view.exercise = exercise
+            view.section = indexPath.section
+            view.configureCell()
+            
+            return view
+        } else {
+            return collectionView.dequeueReusableSupplementaryView(ofKind: "Footer", withReuseIdentifier: ResultCellView.identifier, for: indexPath)
         }
-        }
-        exerciseDataSource.apply(exerciseSnapshot)
-        
     }
     
 }
+
 
 extension NfpViewController: UICollectionViewDelegate {
     

@@ -11,18 +11,28 @@ class TotalScoreCell: UICollectionViewCell {
     
     static let identifier = "TotalScoreCell"
     
-    private var totalScoreLabel = UILabel()
-    private var gradeLabel = UILabel()
+    private var totalScoreLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private var gradeLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
     private var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
+        button.backgroundColor = .blue
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue
-        print("Init")
+       
         setupCell()
         setupConstraints()
     }
@@ -54,6 +64,7 @@ class TotalScoreCell: UICollectionViewCell {
             
             saveButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 30),
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             saveButton.widthAnchor.constraint(equalToConstant: 50)
             
             
