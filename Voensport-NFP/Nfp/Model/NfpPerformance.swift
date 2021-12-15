@@ -104,7 +104,7 @@ final class NfpPerformance {
         }
     }
     
-    enum Grade: String, CaseIterable  {
+    private enum Grade: String, CaseIterable  {
         case highLevel = "Высший квалификационный уровень"
         case firstLevel = "1 квалификационный уровень"
         case secondLevel = "2 квалификационный уровень"
@@ -125,6 +125,7 @@ final class NfpPerformance {
     }
     
     private func loadInitialSelectedExercise() {
+        selectedExercises = []
         exercises.forEach { exercises in
             if let exercise = exercises.first {
                 selectedExercises.append(exercise)
@@ -135,8 +136,6 @@ final class NfpPerformance {
     private func loadExercises() {
         var exerciseTypes: [ExerciseType] = [.speed, .power, .endurance, .militarySkill, .agility]
         var exercisesList: [[NfpExercise]] = []
-        
-        let exercisesFromJSON = getExercisesFromJsonFile()
         
         for _ in 1...settings.getIntegerNumberOfExercises() {
             let exercisesFromJSON = getExercisesFromJsonFile()

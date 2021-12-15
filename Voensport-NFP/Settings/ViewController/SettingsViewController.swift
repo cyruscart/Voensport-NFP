@@ -34,13 +34,13 @@ class SettingsViewController: UIViewController {
         
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(HapticTableViewCell.self, forCellReuseIdentifier: HapticTableViewCell.identifier)
-        
-        tableView.separatorStyle = .none
-        
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.separatorStyle = .none
     }
     
     @objc private func hapticSwitchDidChange(hapticSwitch: UISwitch) {

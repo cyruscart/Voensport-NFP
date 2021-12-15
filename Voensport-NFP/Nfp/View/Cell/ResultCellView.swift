@@ -11,9 +11,10 @@ class ResultCellView: UICollectionReusableView {
     
     static let identifier = "ResultCellView"
     
-    var exercise: NfpExercise! = nil
+    var exercise: NfpExercise!
     var minimumScore = 0
     var section = 0
+    var completion: (() -> Void) = {}
     
     private var resultLabel: UILabel = {
         let label = UILabel()
@@ -67,7 +68,8 @@ class ResultCellView: UICollectionReusableView {
     func configureCell() {
         resultSlider.minimumValue = Float(exercise.getScoreList().first ?? 0)
         resultSlider.maximumValue = Float(exercise.getScoreList().last ?? 100)
-        resultSlider.value = Float(minimumScore)
+        
+        resultSlider.value = Float(exercise.score)
         
         setSliderTrackColor()
         setResults()
@@ -95,7 +97,9 @@ class ResultCellView: UICollectionReusableView {
             
         }
          setResults()
-         print("moved - \(exercise.number)")
+        
+         completion()
+
     }
     
 }

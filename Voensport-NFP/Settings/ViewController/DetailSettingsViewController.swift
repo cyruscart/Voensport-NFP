@@ -24,10 +24,10 @@ class DetailSettingsViewController: UIViewController {
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
-        tableView.separatorStyle = .singleLine
-        
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.separatorStyle = .singleLine
     }
 }
 

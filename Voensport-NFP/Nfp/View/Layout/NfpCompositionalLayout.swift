@@ -5,11 +5,12 @@
 //  Created by Кирилл on 09.12.2021.
 //
 
-import Foundation
+
 import UIKit
 
 class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
     static func createLayout(settings: Settings) -> UICollectionViewCompositionalLayout {
+        
         
         let numberOfSections = settings.getIntegerNumberOfExercises()
         
@@ -59,9 +60,17 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                                                                                 elementKind: "Footer",
                                                                                 alignment: .bottom)
               
+                let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
+                                                               heightDimension: .fractionalHeight(0.05))
+                
+                let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
+                                                                                elementKind: "Header",
+                                                                                alignment: .top)
+                
                 sectionFooter.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
-                section.boundarySupplementaryItems = [sectionFooter]
-                section.contentInsets = NSDirectionalEdgeInsets(top: 50, leading: 0, bottom: 0, trailing: 0)
+                section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
+                
+                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
             
             section.visibleItemsInvalidationHandler = { (items, offset, environment) in
                 items.forEach { item in

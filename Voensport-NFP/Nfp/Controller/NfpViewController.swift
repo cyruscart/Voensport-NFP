@@ -11,8 +11,8 @@ import UIKit
 
 class NfpViewController: UIViewController  {
     
-    var settings: Settings! = nil
-    var nfpPerformance: NfpPerformance! = nil
+    var settings: Settings!
+    var nfpPerformance: NfpPerformance!
     var isAppear = false
     
     var collectionView: UICollectionView!
@@ -24,20 +24,19 @@ class NfpViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        nfpPerformance = NfpPerformance(settings: settings)
-        nfpPerformance.loadInitialData()
+        setupNavigationBar()
         setupCollectionView()
-        
-//        configureDataSource()
-        
+        nfpPerformance = NfpPerformance(settings: settings)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        setupNavigationBar()
         nfpPerformance.loadInitialData()
-        collectionView.reloadData()
+        updateCompositionalLayout()
+       
+        
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,6 +47,7 @@ class NfpViewController: UIViewController  {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
+        
         isAppear = false
     }
     
@@ -59,6 +59,7 @@ class NfpViewController: UIViewController  {
         collectionView.register(ExerciseCell.self, forCellWithReuseIdentifier: ExerciseCell.identifier)
         collectionView.register(TotalScoreCell.self, forCellWithReuseIdentifier: TotalScoreCell.identifier)
         collectionView.register(ResultCellView.self, forSupplementaryViewOfKind: "Footer", withReuseIdentifier: ResultCellView.identifier)
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemBackground
@@ -66,9 +67,16 @@ class NfpViewController: UIViewController  {
         collectionView.showsVerticalScrollIndicator = false
     }
     
+    private func updateCompositionalLayout() {
+        let layout = NfpCompositionalLayout.createLayout(settings: settings)
+        collectionView.setCollectionViewLayout(layout, animated: false)
+    }
+    
+    
+    
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Сдача ФП"
+                navigationItem.title = "Сдача ФП"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "gearshape.fill"),
             style: .plain,
@@ -84,6 +92,15 @@ class NfpViewController: UIViewController  {
 
         navigationController?.pushViewController(settingsVC, animated: true)
 
+        
+    }
+    
+    private func updateTotalScoreCell() {
+        collectionView.visibleCells.forEach { cell in
+            if let totalCell = cell as? TotalScoreCell {
+                totalCell.configureCell(with: nfpPerformance)
+            }
+        }
     }
     
 }
@@ -118,14 +135,14 @@ extension NfpViewController: UICollectionViewDataSource {
     }
     
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if indexPath.section < settings.getIntegerNumberOfExercises() {
+        if kind == "Footer" {
             let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
             let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
-            exercise.score = minimumScore
+            
+            if exercise.score == 0 {
+                exercise.score = minimumScore
+            }
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Footer", withReuseIdentifier: ResultCellView.identifier, for: indexPath) as! ResultCellView
             
@@ -134,14 +151,22 @@ extension NfpViewController: UICollectionViewDataSource {
             view.section = indexPath.section
             view.configureCell()
             
+            view.completion = { [unowned self] in
+                updateTotalScoreCell()
+            }
+            
             return view
+            
         } else {
-            return collectionView.dequeueReusableSupplementaryView(ofKind: "Footer", withReuseIdentifier: ResultCellView.identifier, for: indexPath)
-        }
+            
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: HeaderView.identifier, for: indexPath) as! HeaderView
+            view.label.text = "\(indexPath.section + 1)  упражнение"
+            return view
+        
     }
     
 }
-
+}
 
 extension NfpViewController: UICollectionViewDelegate {
     
@@ -224,3 +249,5 @@ extension NfpViewController: UICollectionViewDelegate {
         
     }
 }
+
+
