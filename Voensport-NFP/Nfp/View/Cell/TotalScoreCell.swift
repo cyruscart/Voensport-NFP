@@ -11,18 +11,33 @@ class TotalScoreCell: UICollectionViewCell {
     
     static let identifier = "TotalScoreCell"
     
-    private var totalScoreLabel = UILabel()
-    private var gradeLabel = UILabel()
+    private var totalScoreLabel: UILabel = {
+        let label = UILabel()
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private var gradeLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        return label
+    }()
+    
     private var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
+        button.backgroundColor = UIColor(displayP3Red: 17/255,
+                                         green: 60/255,
+                                         blue: 252/255,
+                                         alpha: 1)
+        button.layer.cornerRadius = 15
         return button
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        backgroundColor = .blue
-        print("Init")
+       
         setupCell()
         setupConstraints()
     }
@@ -33,7 +48,6 @@ class TotalScoreCell: UICollectionViewCell {
     
     private func setupCell() {
         
-        
         [totalScoreLabel, gradeLabel,saveButton].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)
@@ -42,11 +56,15 @@ class TotalScoreCell: UICollectionViewCell {
     
     private func setupConstraints() {
         let inset = CGFloat(20)
+        let width = UIScreen.main.bounds.width - inset * 2
+        let height = CGFloat(40)
         
         NSLayoutConstraint.activate([
             totalScoreLabel.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            totalScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            totalScoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            totalScoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
+            totalScoreLabel.widthAnchor.constraint(equalToConstant: width),
+//            totalScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
+//            totalScoreLabel.trailingAnchor.constraint(equalTo: /Users/cyrus/Documents/UICompositionalLayout/ImplementingModernCollectionViews/Modern Collection Views/Compositional Layout/Cells and Supplementary ViewstrailingAnchor, constant: -inset),
             
             gradeLabel.topAnchor.constraint(equalTo: totalScoreLabel.bottomAnchor, constant: 10),
             gradeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
@@ -54,7 +72,9 @@ class TotalScoreCell: UICollectionViewCell {
             
             saveButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 30),
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            saveButton.widthAnchor.constraint(equalToConstant: 50)
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
+            saveButton.heightAnchor.constraint(equalToConstant: 40)
             
             
             

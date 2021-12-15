@@ -17,14 +17,14 @@ class ExerciseCell: UICollectionViewCell {
     private var exerciseTypeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 15)
         return label
     }()
     
     private var exerciseNumberLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 25)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         return label
     }()
     
