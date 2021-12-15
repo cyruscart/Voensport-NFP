@@ -29,7 +29,7 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
 
 
                 let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(0.2))
+                                                            heightDimension: .fractionalWidth(0.8))
 
                 let totalGroup = NSCollectionLayoutGroup.vertical(layoutSize: totalGroupSize, subitems: [totalItem])
 
@@ -46,7 +46,7 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 exerciseItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 
                 let exerciseGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85),
-                                                               heightDimension: .fractionalHeight(0.25))
+                                                               heightDimension: .fractionalWidth(0.5))
                 let exerciseGroup = NSCollectionLayoutGroup.horizontal(layoutSize: exerciseGroupSize, subitems: [exerciseItem])
                 exerciseGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
                 
@@ -54,14 +54,14 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 
                 let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                               heightDimension: .fractionalHeight(0.13))
+                                                               heightDimension: .fractionalWidth(0.3))
                 
                 let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionFooterSize,
                                                                                 elementKind: "Footer",
                                                                                 alignment: .bottom)
               
                 let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                               heightDimension: .fractionalHeight(0.05))
+                                                               heightDimension: .fractionalWidth(0.10))
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                                 elementKind: "Header",

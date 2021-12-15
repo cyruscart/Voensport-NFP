@@ -12,7 +12,7 @@ import UIKit
 class NfpViewController: UIViewController  {
     
     var settings: Settings!
-    var nfpPerformance: NfpPerformance!
+    var nfpPerformance: NfpController!
     var isAppear = false
     
     var collectionView: UICollectionView!
@@ -26,7 +26,7 @@ class NfpViewController: UIViewController  {
         
         setupNavigationBar()
         setupCollectionView()
-        nfpPerformance = NfpPerformance(settings: settings)
+        nfpPerformance = NfpController(settings: settings)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,8 +34,6 @@ class NfpViewController: UIViewController  {
         
         nfpPerformance.loadInitialData()
         updateCompositionalLayout()
-       
-        
        
     }
     
@@ -92,7 +90,19 @@ class NfpViewController: UIViewController  {
 
         navigationController?.pushViewController(settingsVC, animated: true)
 
+    }
+    
+    @objc private func descriptionButtonTapped(sender: UIButton)  {
+        print("tapped")
+       
+    }
+    
+    private func showDescription(with exercise: NfpExercise) {
+        let descriptionVC = ExerciseDescriptionViewController()
+        descriptionVC.configure(with: exercise)
         
+        present(descriptionVC, animated: true)
+
     }
     
     private func updateTotalScoreCell() {
@@ -127,7 +137,13 @@ extension NfpViewController: UICollectionViewDataSource {
             
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExerciseCell.identifier, for: indexPath) as! ExerciseCell
-            cell.configureCell(with: nfpPerformance.exercises[indexPath.section][indexPath.row])
+            cell.exercise = nfpPerformance.exercises[indexPath.section][indexPath.row]
+            cell.configureCell()
+    
+            cell.callback = { [unowned self] exercise in
+                    self.showDescription(with: exercise)
+                }
+            
             cell.layer.cornerRadius = 15
             return cell
         }

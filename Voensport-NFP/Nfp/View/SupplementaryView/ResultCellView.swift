@@ -37,6 +37,7 @@ class ResultCellView: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
+        
     }
     
     required init?(coder: NSCoder) {

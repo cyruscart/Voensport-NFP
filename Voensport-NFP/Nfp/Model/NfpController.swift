@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class NfpPerformance {
+final class NfpController {
     
     var settings: Settings
     var exercises: [[NfpExercise]] = []

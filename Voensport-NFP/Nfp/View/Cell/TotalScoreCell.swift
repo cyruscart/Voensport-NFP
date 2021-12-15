@@ -8,19 +8,18 @@
 import UIKit
 
 class TotalScoreCell: UICollectionViewCell {
-    
     static let identifier = "TotalScoreCell"
     
     private var totalScoreLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
     private var gradeLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
-        label.textAlignment = .center
+        label.textAlignment = .left
         return label
     }()
     
@@ -38,6 +37,8 @@ class TotalScoreCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
        
+        backgroundColor = .lightGray
+        contentView.alpha = 0.5
         setupCell()
         setupConstraints()
     }
@@ -47,7 +48,6 @@ class TotalScoreCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        
         [totalScoreLabel, gradeLabel,saveButton].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)
@@ -63,9 +63,7 @@ class TotalScoreCell: UICollectionViewCell {
             totalScoreLabel.topAnchor.constraint(equalTo: topAnchor, constant: inset),
             totalScoreLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             totalScoreLabel.widthAnchor.constraint(equalToConstant: width),
-//            totalScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-//            totalScoreLabel.trailingAnchor.constraint(equalTo: /Users/cyrus/Documents/UICompositionalLayout/ImplementingModernCollectionViews/Modern Collection Views/Compositional Layout/Cells and Supplementary ViewstrailingAnchor, constant: -inset),
-            
+        
             gradeLabel.topAnchor.constraint(equalTo: totalScoreLabel.bottomAnchor, constant: 10),
             gradeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
             gradeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
@@ -75,13 +73,10 @@ class TotalScoreCell: UICollectionViewCell {
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
             saveButton.heightAnchor.constraint(equalToConstant: 40)
-            
-            
-            
         ])
     }
     
-     func configureCell(with nfpPerformance: NfpPerformance) {
+     func configureCell(with nfpPerformance: NfpController) {
          totalScoreLabel.text = "Количество баллов - \(nfpPerformance.totalScore)"
          gradeLabel.text = nfpPerformance.getTextForGradeLabel()
          

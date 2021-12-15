@@ -11,8 +11,17 @@ class ExerciseCell: UICollectionViewCell {
     
     static let identifier = "ExerciseCell"
     
+    var callback: ((_ exercise: NfpExercise) -> Void)!
+    var exercise: NfpExercise!
+    
     private var backGroundImageView = UIImageView()
-    private var descriptionButton = UIButton(type: .infoDark)
+    
+    var descriptionButton: UIButton = {
+        let button = UIButton(type: .infoDark)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(descriptionButtonTapped), for: .touchUpInside)
+        return button
+    }()
     
     private var exerciseTypeLabel: UILabel = {
         let label = UILabel()
@@ -47,7 +56,6 @@ class ExerciseCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        
         backGroundImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(backGroundImageView)
         
@@ -67,9 +75,9 @@ class ExerciseCell: UICollectionViewCell {
             
             exerciseTypeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             exerciseTypeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            exerciseTypeLabel.trailingAnchor.constraint(equalTo: descriptionButton.trailingAnchor, constant: -10),
+            exerciseTypeLabel.trailingAnchor.constraint(equalTo: descriptionButton.leadingAnchor, constant: -10),
             
-            descriptionButton.topAnchor.constraint(equalTo: backGroundImageView.topAnchor, constant: 3),
+            descriptionButton.topAnchor.constraint(equalTo: backGroundImageView.topAnchor, constant: 10),
             descriptionButton.widthAnchor.constraint(equalToConstant: 45),
             descriptionButton.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor),
             
@@ -84,12 +92,11 @@ class ExerciseCell: UICollectionViewCell {
         ])
     }
     
-    func configureCell(with exercise: NfpExercise) {
+    func configureCell() {
         exerciseTypeLabel.text = exercise.type.rawValue
         exerciseNameLabel.text = exercise.name
         exerciseNumberLabel.text = exercise.number
-        
-        
+        descriptionButton.isHidden = exercise.exerciseDescription == nil
         
         switch exercise.type {
         case .power:
@@ -103,6 +110,27 @@ class ExerciseCell: UICollectionViewCell {
         case .militarySkill:
             backGroundImageView.image = UIImage(named: "militarySkill")
         }
+    }
+    
+    @objc private func descriptionButtonTapped() {
+        callback(exercise)
+    }
+    
+}
+
+// MARK: - Fixed a bug where the description button did not recognize the touch
+
+extension ExerciseCell {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
+//        guard isUserInteractionEnabled else { return nil }
+//        guard !isHidden else { return nil }
+//        guard alpha >= 0.01 else { return nil }
+//        guard self.point(inside: point, with: event) else { return nil }
+        
+        if descriptionButton.point(inside: convert(point, to: descriptionButton), with: event) {
+            return descriptionButton
+        }
+        return super.hitTest(point, with: event)
     }
 }
