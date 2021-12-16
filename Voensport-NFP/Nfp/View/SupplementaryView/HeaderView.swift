@@ -11,7 +11,12 @@ import UIKit
 
 class HeaderView: UICollectionReusableView {
     static let identifier = "HeaderView"
-    let label = UILabel()
+    let label: UILabel = {
+        let label = UILabel()
+        label.font = .boldSystemFont(ofSize: 20)
+        label.adjustsFontSizeToFitWidth = true
+        return label
+    }()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -22,12 +27,11 @@ class HeaderView: UICollectionReusableView {
         fatalError()
     }
     
-    func configure() {
+    private func configure() {
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.adjustsFontForContentSizeCategory = true
-         
         let inset = CGFloat(10)
+        
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
             label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),

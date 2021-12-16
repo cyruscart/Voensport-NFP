@@ -1,3 +1,4 @@
+
 //
 //  ResultCellView.swift
 //  Voensport-NFP
@@ -7,9 +8,9 @@
 
 import UIKit
 
-class ResultCellView: UICollectionReusableView {
+class ResultView: UICollectionReusableView {
     
-    static let identifier = "ResultCellView"
+    static let identifier = "ResultView"
     
     var exercise: NfpExercise!
     var minimumScore = 0
@@ -31,15 +32,16 @@ class ResultCellView: UICollectionReusableView {
         return label
     }()
     
-    private var resultSlider: UISlider = {
-        let slider = UISlider()
+    private var resultSlider: CircleSlider = {
+        let slider = CircleSlider(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        slider.backgroundColor = .green
         slider.addTarget(self, action: #selector(resultSliderMoved), for: .valueChanged)
         return slider
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
+        setupView()
         
     }
     
@@ -47,25 +49,29 @@ class ResultCellView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupCell() {
+    private func setupView() {
 
         [ resultLabel, resultSlider, scoreLabel].forEach { subView in
             subView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(subView)
         }
         
+        let width = (UIScreen.main.bounds.width - 20) / 2
+        
         NSLayoutConstraint.activate([
     
             resultLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            resultLabel.widthAnchor.constraint(equalToConstant: width),
             
-            scoreLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            scoreLabel.widthAnchor.constraint(equalToConstant: 120),
+            scoreLabel.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 20),
+            scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            scoreLabel.widthAnchor.constraint(equalToConstant: width),
             
-            resultSlider.topAnchor.constraint(equalTo: scoreLabel.bottomAnchor, constant: 10),
-            resultSlider.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            resultSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            resultSlider.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            resultSlider.leadingAnchor.constraint(equalTo: scoreLabel.trailingAnchor, constant: 20),
+            resultSlider.widthAnchor.constraint(equalToConstant: 100),
+            resultSlider.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
         ])
     }
     
@@ -73,19 +79,19 @@ class ResultCellView: UICollectionReusableView {
         resultSlider.minimumValue = Float(exercise.getScoreList().first ?? 0)
         resultSlider.maximumValue = Float(exercise.getScoreList().last ?? 100)
         
-        resultSlider.value = Float(exercise.score)
+        resultSlider.setValue(Float(exercise.score), animated: true)
         
-        setSliderTrackColor()
+//        setSliderTrackColor()
         setResults()
         
     }
     
-     private func setSliderTrackColor() {
-     
-        resultSlider.minimumTrackTintColor = lrintf(resultSlider.value) < minimumScore ?
-         UIColor.systemRed :
-         UIColor.systemBlue
-    }
+//     private func setSliderTrackColor() {
+//
+//        resultSlider.minimumTrackTintColor = lrintf(resultSlider.value) < minimumScore ?
+//         UIColor.systemRed :
+//         UIColor.systemBlue
+//    }
     
     private func setResults() {
         scoreLabel.text = "Баллов: \(exercise.score)"
@@ -93,7 +99,7 @@ class ResultCellView: UICollectionReusableView {
     }
     
      @objc func resultSliderMoved() {
-        setSliderTrackColor()
+//        setSliderTrackColor()
         
          
         if exercise.getScoreList().contains(lrintf(resultSlider.value)) && lrintf(resultSlider.value) != exercise.score  {
@@ -106,4 +112,19 @@ class ResultCellView: UICollectionReusableView {
 
     }
     
+}
+
+extension ResultView {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
+//        guard isUserInteractionEnabled else { return nil }
+//        guard !isHidden else { return nil }
+//        guard alpha >= 0.01 else { return nil }
+//        guard self.point(inside: point, with: event) else { return nil }
+        
+        if resultSlider.point(inside: convert(point, to: resultSlider), with: event) {
+            return resultSlider
+        }
+        return super.hitTest(point, with: event)
+    }
 }

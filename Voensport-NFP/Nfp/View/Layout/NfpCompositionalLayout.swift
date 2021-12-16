@@ -54,14 +54,14 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 
                 let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                               heightDimension: .fractionalWidth(0.3))
+                                                               heightDimension: .fractionalWidth(0.27))
                 
                 let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionFooterSize,
                                                                                 elementKind: "Footer",
                                                                                 alignment: .bottom)
               
                 let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                               heightDimension: .fractionalWidth(0.10))
+                                                               heightDimension: .fractionalWidth(0.12))
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                                 elementKind: "Header",
@@ -76,7 +76,7 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 items.forEach { item in
                     let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2)
                     let minScale: CGFloat = 1
-                    let maxScale: CGFloat = 1.12
+                    let maxScale: CGFloat = 1.10
                     let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
                     item.transform = CGAffineTransform(scaleX: scale, y: scale)
                 }

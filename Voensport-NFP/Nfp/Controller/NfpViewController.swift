@@ -56,11 +56,11 @@ class NfpViewController: UIViewController  {
         
         collectionView.register(ExerciseCell.self, forCellWithReuseIdentifier: ExerciseCell.identifier)
         collectionView.register(TotalScoreCell.self, forCellWithReuseIdentifier: TotalScoreCell.identifier)
-        collectionView.register(ResultCellView.self, forSupplementaryViewOfKind: "Footer", withReuseIdentifier: ResultCellView.identifier)
+        collectionView.register(ResultView.self, forSupplementaryViewOfKind: "Footer", withReuseIdentifier: ResultView.identifier)
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        collectionView.backgroundColor = .systemBackground
+        collectionView.backgroundColor = #colorLiteral(red: 0.9885770679, green: 0.9966184497, blue: 0.9885770679, alpha: 1)
         view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
     }
@@ -138,13 +138,14 @@ extension NfpViewController: UICollectionViewDataSource {
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExerciseCell.identifier, for: indexPath) as! ExerciseCell
             cell.exercise = nfpPerformance.exercises[indexPath.section][indexPath.row]
+//
             cell.configureCell()
-    
+           
+            
             cell.callback = { [unowned self] exercise in
                     self.showDescription(with: exercise)
                 }
             
-            cell.layer.cornerRadius = 15
             return cell
         }
             
@@ -160,11 +161,11 @@ extension NfpViewController: UICollectionViewDataSource {
                 exercise.score = minimumScore
             }
             
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Footer", withReuseIdentifier: ResultCellView.identifier, for: indexPath) as! ResultCellView
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Footer", withReuseIdentifier: ResultView.identifier, for: indexPath) as! ResultView
             
             view.minimumScore = minimumScore
             view.exercise = exercise
-            view.section = indexPath.section
+            view.tag = indexPath.section
             view.configureCell()
             
             view.completion = { [unowned self] in
@@ -176,7 +177,9 @@ extension NfpViewController: UICollectionViewDataSource {
         } else {
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: HeaderView.identifier, for: indexPath) as! HeaderView
-            view.label.text = "\(indexPath.section + 1)  упражнение"
+            let type = nfpPerformance.selectedExercises[indexPath.section].type.rawValue
+            view.label.text = "\(type)"
+            view.tag = indexPath.section
             return view
         
     }
@@ -215,9 +218,9 @@ extension NfpViewController: UICollectionViewDelegate {
     private func updateSupplementaryView(_ collectionView: UICollectionView, indexPath: IndexPath) {
         
         collectionView.visibleSupplementaryViews(ofKind: "Footer").forEach { supplView in
-            let view = supplView as! ResultCellView
+            let view = supplView as! ResultView
             
-            if view.section == indexPath.section {
+            if view.tag == indexPath.section {
             
             let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
             let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
@@ -226,6 +229,15 @@ extension NfpViewController: UICollectionViewDelegate {
             view.minimumScore = minimumScore
             view.exercise = exercise
             view.configureCell()
+            }
+        }
+        
+        collectionView.visibleSupplementaryViews(ofKind: "Header").forEach { supplView in
+            let view = supplView as! HeaderView
+            
+            if view.tag == indexPath.section {
+                let type = nfpPerformance.selectedExercises[indexPath.section].type.rawValue
+                view.label.text = "\(type)"
             }
         }
             

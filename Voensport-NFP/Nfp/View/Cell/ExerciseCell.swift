@@ -23,23 +23,20 @@ class ExerciseCell: UICollectionViewCell {
         return button
     }()
     
-    private var exerciseTypeLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        return label
-    }()
     
     private var exerciseNumberLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private var exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = .systemFont(ofSize: 18)
+        label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
         return label
     }()
@@ -59,7 +56,7 @@ class ExerciseCell: UICollectionViewCell {
         backGroundImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(backGroundImageView)
         
-        [descriptionButton, exerciseTypeLabel,exerciseNumberLabel, exerciseNameLabel].forEach { view in
+        [descriptionButton,exerciseNumberLabel, exerciseNameLabel].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
             backGroundImageView.addSubview(view)
         }
@@ -73,30 +70,37 @@ class ExerciseCell: UICollectionViewCell {
             backGroundImageView.topAnchor.constraint(equalTo: topAnchor),
             backGroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            exerciseTypeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            exerciseTypeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            exerciseTypeLabel.trailingAnchor.constraint(equalTo: descriptionButton.leadingAnchor, constant: -10),
-            
-            descriptionButton.topAnchor.constraint(equalTo: backGroundImageView.topAnchor, constant: 10),
+            descriptionButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             descriptionButton.widthAnchor.constraint(equalToConstant: 45),
-            descriptionButton.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor),
+            descriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            exerciseNumberLabel.leadingAnchor.constraint(equalTo: backGroundImageView.leadingAnchor, constant: 30),
-            exerciseNumberLabel.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor, constant: -30),
-            exerciseNumberLabel.bottomAnchor.constraint(equalTo: backGroundImageView.topAnchor, constant: 85),
+            exerciseNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            exerciseNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            exerciseNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            exerciseNumberLabel.heightAnchor.constraint(equalToConstant: layer.bounds.height / 4.5),
             
-            exerciseNameLabel.topAnchor.constraint(equalTo: exerciseNumberLabel.topAnchor),
-            exerciseNameLabel.leadingAnchor.constraint(equalTo: backGroundImageView.leadingAnchor, constant: 10),
-            exerciseNameLabel.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor, constant: -10),
-            exerciseNameLabel.bottomAnchor.constraint(equalTo: backGroundImageView.bottomAnchor, constant: 15)
+            exerciseNameLabel.topAnchor.constraint(equalTo: exerciseNumberLabel.bottomAnchor),
+            exerciseNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            exerciseNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            exerciseNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
     
     func configureCell() {
-        exerciseTypeLabel.text = exercise.type.rawValue
         exerciseNameLabel.text = exercise.name
         exerciseNumberLabel.text = exercise.number
         descriptionButton.isHidden = exercise.exerciseDescription == nil
+        
+        contentView.layer.cornerRadius = 15
+        contentView.layer.masksToBounds = true
+        
+        layer.cornerRadius = 15
+        layer.masksToBounds = false
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.3
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 10
         
         switch exercise.type {
         case .power:
