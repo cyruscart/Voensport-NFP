@@ -105,9 +105,9 @@ final class NfpController {
     }
     
     private enum Grade: String, CaseIterable  {
-        case highLevel = "Высший квалификационный уровень"
-        case firstLevel = "1 квалификационный уровень"
-        case secondLevel = "2 квалификационный уровень"
+        case highLevel = "Высший уровень"
+        case firstLevel = "1 уровень"
+        case secondLevel = "2 уровень"
         case five = "5"
         case four = "4"
         case three = "3"
@@ -190,20 +190,28 @@ final class NfpController {
         return exercises
     }
     
-    func getTextForGradeLabel() -> String {
+    func getGradeForTotalScoreLabel() -> String {
         if calculateGrade() == Grade.highLevel.rawValue ||
             calculateGrade() == Grade.firstLevel.rawValue ||
             calculateGrade() == Grade.secondLevel.rawValue {
-            return """
-                Оценка - 5
-                \(calculateGrade())
-                """
+            return calculateGrade()
         } else {
-            return """
-                Оценка - \(calculateGrade())
-                """
+            return ""
         }
     }
+    
+    func getMarkForTotalScoreLabel() -> String {
+        if calculateGrade() == Grade.highLevel.rawValue ||
+            calculateGrade() == Grade.firstLevel.rawValue ||
+            calculateGrade() == Grade.secondLevel.rawValue ||
+            calculateGrade() == Grade.five.rawValue {
+            return "5"
+        } else {
+            return calculateGrade()
+        }
+    }
+
+  
     
     func getMinimumScore(for exercise: NfpExercise) -> Int {
         exercise.getScoreList().filter { $0 >= minimumScore }.first ?? minimumScore
