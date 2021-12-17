@@ -11,26 +11,32 @@ class ExerciseCell: UICollectionViewCell {
     
     static let identifier = "ExerciseCell"
     
-    private var backGroundImageView = UIImageView()
-    private var descriptionButton = UIButton(type: .infoDark)
+    var callback: ((_ exercise: NfpExercise) -> Void)!
+    var exercise: NfpExercise!
     
-    private var exerciseTypeLabel: UILabel = {
-        let label = UILabel()
-        label.textAlignment = .left
-        label.font = UIFont.boldSystemFont(ofSize: 15)
-        return label
+    private var backGroundImageView = UIImageView()
+    
+    var descriptionButton: UIButton = {
+        let button = UIButton(type: .infoDark)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(descriptionButtonTapped), for: .touchUpInside)
+        return button
     }()
+    
     
     private var exerciseNumberLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = .boldSystemFont(ofSize: 20)
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
     private var exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.font = .systemFont(ofSize: 18)
+        label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
         return label
     }()
@@ -47,11 +53,10 @@ class ExerciseCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        
         backGroundImageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(backGroundImageView)
         
-        [descriptionButton, exerciseTypeLabel,exerciseNumberLabel, exerciseNameLabel].forEach { view in
+        [descriptionButton,exerciseNumberLabel, exerciseNameLabel].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
             backGroundImageView.addSubview(view)
         }
@@ -65,31 +70,37 @@ class ExerciseCell: UICollectionViewCell {
             backGroundImageView.topAnchor.constraint(equalTo: topAnchor),
             backGroundImageView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
-            exerciseTypeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            exerciseTypeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            exerciseTypeLabel.trailingAnchor.constraint(equalTo: descriptionButton.trailingAnchor, constant: -10),
-            
-            descriptionButton.topAnchor.constraint(equalTo: backGroundImageView.topAnchor, constant: 3),
+            descriptionButton.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             descriptionButton.widthAnchor.constraint(equalToConstant: 45),
-            descriptionButton.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor),
+            descriptionButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            exerciseNumberLabel.leadingAnchor.constraint(equalTo: backGroundImageView.leadingAnchor, constant: 30),
-            exerciseNumberLabel.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor, constant: -30),
-            exerciseNumberLabel.bottomAnchor.constraint(equalTo: backGroundImageView.topAnchor, constant: 85),
+            exerciseNumberLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),
+            exerciseNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
+            exerciseNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -30),
+            exerciseNumberLabel.heightAnchor.constraint(equalToConstant: layer.bounds.height / 4.5),
             
-            exerciseNameLabel.topAnchor.constraint(equalTo: exerciseNumberLabel.topAnchor),
-            exerciseNameLabel.leadingAnchor.constraint(equalTo: backGroundImageView.leadingAnchor, constant: 10),
-            exerciseNameLabel.trailingAnchor.constraint(equalTo: backGroundImageView.trailingAnchor, constant: -10),
-            exerciseNameLabel.bottomAnchor.constraint(equalTo: backGroundImageView.bottomAnchor, constant: 15)
+            exerciseNameLabel.topAnchor.constraint(equalTo: exerciseNumberLabel.bottomAnchor),
+            exerciseNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            exerciseNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            exerciseNameLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
         ])
     }
     
-    func configureCell(with exercise: NfpExercise) {
-        exerciseTypeLabel.text = exercise.type.rawValue
+    func configureCell() {
         exerciseNameLabel.text = exercise.name
         exerciseNumberLabel.text = exercise.number
+        descriptionButton.isHidden = exercise.exerciseDescription == nil
         
+        contentView.layer.cornerRadius = 15
+        contentView.layer.masksToBounds = true
         
+        layer.cornerRadius = 15
+        layer.masksToBounds = false
+        
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.3
+        layer.shadowOffset = .zero
+        layer.shadowRadius = 10
         
         switch exercise.type {
         case .power:
@@ -103,6 +114,27 @@ class ExerciseCell: UICollectionViewCell {
         case .militarySkill:
             backGroundImageView.image = UIImage(named: "militarySkill")
         }
+    }
+    
+    @objc private func descriptionButtonTapped() {
+        callback(exercise)
+    }
+    
+}
+
+// MARK: - Fixed a bug where the description button did not recognize the touch
+
+extension ExerciseCell {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         
+//        guard isUserInteractionEnabled else { return nil }
+//        guard !isHidden else { return nil }
+//        guard alpha >= 0.01 else { return nil }
+//        guard self.point(inside: point, with: event) else { return nil }
+        
+        if descriptionButton.point(inside: convert(point, to: descriptionButton), with: event) {
+            return descriptionButton
+        }
+        return super.hitTest(point, with: event)
     }
 }

@@ -29,12 +29,12 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
 
 
                 let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(0.2))
+                                                            heightDimension: .fractionalWidth(0.5))
 
                 let totalGroup = NSCollectionLayoutGroup.vertical(layoutSize: totalGroupSize, subitems: [totalItem])
 
                 section = NSCollectionLayoutSection(group: totalGroup)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30)
 
             } else {
                 
@@ -46,7 +46,7 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 exerciseItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 
                 let exerciseGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85),
-                                                               heightDimension: .fractionalHeight(0.25))
+                                                               heightDimension: .fractionalWidth(0.5))
                 let exerciseGroup = NSCollectionLayoutGroup.horizontal(layoutSize: exerciseGroupSize, subitems: [exerciseItem])
                 exerciseGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
                 
@@ -54,14 +54,14 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 
                 let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                               heightDimension: .fractionalHeight(0.13))
+                                                               heightDimension: .fractionalWidth(0.27))
                 
                 let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionFooterSize,
                                                                                 elementKind: "Footer",
                                                                                 alignment: .bottom)
               
                 let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
-                                                               heightDimension: .fractionalHeight(0.05))
+                                                               heightDimension: .fractionalWidth(0.12))
                 
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                                 elementKind: "Header",
@@ -72,15 +72,15 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 
                 section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
             
-            section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-                items.forEach { item in
-                    let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2)
-                    let minScale: CGFloat = 1
-                    let maxScale: CGFloat = 1.12
-                    let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
-                }
-            }
+//            section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+//                items.forEach { item in
+//                    let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2)
+//                    let minScale: CGFloat = 1
+//                    let maxScale: CGFloat = 1.10
+//                    let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+//                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
+//                }
+//            }
             }
                 
             return section

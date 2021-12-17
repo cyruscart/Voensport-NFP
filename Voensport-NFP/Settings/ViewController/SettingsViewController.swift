@@ -13,22 +13,23 @@ class SettingsViewController: UIViewController {
     private var tableView: UITableView!
     private var selectedSetting: String!
     
+   
     override func viewDidLoad() {
         super.viewDidLoad()
-       
         title = "Настройки"
+        navigationItem.largeTitleDisplayMode = .never
         selectedSetting = ""
-     
         setTableView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        
         settings.setNumberOfExercise()
         tableView.reloadData()
     }
-        
+    
     
     private func setTableView() {
         
@@ -39,7 +40,6 @@ class SettingsViewController: UIViewController {
         tableView.register(HapticTableViewCell.self, forCellReuseIdentifier: HapticTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
-        
         tableView.separatorStyle = .none
     }
     
@@ -70,6 +70,7 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
         
         if let cell = cell as? HapticTableViewCell {
             cell.configure(settings: settings)
+            cell.selectionStyle = .none
             cell.hapticSwitch.addTarget(self, action: #selector(hapticSwitchDidChange), for: .valueChanged)
             
         } else {

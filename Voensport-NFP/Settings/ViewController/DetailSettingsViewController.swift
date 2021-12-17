@@ -15,6 +15,8 @@ class DetailSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        setNavigationTitle()
         setTableView()
       
     }
@@ -28,6 +30,18 @@ class DetailSettingsViewController: UIViewController {
         tableView.delegate = self
         
         tableView.separatorStyle = .singleLine
+    }
+    
+    private func setNavigationTitle() {
+        navigationItem.largeTitleDisplayMode = .never
+        switch currentSetting {
+        case "sex": title = "Пол"
+        case "maleAge": title = "Возрастная категория"
+        case "femaleAge": title = "Возрастная категория"
+        case "numberOfExercise": title = "Количество упражнений"
+        default: title = "Категория"
+            
+        }
     }
 }
 
