@@ -13,4 +13,10 @@ enum SportGrade: String, Codable {
     case firstGrade = "1 разряд"
     case secondGrade = "2 разряд"
     case thirdGrade = "3 разряд"
+    case withoutGrade = "Без разряда"
+    
+    static var paidSportGrade: [SportGrade] {
+        [.ms, .kms, .firstGrade, .withoutGrade]
+    }
 }
+

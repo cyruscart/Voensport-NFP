@@ -15,16 +15,17 @@ class DetailSettingsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         setNavigationTitle()
         setTableView()
-      
+        
     }
     private func setTableView() {
         
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: PickerTableViewCell.identifier)
         
         tableView.dataSource = self
         tableView.delegate = self
@@ -39,6 +40,7 @@ class DetailSettingsViewController: UIViewController {
         case "maleAge": title = "Возрастная категория"
         case "femaleAge": title = "Возрастная категория"
         case "numberOfExercise": title = "Количество упражнений"
+        case "tariff":  title = "Тарифный разряд"
         default: title = "Категория"
             
         }
@@ -48,11 +50,19 @@ class DetailSettingsViewController: UIViewController {
 extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        1
+        return currentSetting == "tariff" ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        settings.getNumberOfRowsForDetailSettings(currentSetting)
+        currentSetting == "tariff" ? 1 : settings.getNumberOfRowsForDetailSettings(currentSetting)
+    }
+    
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        var title = ""
+        if currentSetting == "tariff" {
+            title = section == 0 ? "Тарифный разряд" : "Спортивный разряд"
+        }
+        return title
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,6 +94,25 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
             ? .checkmark
             : .none
             
+        case "tariff":
+            let cell = tableView.dequeueReusableCell(withIdentifier: PickerTableViewCell.identifier, for: indexPath) as! PickerTableViewCell
+            let picker = createPicker(textField: cell.pickerTextField)
+            picker.tag = indexPath.section
+            
+            if indexPath.section == 0 {
+                cell.pickerTextField.placeholder = "Выберите тарифный разряд"
+                cell.pickerTextField.text = settings.tariff == 0
+                ? ""
+                : "\(settings.tariff) тарифный разряд"
+            } else {
+                cell.pickerTextField.placeholder = "Выберите спортивный разряд"
+                cell.pickerTextField.text = settings.sportGrade == nil
+                ? ""
+                : settings.sportGrade?.rawValue
+            }
+    
+            return cell
+            
         default:
             content.text = Category.allCases[indexPath.row].rawValue
             cell.accessoryType = settings.category == Category.allCases[indexPath.row]
@@ -98,6 +127,73 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
         settings.settingDidSelect(didSelectRowAt: indexPath, currentSetting: currentSetting)
         
         tableView.reloadData()
+    }
+    
+}
+
+//MARK: - UIPickerViewDelegate, UIPickerViewDataSource
+
+extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+      1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerView.tag == 0
+        ? Tariff.tariff.count
+        : SportGrade.paidSportGrade.count
+    }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerView.tag == 0
+        ? "\(Tariff.tariffNumbers[row]) тарифный разряд"
+        : SportGrade.paidSportGrade[row].rawValue
+        
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        if pickerView.tag == 0 {
+            guard let cell = tableView.visibleCells.first as? PickerTableViewCell else { return }
+            let tariff = Tariff.tariffNumbers[row]
+            cell.pickerTextField.text = "\(tariff) тарифный разряд"
+            settings.tariff = tariff
+        } else {
+            guard let cell = tableView.visibleCells.last as? PickerTableViewCell else { return }
+            let sportGrade = SportGrade.paidSportGrade[row]
+            cell.pickerTextField.text = sportGrade.rawValue
+            settings.sportGrade = sportGrade
+        }
+    }
+    
+    private func createPicker (textField: UITextField) -> UIPickerView {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([flexButton ,doneButton], animated: false)
+        textField.inputAccessoryView = toolBar
+        textField.inputView = picker
+        
+        return picker
+    }
+    
+    @objc private func donePressed() {
+        
+        tableView.visibleCells.forEach { cell in
+            guard let tariffCell = cell as? PickerTableViewCell else { return }
+            tariffCell.pickerTextField.resignFirstResponder()
+            
+            guard let gradeCell = cell as? PickerTableViewCell else { return }
+            gradeCell.pickerTextField.resignFirstResponder()
+        }
+       
     }
     
 }

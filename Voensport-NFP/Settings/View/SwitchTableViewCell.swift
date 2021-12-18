@@ -1,5 +1,5 @@
 //
-//  HapticTableViewCell.swift
+//  SwitchTableViewCell.swift
 //  Voensport-NFP
 //
 //  Created by Кирилл on 05.12.2021.
@@ -7,12 +7,12 @@
 
 import UIKit
 
-class HapticTableViewCell: UITableViewCell {
+class SwitchTableViewCell: UITableViewCell {
     
     static let identifier = "HapticTableViewCell"
    
-    var hapticSwitch = UISwitch()
-    private let settingNameLabel = UILabel()
+    var switchStatement = UISwitch()
+    var settingNameLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,7 +26,7 @@ class HapticTableViewCell: UITableViewCell {
     
     
     private func setupCell() {
-        [hapticSwitch, settingNameLabel].forEach { view in
+        [switchStatement, settingNameLabel].forEach { view in
             view.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(view)
         }
@@ -36,17 +36,11 @@ class HapticTableViewCell: UITableViewCell {
             settingNameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
             settingNameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
             
-            hapticSwitch.leadingAnchor.constraint(equalTo: settingNameLabel.trailingAnchor, constant: 10),
-            hapticSwitch.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
-            hapticSwitch.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            hapticSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
+            switchStatement.leadingAnchor.constraint(equalTo: settingNameLabel.trailingAnchor, constant: 10),
+            switchStatement.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            switchStatement.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            switchStatement.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16)
         ])
     }
     
-    func configure(settings: Settings) {
-        settingNameLabel.text = "При выборе результата"
-        hapticSwitch.isOn = settings.hapticOn
-    }
-    
-   
 }
