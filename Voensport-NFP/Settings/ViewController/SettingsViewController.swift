@@ -37,7 +37,7 @@ class SettingsViewController: UIViewController {
         view.addSubview(tableView)
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        tableView.register(HapticTableViewCell.self, forCellReuseIdentifier: HapticTableViewCell.identifier)
+        tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
@@ -65,13 +65,14 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.numberOfSections == indexPath.section + 1
-        ? tableView.dequeueReusableCell(withIdentifier: HapticTableViewCell.identifier, for: indexPath) as! HapticTableViewCell
+        ? tableView.dequeueReusableCell(withIdentifier: SwitchTableViewCell.identifier, for: indexPath) as! SwitchTableViewCell
         : tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         
-        if let cell = cell as? HapticTableViewCell {
-            cell.configure(settings: settings)
+        if let cell = cell as? SwitchTableViewCell {
             cell.selectionStyle = .none
-            cell.hapticSwitch.addTarget(self, action: #selector(hapticSwitchDidChange), for: .valueChanged)
+            cell.switchStatement.isOn = settings.hapticOn
+            cell.settingNameLabel.text = "При выборе рузультата"
+            cell.switchStatement.addTarget(self, action: #selector(hapticSwitchDidChange), for: .valueChanged)
             
         } else {
             var content = cell.defaultContentConfiguration()

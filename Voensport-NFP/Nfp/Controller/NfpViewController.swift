@@ -12,7 +12,7 @@ import UIKit
 class NfpViewController: UIViewController  {
     
     var settings: Settings!
-    var nfpPerformance: NfpController!
+    var nfpController: NfpController!
     var isAppear = false
     var exerciseDataSource: UICollectionViewDiffableDataSource<Int, NfpExercise>!
     var collectionView: UICollectionView!
@@ -23,14 +23,14 @@ class NfpViewController: UIViewController  {
         
         setupNavigationBar()
         setupCollectionView()
-        nfpPerformance = NfpController(settings: settings)
+        nfpController = NfpController(settings: settings)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.navigationBar.prefersLargeTitles = true
-        nfpPerformance.loadInitialData()
+        nfpController.loadInitialData()
         updateCompositionalLayout()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         
@@ -95,7 +95,7 @@ class NfpViewController: UIViewController  {
     private func updateTotalScoreCell() {
         collectionView.visibleCells.forEach { cell in
             if let totalCell = cell as? TotalScoreCell {
-                totalCell.configureCell(with: nfpPerformance)
+                totalCell.configureCell(with: nfpController)
             }
         }
     }
@@ -107,8 +107,8 @@ class NfpViewController: UIViewController  {
             
             if view.tag == indexPath.section {
                 
-                let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
-                let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
+                let exercise = self.nfpController.selectedExercises[indexPath.section]
+                let minimumScore = self.nfpController.getMinimumScore(for: exercise)
                 exercise.score = minimumScore
                 
                 view.minimumScore = minimumScore
@@ -121,7 +121,7 @@ class NfpViewController: UIViewController  {
             let view = supplView as! HeaderView
             
             if view.tag == indexPath.section {
-                let type = nfpPerformance.selectedExercises[indexPath.section].type.rawValue
+                let type = nfpController.selectedExercises[indexPath.section].type.rawValue
                 view.label.text = "\(type)"
             }
         }
@@ -153,7 +153,7 @@ class NfpViewController: UIViewController  {
             visibleItemsInSection[0] :
             visibleItemsInSection[1]
             
-            nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPathNextSelectedItem.section][indexPathNextSelectedItem.row]
+            nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPathNextSelectedItem.section][indexPathNextSelectedItem.row]
         }
         
     }
@@ -172,20 +172,20 @@ extension NfpViewController: UICollectionViewDataSource {
         if section == settings.getIntegerNumberOfExercises() {
             return 1
         } else {
-            return nfpPerformance.exercises[section].count
+            return nfpController.exercises[section].count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == settings.getIntegerNumberOfExercises() {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalScoreCell.identifier, for: indexPath) as! TotalScoreCell
-            cell.configureCell(with: self.nfpPerformance)
+            cell.configureCell(with: self.nfpController)
             cell.moneyButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
             return cell
             
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExerciseCell.identifier, for: indexPath) as! ExerciseCell
-            cell.exercise = nfpPerformance.exercises[indexPath.section][indexPath.row]
+            cell.exercise = nfpController.exercises[indexPath.section][indexPath.row]
             cell.configureCell()
             
             cell.callback = { [unowned self] exercise in
@@ -199,8 +199,8 @@ extension NfpViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == "Footer" {
-            let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
-            let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
+            let exercise = self.nfpController.selectedExercises[indexPath.section]
+            let minimumScore = self.nfpController.getMinimumScore(for: exercise)
             
             if exercise.score == 0 {
                 exercise.score = minimumScore
@@ -223,7 +223,7 @@ extension NfpViewController: UICollectionViewDataSource {
         } else {
             
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: HeaderView.identifier, for: indexPath) as! HeaderView
-            let type = nfpPerformance.selectedExercises[indexPath.section].type.rawValue
+            let type = nfpController.selectedExercises[indexPath.section].type.rawValue
             view.label.text = "\(type)"
             view.tag = indexPath.section
             return view
@@ -248,7 +248,7 @@ extension NfpViewController: UICollectionViewDelegate {
         }
         
         guard let totalCell = cell as? TotalScoreCell else { return }
-        totalCell.configureCell(with: nfpPerformance)
+        totalCell.configureCell(with: nfpController)
         
     }
     
@@ -259,10 +259,10 @@ extension NfpViewController: UICollectionViewDelegate {
         if shouldReplaceSelectedItem {
             
             if indexPath.row == 2 {
-                nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPath.section][0]
+                nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
-            } else if indexPath.row == nfpPerformance.exercises[indexPath.section].count - 3 {
-                nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPath.section][nfpPerformance.exercises[indexPath.section].count - 1]
+            } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 {
+                nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][nfpController.exercises[indexPath.section].count - 1]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
             }
         }
@@ -293,7 +293,7 @@ extension NfpViewController {
         
         let title = settings.tariff == 0
         ? "Недостаточно данных!"
-        : "\(nfpPerformance.getAmountOfMoney()) \u{20BD}"
+        : "\(nfpController.getAmountOfMoney()) \u{20BD}"
         
         let message = settings.tariff == 0
         ? "Для расчета надбавки за ФП перейдите в настройки и выберите свой тарифный разряд"
