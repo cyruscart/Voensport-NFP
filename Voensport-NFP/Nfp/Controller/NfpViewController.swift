@@ -17,7 +17,7 @@ class NfpViewController: UIViewController  {
     var exerciseDataSource: UICollectionViewDiffableDataSource<Int, NfpExercise>!
     var collectionView: UICollectionView!
     private var feedbackGenerator: UISelectionFeedbackGenerator?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -33,7 +33,7 @@ class NfpViewController: UIViewController  {
         nfpPerformance.loadInitialData()
         updateCompositionalLayout()
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
-       
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -59,7 +59,7 @@ class NfpViewController: UIViewController  {
         collectionView.register(HeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-      
+        
         view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
     }
@@ -71,7 +71,7 @@ class NfpViewController: UIViewController  {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-                navigationItem.title = "Сдача ФП"
+        navigationItem.title = "Сдача ФП"
         navigationItem.rightBarButtonItem = UIBarButtonItem(
             image: UIImage(systemName: "gearshape.fill"),
             style: .plain,
@@ -80,20 +80,17 @@ class NfpViewController: UIViewController  {
         )
     }
     
-    @objc private func showSettings() {
-        let settingsVC = SettingsViewController()
-        settingsVC.settings = settings
-        navigationController?.pushViewController(settingsVC, animated: true)
+    private func startFeedbackGenerator() {
         
+        if settings.hapticOn {
+            feedbackGenerator = UISelectionFeedbackGenerator()
+            feedbackGenerator?.prepare()
+            feedbackGenerator?.selectionChanged()
+            feedbackGenerator = nil
+        }
     }
     
-    private func showDescription(with exercise: NfpExercise) {
-        let descriptionVC = ExerciseDescriptionViewController()
-        descriptionVC.configure(with: exercise)
-        
-        present(descriptionVC, animated: true)
-
-    }
+    //MARK: - Update UI
     
     private func updateTotalScoreCell() {
         collectionView.visibleCells.forEach { cell in
@@ -101,6 +98,64 @@ class NfpViewController: UIViewController  {
                 totalCell.configureCell(with: nfpPerformance)
             }
         }
+    }
+    
+    private func updateSupplementaryView(_ collectionView: UICollectionView, indexPath: IndexPath) {
+        
+        collectionView.visibleSupplementaryViews(ofKind: "Footer").forEach { supplView in
+            let view = supplView as! ResultCellView
+            
+            if view.tag == indexPath.section {
+                
+                let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
+                let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
+                exercise.score = minimumScore
+                
+                view.minimumScore = minimumScore
+                view.exercise = exercise
+                view.configureCell()
+            }
+        }
+        
+        collectionView.visibleSupplementaryViews(ofKind: "Header").forEach { supplView in
+            let view = supplView as! HeaderView
+            
+            if view.tag == indexPath.section {
+                let type = nfpPerformance.selectedExercises[indexPath.section].type.rawValue
+                view.label.text = "\(type)"
+            }
+        }
+        
+        updateTotalScoreCell()
+    }
+    
+    private func updateSelectedExercises(_ collectionView: UICollectionView, forItemAt indexPath: IndexPath) {
+        
+        /* current item - 2
+         
+         slide to left, next item - 1
+         [[0, 1], [0, 2]]         - visible
+         [0, 0]                   - will display
+         
+         slide to right, next item - 3
+         [[0, 2], [0, 3]]          - visible
+         [0, 4]                    - will display
+         
+         */
+        
+        let visibleItemsInSection = collectionView
+            .indexPathsForVisibleItems
+            .filter {$0.section == indexPath.section}
+            .sorted {$0.row < $1.row}
+        
+        if visibleItemsInSection.count == 2 {
+            let indexPathNextSelectedItem = visibleItemsInSection[1].row > indexPath.row ?
+            visibleItemsInSection[0] :
+            visibleItemsInSection[1]
+            
+            nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPathNextSelectedItem.section][indexPathNextSelectedItem.row]
+        }
+        
     }
     
 }
@@ -132,14 +187,14 @@ extension NfpViewController: UICollectionViewDataSource {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExerciseCell.identifier, for: indexPath) as! ExerciseCell
             cell.exercise = nfpPerformance.exercises[indexPath.section][indexPath.row]
             cell.configureCell()
-           
+            
             cell.callback = { [unowned self] exercise in
-                    self.showDescription(with: exercise)
-                }
+                self.showDescription(with: exercise)
+            }
             
             return cell
         }
-            
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -172,18 +227,10 @@ extension NfpViewController: UICollectionViewDataSource {
             view.label.text = "\(type)"
             view.tag = indexPath.section
             return view
-        
-    }
-}
-    private func startFeedbackGenerator() {
-        
-        if settings.hapticOn {
-            feedbackGenerator = UISelectionFeedbackGenerator()
-            feedbackGenerator?.prepare()
-            feedbackGenerator?.selectionChanged()
-            feedbackGenerator = nil
+            
         }
     }
+    
 }
 
 //MARK: - UICollectionViewDelegate
@@ -221,79 +268,55 @@ extension NfpViewController: UICollectionViewDelegate {
         }
     }
     
-    private func updateSupplementaryView(_ collectionView: UICollectionView, indexPath: IndexPath) {
-        
-        collectionView.visibleSupplementaryViews(ofKind: "Footer").forEach { supplView in
-            let view = supplView as! ResultCellView
-            
-            if view.tag == indexPath.section {
-            
-            let exercise = self.nfpPerformance.selectedExercises[indexPath.section]
-            let minimumScore = self.nfpPerformance.getMinimumScore(for: exercise)
-            exercise.score = minimumScore
-                
-            view.minimumScore = minimumScore
-            view.exercise = exercise
-            view.configureCell()
-            }
-        }
-        
-        collectionView.visibleSupplementaryViews(ofKind: "Header").forEach { supplView in
-            let view = supplView as! HeaderView
-            
-            if view.tag == indexPath.section {
-                let type = nfpPerformance.selectedExercises[indexPath.section].type.rawValue
-                view.label.text = "\(type)"
-            }
-        }
-        
-        updateTotalScoreCell()
-        }
-
-    private func updateSelectedExercises(_ collectionView: UICollectionView, forItemAt indexPath: IndexPath) {
-        
-        /* current item - 2
-         
-         slide to left, next item - 1
-         [[0, 1], [0, 2]]         - visible
-         [0, 0]                   - will display
-         
-         slide to right, next item - 3
-         [[0, 2], [0, 3]]          - visible
-         [0, 4]                    - will display
-         
-         */
-        
-        let visibleItemsInSection = collectionView
-            .indexPathsForVisibleItems
-            .filter {$0.section == indexPath.section}
-            .sorted {$0.row < $1.row}
-        
-        if visibleItemsInSection.count == 2 {
-            let indexPathNextSelectedItem = visibleItemsInSection[1].row > indexPath.row ?
-            visibleItemsInSection[0] :
-            visibleItemsInSection[1]
-            
-            nfpPerformance.selectedExercises[indexPath.section] = nfpPerformance.exercises[indexPathNextSelectedItem.section][indexPathNextSelectedItem.row]
-        }
-
-    }
 }
 
-//MARK: - Show money alert
+//MARK: - Navigation
+
 extension NfpViewController {
     
-   @objc private func showAlert() {
+    @objc private func showSettings() {
+        let settingsVC = SettingsViewController()
+        settingsVC.settings = settings
+        navigationController?.pushViewController(settingsVC, animated: true)
+        
+    }
+    
+    private func showDescription(with exercise: NfpExercise) {
+        let descriptionVC = ExerciseDescriptionViewController()
+        descriptionVC.configure(with: exercise)
+        
+        present(descriptionVC, animated: true)
+        
+    }
+    
+    @objc private func showAlert() {
+        
+        let title = settings.tariff == 0
+        ? "Недостаточно данных!"
+        : "\(nfpPerformance.getAmountOfMoney()) \u{20BD}"
+        
+        let message = settings.tariff == 0
+        ? "Для расчета надбавки за ФП перейдите в настройки и выберите свой тарифный разряд"
+        : "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)"
+        
         let alert = UIAlertController(
-            title: "Ежемесячная надбавка к денежному довольствию составит:",
-            message: "10000 рублей",
+            title: title,
+            message: message,
             preferredStyle: .actionSheet
         )
         
-        let playAgainAction = UIAlertAction(title: "Понятно", style: .default) {_ in
-            
+        let closeAction = UIAlertAction(title: "Понятно", style: .cancel)
+        let showSettingsAction = UIAlertAction(title: "В настройки", style: .default) {_ in
+            self.showSettings()
         }
-        alert.addAction(playAgainAction)
+        
+        if settings.tariff == 0 {
+            alert.addAction(showSettingsAction)
+            alert.addAction(closeAction)
+        } else {
+            alert.addAction(closeAction)
+        }
+        
         present(alert, animated: true)
     }
 }

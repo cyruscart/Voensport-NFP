@@ -34,7 +34,7 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 let totalGroup = NSCollectionLayoutGroup.vertical(layoutSize: totalGroupSize, subitems: [totalItem])
 
                 section = NSCollectionLayoutSection(group: totalGroup)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 30, bottom: 30, trailing: 30)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 30, bottom: 40, trailing: 30)
 
             } else {
                 

@@ -15,7 +15,8 @@ final class Settings: Codable {
     var category: Category = .firstCategory
     var numberOfExercise: NumberOfExercise = .three
     var hapticOn = true
-    
+    var tariff = 50
+    var sportGrade: SportGrade? = nil
     
     var sectionKind: [Int] {
         Array(0..<getIntegerNumberOfExercises())
