@@ -21,6 +21,7 @@ class ExerciseDescriptionViewController: UIViewController {
     private let descriptionLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.textColor = .black
         return label
     }()
     

@@ -1739,6 +1739,11 @@ final class NfpController {
     //MARK: - Calculating money
     
     
+    func shouldShowMoneyButton() -> Bool {
+        calculateGrade() == "Высший уровень"
+        || calculateGrade() == "1 уровень"
+        || calculateGrade() == "2 уровень"
+    }
     
     func getAmountOfMoney() -> String {
         guard let tariff = Tariff.tariff[String(settings.tariff)] else { return "tariff not found" }

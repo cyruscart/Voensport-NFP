@@ -21,6 +21,7 @@ class NfpViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("did load")
         setupNavigationBar()
         setupCollectionView()
         nfpController = NfpController(settings: settings)
@@ -28,11 +29,12 @@ class NfpViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("Will appear")
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
+        collectionView.reloadData()
+//        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         
     }
     
@@ -96,6 +98,8 @@ class NfpViewController: UIViewController  {
         collectionView.visibleCells.forEach { cell in
             if let totalCell = cell as? TotalScoreCell {
                 totalCell.configureCell(with: nfpController)
+                totalCell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
+                
             }
         }
     }
@@ -123,6 +127,7 @@ class NfpViewController: UIViewController  {
             if view.tag == indexPath.section {
                 let type = nfpController.selectedExercises[indexPath.section].type.rawValue
                 view.label.text = "\(type)"
+                
             }
         }
         
@@ -180,6 +185,7 @@ extension NfpViewController: UICollectionViewDataSource {
         if indexPath.section == settings.getIntegerNumberOfExercises() {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalScoreCell.identifier, for: indexPath) as! TotalScoreCell
             cell.configureCell(with: self.nfpController)
+            cell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
             cell.moneyButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
             return cell
             
@@ -249,6 +255,7 @@ extension NfpViewController: UICollectionViewDelegate {
         
         guard let totalCell = cell as? TotalScoreCell else { return }
         totalCell.configureCell(with: nfpController)
+        totalCell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
         
     }
     
@@ -282,41 +289,43 @@ extension NfpViewController {
     }
     
     private func showDescription(with exercise: NfpExercise) {
-        let descriptionVC = ExerciseDescriptionViewController()
-        descriptionVC.configure(with: exercise)
-        
-        present(descriptionVC, animated: true)
-        
+            let descriptionVC = ExerciseDescriptionViewController()
+            descriptionVC.configure(with: exercise)
+            
+            present(descriptionVC, animated: true)
+    
     }
     
     @objc private func showAlert() {
-        
-        let title = settings.tariff == 0
-        ? "Недостаточно данных!"
-        : "\(nfpController.getAmountOfMoney()) \u{20BD}"
-        
-        let message = settings.tariff == 0
-        ? "Для расчета надбавки за ФП перейдите в настройки и выберите свой тарифный разряд"
-        : "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)"
-        
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .actionSheet
-        )
-        
-        let closeAction = UIAlertAction(title: "Понятно", style: .cancel)
-        let showSettingsAction = UIAlertAction(title: "В настройки", style: .default) {_ in
-            self.showSettings()
+        if nfpController.shouldShowMoneyButton() {
+            
+            let title = settings.tariff == 0
+            ? "Недостаточно данных!"
+            : "\(nfpController.getAmountOfMoney()) \u{20BD}"
+            
+            let message = settings.tariff == 0
+            ? "Для расчета надбавки за ФП перейдите в настройки и выберите свой тарифный разряд"
+            : "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)"
+            
+            let alert = UIAlertController(
+                title: title,
+                message: message,
+                preferredStyle: .actionSheet
+            )
+            
+            let closeAction = UIAlertAction(title: "Понятно", style: .cancel)
+            let showSettingsAction = UIAlertAction(title: "В настройки", style: .default) {_ in
+                self.showSettings()
+            }
+            
+            if settings.tariff == 0 {
+                alert.addAction(showSettingsAction)
+                alert.addAction(closeAction)
+            } else {
+                alert.addAction(closeAction)
+            }
+            
+            present(alert, animated: true)
         }
-        
-        if settings.tariff == 0 {
-            alert.addAction(showSettingsAction)
-            alert.addAction(closeAction)
-        } else {
-            alert.addAction(closeAction)
-        }
-        
-        present(alert, animated: true)
     }
 }

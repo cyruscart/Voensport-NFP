@@ -15,7 +15,7 @@ class TotalScoreCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
-     
+        
         return label
     }()
     
@@ -33,12 +33,12 @@ class TotalScoreCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.adjustsFontSizeToFitWidth = true
-       
+        
         label.textAlignment = .left
         return label
     }()
     
-     var saveButton: UIButton = {
+    var saveButton: UIButton = {
         let button = UIButton()
         button.setTitle("Сохранить", for: .normal)
         button.backgroundColor = UIColor(displayP3Red: 17/255,
@@ -49,7 +49,7 @@ class TotalScoreCell: UICollectionViewCell {
         return button
     }()
     
-     var moneyButton: UIButton = {
+    var moneyButton: UIButton = {
         let button = UIButton()
         button.setTitle("\u{20BD}", for: .normal)
         button.backgroundColor = UIColor(displayP3Red: 17/255,
@@ -62,7 +62,7 @@ class TotalScoreCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-    
+        
         setupCell()
         setupConstraints()
         
@@ -70,10 +70,10 @@ class TotalScoreCell: UICollectionViewCell {
         
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-
+        
         layer.cornerRadius = 15
         layer.masksToBounds = false
-
+        
         layer.shadowColor = UIColor.black.cgColor
         layer.shadowOpacity = 0.1
         layer.shadowOffset = .zero
@@ -94,7 +94,7 @@ class TotalScoreCell: UICollectionViewCell {
     private func setupConstraints() {
         let inset = CGFloat(20)
         let width = UIScreen.main.bounds.width - inset * 2
-      
+        
         
         NSLayoutConstraint.activate([
             totalScoreLabel.topAnchor.constraint(equalTo: markLabel.topAnchor),
@@ -102,7 +102,7 @@ class TotalScoreCell: UICollectionViewCell {
             
             gradeLabel.bottomAnchor.constraint(equalTo: markLabel.bottomAnchor),
             gradeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-        
+            
             markLabel.topAnchor.constraint(equalTo: topAnchor, constant: inset),
             markLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset * 3),
             
@@ -121,12 +121,12 @@ class TotalScoreCell: UICollectionViewCell {
         ])
     }
     
-     func configureCell(with nfpController: NfpController) {
-         totalScoreLabel.text = "Баллов: \(nfpController.totalScore)"
-         markLabel.text = nfpController.getMarkForTotalScoreLabel()
-         gradeLabel.text = nfpController.getGradeForTotalScoreLabel()
-         
+    func configureCell(with nfpController: NfpController) {
+        totalScoreLabel.text = "Баллов: \(nfpController.totalScore)"
+        markLabel.text = nfpController.getMarkForTotalScoreLabel()
+        gradeLabel.text = nfpController.getGradeForTotalScoreLabel()
         
-         
+        
+        
     }
 }
