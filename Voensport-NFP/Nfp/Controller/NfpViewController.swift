@@ -13,7 +13,7 @@ class NfpViewController: UIViewController  {
     
     var settings: Settings!
     var nfpController: NfpController!
-    var isAppear = false
+    var shouldObserveVisibleCells = false
     var exerciseDataSource: UICollectionViewDiffableDataSource<Int, NfpExercise>!
     var collectionView: UICollectionView!
     private var feedbackGenerator: UISelectionFeedbackGenerator?
@@ -21,7 +21,6 @@ class NfpViewController: UIViewController  {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("did load")
         setupNavigationBar()
         setupCollectionView()
         nfpController = NfpController(settings: settings)
@@ -29,25 +28,25 @@ class NfpViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("Will appear")
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
         collectionView.reloadData()
-//        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .centeredHorizontally, animated: false)
         
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        isAppear = true
+        shouldObserveVisibleCells = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        isAppear = false
+        shouldObserveVisibleCells = false
     }
     
     private func setupCollectionView() {
@@ -246,7 +245,7 @@ extension NfpViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let shouldReplaceSelectedItem = isAppear && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating
+        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating
         
         if shouldReplaceSelectedItem {
             updateSelectedExercises(collectionView, forItemAt: indexPath)
@@ -261,14 +260,28 @@ extension NfpViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        let shouldReplaceSelectedItem = isAppear && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating
+        //        Scroll right
+        //                [1, 2]             - didEndDisplaying cell
+        //                [[1, 3], [1, 4]]   - sorted visible cells
+        
+        //        Scroll left
+        //               [1, 2]              - didEndDisplaying cell
+        //               [[1, 0], [1, 1]]    - sorted visible cells
+        
+        
+        let sortedIndexPathForVisibleItems = collectionView.indexPathsForVisibleItems.filter {$0.section == indexPath.section}
+            .sorted {$0.row < $1.row}
+        
+        let isCellScrollToLeft = indexPath.row > sortedIndexPathForVisibleItems.first?.row ?? 0
+        
+        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating
         
         if shouldReplaceSelectedItem {
             
-            if indexPath.row == 2 {
+            if indexPath.row == 2 && isCellScrollToLeft {
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
-            } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 {
+            } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 && !isCellScrollToLeft{
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][nfpController.exercises[indexPath.section].count - 1]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
             }
@@ -282,6 +295,7 @@ extension NfpViewController: UICollectionViewDelegate {
 extension NfpViewController {
     
     @objc private func showSettings() {
+        shouldObserveVisibleCells = false
         let settingsVC = SettingsViewController()
         settingsVC.settings = settings
         navigationController?.pushViewController(settingsVC, animated: true)
@@ -289,11 +303,11 @@ extension NfpViewController {
     }
     
     private func showDescription(with exercise: NfpExercise) {
-            let descriptionVC = ExerciseDescriptionViewController()
-            descriptionVC.configure(with: exercise)
-            
-            present(descriptionVC, animated: true)
-    
+        let descriptionVC = ExerciseDescriptionViewController()
+        descriptionVC.configure(with: exercise)
+        
+        present(descriptionVC, animated: true)
+        
     }
     
     @objc private func showAlert() {
