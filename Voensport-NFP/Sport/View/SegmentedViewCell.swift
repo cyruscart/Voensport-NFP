@@ -8,14 +8,28 @@
 import UIKit
 
 class SegmentedViewCell: UITableViewCell {
-    static let identifier = "SwitchView"
+    static let identifier = "SegmentedViewCell"
     
-    private var sportSegmented = UISegmentedControl()
+    var ageSegmented: UISegmentedControl = {
+        let segmented = UISegmentedControl()
+        
+        segmented.insertSegment(withTitle: "До 30 лет", at: 0, animated: false)
+        segmented.insertSegment(withTitle: "30 - 40 лет", at: 1, animated: false)
+        segmented.insertSegment(withTitle: "Свыше 40 лет", at: 2, animated: false)
+        
+        segmented.addTarget(self, action: #selector(segmentedSelected) , for: .valueChanged)
+        
+        return segmented
+    }()
+    
+    
+    var callBack: ((Int) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupCell()
+        
         
     }
     
@@ -24,20 +38,34 @@ class SegmentedViewCell: UITableViewCell {
     }
     
     private func setupCell() {
-        sportSegmented.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(sportSegmented)
+        ageSegmented.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(ageSegmented)
         
         NSLayoutConstraint.activate([
-            sportSegmented.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            sportSegmented.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            sportSegmented.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            sportSegmented.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            ageSegmented.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            ageSegmented.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            ageSegmented.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            ageSegmented.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
             
         ])
     }
     
-    func configureCell() {
-        
+    func configure(_ age: SportType.TriathlonAgeCategory) {
+        switch age {
+        case .lessThirty:
+            ageSegmented.selectedSegmentIndex = 0
+        case .lessForty:
+            ageSegmented.selectedSegmentIndex = 1
+        case .moreForty:
+            ageSegmented.selectedSegmentIndex = 2
+        }
     }
+    
+    @objc func segmentedSelected() {
+        guard let callBack = callBack else { return }
+        
+        callBack(ageSegmented.selectedSegmentIndex)
+    }
+    
     
 }

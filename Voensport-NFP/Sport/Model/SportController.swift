@@ -10,41 +10,58 @@ import Foundation
 final class SportController {
     
     var isEditing = false
-    var sportType: SportType = .triathlon
     var triathlonType: SportType.TriathlonType = .summer
     var ageCategory: SportType.TriathlonAgeCategory = .lessThirty
     var exercises: [SportExercise] = []
+    private var summerTriathlonExercises: [SportExercise] = []
+    private var winterTriathlonExercises: [SportExercise] = []
     
     var totalScore: Int {
         exercises.compactMap { $0.score }.reduce(0, +)
     }
     
-    lazy var sportGrade = sportType == .triathlon
-    ? calculateTriathlonGrade()
-    : calculateVTGrade()
+    lazy var sportGrade = calculateTriathlonGrade()
     
     
+     func loadExercises() {
+        
+        guard let summerPath = Bundle.main.path(forResource: "SummerTriathlonExercises", ofType: "json") else { return }
+        guard let winterPath = Bundle.main.path(forResource: "WinterTriathlonExercises", ofType: "json") else { return }
+        
+            do {
+                guard let summerData = try String(contentsOfFile: summerPath).data(using: .utf8) else { return }
+                summerTriathlonExercises = try JSONDecoder().decode([SportExercise].self, from: summerData)
+                
+                guard let winterData = try String(contentsOfFile: winterPath).data(using: .utf8) else { return }
+                summerTriathlonExercises = try JSONDecoder().decode([SportExercise].self, from: winterData)
+                
+            } catch {
+                print(error.localizedDescription)
+            }
+    }
     
     //MARK: - Triathlon methods
     
-//    func updateTriathlonExercises() {
-//        
-//        switch ageCategory {
-//        case .lessThirty:
-//            exercises = triathlonType == .summer
-//            ? DataManager.shared.summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
-//            : DataManager.shared.winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
-//        case .lessForty:
-//            exercises = triathlonType == .summer
-//            ? DataManager.shared.summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
-//            : DataManager.shared.winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
-//        case .moreForty:
-//            exercises = triathlonType == .summer
-//            ? DataManager.shared.summerTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
-//            : DataManager.shared.winterTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
-//        }
-//    }
-//    
+    func updateTriathlonExercises() {
+        exercises.removeAll()
+        loadExercises()
+        
+        switch ageCategory {
+        case .lessThirty:
+            exercises = triathlonType == .summer
+            ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
+            : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
+        case .lessForty:
+            exercises = triathlonType == .summer
+            ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
+            : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
+        case .moreForty:
+            exercises = triathlonType == .summer
+            ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
+            : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
+        }
+    }
+    
     
     func calculateTriathlonGrade() -> String {
         var grade = ""
@@ -96,42 +113,4 @@ final class SportController {
         return grade
     }
     
-    //MARK: - VT methods
-    
-    func calculateVTGrade() -> String {
-        var grade = ""
-        
-        if !exercises.filter({$0.score == nil}).isEmpty {
-            return " " // пробел для отслеживания момента, когда показывать кнопку сохранить
-        }
-        
-        switch totalScore {
-        case 2900...:
-            grade = SportGrade.kms.rawValue
-        case 2300...2899:
-            grade = SportGrade.firstGrade.rawValue
-        case 1800...2299:
-            grade = SportGrade.secondGrade.rawValue
-        case 1400...1799:
-                grade = SportGrade.thirdGrade.rawValue
-        default:
-            break
-        }
-        return grade
-    }
-    
-    func getExerciseTitleForSegment(_ index: Int) -> [String] {
-        switch index {
-        case 0:
-            return ["Подтягивания", "Подъем переворотом"]
-        case 1:
-            return ["Бег 60 м", "Бег 100 м"]
-        case 2:
-            return ["Бег 1 км", "Бег 3 км"]
-        default:
-            return ["ПП ОКУ", "ПП ВМФ", "Лопинг"]
-        }
-    }
-    
-   
 }

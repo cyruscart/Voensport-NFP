@@ -60,14 +60,17 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+        showTriathlonViewController(index: indexPath.row)
     }
     
     
     //MARK: - Navigation
     
-    private func showSportViewController() {
-        
+    private func showTriathlonViewController(index: Int) {
+        let triathlonVC = TriathlonViewController()
+        triathlonVC.sportController = SportController()
+        triathlonVC.sportController.triathlonType = index == 0 ? .summer : .winter
+       
+        navigationController?.pushViewController(triathlonVC, animated: true)
     }
 }
