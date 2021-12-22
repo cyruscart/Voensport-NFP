@@ -189,11 +189,11 @@
 		6EC4BA90275B7BF000A4FD4A /* Voensport-NFP */ = {
 			isa = PBXGroup;
 			children = (
-				6E50C0012770A6AD00C3D04C /* Sport */,
 				6EC4BAA8275B7C2B00A4FD4A /* Application */,
 				6EC4BAB0275B7EC300A4FD4A /* SplashScreen */,
 				6ED04544275C6AB800D048B4 /* Nfp */,
 				6ED0454A275C6BAF00D048B4 /* Settings */,
+				6E50C0012770A6AD00C3D04C /* Sport */,
 				6EC4BAAC275B7CB300A4FD4A /* Resources */,
 			);
 			path = "Voensport-NFP";

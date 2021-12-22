@@ -57,8 +57,11 @@ class TotalScoreSportCell: UITableViewCell  {
     }
     
     func configureCell(sportController: SportController) {
-        totalScoreLabel.text = "Баллов: \(sportController.totalScore)"
+        totalScoreLabel.text = "Сумма баллов: \(sportController.totalScore)"
         gradeLabel.text = sportController.calculateTriathlonGrade()
+        
+        saveButton.isHidden = !sportController.shouldShowTotalScore()
+        totalScoreLabel.isHidden = !sportController.shouldShowTotalScore()
     }
     
     private func configureCellForEditing() {

@@ -23,15 +23,12 @@ class TriathlonViewController: UIViewController {
         ? "Летнее офицерское троеборье"
         : "Зимнее офицерское троеборье"
         
-        sportController.loadExercises()
+        
         sportController.updateTriathlonExercises()
+        print(sportController.exercises.count)
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-    }
     
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .plain)
@@ -78,21 +75,25 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             //            if SportPerformanceManager.shared.isEditing { cell.configureForEditing(with: editingPerformanceResult)
             //            }
             cell.selectionStyle = .none
-            cell.configure(sportController.ageCategory)
-            cell.callBack = { selectedSegment in
+            cell.callBack = { [unowned self] selectedSegment in
                 self.updateAfterAgeSegmentSelected(selectedSegment)
             }
+            cell.configure(sportController.ageCategory)
             
             return cell
             
         case 1...3:
-            print("case 1...3")
+            
             let cell = tableView.dequeueReusableCell(withIdentifier: SportExerciseCell.identifier, for: indexPath) as! SportExerciseCell
-            let picker = createPicker(textField: cell.resultTextField)
-            picker.tag = indexPath.row - 1
-            cell.tag = indexPath.row - 1
+            
             cell.selectionStyle = .none
-            cell.configureCell(sportController.exercises[indexPath.row - 1])
+            cell.exercise = sportController.exercises[indexPath.row - 1]
+            cell.configureCell()
+            cell.tag = indexPath.row - 1
+            cell.callBackForUpdatingTotalScore = { [unowned self] in
+                self.updateTotalScoreCell()
+            }
+            
             return cell
             
         default:
@@ -103,87 +104,27 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-    }
     
     private func updateAfterAgeSegmentSelected(_ selectedSegment: Int) {
-        
         
         sportController.ageCategory = SportType.TriathlonAgeCategory.allCases[selectedSegment]
         sportController.updateTriathlonExercises()
         
         tableView.visibleCells.forEach { cell in
-            cell.reloadInputViews()
+            if let cell = cell as? SportExerciseCell {
+                cell.exercise = sportController.exercises[cell.tag]
+                cell.configureCell()
+            }
         }
-
-    }
-    
-  
-}
-
-//MARK: - UIPickerViewDelegate, UIPickerViewDataSource
-
-extension TriathlonViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        1
-    }
-    
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        sportController.exercises[pickerView.tag].getScoreList().count
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        String(sportController.exercises[pickerView.tag].getScoreList()[row])
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-        let newResult = String(sportController.exercises[pickerView.tag].getScoreList()[pickerView.selectedRow(inComponent: 0)])
-        sportController.exercises[pickerView.tag].result = newResult
         
-        guard let newScore = sportController.exercises[pickerView.tag].score else { return }
-        
+        updateTotalScoreCell()
+    }
+    
+    private func updateTotalScoreCell() {
         tableView.visibleCells.forEach { cell in
-            
-            if let exCell = cell as? SportExerciseCell {
-                if exCell.tag == pickerView.tag {
-                    exCell.resultTextField.text = newResult
-                    exCell.scoreLabel.text = "Баллов: \(newScore)"
-                }
-            } else if let totalCell = cell as? TotalScoreSportCell {
-                totalCell.configureCell(sportController: sportController)
-        }
-    }
-    }
-    
-    private func createPicker (textField: UITextField) -> UIPickerView {
-        let picker = UIPickerView()
-        picker.delegate = self
-        picker.dataSource = self
-        
-        let toolBar = UIToolbar()
-        toolBar.sizeToFit()
-        
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
-        let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        
-        toolBar.setItems([flexButton ,doneButton], animated: false)
-        textField.inputAccessoryView = toolBar
-        textField.inputView = picker
-        
-        return picker
-    }
-    
-    @objc private func donePressed() {
-        
-        tableView.visibleCells.forEach { cell in
-            guard let exerciseCell = cell as? SportExerciseCell else { return }
-            exerciseCell.resultTextField.resignFirstResponder()
-            
+            guard let totalScoreCell = cell as? TotalScoreSportCell else { return }
+            totalScoreCell.configureCell(sportController: sportController)
         }
     }
 }
+

@@ -10,13 +10,16 @@ import UIKit
 class SportExerciseCell: UITableViewCell  {
     static let identifier = "SportExerciseCell"
     
-     var exerciseNameLabel: UILabel = {
+    var exercise: SportExercise!
+    var callBackForUpdatingTotalScore: (() -> Void) = {}
+    
+    var exerciseNameLabel: UILabel = {
         let label = UILabel()
         
         return label
     }()
     
-     var scoreLabel: UILabel = {
+    var scoreLabel: UILabel = {
         let label = UILabel()
         
         return label
@@ -28,7 +31,7 @@ class SportExerciseCell: UITableViewCell  {
         tf.placeholder = "Выберите результат"
         return tf
     }()
- 
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -42,6 +45,7 @@ class SportExerciseCell: UITableViewCell  {
     }
     
     private func setupCell() {
+        createPicker(textField: resultTextField)
         
         [exerciseNameLabel, scoreLabel, resultTextField].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
@@ -62,27 +66,67 @@ class SportExerciseCell: UITableViewCell  {
         ])
     }
     
-    func configureCell(_ exercise: SportExercise) {
-        
+    func configureCell() {
+        createPicker(textField: resultTextField)
+     
         exerciseNameLabel.text = exercise.name
+        resultTextField.text = String(exercise.result)
         
-        if let score = exercise.score {
-            scoreLabel.text = String(score)
-        }
+        scoreLabel.text = exercise.score == 0
+        ? ""
+        : String(exercise.score)
     }
     
-    private func configureCellForEditing() {
-        
-        //        resultTextField.text = SportPerformanceManager.shared.exercises[cellIndex].result
-        //        scoreLabel.text = "Баллов: \(String(SportPerformanceManager.shared.exercises[cellIndex].score ?? 0))"
-        //
-        //        let resultIndex = SportPerformanceManager.shared.exercises[cellIndex].getIndexForEditingResult()
-        //
-        //        SportPerformanceManager.shared.exercises[cellIndex].result == ""
-        //        ? resultPicker.selectRow(SportPerformanceManager.shared.exercises[cellIndex].getScoreList().count / 2, inComponent: 0, animated: false)
-        //        : resultPicker.selectRow(resultIndex, inComponent: 0, animated: false)
-        //    }
-        
-        
+}
+
+//MARK: - UIPickerViewDelegate, UIPickerViewDataSource
+extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        1
     }
+    
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        exercise.getScoreList().count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        String(exercise.getScoreList()[row])
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        let newResult = String(exercise.getScoreList()[pickerView.selectedRow(inComponent: 0)])
+        exercise.result = newResult
+        
+        let newScore = exercise.score
+        
+        resultTextField.text = newResult
+        scoreLabel.text = "Баллов: \(newScore)"
+        
+        callBackForUpdatingTotalScore()
+    }
+    
+    
+    private func createPicker (textField: UITextField) {
+        let picker = UIPickerView()
+        picker.delegate = self
+        picker.dataSource = self
+        
+        let toolBar = UIToolbar()
+        toolBar.sizeToFit()
+        
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        
+        toolBar.setItems([flexButton ,doneButton], animated: false)
+        textField.inputAccessoryView = toolBar
+        textField.inputView = picker
+    }
+    
+    @objc private func donePressed() {
+        resultTextField.resignFirstResponder()
+    }
+    
 }

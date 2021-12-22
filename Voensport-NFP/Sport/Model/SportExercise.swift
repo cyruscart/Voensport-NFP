@@ -10,15 +10,16 @@ import Foundation
 
 
 
-struct SportExercise: Codable {
+final class SportExercise: Codable {
+    
     let name: String
     let triathlonAgeCategory: SportType.TriathlonAgeCategory?
     var result = ""
     
     let scoreList: [String: Int]
     
-    var score: Int? {
-        scoreList.first(where: {$0.key == result })?.value ?? nil
+    var score: Int {
+        scoreList.first(where: {$0.key == result })?.value ?? 0
     }
     
     func getScoreList() -> [String] {
