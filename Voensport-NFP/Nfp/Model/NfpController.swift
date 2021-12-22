@@ -139,7 +139,7 @@ final class NfpController {
         var exercisesList: [[NfpExercise]] = []
         
         for _ in 1...settings.getIntegerNumberOfExercises() {
-            let exercisesFromJSON = getExercisesFromJsonFile()
+            let exercisesFromJSON = StorageManager.shared.getNfpExercisesFromJsonFile(settings.sex)
             var exercises: [NfpExercise] = []
             
             exerciseTypes.forEach { type in
@@ -168,26 +168,7 @@ final class NfpController {
         exercises = exercisesList
     }
     
-    private func getExercisesFromJsonFile() -> [NfpExercise] {
-        var exercises: [NfpExercise] = []
-        
-        let jsonFile = settings.sex == .male
-        ? "NfpManExercises"
-        : "NfpWomanExercises"
-        
-        if let path = Bundle.main.path(forResource: jsonFile, ofType: "json") {
-            do {
-                guard let data = try String(contentsOfFile: path).data(using: .utf8) else { return exercises }
-                exercises = try JSONDecoder().decode([NfpExercise].self, from: data)
-            } catch {
-                print(error.localizedDescription)
-            }
-        } else {
-            fatalError("File not found")
-        }
-        
-        return exercises
-    }
+    
     
     func getGradeForTotalScoreLabel() -> String {
         if calculateGrade() == Grade.highLevel.rawValue ||

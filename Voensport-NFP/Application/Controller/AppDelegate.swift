@@ -39,8 +39,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nfpTabBarImage = UIImage(named: "nfp")
         nfpViewController.settings = settings
         
+        let sportListVC = SportListViewController()
+        let sportTabBarImage = UIImage(systemName: "sportscourt")
+        
         tabBarVC.viewControllers = [
-        generateNavigationController(rootViewController: nfpViewController, title: "Сдача ФП", image: nfpTabBarImage!)
+        generateNavigationController(rootViewController: nfpViewController, title: "Сдача ФП", image: nfpTabBarImage!),
+        
+        generateNavigationController(rootViewController: sportListVC, title: "Военный спорт", image: sportTabBarImage!)
         ]
         
         return tabBarVC
