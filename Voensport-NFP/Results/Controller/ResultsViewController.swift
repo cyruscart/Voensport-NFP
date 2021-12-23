@@ -95,8 +95,20 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-       
+        let detailResultVC = DetailResultViewController()
+        
+        if indexPath.section == 0 {
+            let nfpResult = resultsController.nfpResults[indexPath.row]
+            detailResultVC.nfpResult = nfpResult
+            detailResultVC.numberOfSectionForLayout = nfpResult.nfpExercises.count
+        } else {
+            detailResultVC.sportResult = resultsController.sportResults[indexPath.row]
         }
+        
+        let navController = UINavigationController(rootViewController: detailResultVC)
+        present(navController, animated: true, completion: nil)
     }
+    
+}
 
 

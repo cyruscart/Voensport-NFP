@@ -14,27 +14,22 @@ struct ResultsController: Codable {
     var sportResults: [SportResult] = []
     
     var shouldReloadData: Bool {
-        nfpResults.isEmpty && sportResults.isEmpty
+        nfpResults.isEmpty || sportResults.isEmpty
     }
     
     func getTitleForHeaderInSection(for section: Int) -> String {
         
         switch section {
         case 0:
-            return nfpResults.isEmpty
-            ? "Нет результатов сдачи ФП"
-            : "Результаты сдачи ФП"
+            return nfpResults.isEmpty ? "Нет результатов сдачи ФП" : "Результаты сдачи ФП"
         default:
-            return sportResults.isEmpty
-            ? "Нет спортивных результатов"
-            : "Спортивные результаты"
+            return sportResults.isEmpty ? "Нет спортивных результатов" : "Спортивные результаты"
         }
     }
     
-
 }
-    
-    
+
+
 struct NfpResult: Codable {
     
     let totalScore: Int
@@ -79,4 +74,9 @@ struct SportResult: Codable {
         
         return dateFormatter.string(from: date)
     }
+}
+
+enum ResultType {
+    case nfp
+    case sport
 }

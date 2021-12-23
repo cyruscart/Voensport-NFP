@@ -7,14 +7,11 @@
 
 import UIKit
 
-
-
 class NfpViewController: UIViewController  {
     
     var settings: Settings!
     var nfpController: NfpController!
     var shouldObserveVisibleCells = false
-    var exerciseDataSource: UICollectionViewDiffableDataSource<Int, NfpExercise>!
     var collectionView: UICollectionView!
     private var feedbackGenerator: UISelectionFeedbackGenerator?
     
