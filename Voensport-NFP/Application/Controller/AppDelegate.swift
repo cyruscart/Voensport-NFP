@@ -13,14 +13,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     private var settings: Settings!
+    private var resultsController: ResultsController!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         window = UIWindow()
         window?.makeKeyAndVisible()
+        
         settings = StorageManager.shared.getSettings()
+        
         let mainTabBarVC = generateTabBarController(settings: settings)
-       
         window?.rootViewController = mainTabBarVC
         
         return true
@@ -42,10 +44,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let sportListVC = SportListViewController()
         let sportTabBarImage = UIImage(systemName: "sportscourt")
         
+        let resultsVC = ResultsViewController()
+        let resultTabBarImage = UIImage(systemName: "circle.grid.cross")
+        
         tabBarVC.viewControllers = [
         generateNavigationController(rootViewController: nfpViewController, title: "Сдача ФП", image: nfpTabBarImage!),
         
-        generateNavigationController(rootViewController: sportListVC, title: "Военный спорт", image: sportTabBarImage!)
+        generateNavigationController(rootViewController: sportListVC, title: "Военный спорт", image: sportTabBarImage!),
+        
+        generateNavigationController(rootViewController: resultsVC, title: "Результаты", image: resultTabBarImage!)
         ]
         
         return tabBarVC

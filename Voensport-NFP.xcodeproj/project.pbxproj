@@ -24,12 +24,14 @@
 		6E330B94276DA0F9008DEC4F /* SportGrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E330B93276DA0F9008DEC4F /* SportGrade.swift */; };
 		6E330B96276DE681008DEC4F /* PickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E330B95276DE681008DEC4F /* PickerTableViewCell.swift */; };
 		6E50C0062770A6FC00C3D04C /* SportListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0052770A6FC00C3D04C /* SportListViewController.swift */; };
-		6E50C0082770A7F200C3D04C /* SportController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0072770A7F200C3D04C /* SportController.swift */; };
-		6E50C00A2770A83900C3D04C /* SportExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0092770A83900C3D04C /* SportExercise.swift */; };
-		6E50C00C2770A96C00C3D04C /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00B2770A96C00C3D04C /* SportType.swift */; };
+		6E50C0082770A7F200C3D04C /* TriathlonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0072770A7F200C3D04C /* TriathlonController.swift */; };
+		6E50C00A2770A83900C3D04C /* TriathlonExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0092770A83900C3D04C /* TriathlonExercise.swift */; };
+		6E50C00C2770A96C00C3D04C /* TriathlonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00B2770A96C00C3D04C /* TriathlonType.swift */; };
 		6E50C00E2770C9E400C3D04C /* TriathlonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00D2770C9E300C3D04C /* TriathlonViewController.swift */; };
 		6E50C0102770CBE900C3D04C /* SegmentedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00F2770CBE900C3D04C /* SegmentedViewCell.swift */; };
 		6E50C0122770CF5200C3D04C /* SportExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0112770CF5200C3D04C /* SportExerciseCell.swift */; };
+		6E5F27F127734ED700926FC1 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F27F027734ED700926FC1 /* ResultsViewController.swift */; };
+		6E5F27F3277350FD00926FC1 /* Results.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F27F2277350FD00926FC1 /* Results.swift */; };
 		6E80DAF92769AD7D006C21F0 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAF82769AD7D006C21F0 /* HeaderView.swift */; };
 		6E80DAFC2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */; };
 		6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */; };
@@ -40,6 +42,7 @@
 		6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C6002762064200D51135 /* TotalScoreCell.swift */; };
 		6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */; };
 		6EB46013276E0EC600DC5C77 /* Tariff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB46012276E0EC600DC5C77 /* Tariff.swift */; };
+		6EBAF099277480350034999F /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAF098277480350034999F /* SportType.swift */; };
 		6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */; };
 		6EC4BA9E275B7BF100A4FD4A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */; };
 		6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EC4BAB4275B7F0600A4FD4A /* SplashViewController.swift */; };
@@ -65,12 +68,14 @@
 		6E330B93276DA0F9008DEC4F /* SportGrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportGrade.swift; sourceTree = "<group>"; };
 		6E330B95276DE681008DEC4F /* PickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTableViewCell.swift; sourceTree = "<group>"; };
 		6E50C0052770A6FC00C3D04C /* SportListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportListViewController.swift; sourceTree = "<group>"; };
-		6E50C0072770A7F200C3D04C /* SportController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportController.swift; sourceTree = "<group>"; };
-		6E50C0092770A83900C3D04C /* SportExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportExercise.swift; sourceTree = "<group>"; };
-		6E50C00B2770A96C00C3D04C /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
+		6E50C0072770A7F200C3D04C /* TriathlonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriathlonController.swift; sourceTree = "<group>"; };
+		6E50C0092770A83900C3D04C /* TriathlonExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriathlonExercise.swift; sourceTree = "<group>"; };
+		6E50C00B2770A96C00C3D04C /* TriathlonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriathlonType.swift; sourceTree = "<group>"; };
 		6E50C00D2770C9E300C3D04C /* TriathlonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriathlonViewController.swift; sourceTree = "<group>"; };
 		6E50C00F2770CBE900C3D04C /* SegmentedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewCell.swift; sourceTree = "<group>"; };
 		6E50C0112770CF5200C3D04C /* SportExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportExerciseCell.swift; sourceTree = "<group>"; };
+		6E5F27F027734ED700926FC1 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
+		6E5F27F2277350FD00926FC1 /* Results.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Results.swift; sourceTree = "<group>"; };
 		6E80DAF82769AD7D006C21F0 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDescriptionViewController.swift; sourceTree = "<group>"; };
 		6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 		6EB3C6002762064200D51135 /* TotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreCell.swift; sourceTree = "<group>"; };
 		6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6EB46012276E0EC600DC5C77 /* Tariff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tariff.swift; sourceTree = "<group>"; };
+		6EBAF098277480350034999F /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
 		6EC4BA8E275B7BF000A4FD4A /* Voensport-NFP.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Voensport-NFP.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC4BA91275B7BF000A4FD4A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6EC4BA9D275B7BF100A4FD4A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -118,9 +124,9 @@
 		6E50C0022770A6BA00C3D04C /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6E50C0072770A7F200C3D04C /* SportController.swift */,
-				6E50C0092770A83900C3D04C /* SportExercise.swift */,
-				6E50C00B2770A96C00C3D04C /* SportType.swift */,
+				6E50C00B2770A96C00C3D04C /* TriathlonType.swift */,
+				6E50C0072770A7F200C3D04C /* TriathlonController.swift */,
+				6E50C0092770A83900C3D04C /* TriathlonExercise.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -140,6 +146,39 @@
 			children = (
 				6E50C0052770A6FC00C3D04C /* SportListViewController.swift */,
 				6E50C00D2770C9E300C3D04C /* TriathlonViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6E5F27EC27734A9E00926FC1 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				6E5F27EF27734C2200926FC1 /* Controller */,
+				6E5F27EE27734C1700926FC1 /* View */,
+				6E5F27ED27734C0C00926FC1 /* Model */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		6E5F27ED27734C0C00926FC1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6E5F27F2277350FD00926FC1 /* Results.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6E5F27EE27734C1700926FC1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6E5F27EF27734C2200926FC1 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6E5F27F027734ED700926FC1 /* ResultsViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -194,6 +233,7 @@
 				6ED04544275C6AB800D048B4 /* Nfp */,
 				6ED0454A275C6BAF00D048B4 /* Settings */,
 				6E50C0012770A6AD00C3D04C /* Sport */,
+				6E5F27EC27734A9E00926FC1 /* Results */,
 				6EC4BAAC275B7CB300A4FD4A /* Resources */,
 			);
 			path = "Voensport-NFP";
@@ -229,6 +269,7 @@
 			children = (
 				6E330B93276DA0F9008DEC4F /* SportGrade.swift */,
 				6EB46012276E0EC600DC5C77 /* Tariff.swift */,
+				6EBAF098277480350034999F /* SportType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -445,19 +486,22 @@
 				6E21297E27635E7C0016B24A /* NfpManExercises.json in Sources */,
 				6E21297F27635E7C0016B24A /* NfpWomanExercises.json in Sources */,
 				6E21298027635E7C0016B24A /* SummerTriathlonExercises.json in Sources */,
-				6E50C00A2770A83900C3D04C /* SportExercise.swift in Sources */,
-				6E50C00C2770A96C00C3D04C /* SportType.swift in Sources */,
+				6E50C00A2770A83900C3D04C /* TriathlonExercise.swift in Sources */,
+				6E50C00C2770A96C00C3D04C /* TriathlonType.swift in Sources */,
+				6E5F27F3277350FD00926FC1 /* Results.swift in Sources */,
 				6E330B94276DA0F9008DEC4F /* SportGrade.swift in Sources */,
 				6E50C0102770CBE900C3D04C /* SegmentedViewCell.swift in Sources */,
 				6E21298127635E7C0016B24A /* WinterTriathlonExercises.json in Sources */,
 				6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */,
 				6EC4BAB5275B7F0600A4FD4A /* SplashViewController.swift in Sources */,
+				6EBAF099277480350034999F /* SportType.swift in Sources */,
 				6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */,
 				6E80DAF92769AD7D006C21F0 /* HeaderView.swift in Sources */,
 				6E07426C275CB35C00907B35 /* SwitchTableViewCell.swift in Sources */,
 				6ED04549275C6B4700D048B4 /* NfpViewController.swift in Sources */,
+				6E5F27F127734ED700926FC1 /* ResultsViewController.swift in Sources */,
 				6ED04555275C91B800D048B4 /* Settings.swift in Sources */,
-				6E50C0082770A7F200C3D04C /* SportController.swift in Sources */,
+				6E50C0082770A7F200C3D04C /* TriathlonController.swift in Sources */,
 				6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */,
 				6E330B96276DE681008DEC4F /* PickerTableViewCell.swift in Sources */,
 				6ED04558275C922100D048B4 /* StorageManager.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 class SportExerciseCell: UITableViewCell  {
     static let identifier = "SportExerciseCell"
     
-    var exercise: SportExercise!
+    var exercise: TriathlonExercise!
     var callBackForUpdatingTotalScore: (() -> Void) = {}
     
     var exerciseNameLabel: UILabel = {

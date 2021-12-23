@@ -1,5 +1,5 @@
 //
-//  SportType.swift
+//  TriathlonType.swift
 //  Voensport-NFP
 //
 //  Created by Кирилл on 20.12.2021.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum SportType {
-    
+    let sportTypes = ["Летнее офицерское троеборье", "Зимнее офицерское троеборье"]
+
     enum TriathlonType: String, Codable {
         case summer = "Летнее офицерское троеборье"
         case winter = "Зимнее офицерское троеборье"
@@ -20,8 +20,4 @@ enum SportType {
         case moreForty = "Свыше 40 лет"
     }
     
-    static var sportTypes: [String] {
-        ["Летнее офицерское троеборье", "Зимнее офицерское троеборье"]
-    }
 
-}

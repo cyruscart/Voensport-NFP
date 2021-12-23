@@ -44,7 +44,7 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        SportType.sportTypes.count
+        sportTypes.count
     }
     
     
@@ -52,7 +52,7 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = SportType.sportTypes[indexPath.row]
+        content.text = sportTypes[indexPath.row]
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         
@@ -68,7 +68,7 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func showTriathlonViewController(index: Int) {
         let triathlonVC = TriathlonViewController()
-        triathlonVC.sportController = SportController()
+        triathlonVC.sportController = TriathlonController()
         triathlonVC.sportController.triathlonType = index == 0 ? .summer : .winter
        
         navigationController?.pushViewController(triathlonVC, animated: true)

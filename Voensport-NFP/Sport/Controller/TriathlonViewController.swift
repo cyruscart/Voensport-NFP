@@ -10,7 +10,7 @@ import UIKit
 class TriathlonViewController: UIViewController {
     
     private var tableView: UITableView!
-    var sportController: SportController!
+    var sportController: TriathlonController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,6 +99,10 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: TotalScoreSportCell.identifier, for: indexPath) as! TotalScoreSportCell
             cell.configureCell(sportController: sportController)
+            
+            cell.saveButtonCallBack = { [unowned self] in
+                self.saveSportResult()
+            }
             cell.selectionStyle = .none
             return cell
         }
@@ -107,7 +111,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func updateAfterAgeSegmentSelected(_ selectedSegment: Int) {
         
-        sportController.ageCategory = SportType.TriathlonAgeCategory.allCases[selectedSegment]
+        sportController.ageCategory = TriathlonAgeCategory.allCases[selectedSegment]
         sportController.updateTriathlonExercises()
         
         tableView.visibleCells.forEach { cell in
@@ -125,6 +129,14 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             guard let totalScoreCell = cell as? TotalScoreSportCell else { return }
             totalScoreCell.configureCell(sportController: sportController)
         }
+    }
+    
+    private func saveSportResult() {
+            let sportResult = sportController.generateSportResult()
+            var resultsController = StorageManager.shared.getResults()
+            resultsController.sportResults.append(sportResult)
+            StorageManager.shared.saveResults(results: resultsController)
+        
     }
 }
 
