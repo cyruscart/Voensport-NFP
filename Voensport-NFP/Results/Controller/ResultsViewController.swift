@@ -108,6 +108,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         let navController = UINavigationController(rootViewController: detailResultVC)
+        navController.modalPresentationStyle = .fullScreen
         present(navController, animated: true, completion: nil)
     }
     

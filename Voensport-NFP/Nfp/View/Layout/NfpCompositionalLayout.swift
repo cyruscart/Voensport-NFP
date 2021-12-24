@@ -42,8 +42,8 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 let exerciseItem = NSCollectionLayoutItem(layoutSize: exerciseItemSize)
                 exerciseItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 
-                let exerciseGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.85),
-                                                               heightDimension: .fractionalWidth(0.5))
+                let exerciseGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
+                                                               heightDimension: .fractionalWidth(0.45))
                 let exerciseGroup = NSCollectionLayoutGroup.horizontal(layoutSize: exerciseGroupSize, subitems: [exerciseItem])
                 exerciseGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
                 
@@ -69,15 +69,15 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 
                 section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
             
-//            section.visibleItemsInvalidationHandler = { (items, offset, environment) in
-//                items.forEach { item in
-//                    let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2)
-//                    let minScale: CGFloat = 1
-//                    let maxScale: CGFloat = 1.10
-//                    let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
-//                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
-//                }
-//            }
+            section.visibleItemsInvalidationHandler = { (items, offset, environment) in
+                items.forEach { item in
+                    let distanceFromCenter = abs((item.frame.midX - offset.x) - environment.container.contentSize.width / 2)
+                    let minScale: CGFloat = 1
+                    let maxScale: CGFloat = 1.10
+                    let scale = max(maxScale - (distanceFromCenter / environment.container.contentSize.width), minScale)
+                    item.transform = CGAffineTransform(scaleX: scale, y: scale)
+                }
+            }
             }
                 
             return section

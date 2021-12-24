@@ -25,7 +25,7 @@ class DetailResultViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("viewWillAppear")
         navigationController?.navigationBar.prefersLargeTitles = true
         
     }
@@ -127,11 +127,13 @@ extension DetailResultViewController {
         settings.femaleAgeCategory = nfpResult.femaleAgeCategory
         settings.numberOfExercise = nfpResult.numberOfExercise
         settings.category = nfpResult.category
-       
+        settings.tariff = nfpResult.tariff
+        
         nfpVC.nfpController = NfpController(settings: settings)
         nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
         nfpVC.nfpController.isEditing = true
-         
+        nfpVC.modalPresentationStyle = .fullScreen
+        
         present(nfpVC, animated: true, completion: nil)
     }
     

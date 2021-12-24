@@ -87,11 +87,17 @@ class NfpViewController: UIViewController  {
         }
     }
     
-    private func saveResults() {
+    private func saveResults(indexPath: IndexPath) {
         let nfpResult = nfpController.generateNfpResult()
+        
+        if nfpController.isEditing {
+            StorageManager.shared.editNfpResult(with: indexPath, and: nfpResult)
+            dismiss(animated: true)
+        } else {
         var resultsController = StorageManager.shared.getResults()
         resultsController.nfpResults.append(nfpResult)
         StorageManager.shared.saveResults(results: resultsController)
+        }
     }
     
     //MARK: - Update UI
@@ -190,7 +196,7 @@ extension NfpViewController: UICollectionViewDataSource {
             cell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
             cell.moneyButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
             cell.saveButtonCallBack = { [unowned self] in
-                self.saveResults()
+                self.saveResults(indexPath: indexPath)
             }
             return cell
             
@@ -307,7 +313,6 @@ extension NfpViewController {
         navigationController?.pushViewController(settingsVC, animated: true)
         
     }
-    
     
     private func showDescription(with exercise: NfpExercise) {
         let descriptionVC = ExerciseDescriptionViewController()

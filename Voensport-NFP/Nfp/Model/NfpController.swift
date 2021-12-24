@@ -186,17 +186,19 @@ final class NfpController {
                     numberOfExercise: numberOfExercise,
                     category: category,
                     date: Date(),
-                    nfpExercises: selectedExercises)
+                    nfpExercises: selectedExercises,
+                    tariff: settings.tariff)
         :
         NfpResult(totalScore: totalScore,
-                    grade: calculateGrade(),
+                  grade: calculateGrade(),
                   sex: settings.sex,
-                    maleAgeCategory: maleAgeCategory,
-                    femaleAgeCategory: femaleAgeCategory,
-                    numberOfExercise: numberOfExercise,
-                    category: category,
-                    date: Date(),
-                    nfpExercises: selectedExercises)
+                  maleAgeCategory: maleAgeCategory,
+                  femaleAgeCategory: femaleAgeCategory,
+                  numberOfExercise: numberOfExercise,
+                  category: category,
+                  date: Date(),
+                  nfpExercises: selectedExercises,
+                  tariff: settings.tariff)
         
         return nfpResult
     }
@@ -1747,7 +1749,7 @@ final class NfpController {
         }
     }
     
-
+    
     //MARK: - Calculating money
     
     
@@ -1778,7 +1780,7 @@ final class NfpController {
             
         case "2 уровень":
             money = Int(tariff * 0.15 * 0.87)
-
+            
         default:
             money = 0
         }

@@ -41,6 +41,7 @@ struct NfpResult: Codable {
     let category: Category
     let date: Date
     let nfpExercises: [NfpExercise]
+    let tariff: Int
     
     func getDate() -> String {
         let dateFormatter = DateFormatter()
