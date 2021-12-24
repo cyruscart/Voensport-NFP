@@ -42,6 +42,8 @@ class ResultsViewController: UIViewController {
     
 }
 
+//MARK: - UITableViewDataSource, UITableViewDelegate
+
 extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {

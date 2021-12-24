@@ -54,11 +54,6 @@ class DetailResultViewController: UIViewController  {
         : nfpResult?.getDate() ?? ""
     }
     
-   
-    
-    private func editResults() {
-    
-    }
 }
    
 //MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -83,6 +78,14 @@ extension DetailResultViewController: UICollectionViewDataSource, UICollectionVi
                 cell.configureCell(sportResult: sportResult)
             }
 
+            cell.editButtonCallBack = { [unowned self] in
+                self.editResults()
+            }
+            
+            cell.saveButtonCallBack = { [unowned self] in
+                dismiss(animated: true)
+            }
+            
             return cell
             
         } else {
@@ -104,13 +107,41 @@ extension DetailResultViewController: UICollectionViewDataSource, UICollectionVi
 
 extension DetailResultViewController {
     
-     private func showNfpViewController() {
+    private func editResults() {
+        if let _ = nfpResult {
+            showNfpViewController()
+        }
         
+        if let _ = sportResult {
+            showTriathlonViewController()
+        }
     }
     
+    private func showNfpViewController() {
+        guard let nfpResult = nfpResult else { return }
+        let nfpVC = NfpViewController()
+        
+        let settings = Settings()
+        settings.sex = nfpResult.sex
+        settings.maleAgeCategory = nfpResult.maleAgeCategory
+        settings.femaleAgeCategory = nfpResult.femaleAgeCategory
+        settings.numberOfExercise = nfpResult.numberOfExercise
+        settings.category = nfpResult.category
+       
+        nfpVC.nfpController = NfpController(settings: settings)
+        nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
+        nfpVC.nfpController.isEditing = true
+         
+        present(nfpVC, animated: true, completion: nil)
+    }
     
     private func showTriathlonViewController() {
+        guard let sportResult = sportResult else { return }
         
+        let triathlonVC = TriathlonViewController()
+        triathlonVC.sportController = TriathlonController(sportResult: sportResult)
+        
+        present(triathlonVC, animated: true, completion: nil)
     }
     
     

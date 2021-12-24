@@ -51,6 +51,16 @@ struct NfpResult: Codable {
         
         return dateFormatter.string(from: date)
     }
+    
+    func getExerciseForEditing() -> [[NfpExercise]] {
+        var exercises: [[NfpExercise]] = []
+        
+        nfpExercises.forEach { exercise in
+            exercises.append([exercise])
+        }
+        
+        return exercises
+    }
 }
 
 struct SportResult: Codable {

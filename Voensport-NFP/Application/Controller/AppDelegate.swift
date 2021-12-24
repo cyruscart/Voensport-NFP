@@ -38,8 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarVC = UITabBarController()
         
         let nfpViewController = NfpViewController()
+        nfpViewController.nfpController = NfpController(settings: settings)
         let nfpTabBarImage = UIImage(named: "nfp")
-        nfpViewController.settings = settings
         
         let sportListVC = SportListViewController()
         let sportTabBarImage = UIImage(systemName: "sportscourt")

@@ -123,9 +123,13 @@ final class NfpController {
         self.settings = settings
     }
     
+    
     //MARK: - Methods
     func loadInitialData() {
-        loadExercises()
+        if !isEditing {
+            loadExercises()
+        }
+        
         loadInitialSelectedExercise()
     }
     

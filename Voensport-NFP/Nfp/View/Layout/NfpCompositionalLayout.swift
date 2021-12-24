@@ -9,10 +9,7 @@
 import UIKit
 
 class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
-    static func createLayout(settings: Settings) -> UICollectionViewCompositionalLayout {
-        
-        
-        let numberOfSections = settings.getIntegerNumberOfExercises()
+    static func createLayout(numberOfSections: Int) -> UICollectionViewCompositionalLayout {
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             let sectionKind = Array(0...numberOfSections)[sectionIndex]

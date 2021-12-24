@@ -24,10 +24,9 @@ class ResultNfpExerciseCell: UICollectionViewCell {
     
     private var exerciseNameLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 18)
+        label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.numberOfLines = 0
-        label.numberOfLines
         
         return label
     }()
@@ -36,7 +35,6 @@ class ResultNfpExerciseCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .left
-        label.adjustsFontSizeToFitWidth = true
         
         return label
     }()
@@ -46,7 +44,6 @@ class ResultNfpExerciseCell: UICollectionViewCell {
     private var scoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
-        label.adjustsFontSizeToFitWidth = true
         
         label.textAlignment = .left
         return label
@@ -88,22 +85,24 @@ class ResultNfpExerciseCell: UICollectionViewCell {
     private func setupConstraints() {
         
         NSLayoutConstraint.activate([
-            exerciseNumberLabel.topAnchor.constraint(equalTo: topAnchor),
-            exerciseNumberLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            exerciseNumberLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
+            exerciseNumberLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            exerciseNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            exerciseNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+
             exerciseNameLabel.topAnchor.constraint(equalTo: exerciseNumberLabel.bottomAnchor, constant: 10),
-            exerciseNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            exerciseNameLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
-            resultLabel.topAnchor.constraint(equalTo: exerciseNameLabel.bottomAnchor, constant: 10),
-            resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            resultLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            
+            exerciseNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            exerciseNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+
+            resultLabel.topAnchor.constraint(equalTo: exerciseNameLabel.bottomAnchor, constant: 15),
+            resultLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            resultLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+
             scoreLabel.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 10),
-            scoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            scoreLabel.trailingAnchor.constraint(equalTo: trailingAnchor)
+            scoreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            scoreLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
+        
     }
     
     func configureCell(nfpExercise: NfpExercise) {

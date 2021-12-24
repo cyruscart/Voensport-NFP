@@ -19,14 +19,14 @@ class ResultsCompositionalLayout: UICollectionViewCompositionalLayout {
             if sectionKind == numberOfSection  {
 
                 let totalItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                           heightDimension: .fractionalHeight(1))
+                                                           heightDimension: .estimated(50))
 
 
                 let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)
 
 
                 let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalWidth(0.55))
+                                                            heightDimension: .estimated(50))
 
                 let totalGroup = NSCollectionLayoutGroup.vertical(layoutSize: totalGroupSize, subitems: [totalItem])
 
@@ -36,18 +36,17 @@ class ResultsCompositionalLayout: UICollectionViewCompositionalLayout {
             } else {
                 
                 let exerciseItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .fractionalHeight(1))
-                
+                                                              heightDimension: .estimated(50))
                 
                 let exerciseItem = NSCollectionLayoutItem(layoutSize: exerciseItemSize)
-                exerciseItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 
                 let exerciseGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                               heightDimension: .fractionalWidth(0.4))
-                let exerciseGroup = NSCollectionLayoutGroup.horizontal(layoutSize: exerciseGroupSize, subitems: [exerciseItem])
+                                                               heightDimension: .estimated(50))
+                
+                let exerciseGroup = NSCollectionLayoutGroup.horizontal(layoutSize: exerciseGroupSize, subitem: exerciseItem, count: 1)
                
                 section = NSCollectionLayoutSection(group: exerciseGroup)
-                
+              
                 section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 30, bottom: 10, trailing: 30)
                   
             }

@@ -9,7 +9,7 @@ import UIKit
 
 class NfpViewController: UIViewController  {
     
-    var settings: Settings!
+//    var settings: Settings!
     var nfpController: NfpController!
     var shouldObserveVisibleCells = false
     var collectionView: UICollectionView!
@@ -20,7 +20,6 @@ class NfpViewController: UIViewController  {
         
         setupNavigationBar()
         setupCollectionView()
-        nfpController = NfpController(settings: settings)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,7 +46,7 @@ class NfpViewController: UIViewController  {
     }
     
     private func setupCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(settings: settings))
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises()))
         collectionView.delegate = self
         collectionView.dataSource = self
         
@@ -63,7 +62,7 @@ class NfpViewController: UIViewController  {
     }
     
     private func updateCompositionalLayout() {
-        let layout = NfpCompositionalLayout.createLayout(settings: settings)
+        let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
         collectionView.setCollectionViewLayout(layout, animated: false)
     }
     
@@ -80,7 +79,7 @@ class NfpViewController: UIViewController  {
     
     private func startFeedbackGenerator() {
         
-        if settings.hapticOn {
+        if nfpController.settings.hapticOn {
             feedbackGenerator = UISelectionFeedbackGenerator()
             feedbackGenerator?.prepare()
             feedbackGenerator?.selectionChanged()
@@ -173,11 +172,11 @@ class NfpViewController: UIViewController  {
 extension NfpViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        settings.getIntegerNumberOfExercises() + 1
+        nfpController.settings.getIntegerNumberOfExercises() + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == settings.getIntegerNumberOfExercises() {
+        if section == nfpController.settings.getIntegerNumberOfExercises() {
             return 1
         } else {
             return nfpController.exercises[section].count
@@ -185,7 +184,7 @@ extension NfpViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == settings.getIntegerNumberOfExercises() {
+        if indexPath.section == nfpController.settings.getIntegerNumberOfExercises() {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalScoreCell.identifier, for: indexPath) as! TotalScoreCell
             cell.configureCell(with: self.nfpController)
             cell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
@@ -304,7 +303,7 @@ extension NfpViewController {
     @objc private func showSettings() {
         shouldObserveVisibleCells = false
         let settingsVC = SettingsViewController()
-        settingsVC.settings = settings
+        settingsVC.settings = nfpController.settings
         navigationController?.pushViewController(settingsVC, animated: true)
         
     }
@@ -321,11 +320,11 @@ extension NfpViewController {
     @objc private func showAlert() {
         if nfpController.shouldShowMoneyButton() {
             
-            let title = settings.tariff == 0
+            let title = nfpController.settings.tariff == 0
             ? "Недостаточно данных!"
             : "\(nfpController.getAmountOfMoney()) \u{20BD}"
             
-            let message = settings.tariff == 0
+            let message = nfpController.settings.tariff == 0
             ? "Для расчета надбавки за ФП перейдите в настройки и выберите свой тарифный разряд"
             : "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)"
             
@@ -340,7 +339,7 @@ extension NfpViewController {
                 self.showSettings()
             }
             
-            if settings.tariff == 0 {
+            if nfpController.settings.tariff == 0 {
                 alert.addAction(showSettingsAction)
                 alert.addAction(closeAction)
             } else {
