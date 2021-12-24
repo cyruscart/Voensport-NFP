@@ -7,13 +7,10 @@
 
 import Foundation
 
-
-
-
-final class SportExercise: Codable {
+final class TriathlonExercise: Codable {
     
     let name: String
-    let triathlonAgeCategory: SportType.TriathlonAgeCategory?
+    let triathlonAgeCategory: TriathlonAgeCategory
     var result = ""
     
     let scoreList: [String: Int]

@@ -53,10 +53,10 @@ final class StorageManager {
     
 //MARK: - Sport
     
-    func getSportExercisesFromJsonFile() -> (summerExercises: [SportExercise], winterExercises: [SportExercise]) {
+    func getSportExercisesFromJsonFile() -> (summerExercises: [TriathlonExercise], winterExercises: [TriathlonExercise]) {
         
-        var summerExercises: [SportExercise] = []
-        var winterExercises: [SportExercise] = []
+        var summerExercises: [TriathlonExercise] = []
+        var winterExercises: [TriathlonExercise] = []
         
         guard let winterPath = Bundle.main.path(forResource: "WinterTriathlonExercises", ofType: "json") else { return ([], []) }
         
@@ -64,10 +64,10 @@ final class StorageManager {
         
         do {
             guard let summerData = try String(contentsOfFile: summerPath).data(using: .utf8) else { return ([], []) }
-             summerExercises = try JSONDecoder().decode([SportExercise].self, from: summerData)
+             summerExercises = try JSONDecoder().decode([TriathlonExercise].self, from: summerData)
             
             guard let winterData = try String(contentsOfFile: winterPath).data(using: .utf8) else { return ([], []) }
-             winterExercises = try JSONDecoder().decode([SportExercise].self, from: winterData)
+             winterExercises = try JSONDecoder().decode([TriathlonExercise].self, from: winterData)
             
         } catch {
             print(error.localizedDescription)
@@ -76,4 +76,41 @@ final class StorageManager {
         
     }
     
+//MARK: - Results
+
+    func saveResults(results: ResultsController) {
+        guard let data = try? JSONEncoder().encode(results) else { return }
+        UserDefaults.standard.set(data, forKey: "results")
+    }
+    
+    func getResults() -> ResultsController {
+        guard let data = UserDefaults.standard.data(forKey: "results") else { return ResultsController() }
+        guard let results = try? JSONDecoder().decode(ResultsController.self, from: data) else { return ResultsController() }
+
+        return results
+    }
+    
+    func deleteResult(with indexPath: IndexPath) {
+        var resultsController = getResults()
+        
+        if indexPath.section == 0 {
+            resultsController.nfpResults.remove(at: indexPath.row)
+        } else {
+            resultsController.sportResults.remove(at: indexPath.row)
+        }
+        
+        saveResults(results: resultsController)
+    }
+    
+    func editSportResult(with indexPath: IndexPath, and newSportResult: SportResult) {
+        var resultsController = getResults()
+        resultsController.sportResults[indexPath.row] = newSportResult
+        saveResults(results: resultsController)
+    }
+    
+    func editNfpResult(with indexPath: IndexPath, and newNfpResult: NfpResult) {
+        var resultsController = getResults()
+        resultsController.nfpResults[indexPath.row] = newNfpResult
+        saveResults(results: resultsController)
+    }
 }

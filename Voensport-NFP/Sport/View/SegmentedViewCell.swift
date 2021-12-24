@@ -50,7 +50,7 @@ class SegmentedViewCell: UITableViewCell {
         ])
     }
     
-    func configure(_ age: SportType.TriathlonAgeCategory) {
+    func configure(_ age: TriathlonAgeCategory) {
         switch age {
         case .lessThirty:
             ageSegmented.selectedSegmentIndex = 0

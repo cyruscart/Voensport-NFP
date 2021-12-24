@@ -10,17 +10,19 @@ import UIKit
 class TotalScoreSportCell: UITableViewCell  {
     static let identifier = "TotalScoreSportCell"
     
+    var saveButtonCallBack: (() -> Void) = {}
+    
     private var totalScoreLabel = UILabel()
     private var gradeLabel = UILabel()
     
     private var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Сохранить", for: .normal)
         button.backgroundColor = UIColor(displayP3Red: 17/255,
                                          green: 60/255,
                                          blue: 252/255,
                                          alpha: 1)
         button.layer.cornerRadius = 15
+        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -56,10 +58,11 @@ class TotalScoreSportCell: UITableViewCell  {
         ])
     }
     
-    func configureCell(sportController: SportController) {
+    func configureCell(sportController: TriathlonController) {
         totalScoreLabel.text = "Сумма баллов: \(sportController.totalScore)"
         gradeLabel.text = sportController.calculateTriathlonGrade()
         
+        saveButton.setTitle("Сохранить", for: .normal)
         saveButton.isHidden = !sportController.shouldShowTotalScore()
         totalScoreLabel.isHidden = !sportController.shouldShowTotalScore()
     }
@@ -67,4 +70,11 @@ class TotalScoreSportCell: UITableViewCell  {
     private func configureCellForEditing() {
         
     }
-}
+        
+        @objc private func saveButtonPressed() {
+            if saveButton.title(for: .normal) == "Сохранить" {
+                saveButton.setTitle("Сохранено", for: .normal)
+                saveButtonCallBack()
+            }
+        }
+    }

@@ -10,6 +10,8 @@ import UIKit
 class TotalScoreCell: UICollectionViewCell {
     static let identifier = "TotalScoreCell"
     
+    var saveButtonCallBack: (() -> Void) = {}
+    
     private var totalScoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -40,12 +42,12 @@ class TotalScoreCell: UICollectionViewCell {
     
     var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Сохранить", for: .normal)
         button.backgroundColor = UIColor(displayP3Red: 17/255,
                                          green: 60/255,
                                          blue: 252/255,
                                          alpha: 1)
         button.layer.cornerRadius = 15
+        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -125,8 +127,14 @@ class TotalScoreCell: UICollectionViewCell {
         totalScoreLabel.text = "Баллов: \(nfpController.totalScore)"
         markLabel.text = nfpController.getMarkForTotalScoreLabel()
         gradeLabel.text = nfpController.getGradeForTotalScoreLabel()
-        
-        
-        
+        saveButton.setTitle("Сохранить", for: .normal)
     }
+    
+    @objc private func saveButtonPressed() {
+        if saveButton.title(for: .normal) == "Сохранить" {
+            saveButton.setTitle("Сохранено", for: .normal)
+            saveButtonCallBack()
+        }
+    }
+    
 }

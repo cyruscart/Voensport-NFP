@@ -1,46 +1,78 @@
 //
-//  SportController.swift
+//  TriathlonController.swift
 //  Voensport-NFP
 //
 //  Created by Кирилл on 20.12.2021.
 //
 
 import Foundation
+import UIKit
 
-final class SportController {
+final class TriathlonController {
+    
     
     var isEditing = false
-    var triathlonType: SportType.TriathlonType = .summer
-    var ageCategory: SportType.TriathlonAgeCategory = .lessThirty
-    var exercises: [SportExercise] = []
-    private var summerTriathlonExercises: [SportExercise] = []
-    private var winterTriathlonExercises: [SportExercise] = []
+    var triathlonType: TriathlonType = .summer
+    
+    var sportType: SportType {
+        triathlonType == .summer ? .summerTriathlon : .winterTriathlon
+    }
+    
+    var ageCategory: TriathlonAgeCategory = .lessThirty
+    var exercises: [TriathlonExercise] = []
+    private var summerTriathlonExercises: [TriathlonExercise] = []
+    private var winterTriathlonExercises: [TriathlonExercise] = []
     
     var totalScore: Int {
         exercises.compactMap { $0.score }.reduce(0, +)
     }
     
-    //MARK: - Triathlon methods
+    init(sportResult: SportResult) {
+        exercises = sportResult.sportExercises
+        isEditing = true
+        triathlonType = sportResult.triathlonType ?? .summer
+        ageCategory = sportResult.ageTriathlonCategory ?? .lessForty
+        
+    }
+    
+    init() {}
+    
+        //MARK: - Triathlon methods
+    
+    func generateSportResult() -> SportResult {
+    
+        SportResult(
+            sportType: sportType,
+            totalScore: totalScore,
+            grade: calculateTriathlonGrade(),
+            date: Date(),
+            ageTriathlonCategory: ageCategory,
+            triathlonType: triathlonType,
+            sportExercises: exercises
+        )
+    }
     
     func updateTriathlonExercises() {
-        let sportExercises = StorageManager.shared.getSportExercisesFromJsonFile()
-        
-        summerTriathlonExercises = sportExercises.summerExercises
-        winterTriathlonExercises = sportExercises.winterExercises
-        
-        switch ageCategory {
-        case .lessThirty:
-            exercises = triathlonType == .summer
-            ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
-            : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
-        case .lessForty:
-            exercises = triathlonType == .summer
-            ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
-            : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
-        case .moreForty:
-            exercises = triathlonType == .summer
-            ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
-            : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
+        if !isEditing {
+            let sportExercises = StorageManager.shared.getSportExercisesFromJsonFile()
+            
+            summerTriathlonExercises = sportExercises.summerExercises
+            winterTriathlonExercises = sportExercises.winterExercises
+            
+            switch ageCategory {
+            case .lessThirty:
+                exercises = triathlonType == .summer
+                ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
+                : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessThirty}
+            case .lessForty:
+                exercises = triathlonType == .summer
+                ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
+                : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .lessForty}
+            case .moreForty:
+                exercises = triathlonType == .summer
+                ? summerTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
+                : winterTriathlonExercises.filter {$0.triathlonAgeCategory == .moreForty}
+            }
         }
     }
     
@@ -99,3 +131,4 @@ final class SportController {
         exercises.filter { $0.score == 0 }.count < 3
     }
 }
+

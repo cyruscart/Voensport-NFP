@@ -48,6 +48,10 @@ final class NfpController {
         selectedExercises.map { $0.score }.reduce(0, +)
     }
     
+    var sex: Sex {
+        settings.sex
+    }
+    
     
     var minimumScore: Int {
         
@@ -119,9 +123,13 @@ final class NfpController {
         self.settings = settings
     }
     
+    
     //MARK: - Methods
     func loadInitialData() {
-        loadExercises()
+        if !isEditing {
+            loadExercises()
+        }
+        
         loadInitialSelectedExercise()
     }
     
@@ -168,7 +176,30 @@ final class NfpController {
         exercises = exercisesList
     }
     
-    
+    func generateNfpResult() -> NfpResult {
+        let nfpResult = isEditing
+        ? NfpResult(totalScore: totalScore,
+                    grade: calculateGrade(),
+                    sex: sex,
+                    maleAgeCategory: maleAgeCategory,
+                    femaleAgeCategory: femaleAgeCategory,
+                    numberOfExercise: numberOfExercise,
+                    category: category,
+                    date: Date(),
+                    nfpExercises: selectedExercises)
+        :
+        NfpResult(totalScore: totalScore,
+                    grade: calculateGrade(),
+                  sex: settings.sex,
+                    maleAgeCategory: maleAgeCategory,
+                    femaleAgeCategory: femaleAgeCategory,
+                    numberOfExercise: numberOfExercise,
+                    category: category,
+                    date: Date(),
+                    nfpExercises: selectedExercises)
+        
+        return nfpResult
+    }
     
     func getGradeForTotalScoreLabel() -> String {
         if calculateGrade() == Grade.highLevel.rawValue ||
