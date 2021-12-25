@@ -1,41 +1,49 @@
 {
   "images" : [
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-13.jpg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-12.jpg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "20x20"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-11.jpg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-6.jpg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "29x29"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-7.jpg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-5.jpg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "40x40"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-4.jpg",
       "idiom" : "iphone",
       "scale" : "2x",
       "size" : "60x60"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-1.jpg",
       "idiom" : "iphone",
       "scale" : "3x",
       "size" : "60x60"
@@ -46,46 +54,55 @@
       "size" : "20x20"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-14.jpg",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "20x20"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-16.jpg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "29x29"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-10.jpg",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "29x29"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-15.jpg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "40x40"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-8.jpg",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "40x40"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-9.jpg",
       "idiom" : "ipad",
       "scale" : "1x",
       "size" : "76x76"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-3.jpg",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "76x76"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40-2.jpg",
       "idiom" : "ipad",
       "scale" : "2x",
       "size" : "83.5x83.5"
     },
     {
+      "filename" : "IMAGE 2021-12-23 19:53:40.jpg",
       "idiom" : "ios-marketing",
       "scale" : "1x",
       "size" : "1024x1024"

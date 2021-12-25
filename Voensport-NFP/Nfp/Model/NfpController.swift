@@ -14,33 +14,21 @@ final class NfpController {
     var selectedExercises: [NfpExercise] = []
     
     var isEditing = false
-    //    var editingPerformance = PerformanceResult(totalScore: 0, grade: "", date: Date())
+    var editingResultIndex = IndexPath()
     
     var maleAgeCategory: MaleAgeCategory {
-        //        isEditing
-        //        ? editingPerformance.maleAgeCategory!
-        //        : settings.maleAgeCategory
         settings.maleAgeCategory
     }
     
     var femaleAgeCategory: FemaleAgeCategory {
-        //        isEditing
-        //        ? editingPerformance.femaleAgeCategory!
-        //        : settings.femaleAgeCategory
         settings.femaleAgeCategory
     }
     
     var category: Category {
-        //        isEditing
-        //        ? editingPerformance.category!
-        //        : settings.category
         settings.category
     }
     
     var numberOfExercise: NumberOfExercise {
-        //        isEditing
-        //        ? editingPerformance.numberOfExercise!
-        //        : settings.numberOfExercise
         settings.numberOfExercise
     }
     

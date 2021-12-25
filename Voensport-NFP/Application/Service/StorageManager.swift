@@ -102,15 +102,16 @@ final class StorageManager {
         saveResults(results: resultsController)
     }
     
-    func editSportResult(with indexPath: IndexPath, and newSportResult: SportResult) {
+    func editSportResult(with indexPath: IndexPath, and sportResult: SportResult) {
         var resultsController = getResults()
-        resultsController.sportResults[indexPath.row] = newSportResult
+        resultsController.sportResults[indexPath.row] = sportResult
         saveResults(results: resultsController)
     }
     
-    func editNfpResult(with indexPath: IndexPath, and newNfpResult: NfpResult) {
+    func editNfpResult(with indexPath: IndexPath, and nfpResult: NfpResult) {
+      
         var resultsController = getResults()
-        resultsController.nfpResults[indexPath.row] = newNfpResult
+        resultsController.nfpResults[indexPath.row] = nfpResult
         saveResults(results: resultsController)
     }
 }

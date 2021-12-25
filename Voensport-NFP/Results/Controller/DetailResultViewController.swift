@@ -11,6 +11,7 @@ class DetailResultViewController: UIViewController  {
     
     var sportResult: SportResult?
     var nfpResult: NfpResult?
+    var editingResultIndexPath = IndexPath()
     var numberOfSectionForLayout = 3
     
     var collectionView: UICollectionView!
@@ -25,7 +26,6 @@ class DetailResultViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
         navigationController?.navigationBar.prefersLargeTitles = true
         
     }
@@ -132,8 +132,9 @@ extension DetailResultViewController {
         nfpVC.nfpController = NfpController(settings: settings)
         nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
         nfpVC.nfpController.isEditing = true
-        nfpVC.modalPresentationStyle = .fullScreen
+        nfpVC.nfpController.editingResultIndex = editingResultIndexPath
         
+        nfpVC.modalPresentationStyle = .fullScreen
         present(nfpVC, animated: true, completion: nil)
     }
     
@@ -142,6 +143,7 @@ extension DetailResultViewController {
         
         let triathlonVC = TriathlonViewController()
         triathlonVC.sportController = TriathlonController(sportResult: sportResult)
+        triathlonVC.sportController.editingResultIndex = editingResultIndexPath
         
         present(triathlonVC, animated: true, completion: nil)
     }

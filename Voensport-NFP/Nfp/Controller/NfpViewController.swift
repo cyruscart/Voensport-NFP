@@ -87,11 +87,11 @@ class NfpViewController: UIViewController  {
         }
     }
     
-    private func saveResults(indexPath: IndexPath) {
+    private func saveResults() {
         let nfpResult = nfpController.generateNfpResult()
         
         if nfpController.isEditing {
-            StorageManager.shared.editNfpResult(with: indexPath, and: nfpResult)
+            StorageManager.shared.editNfpResult(with: nfpController.editingResultIndex, and: nfpResult)
             dismiss(animated: true)
         } else {
         var resultsController = StorageManager.shared.getResults()
@@ -196,7 +196,7 @@ extension NfpViewController: UICollectionViewDataSource {
             cell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
             cell.moneyButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
             cell.saveButtonCallBack = { [unowned self] in
-                self.saveResults(indexPath: indexPath)
+                self.saveResults()
             }
             return cell
             
@@ -291,6 +291,7 @@ extension NfpViewController: UICollectionViewDelegate {
         if shouldReplaceSelectedItem {
             
             if indexPath.row == 2 && isCellScrollToLeft {
+
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
             } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 && !isCellScrollToLeft{

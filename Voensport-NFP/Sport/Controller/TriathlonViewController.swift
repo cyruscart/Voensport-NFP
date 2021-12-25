@@ -79,6 +79,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
                 self.updateAfterAgeSegmentSelected(selectedSegment)
             }
             cell.configure(sportController.ageCategory)
+            cell.ageSegmented.isHidden = sportController.isEditing
             
             return cell
             
@@ -132,11 +133,17 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     private func saveSportResult() {
-            let sportResult = sportController.generateSportResult()
+        let sportResult = sportController.generateSportResult()
+        
+        if sportController.isEditing {
+            StorageManager.shared.editSportResult(with: sportController.editingResultIndex, and: sportResult)
+            dismiss(animated: true)
+        } else {
             var resultsController = StorageManager.shared.getResults()
             resultsController.sportResults.append(sportResult)
             StorageManager.shared.saveResults(results: resultsController)
-        
+        }
     }
+    
 }
 

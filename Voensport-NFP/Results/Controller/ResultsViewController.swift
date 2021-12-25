@@ -98,6 +98,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailResultVC = DetailResultViewController()
+        detailResultVC.editingResultIndexPath = indexPath
         
         if indexPath.section == 0 {
             let nfpResult = resultsController.nfpResults[indexPath.row]

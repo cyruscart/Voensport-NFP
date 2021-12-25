@@ -74,7 +74,7 @@ class SportExerciseCell: UITableViewCell  {
         
         scoreLabel.text = exercise.score == 0
         ? ""
-        : String(exercise.score)
+        : "Баллов: \(exercise.score)"
     }
     
 }
