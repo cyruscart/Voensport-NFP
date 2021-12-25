@@ -15,37 +15,17 @@ final class NfpController {
     
     var isEditing = false
     var editingResultIndex = IndexPath()
-    
-    var maleAgeCategory: MaleAgeCategory {
-        settings.maleAgeCategory
-    }
-    
-    var femaleAgeCategory: FemaleAgeCategory {
-        settings.femaleAgeCategory
-    }
-    
-    var category: Category {
-        settings.category
-    }
-    
-    var numberOfExercise: NumberOfExercise {
-        settings.numberOfExercise
-    }
+    var editingResultDate = ""
     
     var totalScore: Int {
         selectedExercises.map { $0.score }.reduce(0, +)
     }
     
-    var sex: Sex {
-        settings.sex
-    }
-    
-    
     var minimumScore: Int {
         
         if settings.sex == .male {
             
-            switch maleAgeCategory {
+            switch settings.maleAgeCategory {
             case .candidate:
                 return 26
             case .solderLessSixMonths:
@@ -78,7 +58,7 @@ final class NfpController {
             
         } else {
             
-            switch femaleAgeCategory {
+            switch settings.femaleAgeCategory {
             case .candidate:
                 return 26
             case .firstAgeGroup:
@@ -164,31 +144,19 @@ final class NfpController {
         exercises = exercisesList
     }
     
+    
     func generateNfpResult() -> NfpResult {
-        let nfpResult = isEditing
-        ? NfpResult(totalScore: totalScore,
-                    grade: calculateGrade(),
-                    sex: sex,
-                    maleAgeCategory: maleAgeCategory,
-                    femaleAgeCategory: femaleAgeCategory,
-                    numberOfExercise: numberOfExercise,
-                    category: category,
-                    date: Date(),
-                    nfpExercises: selectedExercises,
-                    tariff: settings.tariff)
-        :
         NfpResult(totalScore: totalScore,
                   grade: calculateGrade(),
                   sex: settings.sex,
-                  maleAgeCategory: maleAgeCategory,
-                  femaleAgeCategory: femaleAgeCategory,
-                  numberOfExercise: numberOfExercise,
-                  category: category,
+                  maleAgeCategory: settings.maleAgeCategory,
+                  femaleAgeCategory: settings.femaleAgeCategory,
+                  numberOfExercise: settings.numberOfExercise,
+                  category: settings.category,
                   date: Date(),
                   nfpExercises: selectedExercises,
                   tariff: settings.tariff)
         
-        return nfpResult
     }
     
     func getGradeForTotalScoreLabel() -> String {
@@ -231,7 +199,7 @@ final class NfpController {
         
         if settings.sex == .male {
             
-            switch maleAgeCategory {
+            switch settings.maleAgeCategory {
             case .candidate: return
                 calculateCandidateGrade()
             case .solderLessSixMonths:
@@ -264,7 +232,7 @@ final class NfpController {
             
         } else {
             
-            switch femaleAgeCategory {
+            switch settings.femaleAgeCategory {
             case .candidate:
                 return calculateWomanCandidateGrade()
             case .firstAgeGroup:
@@ -288,7 +256,7 @@ final class NfpController {
     private func calculateCandidateGrade() -> String {
         var localGrade = ""
         
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 120...149:
@@ -320,7 +288,7 @@ final class NfpController {
     private func calculateLessSixMonthGrade() -> String {
         var localGrade = ""
         
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 100...129:
@@ -352,7 +320,7 @@ final class NfpController {
     private func calculateMoreSixMonthGrade() -> String {
         var localGrade = ""
         
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 110...149:
@@ -382,7 +350,7 @@ final class NfpController {
     
     private func calculateCadetFirstYearGrade() -> String {
         var localGrade = ""
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 120...159:
@@ -441,7 +409,7 @@ final class NfpController {
     private func calculateCadetSecondYearGrade() -> String {
         var localGrade = ""
         
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 130...169:
@@ -500,7 +468,7 @@ final class NfpController {
     private func calculateCadetThirdYearGrade() -> String {
         var localGrade = ""
         
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 150...189:
@@ -559,9 +527,9 @@ final class NfpController {
     private func calculateFirstGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 140...199:
@@ -615,7 +583,7 @@ final class NfpController {
                 }
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 140...189:
@@ -668,7 +636,7 @@ final class NfpController {
                 }
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 130...179:
@@ -729,9 +697,9 @@ final class NfpController {
     private func calculateSecondGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 140...179:
@@ -785,7 +753,7 @@ final class NfpController {
                 }
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 130...169:
@@ -839,7 +807,7 @@ final class NfpController {
                 }
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 120...159:
@@ -898,9 +866,9 @@ final class NfpController {
     private func calculateThirdGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 120...159:
@@ -954,7 +922,7 @@ final class NfpController {
                 }
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 110...149:
@@ -1008,7 +976,7 @@ final class NfpController {
                 }
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 100...139:
@@ -1068,9 +1036,9 @@ final class NfpController {
     private func calculateFourthGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 100...149:
@@ -1124,7 +1092,7 @@ final class NfpController {
                 }
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 90...139:
@@ -1178,7 +1146,7 @@ final class NfpController {
                 }
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 80...129:
@@ -1238,9 +1206,9 @@ final class NfpController {
     private func calculateFifthGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 90...119:
@@ -1279,7 +1247,7 @@ final class NfpController {
                 break
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 80...99:
@@ -1318,7 +1286,7 @@ final class NfpController {
                 break
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 70...89:
@@ -1363,9 +1331,9 @@ final class NfpController {
     private func calculateSixthGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 80...89:
@@ -1387,7 +1355,7 @@ final class NfpController {
                 break
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 60...69:
@@ -1409,7 +1377,7 @@ final class NfpController {
                 break
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 50...59:
@@ -1437,9 +1405,9 @@ final class NfpController {
     private func calculateSeventhGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 70...69:
@@ -1461,7 +1429,7 @@ final class NfpController {
                 break
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 50...69:
@@ -1483,7 +1451,7 @@ final class NfpController {
                 break
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 40...49:
@@ -1511,9 +1479,9 @@ final class NfpController {
     private func calculateEighthGroupGrade() -> String {
         var localGrade = ""
         
-        switch category {
+        switch settings.category {
         case .firstCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 60...79:
@@ -1535,7 +1503,7 @@ final class NfpController {
                 break
             }
         case .secondCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 40...59:
@@ -1557,7 +1525,7 @@ final class NfpController {
                 break
             }
         case .thirdCategory:
-            switch numberOfExercise {
+            switch settings.numberOfExercise {
             case .three:
                 switch totalScore {
                 case 30...49:
@@ -1588,7 +1556,7 @@ final class NfpController {
     private func calculateWomanCandidateGrade() -> String {
         var localGrade = ""
         
-        switch numberOfExercise {
+        switch settings.numberOfExercise {
         case .three:
             switch totalScore {
             case 120...149:

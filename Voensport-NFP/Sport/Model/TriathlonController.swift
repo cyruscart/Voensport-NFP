@@ -10,9 +10,11 @@ import UIKit
 
 final class TriathlonController {
     
-    var isEditing = false
     var triathlonType: TriathlonType = .summer
+    
+    var isEditing = false
     var editingResultIndex = IndexPath()
+    var editingResultDate = ""
     
     var sportType: SportType {
         triathlonType == .summer ? .summerTriathlon : .winterTriathlon

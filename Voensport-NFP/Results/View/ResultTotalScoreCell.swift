@@ -33,7 +33,10 @@ class ResultTotalScoreCell: UICollectionViewCell {
     
     var editButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = .systemGray
+        button.backgroundColor = UIColor(displayP3Red: 29/255,
+                                         green: 201/255,
+                                         blue: 58/255,
+                                         alpha: 1)
         button.layer.cornerRadius = 15
         button.setTitle("Изменить", for: .normal)
         button.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)

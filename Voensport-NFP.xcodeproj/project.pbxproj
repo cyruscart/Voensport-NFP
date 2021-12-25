@@ -39,6 +39,7 @@
 		6E90DDF6275F4BBE004B618A /* NfpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF5275F4BBE004B618A /* NfpController.swift */; };
 		6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF7275F50F1004B618A /* ResultCellView.swift */; };
 		6E95955127774AD90085BD08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E95955027774AD90085BD08 /* Assets.xcassets */; };
+		6E95955327777BB80085BD08 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E95955227777BB80085BD08 /* AlertController.swift */; };
 		6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */; };
 		6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C6002762064200D51135 /* TotalScoreCell.swift */; };
 		6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */; };
@@ -87,6 +88,7 @@
 		6E90DDF5275F4BBE004B618A /* NfpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpController.swift; sourceTree = "<group>"; };
 		6E90DDF7275F50F1004B618A /* ResultCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCellView.swift; sourceTree = "<group>"; };
 		6E95955027774AD90085BD08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6E95955227777BB80085BD08 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpCompositionalLayout.swift; sourceTree = "<group>"; };
 		6EB3C6002762064200D51135 /* TotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreCell.swift; sourceTree = "<group>"; };
 		6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -257,7 +259,7 @@
 				6EC4BAAD275B7DA800A4FD4A /* Model */,
 				6EC4BAAE275B7DAF00A4FD4A /* Veiw */,
 				6EC4BAAF275B7DB400A4FD4A /* Controller */,
-				6ED04556275C91EA00D048B4 /* Service */,
+				6ED04556275C91EA00D048B4 /* Services */,
 			);
 			path = Application;
 			sourceTree = "<group>";
@@ -270,7 +272,6 @@
 				6E21297927635E4F0016B24A /* NfpWomanExercises.json */,
 				6E21297727635E4F0016B24A /* SummerTriathlonExercises.json */,
 				6E21297827635E4F0016B24A /* WinterTriathlonExercises.json */,
-				6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */,
 				6EC4BAA2275B7BF100A4FD4A /* Info.plist */,
 			);
 			path = Resources;
@@ -289,6 +290,7 @@
 		6EC4BAAE275B7DAF00A4FD4A /* Veiw */ = {
 			isa = PBXGroup;
 			children = (
+				6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */,
 			);
 			path = Veiw;
 			sourceTree = "<group>";
@@ -348,6 +350,7 @@
 			children = (
 				6ED04548275C6B4700D048B4 /* NfpViewController.swift */,
 				6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */,
+				6E95955227777BB80085BD08 /* AlertController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -412,12 +415,12 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		6ED04556275C91EA00D048B4 /* Service */ = {
+		6ED04556275C91EA00D048B4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				6ED04557275C922100D048B4 /* StorageManager.swift */,
 			);
-			path = Service;
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -512,6 +515,7 @@
 				6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */,
 				6E80DAF92769AD7D006C21F0 /* HeaderView.swift in Sources */,
 				6E07426C275CB35C00907B35 /* SwitchTableViewCell.swift in Sources */,
+				6E95955327777BB80085BD08 /* AlertController.swift in Sources */,
 				6ED04549275C6B4700D048B4 /* NfpViewController.swift in Sources */,
 				6E5F27F127734ED700926FC1 /* ResultsViewController.swift in Sources */,
 				6ED04555275C91B800D048B4 /* Settings.swift in Sources */,

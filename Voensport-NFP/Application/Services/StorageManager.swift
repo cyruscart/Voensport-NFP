@@ -109,7 +109,6 @@ final class StorageManager {
     }
     
     func editNfpResult(with indexPath: IndexPath, and nfpResult: NfpResult) {
-      
         var resultsController = getResults()
         resultsController.nfpResults[indexPath.row] = nfpResult
         saveResults(results: resultsController)

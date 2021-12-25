@@ -197,3 +197,5 @@ extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
 }
+
+    
