@@ -11,18 +11,14 @@ class TriathlonViewController: UIViewController {
     
     private var tableView: UITableView!
     var sportController: TriathlonController!
+    var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setTableView()
         
-        navigationItem.largeTitleDisplayMode = .never
-        
-        title = sportController.triathlonType == .summer
-        ? "Летнее офицерское троеборье"
-        : "Зимнее офицерское троеборье"
-        
+        setupNavigationBar()
         
         sportController.updateTriathlonExercises()
         print(sportController.exercises.count)
@@ -43,6 +39,29 @@ class TriathlonViewController: UIViewController {
         
         tableView.backgroundColor = .systemBackground
         tableView.separatorStyle = .none
+    }
+    
+    private func setupNavigationBar() {
+        
+        if sportController.isEditing {
+            navigationController?.navigationBar.prefersLargeTitles = true
+            title = sportController.editingResultDate
+            
+            let closeAction = UIAction { [ unowned self ] _ in
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+            let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
+            
+            navigationItem.rightBarButtonItem = closeButton
+        } else {
+            navigationItem.largeTitleDisplayMode = .never
+            
+            title = sportController.triathlonType == .summer
+            ? "Летнее офицерское троеборье"
+            : "Зимнее офицерское троеборье"
+            
+        }
     }
 }
 
@@ -137,10 +156,11 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
         
         if sportController.isEditing {
             StorageManager.shared.editSportResult(with: sportController.editingResultIndex, and: sportResult)
+            updateUIAfterEditingDelegate?.updateUI(indexPath: sportController.editingResultIndex)
             dismiss(animated: true)
         } else {
             var resultsController = StorageManager.shared.getResults()
-            resultsController.sportResults.append(sportResult)
+            resultsController.sportResults.insert(sportResult, at: 0)
             StorageManager.shared.saveResults(results: resultsController)
         }
     }

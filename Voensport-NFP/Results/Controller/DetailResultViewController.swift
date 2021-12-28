@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol UpdateUIAfterEditingDelegate {
+    func updateUI(indexPath: IndexPath)
+}
+
 class DetailResultViewController: UIViewController  {
     
     var sportResult: SportResult?
@@ -26,8 +30,8 @@ class DetailResultViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.navigationBar.prefersLargeTitles = true
         
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 
     
@@ -133,9 +137,12 @@ extension DetailResultViewController {
         nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
         nfpVC.nfpController.isEditing = true
         nfpVC.nfpController.editingResultIndex = editingResultIndexPath
+        nfpVC.nfpController.editingResultDate = nfpResult.getDate()
+        nfpVC.updateUIAfterEditingDelegate = self
         
-        nfpVC.modalPresentationStyle = .fullScreen
-        present(nfpVC, animated: true, completion: nil)
+//        nfpVC.modalPresentationStyle = .fullScreen
+        let navVC = UINavigationController(rootViewController: nfpVC)
+        present(navVC, animated: true, completion: nil)
     }
     
     private func showTriathlonViewController() {
@@ -144,10 +151,34 @@ extension DetailResultViewController {
         let triathlonVC = TriathlonViewController()
         triathlonVC.sportController = TriathlonController(sportResult: sportResult)
         triathlonVC.sportController.editingResultIndex = editingResultIndexPath
+        triathlonVC.sportController.editingResultDate = sportResult.getDate()
+        triathlonVC.updateUIAfterEditingDelegate = self
         
-        present(triathlonVC, animated: true, completion: nil)
+        let navVC = UINavigationController(rootViewController: triathlonVC)
+        present(navVC, animated: true, completion: nil)
     }
-    
     
 }
 
+//MARK: - UpdateUIAfterEditingDelegate
+
+extension DetailResultViewController: UpdateUIAfterEditingDelegate {
+    
+    func updateUI(indexPath: IndexPath) {
+        
+        if let _ = nfpResult {
+            let updatedNfpResult = StorageManager.shared.getResults().nfpResults[indexPath.row]
+            nfpResult = updatedNfpResult
+        }
+        
+        if let _ = sportResult {
+            let updatedSportResult = StorageManager.shared.getResults().sportResults[indexPath.row]
+            sportResult = updatedSportResult
+        }
+        
+        collectionView.reloadData()
+        
+    }
+    
+    
+    }

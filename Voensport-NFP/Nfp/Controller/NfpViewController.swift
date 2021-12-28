@@ -9,7 +9,7 @@ import UIKit
 
 class NfpViewController: UIViewController  {
     
-//    var settings: Settings!
+    var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     var nfpController: NfpController!
     var shouldObserveVisibleCells = false
     var collectionView: UICollectionView!
@@ -53,7 +53,7 @@ class NfpViewController: UIViewController  {
         collectionView.register(ExerciseCell.self, forCellWithReuseIdentifier: ExerciseCell.identifier)
         collectionView.register(TotalScoreCell.self, forCellWithReuseIdentifier: TotalScoreCell.identifier)
         collectionView.register(ResultCellView.self, forSupplementaryViewOfKind: "Footer", withReuseIdentifier: ResultCellView.identifier)
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.identifier)
+        collectionView.register(NfpExerciseHeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: NfpExerciseHeaderView.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
@@ -68,13 +68,26 @@ class NfpViewController: UIViewController  {
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
-        navigationItem.title = "Сдача ФП"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
+        
+        navigationItem.title = nfpController.isEditing
+        ? nfpController.editingResultDate
+        : "Сдача ФП"
+        
+        let settingsButton = UIBarButtonItem(
             image: UIImage(systemName: "gearshape.fill"),
             style: .plain,
             target: self,
-            action: #selector(showSettings)
-        )
+            action: #selector(showSettings))
+        
+        let closeAction = UIAction { [ unowned self ] _ in
+            self.dismiss(animated: true, completion: nil)
+        }
+        
+        let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
+        
+        navigationItem.rightBarButtonItem = nfpController.isEditing
+        ? closeButton
+        : settingsButton
     }
     
     private func startFeedbackGenerator() {
@@ -92,11 +105,12 @@ class NfpViewController: UIViewController  {
         
         if nfpController.isEditing {
             StorageManager.shared.editNfpResult(with: nfpController.editingResultIndex, and: nfpResult)
+            updateUIAfterEditingDelegate?.updateUI(indexPath: nfpController.editingResultIndex)
             dismiss(animated: true)
         } else {
-        var resultsController = StorageManager.shared.getResults()
-        resultsController.nfpResults.append(nfpResult)
-        StorageManager.shared.saveResults(results: resultsController)
+            var resultsController = StorageManager.shared.getResults()
+            resultsController.nfpResults.insert(nfpResult, at: 0)
+            StorageManager.shared.saveResults(results: resultsController)
         }
     }
     
@@ -130,7 +144,7 @@ class NfpViewController: UIViewController  {
         }
         
         collectionView.visibleSupplementaryViews(ofKind: "Header").forEach { supplView in
-            let view = supplView as! HeaderView
+            let view = supplView as! NfpExerciseHeaderView
             
             if view.tag == indexPath.section {
                 let type = nfpController.selectedExercises[indexPath.section].type.rawValue
@@ -239,7 +253,7 @@ extension NfpViewController: UICollectionViewDataSource {
             
         } else {
             
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: HeaderView.identifier, for: indexPath) as! HeaderView
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: NfpExerciseHeaderView.identifier, for: indexPath) as! NfpExerciseHeaderView
             let type = nfpController.selectedExercises[indexPath.section].type.rawValue
             view.label.text = "\(type)"
             view.tag = indexPath.section
@@ -285,13 +299,14 @@ extension NfpViewController: UICollectionViewDelegate {
             .sorted {$0.row < $1.row}
         
         let isCellScrollToLeft = indexPath.row > sortedIndexPathForVisibleItems.first?.row ?? 0
+        let isDidEndDisplayingTotalScoreCell = indexPath.section == nfpController.settings.getIntegerNumberOfExercises()
         
-        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating
+        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !isDidEndDisplayingTotalScoreCell
         
         if shouldReplaceSelectedItem {
             
             if indexPath.row == 2 && isCellScrollToLeft {
-
+                
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
             } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 && !isCellScrollToLeft{
@@ -323,36 +338,30 @@ extension NfpViewController {
         
     }
     
+    
     @objc private func showAlert() {
         if nfpController.shouldShowMoneyButton() {
+            nfpController.settings.tariff == 0
+            ? showSettingsAlert()
+            : showMoneyAlert()
             
-            let title = nfpController.settings.tariff == 0
-            ? "Недостаточно данных!"
-            : "\(nfpController.getAmountOfMoney()) \u{20BD}"
-            
-            let message = nfpController.settings.tariff == 0
-            ? "Для расчета надбавки за ФП перейдите в настройки и выберите свой тарифный разряд"
-            : "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)"
-            
-            let alert = UIAlertController(
-                title: title,
-                message: message,
-                preferredStyle: .actionSheet
-            )
-            
-            let closeAction = UIAlertAction(title: "Понятно", style: .cancel)
-            let showSettingsAction = UIAlertAction(title: "В настройки", style: .default) {_ in
-                self.showSettings()
-            }
-            
-            if nfpController.settings.tariff == 0 {
-                alert.addAction(showSettingsAction)
-                alert.addAction(closeAction)
-            } else {
-                alert.addAction(closeAction)
-            }
-            
-            present(alert, animated: true)
         }
     }
+    
+    private func showSettingsAlert() {
+        let alert = UIAlertController.createSettingsAlertController()
+        
+        alert.setSettingsAction { [unowned self] tariff, sportGrade in
+            self.nfpController.settings.tariff = tariff
+            self.nfpController.settings.sportGrade = sportGrade
+            showMoneyAlert()
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
+    private func showMoneyAlert() {
+        let alert = UIAlertController.createMoneyAlertController(money: nfpController.getAmountOfMoney())
+        present(alert, animated: true, completion: nil)
+    }
 }
+
