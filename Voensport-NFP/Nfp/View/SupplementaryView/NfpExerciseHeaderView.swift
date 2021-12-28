@@ -5,11 +5,9 @@
 //  Created by Кирилл on 15.12.2021.
 //
 
-import Foundation
-
 import UIKit
 
-class HeaderView: UICollectionReusableView {
+class NfpExerciseHeaderView: UICollectionReusableView {
     static let identifier = "HeaderView"
     let label: UILabel = {
         let label = UILabel()

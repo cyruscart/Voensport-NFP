@@ -48,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let resultTabBarImage = UIImage(systemName: "rectangle.stack.fill")
         
         let aboutAppVC = AboutAppViewController()
-        let aboutTabBarImage = UIImage(systemName: "exclamationmark.circle")
+        let aboutTabBarImage = UIImage(systemName: "info.circle")
         
         tabBarVC.viewControllers = [
         generateNavigationController(rootViewController: nfpViewController, title: "Сдача ФП", image: nfpTabBarImage!),

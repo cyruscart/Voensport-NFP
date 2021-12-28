@@ -53,7 +53,7 @@ class NfpViewController: UIViewController  {
         collectionView.register(ExerciseCell.self, forCellWithReuseIdentifier: ExerciseCell.identifier)
         collectionView.register(TotalScoreCell.self, forCellWithReuseIdentifier: TotalScoreCell.identifier)
         collectionView.register(ResultCellView.self, forSupplementaryViewOfKind: "Footer", withReuseIdentifier: ResultCellView.identifier)
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: HeaderView.identifier)
+        collectionView.register(NfpExerciseHeaderView.self, forSupplementaryViewOfKind: "Header", withReuseIdentifier: NfpExerciseHeaderView.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
@@ -144,7 +144,7 @@ class NfpViewController: UIViewController  {
         }
         
         collectionView.visibleSupplementaryViews(ofKind: "Header").forEach { supplView in
-            let view = supplView as! HeaderView
+            let view = supplView as! NfpExerciseHeaderView
             
             if view.tag == indexPath.section {
                 let type = nfpController.selectedExercises[indexPath.section].type.rawValue
@@ -253,7 +253,7 @@ extension NfpViewController: UICollectionViewDataSource {
             
         } else {
             
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: HeaderView.identifier, for: indexPath) as! HeaderView
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "Header", withReuseIdentifier: NfpExerciseHeaderView.identifier, for: indexPath) as! NfpExerciseHeaderView
             let type = nfpController.selectedExercises[indexPath.section].type.rawValue
             view.label.text = "\(type)"
             view.tag = indexPath.section
