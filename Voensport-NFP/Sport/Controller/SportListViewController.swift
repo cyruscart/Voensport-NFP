@@ -61,6 +61,7 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         showTriathlonViewController(index: indexPath.row)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
     
     

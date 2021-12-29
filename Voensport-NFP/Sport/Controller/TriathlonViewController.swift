@@ -17,12 +17,9 @@ class TriathlonViewController: UIViewController {
         super.viewDidLoad()
         
         setTableView()
-        
         setupNavigationBar()
-        
         sportController.updateTriathlonExercises()
-        print(sportController.exercises.count)
-        
+        hideKeyboardWhenTappedOutside()
     }
     
     
@@ -90,30 +87,26 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: SegmentedViewCell.identifier, for: indexPath) as! SegmentedViewCell
-            
-            //            if SportPerformanceManager.shared.isEditing { cell.configureForEditing(with: editingPerformanceResult)
-            //            }
-            cell.selectionStyle = .none
+          
             cell.callBack = { [unowned self] selectedSegment in
                 self.updateAfterAgeSegmentSelected(selectedSegment)
             }
+            
             cell.configure(sportController.ageCategory)
             cell.ageSegmented.isHidden = sportController.isEditing
-            
+            cell.selectionStyle = .none
             return cell
             
         case 1...3:
             
             let cell = tableView.dequeueReusableCell(withIdentifier: SportExerciseCell.identifier, for: indexPath) as! SportExerciseCell
-            
-            cell.selectionStyle = .none
             cell.exercise = sportController.exercises[indexPath.row - 1]
             cell.configureCell()
             cell.tag = indexPath.row - 1
             cell.callBackForUpdatingTotalScore = { [unowned self] in
                 self.updateTotalScoreCell()
             }
-            
+            cell.selectionStyle = .none
             return cell
             
         default:
@@ -123,6 +116,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             cell.saveButtonCallBack = { [unowned self] in
                 self.saveSportResult()
             }
+            
             cell.selectionStyle = .none
             return cell
         }
@@ -130,7 +124,6 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     
     
     private func updateAfterAgeSegmentSelected(_ selectedSegment: Int) {
-        
         sportController.ageCategory = TriathlonAgeCategory.allCases[selectedSegment]
         sportController.updateTriathlonExercises()
         
@@ -140,7 +133,6 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
                 cell.configureCell()
             }
         }
-        
         updateTotalScoreCell()
     }
     
@@ -165,5 +157,20 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
+}
+
+//MARK: - Hide keyboard
+
+extension TriathlonViewController {
+    
+    func hideKeyboardWhenTappedOutside() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
 

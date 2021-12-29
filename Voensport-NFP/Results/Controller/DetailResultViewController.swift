@@ -41,7 +41,7 @@ class DetailResultViewController: UIViewController  {
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        collectionView.register(ResultNfpExerciseCell.self, forCellWithReuseIdentifier: ResultNfpExerciseCell.identifier)
+        collectionView.register(ResultExerciseCell.self, forCellWithReuseIdentifier: ResultExerciseCell.identifier)
         collectionView.register(ResultTotalScoreCell.self, forCellWithReuseIdentifier: ResultTotalScoreCell.identifier)
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
@@ -93,7 +93,7 @@ extension DetailResultViewController: UICollectionViewDataSource, UICollectionVi
             return cell
             
         } else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultNfpExerciseCell.identifier, for: indexPath) as! ResultNfpExerciseCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultExerciseCell.identifier, for: indexPath) as! ResultExerciseCell
            
             if let nfpResult = nfpResult {
                 cell.configureCell(nfpExercise: nfpResult.nfpExercises[indexPath.section])

@@ -67,8 +67,13 @@ class SportExerciseCell: UITableViewCell  {
     }
     
     func configureCell() {
-        createPicker(textField: resultTextField)
-     
+        let picker = createPicker(textField: resultTextField)
+        let resultIndex = exercise.getIndexForEditingResult()
+        
+        exercise.result == ""
+        ? picker.selectRow(exercise.getScoreList().count / 2, inComponent: 0, animated: false)
+        : picker.selectRow(resultIndex, inComponent: 0, animated: false)
+        
         exerciseNameLabel.text = exercise.name
         resultTextField.text = String(exercise.result)
         
@@ -109,7 +114,7 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     
-    private func createPicker (textField: UITextField) {
+    private func createPicker (textField: UITextField) -> UIPickerView {
         let picker = UIPickerView()
         picker.delegate = self
         picker.dataSource = self
@@ -123,6 +128,8 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
         toolBar.setItems([flexButton ,doneButton], animated: false)
         textField.inputAccessoryView = toolBar
         textField.inputView = picker
+        
+        return picker
     }
     
     @objc private func donePressed() {

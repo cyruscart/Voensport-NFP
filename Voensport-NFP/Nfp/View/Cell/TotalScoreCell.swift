@@ -132,6 +132,7 @@ class TotalScoreCell: UICollectionViewCell {
     
     @objc private func saveButtonPressed() {
         if saveButton.title(for: .normal) == "Сохранить" {
+            saveButton.pulsate()
             saveButton.setTitle("Сохранено", for: .normal)
             saveButtonCallBack()
         }

@@ -1,5 +1,5 @@
 //
-//  ResultNfpExerciseCell..swift
+//  ResultExerciseCell..swift
 //  Voensport-NFP
 //
 //  Created by Кирилл on 23.12.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResultNfpExerciseCell: UICollectionViewCell {
+class ResultExerciseCell: UICollectionViewCell {
     static let identifier = "ResultNfpExerciseCell"
     
     var saveButtonCallBack: (() -> Void) = {}
@@ -123,7 +123,10 @@ class ResultNfpExerciseCell: UICollectionViewCell {
         
         exerciseNameLabel.text = sportResult.sportExercises[index].name
         scoreLabel.text = "Баллов: \(sportResult.sportExercises[index].score)"
-        resultLabel.text = "Результат: \(sportResult.sportExercises[index].result)"
+       
+        resultLabel.text = sportResult.sportExercises[index].result == ""
+        ? "Результат не сохранен"
+        : "Результат: \(sportResult.sportExercises[index].result)"
     }
     
 }

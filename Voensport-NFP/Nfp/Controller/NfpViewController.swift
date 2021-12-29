@@ -72,7 +72,7 @@ class NfpViewController: UIViewController  {
         navigationItem.title = nfpController.isEditing
         ? nfpController.editingResultDate
         : "Сдача ФП"
-        
+    
         let settingsButton = UIBarButtonItem(
             image: UIImage(systemName: "gearshape.fill"),
             style: .plain,

@@ -27,9 +27,8 @@ class AboutAppViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        collectionView.reloadData()
     }
-    
     
     private func setupCollectionView() {
         
@@ -46,7 +45,6 @@ class AboutAppViewController: UIViewController {
         view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
     }
-    
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -106,6 +104,13 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
             view.messageLabel.text = ["", "Логотип для этого приложения был сгенерирован нейросетью ruDALL-E, просто посмотрите, какие еще крутые варианты она предложила"][indexPath.section]
             return view
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            let onboardingVC = OnboardingViewController()
+            onboardingVC.modalPresentationStyle = .fullScreen
+            present(onboardingVC, animated: true, completion: nil)
+        }
+    }
 }
-
 
