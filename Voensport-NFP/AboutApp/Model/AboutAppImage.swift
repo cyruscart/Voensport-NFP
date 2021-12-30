@@ -12,11 +12,14 @@ struct AboutAppImage {
 }
 
 struct Donate {
-    static let message = "Если Вам нравится это приложение, вы можете поддержать разработчика. Это придаст мотивацию поддерживать и развивать приложение"
+    static let message = """
+    Нравится приложение?
+    Вы можете поддержать разработчика. Это придаст мотивацию поддерживать и развивать приложение
+    """
 }
 
 struct LogoImagePresentation {
    static let message = "Логотип для этого приложения был сгенерирован нейросетью ruDALL-E, ниже Вы можете насладиться другими потрясающими вариантами"
-   static let imagesName = ["logo1", "logo2", "logo3", "logo4", "logo5", "logo6", "logo7", "logo8"]
+   static let imagesName = ["logo5", "logo2", "logo3", "logo4", "logo1", "logo6", "logo7", "logo8"]
 
 }

@@ -89,10 +89,9 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
         case .donate:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DonateCell.identifier, for: indexPath) as! DonateCell
             cell.messageLabel.text = """
-            Если Вам нравится это приложение,
-            Вы можете поблагодарить разработчика
+            Нравится приложение?
+            Вы можете поддержать разработчика
             """
-            
             return cell
         }
     }

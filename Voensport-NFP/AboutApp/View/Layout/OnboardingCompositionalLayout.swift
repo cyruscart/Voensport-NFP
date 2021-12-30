@@ -24,7 +24,7 @@ class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
             
             totalGroup.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 40)
             
-            let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
+            let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                            heightDimension: .estimated(100))
             let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionFooterSize,
                                                                             elementKind: "OnBoardingFooter",

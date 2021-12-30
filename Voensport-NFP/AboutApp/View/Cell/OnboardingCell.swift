@@ -16,7 +16,6 @@ class OnboardingCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupCell()
-        setShadows()
         setupConstraints()
     }
     
@@ -25,12 +24,14 @@ class OnboardingCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-            onboardingView.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(onboardingView)
+        onboardingView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(onboardingView)
+        setViewShadows()
+        layer.shadowRadius = 10
+        
     }
     
     private func setupConstraints() {
-       
         
         NSLayoutConstraint.activate([
             onboardingView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -40,14 +41,6 @@ class OnboardingCell: UICollectionViewCell {
         ])
     }
     
-    
-    private func setShadows() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.3
-        layer.shadowOffset = .zero
-        layer.shadowRadius = 10
-    
-    }
     
     func configure(_ onboardingItem: OnboardingItem) {
         onboardingView.image = UIImage(named: onboardingItem.imageName)

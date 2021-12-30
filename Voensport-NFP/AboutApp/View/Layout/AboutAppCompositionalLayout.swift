@@ -68,11 +68,11 @@ class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                 
             case .donate:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .estimated(50))
+                                                      heightDimension: .estimated(200))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
             
                 let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                               heightDimension: .estimated(50))
+                                                               heightDimension: .estimated(200))
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 section = NSCollectionLayoutSection(group: group)

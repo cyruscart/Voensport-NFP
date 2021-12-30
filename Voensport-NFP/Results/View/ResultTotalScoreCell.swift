@@ -32,24 +32,18 @@ class ResultTotalScoreCell: UICollectionViewCell {
     }()
     
     var editButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton.createSaveButton()
         button.backgroundColor = UIColor(displayP3Red: 29/255,
                                          green: 201/255,
                                          blue: 58/255,
                                          alpha: 1)
-        button.layer.cornerRadius = 15
         button.setTitle("Изменить", for: .normal)
         button.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
         return button
     }()
     
     var saveButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(displayP3Red: 17/255,
-                                         green: 60/255,
-                                         blue: 252/255,
-                                         alpha: 1)
-        button.layer.cornerRadius = 15
+        let button = UIButton.createSaveButton()
         button.setTitle("Закрыть", for: .normal)
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
@@ -71,10 +65,7 @@ class ResultTotalScoreCell: UICollectionViewCell {
         layer.cornerRadius = 15
         layer.masksToBounds = false
         
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.1
-        layer.shadowOffset = .zero
-        layer.shadowRadius = 4
+        setViewShadows()
     }
     
     required init?(coder: NSCoder) {
@@ -103,12 +94,10 @@ class ResultTotalScoreCell: UICollectionViewCell {
             editButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 15),
             editButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             editButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            editButton.heightAnchor.constraint(equalToConstant: 40),
             
             saveButton.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 15),
             saveButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             saveButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-            saveButton.heightAnchor.constraint(equalToConstant: 40),
             saveButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
             
             

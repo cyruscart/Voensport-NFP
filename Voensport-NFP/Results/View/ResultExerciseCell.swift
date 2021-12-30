@@ -65,10 +65,7 @@ class ResultExerciseCell: UICollectionViewCell {
         layer.cornerRadius = 15
         layer.masksToBounds = false
         
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.1
-        layer.shadowOffset = .zero
-        layer.shadowRadius = 4
+        setViewShadows()
     }
     
     required init?(coder: NSCoder) {

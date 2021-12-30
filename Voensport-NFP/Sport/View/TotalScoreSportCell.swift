@@ -16,12 +16,7 @@ class TotalScoreSportCell: UITableViewCell  {
     private var gradeLabel = UILabel()
     
     private var saveButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(displayP3Red: 17/255,
-                                         green: 60/255,
-                                         blue: 252/255,
-                                         alpha: 1)
-        button.layer.cornerRadius = 15
+        let button = UIButton.createSaveButton()
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
     }()
@@ -53,8 +48,7 @@ class TotalScoreSportCell: UITableViewCell  {
             
             saveButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
-            saveButton.heightAnchor.constraint(equalToConstant: 40)
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
         ])
     }
     
@@ -67,10 +61,6 @@ class TotalScoreSportCell: UITableViewCell  {
         totalScoreLabel.isHidden = !sportController.shouldShowTotalScore()
     }
     
-    private func configureCellForEditing() {
-        
-    }
-        
         @objc private func saveButtonPressed() {
             if saveButton.title(for: .normal) == "Сохранить" {
                 saveButton.pulsate()

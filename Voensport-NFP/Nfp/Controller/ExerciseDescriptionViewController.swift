@@ -26,15 +26,9 @@ class ExerciseDescriptionViewController: UIViewController {
     }()
     
     private let okButton: UIButton = {
-        let button = UIButton()
+        let button = UIButton.createSaveButton()
         button.setTitle("Понятно", for: .normal)
         button.addTarget(self, action: #selector(okButtonPressed), for: .touchUpInside)
-        
-        button.backgroundColor = UIColor(displayP3Red: 17/255,
-                                         green: 60/255,
-                                         blue: 252/255,
-                                         alpha: 1)
-        button.layer.cornerRadius = 15
         return button
     }()
     
@@ -88,8 +82,7 @@ class ExerciseDescriptionViewController: UIViewController {
             
             okButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
             okButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
-            okButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40),
-            okButton.heightAnchor.constraint(equalToConstant: 40)
+            okButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -40)
         ])
     }
     

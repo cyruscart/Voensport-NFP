@@ -97,9 +97,8 @@ class ExerciseCell: UICollectionViewCell {
         layer.cornerRadius = 15
         layer.masksToBounds = false
         
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.3
-        layer.shadowOffset = .zero
+        
+        setViewShadows()
         layer.shadowRadius = 10
         
         switch exercise.type {
