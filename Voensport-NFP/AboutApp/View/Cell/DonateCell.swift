@@ -176,8 +176,8 @@ class DonateCell: UICollectionViewCell  {
             messageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             
             buttonStackView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 20),
-            buttonStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 40),
-            buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -40),
+            buttonStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 30),
+            buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             buttonStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
             
         ])

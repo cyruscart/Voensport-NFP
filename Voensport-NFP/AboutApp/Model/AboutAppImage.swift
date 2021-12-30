@@ -7,19 +7,19 @@
 
 import Foundation
 
-struct AboutAppImage {
-   static let imageName = "onboarding"
-}
+//struct AboutAppImage {
+//   static let imageName = "onboarding"
+//}
 
-struct Donate {
-    static let message = """
-    Нравится приложение?
-    Вы можете поддержать разработчика. Это придаст мотивацию поддерживать и развивать приложение
-    """
-}
+//struct Donate {
+//    static let message = """
+//    Нравится приложение?
+//    Вы можете поддержать разработчика. Это придаст мотивацию поддерживать и развивать приложение
+//    """
+//}
 
 struct LogoImagePresentation {
-   static let message = "Логотип для этого приложения был сгенерирован нейросетью ruDALL-E, ниже Вы можете насладиться другими потрясающими вариантами"
+    static let message = "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по тестовому запросу \"Логотип для приложения Военспорт - НФП\". Просто посмотрите, какие еще крутые варианты она нарисовала"
    static let imagesName = ["logo5", "logo2", "logo3", "logo4", "logo1", "logo6", "logo7", "logo8"]
 
 }

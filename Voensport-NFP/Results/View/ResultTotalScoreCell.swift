@@ -93,7 +93,7 @@ class ResultTotalScoreCell: UICollectionViewCell {
             
             editButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 15),
             editButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            editButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+            editButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10), 
             
             saveButton.topAnchor.constraint(equalTo: editButton.bottomAnchor, constant: 15),
             saveButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),

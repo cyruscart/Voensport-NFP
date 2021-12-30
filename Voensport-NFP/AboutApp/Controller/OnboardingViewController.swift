@@ -83,8 +83,8 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
     
     @objc private func nextButtonTapped() {
         guard let visibleItemIndex = collectionView.indexPathsForVisibleItems.first?.item else { return }
+        print(visibleItemIndex)
         let nextVisibleItemIndex = visibleItemIndex + 1
-        
         if nextVisibleItemIndex < OnboardingItem.generateItems().count {
             let indexPath = IndexPath(item: nextVisibleItemIndex, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)

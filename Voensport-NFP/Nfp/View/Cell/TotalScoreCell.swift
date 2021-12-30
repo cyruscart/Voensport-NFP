@@ -42,11 +42,6 @@ class TotalScoreCell: UICollectionViewCell {
     
     var saveButton: UIButton = {
         let button = UIButton.createSaveButton()
-//        button.backgroundColor = UIColor(displayP3Red: 17/255,
-//                                         green: 60/255,
-//                                         blue: 252/255,
-//                                         alpha: 1)
-//        button.layer.cornerRadius = 15
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
     }()

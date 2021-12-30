@@ -19,12 +19,7 @@ class OnBoardingFooter: UICollectionReusableView {
     }()
     
     var nextButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = UIColor(displayP3Red: 17/255,
-                                         green: 60/255,
-                                         blue: 252/255,
-                                         alpha: 1)
-        button.layer.cornerRadius = 15
+        let button = UIButton.createSaveButton()
         button.setTitle("Далее", for: .normal)
         return button
     }()
@@ -55,7 +50,6 @@ class OnBoardingFooter: UICollectionReusableView {
             nextButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 10),
             nextButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            nextButton.heightAnchor.constraint(equalToConstant: 40),
             nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
             
         ])
