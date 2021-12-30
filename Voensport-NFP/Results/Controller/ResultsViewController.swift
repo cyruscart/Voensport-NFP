@@ -74,6 +74,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         : "\(resultsController.sportResults[indexPath.row].sportType.rawValue)"
         
         cell.contentConfiguration = content
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

@@ -11,8 +11,7 @@ import UIKit
 class OnboardingViewController: UIViewController {
     
     private var collectionView: UICollectionView!
-    private var visibleItem = 0
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -39,6 +38,9 @@ class OnboardingViewController: UIViewController {
         
         view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
+        collectionView.isScrollEnabled = false
+        
+        
     }
     
 }
@@ -59,6 +61,7 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
 
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCell.identifier, for: indexPath) as! OnboardingCell
             cell.configure(OnboardingItem.generateItems()[indexPath.item])
+        
             return cell
 
         }
@@ -67,17 +70,46 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
        
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: "OnBoardingFooter", withReuseIdentifier: OnBoardingFooter.identifier, for: indexPath) as! OnBoardingFooter
         view.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
+        view.configure(OnboardingItem.generateItems()[indexPath.item])
             return view
     }
     
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        guard let visibleItemIndex = collectionView.indexPathsForVisibleItems.first?.item else { return }
+        updateSupplementaryView(itemIndex: visibleItemIndex)
+        setButtonTitle(index: visibleItemIndex)
+    }
+    
     @objc private func nextButtonTapped() {
-        visibleItem += 1
-        if visibleItem < OnboardingItem.generateItems().count {
-            let indexPath = IndexPath(item: visibleItem, section: 0)
+        guard let visibleItemIndex = collectionView.indexPathsForVisibleItems.first?.item else { return }
+        let nextVisibleItemIndex = visibleItemIndex + 1
+        
+        if nextVisibleItemIndex < OnboardingItem.generateItems().count {
+            let indexPath = IndexPath(item: nextVisibleItemIndex, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
+            setButtonTitle(index: nextVisibleItemIndex)
         } else {
             dismiss(animated: true, completion: nil)
         }
+
     }
+    
+    private func updateSupplementaryView(itemIndex: Int) {
+        guard let footer = collectionView.visibleSupplementaryViews(ofKind: "OnBoardingFooter").first as? OnBoardingFooter else { return }
+        footer.configure(OnboardingItem.generateItems()[itemIndex])
+    }
+    
+    private func setButtonTitle(index: Int) {
+        guard let footer = collectionView.visibleSupplementaryViews(ofKind: "OnBoardingFooter").first as? OnBoardingFooter else { return }
+        
+        let title = index == OnboardingItem.generateItems().count - 1
+        ? "Закрыть"
+        : "Далее"
+        
+        footer.nextButton.setTitle(title, for: .normal)
+    }
+    
+    
 }
 

@@ -113,4 +113,15 @@ final class StorageManager {
         resultsController.nfpResults[indexPath.row] = nfpResult
         saveResults(results: resultsController)
     }
+    
+    //MARK: - Onboarding
+    
+    func shouldShowOnboarding() -> Bool {
+            if let _ = UserDefaults.standard.string(forKey: "onBoardingShowed") {
+                return false
+            } else {
+                UserDefaults.standard.set("showed", forKey: "onBoardingShowed")
+                return true
+            }
+        }
 }

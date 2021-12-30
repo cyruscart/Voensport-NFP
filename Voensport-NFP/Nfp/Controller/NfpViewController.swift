@@ -20,6 +20,7 @@ class NfpViewController: UIViewController  {
         
         setupNavigationBar()
         setupCollectionView()
+        showOnboarding()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -362,6 +363,14 @@ extension NfpViewController {
     private func showMoneyAlert() {
         let alert = UIAlertController.createMoneyAlertController(money: nfpController.getAmountOfMoney())
         present(alert, animated: true, completion: nil)
+    }
+    
+    private func showOnboarding() {
+        if StorageManager.shared.shouldShowOnboarding() {
+            let onboardingVC = OnboardingViewController()
+            onboardingVC.modalPresentationStyle = .fullScreen
+            present(onboardingVC, animated: true, completion: nil)
+        }
     }
 }
 

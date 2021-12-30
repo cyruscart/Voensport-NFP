@@ -10,6 +10,14 @@ import UIKit
 class OnBoardingFooter: UICollectionReusableView {
     static let identifier = "OnBoardingFooter"
    
+    private var messageLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 18)
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        return label
+    }()
+    
     var nextButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = UIColor(displayP3Red: 17/255,
@@ -24,7 +32,7 @@ class OnBoardingFooter: UICollectionReusableView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupView()
-        print("suool")
+        
     }
     
     required init?(coder: NSCoder) {
@@ -34,18 +42,28 @@ class OnBoardingFooter: UICollectionReusableView {
     private func setupView() {
             nextButton.translatesAutoresizingMaskIntoConstraints = false
             addSubview(nextButton)
+        
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(messageLabel)
        
         NSLayoutConstraint.activate([
-            nextButton.topAnchor.constraint(equalTo: topAnchor),
+            
+            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            
+            nextButton.topAnchor.constraint(equalTo: messageLabel.bottomAnchor, constant: 10),
             nextButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: trailingAnchor),
-            nextButton.bottomAnchor.constraint(equalTo: bottomAnchor)
+            nextButton.heightAnchor.constraint(equalToConstant: 40),
+            nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
             
         ])
     }
     
-    func configure() {
-}
+    func configure(_ onboardingItem: OnboardingItem) {
+        messageLabel.text = onboardingItem.message
+    }
 }
 
 

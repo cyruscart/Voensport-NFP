@@ -60,7 +60,7 @@ class AboutImageCell: UICollectionViewCell {
     }
     
     func showLogo(images count: Int) {
-//        imageView.image = UIImage(named: "0")
+        imageView.image = UIImage(named: "0")
         setShadows()
         
         contentView.layer.cornerRadius = 25

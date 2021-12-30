@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension UIView {
+extension UIButton {
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")
         
@@ -19,4 +19,5 @@ extension UIView {
         
         layer.add(pulse, forKey: nil)
     }
+    
 }

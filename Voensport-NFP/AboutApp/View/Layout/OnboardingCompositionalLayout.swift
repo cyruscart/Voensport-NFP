@@ -17,28 +17,26 @@ class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
                                                        heightDimension: .fractionalHeight(1))
             
             let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)
-            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.95),
-                                                        heightDimension: .fractionalHeight(0.87))
+            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(0.45),
+                                                        heightDimension: .fractionalHeight(0.70))
             
             let totalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: totalGroupSize, subitems: [totalItem])
             
-            totalGroup.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 20)
+            totalGroup.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 40)
             
-            let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.7),
-                                                           heightDimension: .absolute(40))
+            let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
+                                                           heightDimension: .estimated(100))
             let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionFooterSize,
                                                                             elementKind: "OnBoardingFooter",
                                                                             alignment: .bottom)
             
             let section = NSCollectionLayoutSection(group: totalGroup)
             section.boundarySupplementaryItems = [sectionFooter]
-            //                section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 0 , bottom: 10, trailing: 0)
             section.orthogonalScrollingBehavior = .groupPagingCentered
             
            
             return section
         }
-        
         
         return layout
     }
