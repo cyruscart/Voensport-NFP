@@ -9,7 +9,6 @@ import UIKit
 
 class TotalScoreCell: UICollectionViewCell {
     static let identifier = "TotalScoreCell"
-    
     var saveButtonCallBack: (() -> Void) = {}
     
     private var totalScoreLabel: UILabel = {
@@ -59,10 +58,8 @@ class TotalScoreCell: UICollectionViewCell {
         setupConstraints()
         
         backgroundColor = .systemBackground
-        
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-        
         layer.cornerRadius = 15
         layer.masksToBounds = false
         
@@ -84,7 +81,6 @@ class TotalScoreCell: UICollectionViewCell {
         let inset = CGFloat(20)
         let width = UIScreen.main.bounds.width - inset * 2
         
-        
         NSLayoutConstraint.activate([
             totalScoreLabel.topAnchor.constraint(equalTo: markLabel.topAnchor),
             totalScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
@@ -94,8 +90,6 @@ class TotalScoreCell: UICollectionViewCell {
             
             markLabel.topAnchor.constraint(equalTo: topAnchor, constant: inset),
             markLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset * 3),
-            
-            
             
             saveButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor, constant: inset / 2),

@@ -5,11 +5,9 @@
 //  Created by Кирилл on 20.12.2021.
 //
 
-import Foundation
 import UIKit
 
 final class TriathlonController {
-    
     var triathlonType: TriathlonType = .summer
     
     var isEditing = false
@@ -22,6 +20,7 @@ final class TriathlonController {
     
     var ageCategory: TriathlonAgeCategory = .lessThirty
     var exercises: [TriathlonExercise] = []
+    
     private var summerTriathlonExercises: [TriathlonExercise] = []
     private var winterTriathlonExercises: [TriathlonExercise] = []
     
@@ -39,10 +38,9 @@ final class TriathlonController {
     
     init() {}
     
-        //MARK: - Triathlon methods
+    //MARK: - Triathlon methods
     
     func generateSportResult() -> SportResult {
-    
         SportResult(
             sportType: sportType,
             totalScore: totalScore,
@@ -57,7 +55,6 @@ final class TriathlonController {
     func updateTriathlonExercises() {
         if !isEditing {
             let sportExercises = StorageManager.shared.getSportExercisesFromJsonFile()
-            
             summerTriathlonExercises = sportExercises.summerExercises
             winterTriathlonExercises = sportExercises.winterExercises
             
@@ -124,7 +121,6 @@ final class TriathlonController {
             }
         default:
             break
-            
         }
         return grade
     }

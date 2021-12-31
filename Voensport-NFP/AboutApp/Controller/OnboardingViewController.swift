@@ -7,40 +7,25 @@
 
 import UIKit
 
-
 class OnboardingViewController: UIViewController {
-    
     private var collectionView: UICollectionView!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupCollectionView()
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     private func setupCollectionView() {
-        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: OnboardingCompositionalLayout.createLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(OnboardingCell.self, forCellWithReuseIdentifier: OnboardingCell.identifier)
-        
         collectionView.register(OnBoardingFooter.self, forSupplementaryViewOfKind: "OnBoardingFooter", withReuseIdentifier: OnBoardingFooter.identifier)
-        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
-        
-        
+        view.addSubview(collectionView)
     }
     
 }
@@ -58,24 +43,19 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCell.identifier, for: indexPath) as! OnboardingCell
-            cell.configure(OnboardingItem.generateItems()[indexPath.item])
-        
-            return cell
-
-        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: OnboardingCell.identifier, for: indexPath) as! OnboardingCell
+        cell.configure(OnboardingItem.generateItems()[indexPath.item])
+        return cell
+    }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-       
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "OnBoardingFooter", withReuseIdentifier: OnBoardingFooter.identifier, for: indexPath) as! OnBoardingFooter
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: "OnBoardingFooter", withReuseIdentifier: OnBoardingFooter.identifier, for: indexPath) as! OnBoardingFooter
         view.nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         view.configure(OnboardingItem.generateItems()[indexPath.item])
-            return view
+        return view
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
         guard let visibleItemIndex = collectionView.indexPathsForVisibleItems.first?.item else { return }
         updateSupplementaryView(itemIndex: visibleItemIndex)
         setButtonTitle(index: visibleItemIndex)
@@ -83,8 +63,8 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
     
     @objc private func nextButtonTapped() {
         guard let visibleItemIndex = collectionView.indexPathsForVisibleItems.first?.item else { return }
-        print(visibleItemIndex)
         let nextVisibleItemIndex = visibleItemIndex + 1
+        
         if nextVisibleItemIndex < OnboardingItem.generateItems().count {
             let indexPath = IndexPath(item: nextVisibleItemIndex, section: 0)
             collectionView.scrollToItem(at: indexPath, at: .bottom, animated: true)
@@ -92,7 +72,6 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
         } else {
             dismiss(animated: true, completion: nil)
         }
-
     }
     
     private func updateSupplementaryView(itemIndex: Int) {
@@ -102,14 +81,9 @@ extension OnboardingViewController: UICollectionViewDataSource, UICollectionView
     
     private func setButtonTitle(index: Int) {
         guard let footer = collectionView.visibleSupplementaryViews(ofKind: "OnBoardingFooter").first as? OnBoardingFooter else { return }
-        
-        let title = index == OnboardingItem.generateItems().count - 1
-        ? "Закрыть"
-        : "Далее"
-        
+        let title = index == OnboardingItem.generateItems().count - 1 ? "Закрыть" : "Далее"
         footer.nextButton.setTitle(title, for: .normal)
     }
-    
     
 }
 

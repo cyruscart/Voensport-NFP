@@ -9,6 +9,7 @@ import UIKit
 
 class NfpExerciseHeaderView: UICollectionReusableView {
     static let identifier = "HeaderView"
+    
     let label: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 20)
@@ -28,13 +29,12 @@ class NfpExerciseHeaderView: UICollectionReusableView {
     private func configure() {
         addSubview(label)
         label.translatesAutoresizingMaskIntoConstraints = false
-        let inset = CGFloat(10)
         
         NSLayoutConstraint.activate([
-            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
-            label.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: inset)
+            label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            label.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            label.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            label.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10)
         ])
     }
 }

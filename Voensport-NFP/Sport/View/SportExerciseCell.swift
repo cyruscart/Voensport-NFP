@@ -12,18 +12,8 @@ class SportExerciseCell: UITableViewCell  {
     
     var exercise: TriathlonExercise!
     var callBackForUpdatingTotalScore: (() -> Void) = {}
-    
-    var exerciseNameLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
-    
-    var scoreLabel: UILabel = {
-        let label = UILabel()
-        
-        return label
-    }()
+    var exerciseNameLabel = UILabel()
+    var scoreLabel = UILabel()
     
     var resultTextField: UITextField = {
         let tf = UITextField()
@@ -32,12 +22,10 @@ class SportExerciseCell: UITableViewCell  {
         return tf
     }()
     
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupCell()
-        
     }
     
     required init?(coder: NSCoder) {
@@ -45,7 +33,6 @@ class SportExerciseCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        createPicker(textField: resultTextField)
         
         [exerciseNameLabel, scoreLabel, resultTextField].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
@@ -76,10 +63,7 @@ class SportExerciseCell: UITableViewCell  {
         
         exerciseNameLabel.text = exercise.name
         resultTextField.text = String(exercise.result)
-        
-        scoreLabel.text = exercise.score == 0
-        ? ""
-        : "Баллов: \(exercise.score)"
+        scoreLabel.text = exercise.score == 0 ? "" : "Баллов: \(exercise.score)"
     }
     
 }
@@ -91,7 +75,6 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
         1
     }
     
-    
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         exercise.getScoreList().count
     }
@@ -101,18 +84,13 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
         let newResult = String(exercise.getScoreList()[pickerView.selectedRow(inComponent: 0)])
         exercise.result = newResult
-        
         let newScore = exercise.score
-        
         resultTextField.text = newResult
         scoreLabel.text = "Баллов: \(newScore)"
-        
         callBackForUpdatingTotalScore()
     }
-    
     
     private func createPicker (textField: UITextField) -> UIPickerView {
         let picker = UIPickerView()

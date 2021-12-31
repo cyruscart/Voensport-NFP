@@ -17,8 +17,8 @@ class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
                                                        heightDimension: .fractionalHeight(1))
             
             let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)
-            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(0.45),
-                                                        heightDimension: .fractionalHeight(0.70))
+            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(0.46),
+                                                        heightDimension: .fractionalHeight(0.75))
             
             let totalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: totalGroupSize, subitems: [totalItem])
             

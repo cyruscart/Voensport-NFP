@@ -42,7 +42,6 @@ class ResultCellView: UICollectionReusableView {
         setupCell()
         
         backgroundColor = .systemBackground
-        
     }
     
     required init?(coder: NSCoder) {
@@ -50,15 +49,14 @@ class ResultCellView: UICollectionReusableView {
     }
     
     private func setupCell() {
-
         [ resultLabel, resultSlider, scoreLabel].forEach { subView in
             subView.translatesAutoresizingMaskIntoConstraints = false
             self.addSubview(subView)
         }
         
         let width = UIScreen.main.bounds.width - 30
+        
         NSLayoutConstraint.activate([
-            
             resultLabel.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             resultLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 30),
             resultLabel.widthAnchor.constraint(equalToConstant: width / 3 * 2),
@@ -76,20 +74,16 @@ class ResultCellView: UICollectionReusableView {
     func configureCell() {
         resultSlider.minimumValue = Float(exercise.getScoreList().first ?? 0)
         resultSlider.maximumValue = Float(exercise.getScoreList().last ?? 100)
-        
         resultSlider.value = Float(exercise.score)
-        
         setSliderTrackColor()
         setResults()
-        
-        
     }
     
-     private func setSliderTrackColor() {
-     
+    private func setSliderTrackColor() {
+        
         resultSlider.minimumTrackTintColor = lrintf(resultSlider.value) < minimumScore ?
-         UIColor.systemRed :
-         UIColor.systemBlue
+        UIColor.systemRed :
+        UIColor.systemBlue
     }
     
     private func setResults() {
@@ -97,17 +91,14 @@ class ResultCellView: UICollectionReusableView {
         resultLabel.text = "Результат: \(exercise.result ?? "0")"
     }
     
-     @objc func resultSliderMoved() {
+    @objc func resultSliderMoved() {
         setSliderTrackColor()
         
-         
         if exercise.getScoreList().contains(lrintf(resultSlider.value)) && lrintf(resultSlider.value) != exercise.score  {
             exercise.score = lrintf(resultSlider.value)
             callback()
         }
-         setResults()
-        
-
+        setResults()
     }
     
 }

@@ -8,7 +8,6 @@
 import Foundation
 
 final class TriathlonExercise: Codable {
-    
     let name: String
     let triathlonAgeCategory: TriathlonAgeCategory
     var result = ""

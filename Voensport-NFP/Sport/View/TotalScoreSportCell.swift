@@ -33,7 +33,6 @@ class TotalScoreSportCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        
         [totalScoreLabel, gradeLabel, saveButton].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)

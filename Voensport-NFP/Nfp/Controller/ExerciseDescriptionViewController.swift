@@ -8,15 +8,10 @@
 import UIKit
 
 class ExerciseDescriptionViewController: UIViewController {
-
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     
-    private let exerciseImage: UIImageView = {
-        let image = UIImageView()
-        
-        return image
-    }()
+    private let exerciseImage = UIImageView()
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
@@ -31,7 +26,6 @@ class ExerciseDescriptionViewController: UIViewController {
         button.addTarget(self, action: #selector(okButtonPressed), for: .touchUpInside)
         return button
     }()
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,17 +60,15 @@ class ExerciseDescriptionViewController: UIViewController {
             view.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(view)
         }
-        
-        let inset = CGFloat(20)
-        
+     
         NSLayoutConstraint.activate([
             exerciseImage.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 30),
-            exerciseImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            exerciseImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            exerciseImage.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            exerciseImage.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            descriptionLabel.topAnchor.constraint(equalTo: exerciseImage.bottomAnchor, constant: inset),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: inset),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -inset),
+            descriptionLabel.topAnchor.constraint(equalTo: exerciseImage.bottomAnchor, constant: 20),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             descriptionLabel.bottomAnchor.constraint(equalTo: okButton.topAnchor, constant: -30),
             
             
@@ -87,16 +79,10 @@ class ExerciseDescriptionViewController: UIViewController {
     }
     
     func configure(with exercise: NfpExercise) {
-        
-            
             if let descriptionText = exercise.exerciseDescription {
                 descriptionLabel.text = descriptionText
             }
-            
             exerciseImage.image = UIImage(named: "\(exercise.number)")
-//        } else {
-//            descriptionLabel.text = DataManager.shared.gradeRules
-//        }
     }
     
     @objc private func okButtonPressed() {

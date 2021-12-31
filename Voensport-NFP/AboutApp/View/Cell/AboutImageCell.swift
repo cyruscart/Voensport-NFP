@@ -71,8 +71,8 @@ class AboutImageCell: UICollectionViewCell {
         }
         
         imageView.animationImages = logoImages
-        imageView.animationDuration = 20
-        imageView.animationRepeatCount = 5
+        imageView.animationDuration = 14
+        imageView.animationRepeatCount = 10
         imageView.startAnimating()
     }
 }

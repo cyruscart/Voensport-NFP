@@ -10,10 +10,10 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     var settings: Settings!
+    
     private var tableView: UITableView!
     private var selectedSetting: String!
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Настройки"
@@ -25,22 +25,18 @@ class SettingsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         settings.setNumberOfExercise()
         tableView.reloadData()
     }
     
-    
     private func setTableView() {
-        
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
-        view.addSubview(tableView)
-        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
+        view.addSubview(tableView)
     }
     
     @objc private func hapticSwitchDidChange(hapticSwitch: UISwitch) {
@@ -52,7 +48,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         settings.getNumberOfSectionForSettings()
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,7 +68,6 @@ extension SettingsViewController: UITableViewDataSource, UITableViewDelegate {
             cell.switchStatement.isOn = settings.hapticOn
             cell.settingNameLabel.text = "При выборе рузультата"
             cell.switchStatement.addTarget(self, action: #selector(hapticSwitchDidChange), for: .valueChanged)
-            
         } else {
             var content = cell.defaultContentConfiguration()
             cell.accessoryType = .disclosureIndicator

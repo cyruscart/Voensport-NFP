@@ -18,39 +18,46 @@ class DetailSettingsViewController: UIViewController {
         
         setNavigationTitle()
         setTableView()
-        
     }
+    
     private func setTableView() {
-        
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
-        view.addSubview(tableView)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(PickerTableViewCell.self, forCellReuseIdentifier: PickerTableViewCell.identifier)
-        
         tableView.dataSource = self
         tableView.delegate = self
-        
         tableView.separatorStyle = .singleLine
+        view.addSubview(tableView)
     }
     
     private func setNavigationTitle() {
         navigationItem.largeTitleDisplayMode = .never
+        
         switch currentSetting {
-        case "sex": title = "Пол"
-        case "maleAge": title = "Возрастная категория"
-        case "femaleAge": title = "Возрастная категория"
-        case "numberOfExercise": title = "Количество упражнений"
-        case "tariff":  title = "Тарифный разряд"
-        default: title = "Категория"
+        case "sex":
+            title = "Пол"
+        case "maleAge":
+            title = "Возрастная категория"
+        case "femaleAge":
+            title = "Возрастная категория"
+        case "numberOfExercise":
+            title = "Количество упражнений"
+        case "tariff":
+            title = "Тарифный разряд"
+        default:
+            title = "Категория"
             
         }
     }
+    
 }
+
+//MARK: - UITableViewDelegate, UITableViewDataSource
 
 extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return currentSetting == "tariff" ? 2 : 1
+        currentSetting == "tariff" ? 2 : 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -110,7 +117,6 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 ? ""
                 : settings.sportGrade?.rawValue
             }
-    
             return cell
             
         default:
@@ -125,7 +131,6 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         settings.settingDidSelect(didSelectRowAt: indexPath, currentSetting: currentSetting)
-        
         tableView.reloadData()
     }
     
@@ -135,7 +140,7 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
 
 extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-      1
+        1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
@@ -144,12 +149,10 @@ extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSo
         : SportGrade.paidSportGrade.count
     }
     
-    
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerView.tag == 0
         ? "\(Tariff.tariffNumbers[row]) тарифный разряд"
         : SportGrade.paidSportGrade[row].rawValue
-        
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
@@ -185,7 +188,6 @@ extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSo
     }
     
     @objc private func donePressed() {
-        
         tableView.visibleCells.forEach { cell in
             guard let tariffCell = cell as? PickerTableViewCell else { return }
             tariffCell.pickerTextField.resignFirstResponder()
@@ -193,9 +195,6 @@ extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSo
             guard let gradeCell = cell as? PickerTableViewCell else { return }
             gradeCell.pickerTextField.resignFirstResponder()
         }
-       
     }
     
 }
-
-    

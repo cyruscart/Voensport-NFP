@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIButton {
+    
     func pulsate() {
         let pulse = CASpringAnimation(keyPath: "transform.scale")
         
@@ -30,4 +31,5 @@ extension UIButton {
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         return button
     }
+    
 }

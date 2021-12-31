@@ -11,6 +11,8 @@ enum AboutAppSectionKind: CaseIterable  {
     case onboarding
     case logo
     case donate
+    
+    static let logoImagesName = ["logo5", "logo2", "logo3", "logo4", "logo1", "logo6", "logo7", "logo8"]
 }
 
 class AboutAppViewController: UIViewController {
@@ -21,7 +23,6 @@ class AboutAppViewController: UIViewController {
         
         setupNavigationBar()
         setupCollectionView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,19 +32,15 @@ class AboutAppViewController: UIViewController {
     }
     
     private func setupCollectionView() {
-        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: AboutAppCompositionalLayout.createLayout())
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(AboutImageCell.self, forCellWithReuseIdentifier: AboutImageCell.identifier)
         collectionView.register(DonateCell.self, forCellWithReuseIdentifier: DonateCell.identifier)
         collectionView.register(AboutAppHeaderView.self, forSupplementaryViewOfKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier)
-        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
+        view.addSubview(collectionView)
     }
     
     private func setupNavigationBar() {
@@ -62,28 +59,21 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch AboutAppSectionKind.allCases[section] {
-        case .onboarding:
-            return 1
-        case .logo:
-            return LogoImagePresentation.imagesName.count
-        case .donate:
-            return 1
-        }
+        AboutAppSectionKind.allCases[section] == .logo ? AboutAppSectionKind.logoImagesName.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         switch AboutAppSectionKind.allCases[indexPath.section] {
+            
         case .onboarding:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AboutImageCell.identifier, for: indexPath) as! AboutImageCell
-            cell.showLogo(images: 173)
-            
+            cell.showLogo(images: 114)
             return cell
             
         case .logo:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AboutImageCell.identifier, for: indexPath) as! AboutImageCell
-            cell.configureCell(imageName: LogoImagePresentation.imagesName[indexPath.item])
+            cell.configureCell(imageName: AboutAppSectionKind.logoImagesName[indexPath.item])
             return cell
             
         case .donate:
@@ -98,10 +88,10 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-            let view = collectionView.dequeueReusableSupplementaryView(ofKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier, for: indexPath) as! AboutAppHeaderView
-            view.headingLabel.text = ["Возможности", "Логотип"][indexPath.section]
-            view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие еще крутые варианты она нарисовала"][indexPath.section]
-            return view
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier, for: indexPath) as! AboutAppHeaderView
+        view.headingLabel.text = ["Возможности", "Логотип"][indexPath.section]
+        view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие еще крутые варианты она нарисовала"][indexPath.section]
+        return view
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -111,5 +101,6 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
             present(onboardingVC, animated: true, completion: nil)
         }
     }
+    
 }
 

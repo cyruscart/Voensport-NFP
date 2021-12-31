@@ -118,14 +118,13 @@ extension UIAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @objc private func donePressed() {
-        
         guard let tariffTF = textFields?.first else { return }
         tariffTF.resignFirstResponder()
             
         guard let sportGradeTF = textFields?.last else { return }
         sportGradeTF.resignFirstResponder()
         }
-       
+    
     }
     
 
