@@ -11,7 +11,7 @@ class SegmentedViewCell: UITableViewCell {
     static let identifier = "SegmentedViewCell"
     var callBack: ((Int) -> Void)?
     
-    var ageSegmented: UISegmentedControl = {
+    let ageSegmented: UISegmentedControl = {
         let segmented = UISegmentedControl()
         
         segmented.insertSegment(withTitle: "До 30 лет", at: 0, animated: false)
@@ -46,10 +46,13 @@ class SegmentedViewCell: UITableViewCell {
     
     func configure(_ age: TriathlonAgeCategory) {
         switch age {
+            
         case .lessThirty:
             ageSegmented.selectedSegmentIndex = 0
+            
         case .lessForty:
             ageSegmented.selectedSegmentIndex = 1
+            
         case .moreForty:
             ageSegmented.selectedSegmentIndex = 2
         }

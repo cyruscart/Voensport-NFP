@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ResultsViewController: UIViewController {
+final class ResultsViewController: UIViewController {
     
     var resultsController: ResultsController!
     private var tableView: UITableView!
@@ -23,17 +23,13 @@ class ResultsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
       
-        print("willAppear")
         resultsController = StorageManager.shared.getResults()
         tableView.reloadData()
     }
     
-    
     private func setTableView() {
-        
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
-        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
         tableView.dataSource = self
@@ -61,7 +57,6 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
         

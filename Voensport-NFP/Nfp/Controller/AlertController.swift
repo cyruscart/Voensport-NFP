@@ -107,7 +107,7 @@ extension UIAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
         let toolBar = UIToolbar()
         toolBar.sizeToFit()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: nil, action: #selector(donePressed))
+        let doneButton = UIBarButtonItem(title: "Готово", style: .done, target: nil, action: #selector(donePressed))
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
         toolBar.setItems([flexButton ,doneButton], animated: false)

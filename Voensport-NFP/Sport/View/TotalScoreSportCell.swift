@@ -7,15 +7,15 @@
 
 import UIKit
 
-class TotalScoreSportCell: UITableViewCell  {
+final class TotalScoreSportCell: UITableViewCell  {
     static let identifier = "TotalScoreSportCell"
     
     var saveButtonCallBack: (() -> Void) = {}
     
-    private var totalScoreLabel = UILabel()
-    private var gradeLabel = UILabel()
+    private let totalScoreLabel = UILabel()
+    private let gradeLabel = UILabel()
     
-    private var saveButton: UIButton = {
+    private let saveButton: UIButton = {
         let button = UIButton.createSaveButton()
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button

@@ -7,9 +7,7 @@
 
 import Foundation
 
-
 struct ResultsController: Codable {
-    
     var nfpResults: [NfpResult] = []
     var sportResults: [SportResult] = []
     
@@ -18,7 +16,6 @@ struct ResultsController: Codable {
     }
     
     func getTitleForHeaderInSection(for section: Int) -> String {
-        
         switch section {
         case 0:
             return nfpResults.isEmpty ? "Нет результатов сдачи ФП" : "Результаты сдачи ФП"
@@ -29,9 +26,7 @@ struct ResultsController: Codable {
     
 }
 
-
 struct NfpResult: Codable {
-    
     let totalScore: Int
     let grade: String
     let sex: Sex
@@ -45,11 +40,9 @@ struct NfpResult: Codable {
     
     func getDate() -> String {
         let dateFormatter = DateFormatter()
-        
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "ru_Ru")
-        
         return dateFormatter.string(from: date)
     }
     
@@ -62,27 +55,23 @@ struct NfpResult: Codable {
         
         return exercises
     }
+    
 }
 
 struct SportResult: Codable {
-    
     let sportType: SportType
     let totalScore: Int
     let grade: String
     var date: Date
-    
     var ageTriathlonCategory: TriathlonAgeCategory? = nil
     var triathlonType: TriathlonType? = nil
-    
     var sportExercises: [TriathlonExercise] = []
     
     func getDate() -> String {
         let dateFormatter = DateFormatter()
-        
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "ru_Ru")
-        
         return dateFormatter.string(from: date)
     }
 }

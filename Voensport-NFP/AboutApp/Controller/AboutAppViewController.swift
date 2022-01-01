@@ -15,8 +15,8 @@ enum AboutAppSectionKind: CaseIterable  {
     static let logoImagesName = ["logo5", "logo2", "logo3", "logo4", "logo1", "logo6", "logo7", "logo8"]
 }
 
-class AboutAppViewController: UIViewController {
-    var collectionView: UICollectionView!
+final class AboutAppViewController: UIViewController {
+    private var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -23,10 +23,7 @@ extension UIButton {
     
     static func createSaveButton() -> UIButton {
         let button = UIButton()
-        button.backgroundColor = UIColor(displayP3Red: 17/255,
-                                         green: 60/255,
-                                         blue: 252/255,
-                                         alpha: 1)
+        button.backgroundColor = AppColor.blue
         button.layer.cornerRadius = 15
         button.heightAnchor.constraint(equalToConstant: 40).isActive = true
         return button

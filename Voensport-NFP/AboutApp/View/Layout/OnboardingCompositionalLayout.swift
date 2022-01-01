@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
+final class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
     
     static func createLayout() -> UICollectionViewCompositionalLayout {
         
@@ -21,7 +21,6 @@ class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
                                                         heightDimension: .fractionalHeight(0.75))
             
             let totalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: totalGroupSize, subitems: [totalItem])
-            
             totalGroup.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 40)
             
             let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
@@ -33,11 +32,8 @@ class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
             let section = NSCollectionLayoutSection(group: totalGroup)
             section.boundarySupplementaryItems = [sectionFooter]
             section.orthogonalScrollingBehavior = .groupPagingCentered
-            
-           
             return section
         }
-        
         return layout
     }
 }

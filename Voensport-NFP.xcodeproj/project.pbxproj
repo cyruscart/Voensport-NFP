@@ -213,9 +213,9 @@
 		6E5F27EC27734A9E00926FC1 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				6E5F27EF27734C2200926FC1 /* Controller */,
-				6E5F27EE27734C1700926FC1 /* View */,
 				6E5F27ED27734C0C00926FC1 /* Model */,
+				6E5F27EE27734C1700926FC1 /* View */,
+				6E5F27EF27734C2200926FC1 /* Controller */,
 			);
 			path = Results;
 			sourceTree = "<group>";

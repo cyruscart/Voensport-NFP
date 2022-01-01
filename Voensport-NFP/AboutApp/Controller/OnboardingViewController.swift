@@ -7,7 +7,7 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController {
+final class OnboardingViewController: UIViewController {
     private var collectionView: UICollectionView!
     
     override func viewDidLoad() {

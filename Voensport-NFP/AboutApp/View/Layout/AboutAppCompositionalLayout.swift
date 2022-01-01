@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
+final class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
     static func createLayout() -> UICollectionViewCompositionalLayout {
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
@@ -41,7 +41,6 @@ class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                 section.orthogonalScrollingBehavior = .groupPagingCentered
                 
             case .logo:
-                
                 let logoItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                               heightDimension: .fractionalHeight(1))
                 let logoItem = NSCollectionLayoutItem(layoutSize: logoItemSize)
@@ -54,16 +53,13 @@ class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                 section = NSCollectionLayoutSection(group: logoGroup)
                 section.orthogonalScrollingBehavior = .continuous
                 
-              
                 let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                                heightDimension: .estimated(50))
-                
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                                 elementKind: "AboutAppHeaderView",
                                                                                 alignment: .top)
                 
                 section.boundarySupplementaryItems = [sectionHeader]
-                
                 section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
                 
             case .donate:
@@ -76,14 +72,10 @@ class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                 let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
                 
                 section = NSCollectionLayoutSection(group: group)
-                
                 section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 50, trailing: 20)
             }
             return section
         }
-        let config = UICollectionViewCompositionalLayoutConfiguration()
-        config.interSectionSpacing = 0
-        layout.configuration = config
         return layout
     }
 }
