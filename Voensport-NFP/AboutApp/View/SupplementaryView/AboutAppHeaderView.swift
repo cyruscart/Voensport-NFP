@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AboutAppHeaderView: UICollectionReusableView {
+final class AboutAppHeaderView: UICollectionReusableView {
     static let identifier = "AboutAppHeaderView"
    
     let headingLabel: UILabel = {
@@ -17,7 +17,7 @@ class AboutAppHeaderView: UICollectionReusableView {
         return label
     }()
     
-    var messageLabel: UILabel = {
+    let messageLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18)
         label.numberOfLines = 0
@@ -50,8 +50,6 @@ class AboutAppHeaderView: UICollectionReusableView {
             messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)
         ])
     }
-    
-    func configure() {
-}
+  
 }
 

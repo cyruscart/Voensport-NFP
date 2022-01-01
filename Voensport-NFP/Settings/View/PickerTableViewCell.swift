@@ -8,15 +8,9 @@
 import UIKit
 
 class PickerTableViewCell: UITableViewCell {
-    
     static let identifier = "PickerTableViewCell"
     
-    
-     var pickerTextField: UITextField = {
-        let tf = UITextField()
-       
-        return tf
-    }()
+    let pickerTextField = UITextField()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,7 +22,6 @@ class PickerTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupCell() {
         pickerTextField.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(pickerTextField)
@@ -38,7 +31,6 @@ class PickerTableViewCell: UITableViewCell {
             pickerTextField.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             pickerTextField.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
             pickerTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            
         ])
     }
     
@@ -47,6 +39,5 @@ class PickerTableViewCell: UITableViewCell {
             pickerTextField.text = "\(settings.tariff) тарифный разряд"
         }
     }
-    
     
 }

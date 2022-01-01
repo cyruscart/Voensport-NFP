@@ -7,10 +7,10 @@
 
 import UIKit
 
-class AboutImageCell: UICollectionViewCell {
+final class AboutImageCell: UICollectionViewCell {
     
     static let identifier = "AboutImageCell"
-    private var imageView = UIImageView()
+    private let imageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -26,12 +26,9 @@ class AboutImageCell: UICollectionViewCell {
     private func setupCell() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(imageView)
-        
-        contentView.backgroundColor = .red
     }
     
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -41,7 +38,6 @@ class AboutImageCell: UICollectionViewCell {
     }
     
     func configureCell(imageName: String) {
-        
         setShadows()
         imageView.image = UIImage(named: imageName)
     }
@@ -49,21 +45,15 @@ class AboutImageCell: UICollectionViewCell {
     private func setShadows() {
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-        
-        layer.cornerRadius = 15
         layer.masksToBounds = false
-        
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOpacity = 0.2
-        layer.shadowOffset = .zero
-        layer.shadowRadius = 4
+        setViewShadows()
     }
     
     func showLogo(images count: Int) {
         imageView.image = UIImage(named: "0")
         setShadows()
-        
         contentView.layer.cornerRadius = 25
+        
         var logoImages: [UIImage] = []
         
         for image in 0..<count {
@@ -71,8 +61,8 @@ class AboutImageCell: UICollectionViewCell {
         }
         
         imageView.animationImages = logoImages
-        imageView.animationDuration = 20
-        imageView.animationRepeatCount = 5
+        imageView.animationDuration = 14
+        imageView.animationRepeatCount = 10
         imageView.startAnimating()
     }
 }

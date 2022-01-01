@@ -6,12 +6,12 @@
 //
 
 import UIKit
-import CoreData
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    
     private var settings: Settings!
     private var resultsController: ResultsController!
 
@@ -28,9 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        .portrait
+    }
+    
     func applicationWillTerminate(_ application: UIApplication) {
         StorageManager.shared.saveSettings(settings)
-        
     }
 // MARK: - Creating UITabBarController
     
@@ -52,14 +55,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         tabBarVC.viewControllers = [
         generateNavigationController(rootViewController: nfpViewController, title: "Сдача ФП", image: nfpTabBarImage!),
-        
         generateNavigationController(rootViewController: sportListVC, title: "Военный спорт", image: sportTabBarImage!),
-        
         generateNavigationController(rootViewController: resultsVC, title: "Результаты", image: resultTabBarImage!),
-        
         generateNavigationController(rootViewController: aboutAppVC, title: "О приложении", image: aboutTabBarImage!)
         ]
-        
         return tabBarVC
     }
     

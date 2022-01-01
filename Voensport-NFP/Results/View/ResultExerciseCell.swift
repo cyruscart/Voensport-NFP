@@ -7,13 +7,13 @@
 
 import UIKit
 
-class ResultExerciseCell: UICollectionViewCell {
+final class ResultExerciseCell: UICollectionViewCell {
     static let identifier = "ResultNfpExerciseCell"
     
     var saveButtonCallBack: (() -> Void) = {}
     var editButtonCallBack: (() -> Void) = {}
     
-    private var exerciseNumberLabel: UILabel = {
+    private let exerciseNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .center
@@ -22,7 +22,7 @@ class ResultExerciseCell: UICollectionViewCell {
         return label
     }()
     
-    private var exerciseNameLabel: UILabel = {
+    private let exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
@@ -31,7 +31,7 @@ class ResultExerciseCell: UICollectionViewCell {
         return label
     }()
     
-    private var resultLabel: UILabel = {
+    private let resultLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         label.textAlignment = .left
@@ -39,32 +39,24 @@ class ResultExerciseCell: UICollectionViewCell {
         return label
     }()
     
-    
-    
-    private var scoreLabel: UILabel = {
+    private let scoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 18)
         
         label.textAlignment = .left
         return label
     }()
-    
-   
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupCell()
         setupConstraints()
-        
         backgroundColor = .systemBackground
-        
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-        
         layer.cornerRadius = 15
         layer.masksToBounds = false
-        
         setViewShadows()
     }
     
@@ -80,26 +72,24 @@ class ResultExerciseCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             exerciseNumberLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             exerciseNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             exerciseNumberLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-
+            
             exerciseNameLabel.topAnchor.constraint(equalTo: exerciseNumberLabel.bottomAnchor, constant: 10),
             exerciseNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             exerciseNameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
-
+            
             resultLabel.topAnchor.constraint(equalTo: exerciseNameLabel.bottomAnchor, constant: 15),
             resultLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             resultLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-
+            
             scoreLabel.topAnchor.constraint(equalTo: resultLabel.bottomAnchor, constant: 10),
             scoreLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             scoreLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             scoreLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
-        
     }
     
     func configureCell(nfpExercise: NfpExercise) {
@@ -107,11 +97,9 @@ class ResultExerciseCell: UICollectionViewCell {
         exerciseNumberLabel.text = nfpExercise.number
         scoreLabel.text = "Баллов: \(nfpExercise.score)"
         resultLabel.text = "Результат: \(nfpExercise.result ?? "")"
-       
     }
     
     func configureCell(sportResult: SportResult, index: Int) {
-       
         if index == 0 {
             exerciseNumberLabel.text = sportResult.sportType.rawValue
         } else {
@@ -120,7 +108,7 @@ class ResultExerciseCell: UICollectionViewCell {
         
         exerciseNameLabel.text = sportResult.sportExercises[index].name
         scoreLabel.text = "Баллов: \(sportResult.sportExercises[index].score)"
-       
+        
         resultLabel.text = sportResult.sportExercises[index].result == ""
         ? "Результат не сохранен"
         : "Результат: \(sportResult.sportExercises[index].result)"

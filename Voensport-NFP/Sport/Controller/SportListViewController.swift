@@ -24,38 +24,31 @@ class SportListViewController: UIViewController {
         
     }
     
-    
     private func setTableView() {
-        
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
-        view.addSubview(tableView)
-        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
-        
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .singleLine
+        view.addSubview(tableView)
     }
-    
     
 }
 
+    //MARK: - UITableViewDataSource, UITableViewDelegate
+
 extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sportTypes.count
+        sportTypes.allCases.count
     }
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = sportTypes[indexPath.row]
+        content.text = sportTypes.allCases[indexPath.row].rawValue
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
-        
         return cell
     }
     
@@ -64,14 +57,12 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-    
     //MARK: - Navigation
     
     private func showTriathlonViewController(index: Int) {
         let triathlonVC = TriathlonViewController()
         triathlonVC.sportController = TriathlonController()
         triathlonVC.sportController.triathlonType = index == 0 ? .summer : .winter
-       
         navigationController?.pushViewController(triathlonVC, animated: true)
     }
 }

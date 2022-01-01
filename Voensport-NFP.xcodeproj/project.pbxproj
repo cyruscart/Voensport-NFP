@@ -30,7 +30,6 @@
 		6E50C00E2770C9E400C3D04C /* TriathlonViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00D2770C9E300C3D04C /* TriathlonViewController.swift */; };
 		6E50C0102770CBE900C3D04C /* SegmentedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00F2770CBE900C3D04C /* SegmentedViewCell.swift */; };
 		6E50C0122770CF5200C3D04C /* SportExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0112770CF5200C3D04C /* SportExerciseCell.swift */; };
-		6E56A6F4277B0FE000362073 /* AboutAppImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F3277B0FE000362073 /* AboutAppImage.swift */; };
 		6E56A6F6277B111400362073 /* AboutImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F5277B111400362073 /* AboutImageCell.swift */; };
 		6E56A6F8277B128F00362073 /* DonateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F7277B128F00362073 /* DonateCell.swift */; };
 		6E56A6FA277B13FE00362073 /* AboutAppCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F9277B13FE00362073 /* AboutAppCompositionalLayout.swift */; };
@@ -91,7 +90,6 @@
 		6E50C00D2770C9E300C3D04C /* TriathlonViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriathlonViewController.swift; sourceTree = "<group>"; };
 		6E50C00F2770CBE900C3D04C /* SegmentedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewCell.swift; sourceTree = "<group>"; };
 		6E50C0112770CF5200C3D04C /* SportExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportExerciseCell.swift; sourceTree = "<group>"; };
-		6E56A6F3277B0FE000362073 /* AboutAppImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppImage.swift; sourceTree = "<group>"; };
 		6E56A6F5277B111400362073 /* AboutImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutImageCell.swift; sourceTree = "<group>"; };
 		6E56A6F7277B128F00362073 /* DonateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCell.swift; sourceTree = "<group>"; };
 		6E56A6F9277B13FE00362073 /* AboutAppCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppCompositionalLayout.swift; sourceTree = "<group>"; };
@@ -215,9 +213,9 @@
 		6E5F27EC27734A9E00926FC1 /* Results */ = {
 			isa = PBXGroup;
 			children = (
-				6E5F27EF27734C2200926FC1 /* Controller */,
-				6E5F27EE27734C1700926FC1 /* View */,
 				6E5F27ED27734C0C00926FC1 /* Model */,
+				6E5F27EE27734C1700926FC1 /* View */,
+				6E5F27EF27734C2200926FC1 /* Controller */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -290,7 +288,6 @@
 		6E95955727783DEB0085BD08 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				6E56A6F3277B0FE000362073 /* AboutAppImage.swift */,
 				6E56A706277C4EA900362073 /* OnboardingItem.swift */,
 			);
 			path = Model;
@@ -566,7 +563,6 @@
 				6E50C00A2770A83900C3D04C /* TriathlonExercise.swift in Sources */,
 				6E50C00C2770A96C00C3D04C /* TriathlonType.swift in Sources */,
 				6E56A709277C5AB900362073 /* OnBoardingFooter.swift in Sources */,
-				6E56A6F4277B0FE000362073 /* AboutAppImage.swift in Sources */,
 				6E5F27F3277350FD00926FC1 /* ResultsController.swift in Sources */,
 				6E56A6FF277B150C00362073 /* AboutAppHeaderView.swift in Sources */,
 				6E56A707277C4EA900362073 /* OnboardingItem.swift in Sources */,
@@ -670,7 +666,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -725,7 +721,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -745,12 +741,14 @@
 				DEVELOPMENT_TEAM = B5K6K9GB7Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Военспорт НФП";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -774,12 +772,14 @@
 				DEVELOPMENT_TEAM = B5K6K9GB7Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Военспорт НФП";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIStatusBarHidden = NO;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

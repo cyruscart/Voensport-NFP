@@ -11,14 +11,13 @@ protocol UpdateUIAfterEditingDelegate {
     func updateUI(indexPath: IndexPath)
 }
 
-class DetailResultViewController: UIViewController  {
-    
+final class DetailResultViewController: UIViewController  {
     var sportResult: SportResult?
     var nfpResult: NfpResult?
     var editingResultIndexPath = IndexPath()
     var numberOfSectionForLayout = 3
     
-    var collectionView: UICollectionView!
+    private var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,21 +32,17 @@ class DetailResultViewController: UIViewController  {
         
         navigationController?.navigationBar.prefersLargeTitles = true
     }
-
+    
     
     private func setupCollectionView() {
-        
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: ResultsCompositionalLayout.createLayout(numberOfSection: numberOfSectionForLayout))
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         collectionView.register(ResultExerciseCell.self, forCellWithReuseIdentifier: ResultExerciseCell.identifier)
         collectionView.register(ResultTotalScoreCell.self, forCellWithReuseIdentifier: ResultTotalScoreCell.identifier)
-        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        
-        view.addSubview(collectionView)
         collectionView.showsVerticalScrollIndicator = false
+        view.addSubview(collectionView)
     }
     
     
@@ -59,17 +54,17 @@ class DetailResultViewController: UIViewController  {
     }
     
 }
-   
+
 //MARK: - UICollectionViewDataSource, UICollectionViewDelegate
 
 extension DetailResultViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-       numberOfSectionForLayout + 1
+        numberOfSectionForLayout + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-       1
+        1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -81,7 +76,7 @@ extension DetailResultViewController: UICollectionViewDataSource, UICollectionVi
             } else if let sportResult = sportResult {
                 cell.configureCell(sportResult: sportResult)
             }
-
+            
             cell.editButtonCallBack = { [unowned self] in
                 self.editResults()
             }
@@ -94,7 +89,7 @@ extension DetailResultViewController: UICollectionViewDataSource, UICollectionVi
             
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ResultExerciseCell.identifier, for: indexPath) as! ResultExerciseCell
-           
+            
             if let nfpResult = nfpResult {
                 cell.configureCell(nfpExercise: nfpResult.nfpExercises[indexPath.section])
             } else if let sportResult = sportResult {
@@ -123,7 +118,6 @@ extension DetailResultViewController {
     
     private func showNfpViewController() {
         guard let nfpResult = nfpResult else { return }
-        let nfpVC = NfpViewController()
         
         let settings = Settings()
         settings.sex = nfpResult.sex
@@ -133,6 +127,7 @@ extension DetailResultViewController {
         settings.category = nfpResult.category
         settings.tariff = nfpResult.tariff
         
+        let nfpVC = NfpViewController()
         nfpVC.nfpController = NfpController(settings: settings)
         nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
         nfpVC.nfpController.isEditing = true
@@ -140,7 +135,6 @@ extension DetailResultViewController {
         nfpVC.nfpController.editingResultDate = nfpResult.getDate()
         nfpVC.updateUIAfterEditingDelegate = self
         
-//        nfpVC.modalPresentationStyle = .fullScreen
         let navVC = UINavigationController(rootViewController: nfpVC)
         present(navVC, animated: true, completion: nil)
     }
@@ -165,7 +159,6 @@ extension DetailResultViewController {
 extension DetailResultViewController: UpdateUIAfterEditingDelegate {
     
     func updateUI(indexPath: IndexPath) {
-        
         if let _ = nfpResult {
             let updatedNfpResult = StorageManager.shared.getResults().nfpResults[indexPath.row]
             nfpResult = updatedNfpResult
@@ -177,8 +170,6 @@ extension DetailResultViewController: UpdateUIAfterEditingDelegate {
         }
         
         collectionView.reloadData()
-        
     }
     
-    
-    }
+}

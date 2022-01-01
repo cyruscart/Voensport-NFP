@@ -9,8 +9,9 @@ import UIKit
 
 class SegmentedViewCell: UITableViewCell {
     static let identifier = "SegmentedViewCell"
+    var callBack: ((Int) -> Void)?
     
-    var ageSegmented: UISegmentedControl = {
+    let ageSegmented: UISegmentedControl = {
         let segmented = UISegmentedControl()
         
         segmented.insertSegment(withTitle: "До 30 лет", at: 0, animated: false)
@@ -18,19 +19,13 @@ class SegmentedViewCell: UITableViewCell {
         segmented.insertSegment(withTitle: "Свыше 40 лет", at: 2, animated: false)
         
         segmented.addTarget(self, action: #selector(segmentedSelected) , for: .valueChanged)
-        
         return segmented
     }()
-    
-    
-    var callBack: ((Int) -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupCell()
-        
-        
     }
     
     required init?(coder: NSCoder) {
@@ -46,16 +41,18 @@ class SegmentedViewCell: UITableViewCell {
             ageSegmented.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
             ageSegmented.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
             ageSegmented.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
-            
         ])
     }
     
     func configure(_ age: TriathlonAgeCategory) {
         switch age {
+            
         case .lessThirty:
             ageSegmented.selectedSegmentIndex = 0
+            
         case .lessForty:
             ageSegmented.selectedSegmentIndex = 1
+            
         case .moreForty:
             ageSegmented.selectedSegmentIndex = 2
         }
@@ -63,9 +60,7 @@ class SegmentedViewCell: UITableViewCell {
     
     @objc func segmentedSelected() {
         guard let callBack = callBack else { return }
-        
         callBack(ageSegmented.selectedSegmentIndex)
     }
-    
     
 }

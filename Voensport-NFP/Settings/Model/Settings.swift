@@ -38,8 +38,7 @@ final class Settings: Codable {
     }
     
     private var shouldShowCategoryInsteadExercise: Bool {
-        sex == .male
-        && (
+        sex == .male && (
             maleAgeCategory == .sixthAgeGroup ||
             maleAgeCategory == .seventhAgeGroup ||
             maleAgeCategory == .eighthAgeGroup
@@ -79,8 +78,6 @@ final class Settings: Codable {
         (sex == .male && shouldShowCategory && shouldShowNumberOfExercise)
     }
     
-    init() {}
-    
     //MARK: - Enumerations
     
     enum SettingTitle: String, CaseIterable {
@@ -104,7 +101,6 @@ final class Settings: Codable {
     // MARK: -  Methods
     
     func getNumberOfExerciseList() -> [NumberOfExercise] {
-        
         if (sex == .female && femaleAgeCategory == .candidate) ||
             maleAgeCategory == .fifthAgeGroup ||
             maleAgeCategory == .candidate ||
@@ -214,22 +210,6 @@ final class Settings: Codable {
         }
     }
     
-    //    func getTitleForDetailSettings(currentSetting: String) -> String {
-    //
-    //        switch currentSetting {
-    //        case "sex":
-    //            return "Пол"
-    //        case "maleAge", "femaleAge":
-    //            return "Возраст"
-    //        case "category":
-    //            return "Категория"
-    //        case "numberOfExercise":
-    //            return "Количество упражнений"
-    //        default:
-    //            return "Количество упражнений"
-    //        }
-    //    }
-    
     func getTextForCell(section: Int) -> String {
         
         switch section {
@@ -251,8 +231,6 @@ final class Settings: Codable {
             return category.rawValue
         default:
             return "Error"
-       
-            
         }
     }
     

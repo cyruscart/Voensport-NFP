@@ -15,7 +15,7 @@ enum ExerciseType: String, CaseIterable, Codable, Hashable {
     case militarySkill = "Военно-прикладной навык"
 }
 
-class NfpExercise: Codable, Hashable {
+final class NfpExercise: Codable {
     let number: String
     var name: String
     let type: ExerciseType
@@ -24,7 +24,6 @@ class NfpExercise: Codable, Hashable {
     var exerciseDescription: String? = nil
     let scoreList: [String: Int]
     var score = 0
-    private let identifier = UUID()
     
     var result: String? {
         scoreList.first(where: {$0.value == score})?.key ?? nil
@@ -37,16 +36,8 @@ class NfpExercise: Codable, Hashable {
         self.type = type
     }
     
-    static func == (lhs: NfpExercise, rhs: NfpExercise) -> Bool {
-        return ObjectIdentifier(lhs) == ObjectIdentifier(rhs)
-    }
-    
     func getScoreList() -> [Int] {
         scoreList.values.sorted()
-    }
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.identifier)
     }
     
 }

@@ -15,7 +15,10 @@ enum SportGrade: String, Codable {
     case thirdGrade = "3 разряд"
     case withoutGrade = "Без разряда"
     
+    static let paidSportGrade: [SportGrade] = [.ms, .kms, .firstGrade, .withoutGrade]
+    
     static func getGradeFromText(grade: String) -> SportGrade {
+        
         switch grade {
         case "1 разряд":
             return .firstGrade
@@ -28,8 +31,6 @@ enum SportGrade: String, Codable {
         }
     }
     
-    static var paidSportGrade: [SportGrade] {
-        [.ms, .kms, .firstGrade, .withoutGrade]
-    }
 }
+
 

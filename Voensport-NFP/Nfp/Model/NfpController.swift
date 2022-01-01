@@ -1720,6 +1720,7 @@ final class NfpController {
         var money = 0
         
         switch calculateGrade() {
+            
         case "Высший уровень":
             if settings.sportGrade == .ms {
                 money = Int(tariff * 0.87)

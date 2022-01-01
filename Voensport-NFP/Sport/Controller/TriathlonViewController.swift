@@ -22,7 +22,6 @@ class TriathlonViewController: UIViewController {
         hideKeyboardWhenTappedOutside()
     }
     
-    
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .plain)
         view.addSubview(tableView)
@@ -57,71 +56,8 @@ class TriathlonViewController: UIViewController {
             title = sportController.triathlonType == .summer
             ? "Летнее офицерское троеборье"
             : "Зимнее офицерское троеборье"
-            
         }
     }
-}
-
-// MARK: - Table view data source
-
-extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
-    
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        5
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch indexPath.row {
-        case 0:
-            return 45
-        case 4:
-            return 140
-        default:
-            return 100
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        switch indexPath.row {
-        case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: SegmentedViewCell.identifier, for: indexPath) as! SegmentedViewCell
-          
-            cell.callBack = { [unowned self] selectedSegment in
-                self.updateAfterAgeSegmentSelected(selectedSegment)
-            }
-            
-            cell.configure(sportController.ageCategory)
-            cell.ageSegmented.isHidden = sportController.isEditing
-            cell.selectionStyle = .none
-            return cell
-            
-        case 1...3:
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: SportExerciseCell.identifier, for: indexPath) as! SportExerciseCell
-            cell.exercise = sportController.exercises[indexPath.row - 1]
-            cell.configureCell()
-            cell.tag = indexPath.row - 1
-            cell.callBackForUpdatingTotalScore = { [unowned self] in
-                self.updateTotalScoreCell()
-            }
-            cell.selectionStyle = .none
-            return cell
-            
-        default:
-            let cell = tableView.dequeueReusableCell(withIdentifier: TotalScoreSportCell.identifier, for: indexPath) as! TotalScoreSportCell
-            cell.configureCell(sportController: sportController)
-            
-            cell.saveButtonCallBack = { [unowned self] in
-                self.saveSportResult()
-            }
-            
-            cell.selectionStyle = .none
-            return cell
-        }
-    }
-    
     
     private func updateAfterAgeSegmentSelected(_ selectedSegment: Int) {
         sportController.ageCategory = TriathlonAgeCategory.allCases[selectedSegment]
@@ -156,10 +92,72 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             StorageManager.shared.saveResults(results: resultsController)
         }
     }
+}
+
+// MARK: - UITableViewDataSource, UITableViewDelegate
+
+extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        5
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return 45
+        case 4:
+            return 140
+        default:
+            return 100
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        switch indexPath.row {
+        case 0:
+            let cell = tableView.dequeueReusableCell(withIdentifier: SegmentedViewCell.identifier, for: indexPath) as! SegmentedViewCell
+            
+            cell.callBack = { [unowned self] selectedSegment in
+                self.updateAfterAgeSegmentSelected(selectedSegment)
+            }
+            
+            cell.configure(sportController.ageCategory)
+            cell.ageSegmented.isHidden = sportController.isEditing
+            cell.selectionStyle = .none
+            return cell
+            
+        case 1...3:
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: SportExerciseCell.identifier, for: indexPath) as! SportExerciseCell
+            cell.exercise = sportController.exercises[indexPath.row - 1]
+            cell.configureCell()
+            cell.tag = indexPath.row - 1
+            
+            cell.callBackForUpdatingTotalScore = { [unowned self] in
+                self.updateTotalScoreCell()
+            }
+            
+            cell.selectionStyle = .none
+            return cell
+            
+        default:
+            let cell = tableView.dequeueReusableCell(withIdentifier: TotalScoreSportCell.identifier, for: indexPath) as! TotalScoreSportCell
+            cell.configureCell(sportController: sportController)
+            
+            cell.saveButtonCallBack = { [unowned self] in
+                self.saveSportResult()
+            }
+            
+            cell.selectionStyle = .none
+            return cell
+        }
+    }
     
 }
 
-//MARK: - Hide keyboard
+//MARK: - Hide keyboard method
 
 extension TriathlonViewController {
     

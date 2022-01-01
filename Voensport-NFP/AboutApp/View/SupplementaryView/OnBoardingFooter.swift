@@ -7,10 +7,10 @@
 
 import UIKit
 
-class OnBoardingFooter: UICollectionReusableView {
+final class OnBoardingFooter: UICollectionReusableView {
     static let identifier = "OnBoardingFooter"
-   
-    private var messageLabel: UILabel = {
+    
+    private let messageLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 18)
         label.textAlignment = .center
@@ -18,7 +18,7 @@ class OnBoardingFooter: UICollectionReusableView {
         return label
     }()
     
-    var nextButton: UIButton = {
+    let nextButton: UIButton = {
         let button = UIButton.createSaveButton()
         button.setTitle("Далее", for: .normal)
         return button
@@ -26,8 +26,8 @@ class OnBoardingFooter: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupView()
         
+        setupView()
     }
     
     required init?(coder: NSCoder) {
@@ -35,14 +35,12 @@ class OnBoardingFooter: UICollectionReusableView {
     }
     
     private func setupView() {
-            nextButton.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(nextButton)
+        [nextButton, messageLabel].forEach { subview in
+            subview.translatesAutoresizingMaskIntoConstraints = false
+            addSubview(subview)
+        }
         
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(messageLabel)
-       
         NSLayoutConstraint.activate([
-            
             messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
             messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
@@ -51,13 +49,11 @@ class OnBoardingFooter: UICollectionReusableView {
             nextButton.leadingAnchor.constraint(equalTo: leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: trailingAnchor),
             nextButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -20)
-            
         ])
     }
     
     func configure(_ onboardingItem: OnboardingItem) {
         messageLabel.text = onboardingItem.message
     }
+    
 }
-
-

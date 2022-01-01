@@ -26,6 +26,7 @@ class ExerciseCell: UICollectionViewCell {
     
     private var exerciseNumberLabel: UILabel = {
         let label = UILabel()
+        label.textColor = .black
         label.textAlignment = .center
         label.font = .boldSystemFont(ofSize: 20)
         label.adjustsFontSizeToFitWidth = true
@@ -35,6 +36,7 @@ class ExerciseCell: UICollectionViewCell {
     private var exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
+        label.textColor = .black
         label.font = .systemFont(ofSize: 18)
         label.adjustsFontSizeToFitWidth = true
         label.numberOfLines = 0
@@ -63,7 +65,6 @@ class ExerciseCell: UICollectionViewCell {
     }
     
     private func setupConstraints() {
-        
         NSLayoutConstraint.activate([
             backGroundImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             backGroundImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -93,10 +94,8 @@ class ExerciseCell: UICollectionViewCell {
         
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
-        
         layer.cornerRadius = 15
         layer.masksToBounds = false
-        
         
         setViewShadows()
         layer.shadowRadius = 10
@@ -125,12 +124,6 @@ class ExerciseCell: UICollectionViewCell {
 
 extension ExerciseCell {
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
-        
-//        guard isUserInteractionEnabled else { return nil }
-//        guard !isHidden else { return nil }
-//        guard alpha >= 0.01 else { return nil }
-//        guard self.point(inside: point, with: event) else { return nil }
-        
         if descriptionButton.point(inside: convert(point, to: descriptionButton), with: event) {
             return descriptionButton
         }

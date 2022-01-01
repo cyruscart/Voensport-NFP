@@ -13,34 +13,23 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             let sectionKind = Array(0...numberOfSections)[sectionIndex]
-            
             let section: NSCollectionLayoutSection
             
             if sectionKind == numberOfSections  {
                 
                 let totalItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                            heightDimension: .fractionalHeight(1))
-                
-                
-                
                 let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)
-                
                 
                 let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                             heightDimension: .fractionalWidth(0.5))
-                                                           
-                
                 let totalGroup = NSCollectionLayoutGroup.vertical(layoutSize: totalGroupSize, subitems: [totalItem])
                 
                 section = NSCollectionLayoutSection(group: totalGroup)
                 section.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 30, bottom: 40, trailing: 30)
-                
             } else {
-                
                 let exerciseItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                               heightDimension: .fractionalHeight(1))
-                
-                
                 let exerciseItem = NSCollectionLayoutItem(layoutSize: exerciseItemSize)
                 exerciseItem.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0)
                 
@@ -54,21 +43,18 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                 
                 let sectionFooterSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                                heightDimension: .fractionalWidth(0.27))
-                
                 let sectionFooter = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionFooterSize,
                                                                                 elementKind: "Footer",
                                                                                 alignment: .bottom)
                 
                 let sectionHeaderSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.9),
                                                                heightDimension: .fractionalWidth(0.12))
-                
                 let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: sectionHeaderSize,
                                                                                 elementKind: "Header",
                                                                                 alignment: .top)
                 
                 sectionFooter.contentInsets = NSDirectionalEdgeInsets(top: 30, leading: 0, bottom: 0, trailing: 0)
                 section.boundarySupplementaryItems = [sectionHeader, sectionFooter]
-                
                 section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
                 
                 section.visibleItemsInvalidationHandler = { (items, offset, environment) in
@@ -81,10 +67,8 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
                     }
                 }
             }
-            
             return section
         }
-    
         return layout
     }
 }
