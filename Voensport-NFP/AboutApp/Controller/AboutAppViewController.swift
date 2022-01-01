@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PassKit
 
 enum AboutAppSectionKind: CaseIterable  {
     case onboarding
@@ -16,13 +17,18 @@ enum AboutAppSectionKind: CaseIterable  {
 }
 
 final class AboutAppViewController: UIViewController {
+    
     private var collectionView: UICollectionView!
+    private var smallPaymentRequest = PKPaymentRequest()
+    private var mediumPaymentRequest =  PKPaymentRequest()
+    private var largePaymentRequest =  PKPaymentRequest()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupNavigationBar()
         setupCollectionView()
+        setPaymentRequests()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -48,6 +54,11 @@ final class AboutAppViewController: UIViewController {
         title = "О приложении"
     }
     
+    private func setPaymentRequests() {
+        smallPaymentRequest = createPaymentRequest(amount: 99)
+        mediumPaymentRequest = createPaymentRequest(amount: 199)
+        largePaymentRequest = createPaymentRequest(amount: 499)
+    }
 }
 
 //MARK: - UICollectionViewDataSource, UICollectionViewDelegate
@@ -82,6 +93,9 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
             Нравится приложение?
             Вы можете поддержать разработчика
             """
+            cell.smallDonateButton.addTarget(self, action: #selector(smallDonatePressed), for: .touchUpInside)
+            cell.mediumDonateButton.addTarget(self, action: #selector(mediumDonatePressed), for: .touchUpInside)
+            cell.largeDonateButton.addTarget(self, action: #selector(largeDonatePressed), for: .touchUpInside)
             return cell
         }
     }
@@ -104,3 +118,58 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     
 }
 
+//MARK: - Apple pay
+
+extension AboutAppViewController: PKPaymentAuthorizationViewControllerDelegate {
+    
+    func paymentAuthorizationViewControllerDidFinish(_ controller: PKPaymentAuthorizationViewController) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    
+    func paymentAuthorizationViewController(_ controller: PKPaymentAuthorizationViewController, didAuthorizePayment payment: PKPayment, handler completion: @escaping (PKPaymentAuthorizationResult) -> Void) {
+        completion(PKPaymentAuthorizationResult(status: .success, errors: nil))
+    }
+    
+    private func createPaymentRequest(amount: Int) -> PKPaymentRequest {
+        let request = PKPaymentRequest()
+        
+        request.merchantIdentifier = ""
+        request.supportedNetworks = [.visa, .masterCard, .mir]
+        request.supportedCountries = ["RU"]
+        request.merchantCapabilities = .capability3DS
+        request.countryCode = "RU"
+        request.currencyCode = "RUB"
+        
+        let paymentSummaryItems = PKPaymentSummaryItem(label: "Благодарность разработчику", amount: NSDecimalNumber(value: amount))
+        request.paymentSummaryItems = [paymentSummaryItems]
+        
+        return request
+    }
+}
+
+//MARK: - Navigation
+
+extension AboutAppViewController {
+    
+    @objc private func smallDonatePressed() {
+        if let controller = PKPaymentAuthorizationViewController(paymentRequest: smallPaymentRequest) {
+            controller.delegate = self
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func mediumDonatePressed() {
+        if let controller = PKPaymentAuthorizationViewController(paymentRequest: mediumPaymentRequest) {
+            controller.delegate = self
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    @objc private func largeDonatePressed() {
+        if let controller = PKPaymentAuthorizationViewController(paymentRequest: largePaymentRequest) {
+            controller.delegate = self
+            present(controller, animated: true, completion: nil)
+        }
+    }
+    
+}

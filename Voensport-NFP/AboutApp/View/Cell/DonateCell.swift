@@ -6,10 +6,11 @@
 //
 
 import UIKit
+import PassKit
 
 final class DonateCell: UICollectionViewCell  {
     static let identifier = "DonateCell"
-    
+ 
     let buttonStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
@@ -27,26 +28,27 @@ final class DonateCell: UICollectionViewCell  {
         return label
     }()
     
-    private let smallDonateButton: UIButton = {
+     let smallDonateButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = AppColor.blue
         button.setTitle("99 \u{20BD}", for: .normal)
         return button
     }()
     
-    private var mediumDonateButton: UIButton = {
+     let mediumDonateButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = AppColor.blue
         button.setTitle("199 \u{20BD}", for: .normal)
         return button
     }()
     
-    private var largeDonateButton: UIButton = {
+     let largeDonateButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = AppColor.blue
         button.setTitle("499 \u{20BD}", for: .normal)
         return button
     }()
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)
