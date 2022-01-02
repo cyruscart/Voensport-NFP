@@ -103,6 +103,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
         switch indexPath.row {
         case 0:
             return 45
@@ -129,7 +130,6 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             return cell
             
         case 1...3:
-            
             let cell = tableView.dequeueReusableCell(withIdentifier: SportExerciseCell.identifier, for: indexPath) as! SportExerciseCell
             cell.exercise = sportController.exercises[indexPath.row - 1]
             cell.configureCell()
@@ -162,7 +162,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
 extension TriathlonViewController {
     
     func hideKeyboardWhenTappedOutside() {
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         tap.cancelsTouchesInView = false
         view.addGestureRecognizer(tap)
     }

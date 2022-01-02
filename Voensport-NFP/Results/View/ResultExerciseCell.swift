@@ -18,7 +18,6 @@ final class ResultExerciseCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .center
         label.adjustsFontSizeToFitWidth = true
-        
         return label
     }()
     
@@ -27,7 +26,6 @@ final class ResultExerciseCell: UICollectionViewCell {
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.textAlignment = .center
         label.numberOfLines = 0
-        
         return label
     }()
     
@@ -93,6 +91,7 @@ final class ResultExerciseCell: UICollectionViewCell {
     }
     
     func configureCell(nfpExercise: NfpExercise) {
+        setupConstraints()
         exerciseNameLabel.text = nfpExercise.name
         exerciseNumberLabel.text = nfpExercise.number
         scoreLabel.text = "Баллов: \(nfpExercise.score)"
@@ -100,12 +99,7 @@ final class ResultExerciseCell: UICollectionViewCell {
     }
     
     func configureCell(sportResult: SportResult, index: Int) {
-        if index == 0 {
-            exerciseNumberLabel.text = sportResult.sportType.rawValue
-        } else {
-            exerciseNumberLabel.isHidden = true
-        }
-        
+        exerciseNumberLabel.isHidden = true
         exerciseNameLabel.text = sportResult.sportExercises[index].name
         scoreLabel.text = "Баллов: \(sportResult.sportExercises[index].score)"
         
@@ -115,4 +109,3 @@ final class ResultExerciseCell: UICollectionViewCell {
     }
     
 }
-

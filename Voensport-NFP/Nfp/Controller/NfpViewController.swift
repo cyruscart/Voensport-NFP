@@ -9,7 +9,7 @@ import UIKit
 
 class NfpViewController: UIViewController  {
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
-    var nfpController: NfpController!
+    var nfpController: NfpController! // let
     
     private var shouldObserveVisibleCells = false
     private var collectionView: UICollectionView!

@@ -34,17 +34,9 @@ struct NfpResult: Codable {
     let femaleAgeCategory: FemaleAgeCategory
     let numberOfExercise: NumberOfExercise
     let category: Category
-    let date: Date
+    let date: String
     let nfpExercises: [NfpExercise]
     let tariff: Int
-    
-    func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_Ru")
-        return dateFormatter.string(from: date)
-    }
     
     func getExerciseForEditing() -> [[NfpExercise]] {
         var exercises: [[NfpExercise]] = []
@@ -62,18 +54,10 @@ struct SportResult: Codable {
     let sportType: SportType
     let totalScore: Int
     let grade: String
-    var date: Date
+    var date: String
     var ageTriathlonCategory: TriathlonAgeCategory? = nil
     var triathlonType: TriathlonType? = nil
     var sportExercises: [TriathlonExercise] = []
-    
-    func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_Ru")
-        return dateFormatter.string(from: date)
-    }
 }
 
 enum ResultType {

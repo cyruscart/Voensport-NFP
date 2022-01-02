@@ -133,7 +133,7 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc private func clearPressed() {
         exercise.result = ""
         resultTextField.text = ""
-        scoreLabel.text = "Баллов: \(exercise.score)"
+        scoreLabel.text = ""
         callBackForUpdatingTotalScore()
     }
 }

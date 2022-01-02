@@ -24,13 +24,11 @@ final class DetailResultViewController: UIViewController  {
         
         setupNavigationBar()
         setupCollectionView()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        navigationController?.navigationBar.prefersLargeTitles = true
     }
     
     
@@ -49,8 +47,8 @@ final class DetailResultViewController: UIViewController  {
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
         title = nfpResult == nil
-        ? sportResult?.getDate() ?? ""
-        : nfpResult?.getDate() ?? ""
+        ? sportResult?.date ?? ""
+        : nfpResult?.date ?? ""
     }
     
 }
@@ -132,7 +130,7 @@ extension DetailResultViewController {
         nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
         nfpVC.nfpController.isEditing = true
         nfpVC.nfpController.editingResultIndex = editingResultIndexPath
-        nfpVC.nfpController.editingResultDate = nfpResult.getDate()
+        nfpVC.nfpController.editingResultDate = nfpResult.date
         nfpVC.updateUIAfterEditingDelegate = self
         
         let navVC = UINavigationController(rootViewController: nfpVC)
@@ -145,7 +143,7 @@ extension DetailResultViewController {
         let triathlonVC = TriathlonViewController()
         triathlonVC.sportController = TriathlonController(sportResult: sportResult)
         triathlonVC.sportController.editingResultIndex = editingResultIndexPath
-        triathlonVC.sportController.editingResultDate = sportResult.getDate()
+        triathlonVC.sportController.editingResultDate = sportResult.date
         triathlonVC.updateUIAfterEditingDelegate = self
         
         let navVC = UINavigationController(rootViewController: triathlonVC)
@@ -169,7 +167,9 @@ extension DetailResultViewController: UpdateUIAfterEditingDelegate {
             sportResult = updatedSportResult
         }
         
+        
         collectionView.reloadData()
+
     }
     
 }
