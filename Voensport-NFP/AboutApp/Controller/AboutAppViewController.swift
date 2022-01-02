@@ -79,7 +79,7 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
             
         case .onboarding:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: AboutImageCell.identifier, for: indexPath) as! AboutImageCell
-            cell.showLogo(images: 114)
+            cell.showLogo(images: 50)
             return cell
             
         case .logo:

@@ -9,22 +9,23 @@ import Foundation
 
 final class NfpController {
     
-    var settings: Settings
+    let settings: Settings
     var exercises: [[NfpExercise]] = []
     var selectedExercises: [NfpExercise] = []
-    
     var isEditing = false
     var editingResultIndex = IndexPath()
     var editingResultDate = ""
+    
+    var date: String {
+        isEditing ? editingResultDate : getDate()
+    }
     
     var totalScore: Int {
         selectedExercises.map { $0.score }.reduce(0, +)
     }
     
     var minimumScore: Int {
-        
         if settings.sex == .male {
-            
             switch settings.maleAgeCategory {
             case .candidate:
                 return 26
@@ -57,7 +58,6 @@ final class NfpController {
             }
             
         } else {
-            
             switch settings.femaleAgeCategory {
             case .candidate:
                 return 26
@@ -93,6 +93,15 @@ final class NfpController {
     
     
     //MARK: - Methods
+    
+    private func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter.string(from: Date())
+    }
+    
     func loadInitialData() {
         if !isEditing {
             loadExercises()
@@ -153,7 +162,7 @@ final class NfpController {
                   femaleAgeCategory: settings.femaleAgeCategory,
                   numberOfExercise: settings.numberOfExercise,
                   category: settings.category,
-                  date: Date(),
+                  date: date,
                   nfpExercises: selectedExercises,
                   tariff: settings.tariff)
         

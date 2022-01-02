@@ -56,12 +56,12 @@ final class AboutImageCell: UICollectionViewCell {
         
         var logoImages: [UIImage] = []
         
-        for image in 0..<count {
+        for image in 20..<count {
             logoImages.append(UIImage(named: "\(image)")!)
         }
         
         imageView.animationImages = logoImages
-        imageView.animationDuration = 14
+        imageView.animationDuration = 4
         imageView.animationRepeatCount = 10
         imageView.startAnimating()
     }

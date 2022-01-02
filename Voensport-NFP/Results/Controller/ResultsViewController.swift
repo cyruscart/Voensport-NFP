@@ -61,8 +61,8 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
         var content = cell.defaultContentConfiguration()
         
         content.text = indexPath.section == 0
-        ? resultsController.nfpResults[indexPath.row].getDate()
-        : resultsController.sportResults[indexPath.row].getDate()
+        ? resultsController.nfpResults[indexPath.row].date
+        : resultsController.sportResults[indexPath.row].date
         
         content.secondaryText = indexPath.section == 0
         ? "\(resultsController.nfpResults[indexPath.row].grade)"

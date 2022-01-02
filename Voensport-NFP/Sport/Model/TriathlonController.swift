@@ -11,6 +11,11 @@ final class TriathlonController {
     var triathlonType: TriathlonType = .summer
     
     var isEditing = false
+    
+    var date: String {
+        isEditing ? editingResultDate : getDate()
+    }
+    
     var editingResultIndex = IndexPath()
     var editingResultDate = ""
     
@@ -40,12 +45,20 @@ final class TriathlonController {
     
     //MARK: - Triathlon methods
     
+    private func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter.string(from: Date())
+    }
+    
     func generateSportResult() -> SportResult {
         SportResult(
             sportType: sportType,
             totalScore: totalScore,
             grade: calculateTriathlonGrade(),
-            date: Date(),
+            date: date,
             ageTriathlonCategory: ageCategory,
             triathlonType: triathlonType,
             sportExercises: exercises
