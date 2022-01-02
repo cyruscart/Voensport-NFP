@@ -9,9 +9,9 @@ import UIKit
 
 final class SportExerciseCell: UITableViewCell  {
     static let identifier = "SportExerciseCell"
-    
     var exercise: TriathlonExercise!
     var callBackForUpdatingTotalScore: (() -> Void) = {}
+    
     var exerciseNameLabel = UILabel()
     var scoreLabel = UILabel()
     private var picker = UIPickerView()

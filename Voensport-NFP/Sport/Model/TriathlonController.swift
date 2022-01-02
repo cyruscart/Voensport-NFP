@@ -38,10 +38,11 @@ final class TriathlonController {
         isEditing = true
         triathlonType = sportResult.triathlonType ?? .summer
         ageCategory = sportResult.ageTriathlonCategory ?? .lessForty
-        
+        print("TriathlonVC has been allocated")
     }
     
     init() {}
+    deinit { print("TriathlonVC has been deallocated")}
     
     //MARK: - Triathlon methods
     

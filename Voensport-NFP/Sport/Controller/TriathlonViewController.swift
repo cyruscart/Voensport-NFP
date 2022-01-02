@@ -45,6 +45,8 @@ class TriathlonViewController: UIViewController {
             
             let closeAction = UIAction { [ unowned self ] _ in
                 self.dismiss(animated: true, completion: nil)
+                updateUIAfterEditingDelegate?.updateUI(indexPath: sportController.editingResultIndex)
+               
             }
             
             let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)

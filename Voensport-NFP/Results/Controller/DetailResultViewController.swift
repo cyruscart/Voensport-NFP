@@ -26,11 +26,10 @@ final class DetailResultViewController: UIViewController  {
         setupCollectionView()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-    }
-    
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//
+//    }
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: ResultsCompositionalLayout.createLayout(numberOfSection: numberOfSectionForLayout))
@@ -166,7 +165,6 @@ extension DetailResultViewController: UpdateUIAfterEditingDelegate {
             let updatedSportResult = StorageManager.shared.getResults().sportResults[indexPath.row]
             sportResult = updatedSportResult
         }
-        
         
         collectionView.reloadData()
 
