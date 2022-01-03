@@ -50,8 +50,8 @@ class TriathlonViewController: UIViewController {
             }
             
             let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
-            
             navigationItem.rightBarButtonItem = closeButton
+            
         } else {
             navigationItem.largeTitleDisplayMode = .never
             
@@ -127,7 +127,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             cell.configure(sportController.ageCategory)
-            cell.ageSegmented.isHidden = sportController.isEditing
+            cell.ageSegmented.isEnabled = !sportController.isEditing
             cell.selectionStyle = .none
             return cell
             
