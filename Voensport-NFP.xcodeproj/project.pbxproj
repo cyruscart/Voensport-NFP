@@ -278,9 +278,9 @@
 		6E95955627783DE20085BD08 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				6E56A6FD277B14D300362073 /* SupplementaryView */,
-				6E56A6FB277B14C200362073 /* Cell */,
 				6E56A6FC277B14C800362073 /* Layout */,
+				6E56A6FB277B14C200362073 /* Cell */,
+				6E56A6FD277B14D300362073 /* SupplementaryView */,
 			);
 			path = View;
 			sourceTree = "<group>";

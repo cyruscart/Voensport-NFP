@@ -9,7 +9,6 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
     var window: UIWindow?
     
     private var settings: Settings!
@@ -64,10 +63,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     private func generateNavigationController(rootViewController: UIViewController, title: String, image: UIImage) -> UIViewController {
         let navigationVC = UINavigationController(rootViewController: rootViewController)
-        
         navigationVC.tabBarItem.title = title
         navigationVC.tabBarItem.image = image
-        
         return navigationVC
     }
 }

@@ -5,6 +5,7 @@
 //  Created by Кирилл on 05.12.2021.
 //
 
+import StoreKit
 import UIKit
 
 class NfpViewController: UIViewController  {
@@ -29,6 +30,7 @@ class NfpViewController: UIViewController  {
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
+        collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
         collectionView.reloadData()
     }
@@ -79,6 +81,7 @@ class NfpViewController: UIViewController  {
         
         let closeAction = UIAction { [ unowned self ] _ in
             self.dismiss(animated: true, completion: nil)
+            updateUIAfterEditingDelegate?.updateUI(indexPath: nfpController.editingResultIndex)
         }
         
         let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
@@ -107,6 +110,7 @@ class NfpViewController: UIViewController  {
             resultsController.nfpResults.insert(nfpResult, at: 0)
             StorageManager.shared.saveResults(results: resultsController)
         }
+        
     }
     
     //MARK: - Update UI
