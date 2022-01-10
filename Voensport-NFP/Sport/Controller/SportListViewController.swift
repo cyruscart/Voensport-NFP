@@ -61,8 +61,8 @@ extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
     private func showTriathlonViewController(index: Int) {
         let triathlonVC = TriathlonViewController()
-        triathlonVC.sportController = TriathlonController()
-        triathlonVC.sportController.triathlonType = index == 0 ? .summer : .winter
+        triathlonVC.triathlonController = TriathlonController()
+        triathlonVC.triathlonController.triathlonType = index == 0 ? .summer : .winter
         navigationController?.pushViewController(triathlonVC, animated: true)
     }
 }

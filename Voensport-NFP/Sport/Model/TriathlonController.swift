@@ -42,7 +42,6 @@ final class TriathlonController {
     }
     
     init() {}
-    deinit { print("TriathlonVC has been deallocated")}
     
     //MARK: - Triathlon methods
     

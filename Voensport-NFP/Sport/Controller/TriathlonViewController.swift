@@ -10,7 +10,7 @@ import UIKit
 class TriathlonViewController: UIViewController {
     
     private var tableView: UITableView!
-    var sportController: TriathlonController!
+    var triathlonController: TriathlonController!
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     
     override func viewDidLoad() {
@@ -18,7 +18,7 @@ class TriathlonViewController: UIViewController {
         
         setTableView()
         setupNavigationBar()
-        sportController.updateTriathlonExercises()
+        triathlonController.updateTriathlonExercises()
         hideKeyboardWhenTappedOutside()
     }
     
@@ -39,13 +39,13 @@ class TriathlonViewController: UIViewController {
     
     private func setupNavigationBar() {
         
-        if sportController.isEditing {
+        if triathlonController.isEditing {
             navigationController?.navigationBar.prefersLargeTitles = true
-            title = sportController.editingResultDate
+            title = triathlonController.editingResultDate
             
             let closeAction = UIAction { [ unowned self ] _ in
                 self.dismiss(animated: true, completion: nil)
-                updateUIAfterEditingDelegate?.updateUI(indexPath: sportController.editingResultIndex)
+                updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
                
             }
             
@@ -55,19 +55,19 @@ class TriathlonViewController: UIViewController {
         } else {
             navigationItem.largeTitleDisplayMode = .never
             
-            title = sportController.triathlonType == .summer
+            title = triathlonController.triathlonType == .summer
             ? "Летнее офицерское троеборье"
             : "Зимнее офицерское троеборье"
         }
     }
     
     private func updateAfterAgeSegmentSelected(_ selectedSegment: Int) {
-        sportController.ageCategory = TriathlonAgeCategory.allCases[selectedSegment]
-        sportController.updateTriathlonExercises()
+        triathlonController.ageCategory = TriathlonAgeCategory.allCases[selectedSegment]
+        triathlonController.updateTriathlonExercises()
         
         tableView.visibleCells.forEach { cell in
             if let cell = cell as? SportExerciseCell {
-                cell.exercise = sportController.exercises[cell.tag]
+                cell.exercise = triathlonController.exercises[cell.tag]
                 cell.configureCell()
             }
         }
@@ -77,16 +77,16 @@ class TriathlonViewController: UIViewController {
     private func updateTotalScoreCell() {
         tableView.visibleCells.forEach { cell in
             guard let totalScoreCell = cell as? TotalScoreSportCell else { return }
-            totalScoreCell.configureCell(sportController: sportController)
+            totalScoreCell.configureCell(sportController: triathlonController)
         }
     }
     
     private func saveSportResult() {
-        let sportResult = sportController.generateSportResult()
+        let sportResult = triathlonController.generateSportResult()
         
-        if sportController.isEditing {
-            StorageManager.shared.editSportResult(with: sportController.editingResultIndex, and: sportResult)
-            updateUIAfterEditingDelegate?.updateUI(indexPath: sportController.editingResultIndex)
+        if triathlonController.isEditing {
+            StorageManager.shared.editSportResult(with: triathlonController.editingResultIndex, and: sportResult)
+            updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
             dismiss(animated: true)
         } else {
             var resultsController = StorageManager.shared.getResults()
@@ -126,14 +126,14 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
                 self.updateAfterAgeSegmentSelected(selectedSegment)
             }
             
-            cell.configure(sportController.ageCategory)
-            cell.ageSegmented.isEnabled = !sportController.isEditing
+            cell.configure(triathlonController.ageCategory)
+            cell.ageSegmented.isEnabled = !triathlonController.isEditing
             cell.selectionStyle = .none
             return cell
             
         case 1...3:
             let cell = tableView.dequeueReusableCell(withIdentifier: SportExerciseCell.identifier, for: indexPath) as! SportExerciseCell
-            cell.exercise = sportController.exercises[indexPath.row - 1]
+            cell.exercise = triathlonController.exercises[indexPath.row - 1]
             cell.configureCell()
             cell.tag = indexPath.row - 1
             
@@ -146,7 +146,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier: TotalScoreSportCell.identifier, for: indexPath) as! TotalScoreSportCell
-            cell.configureCell(sportController: sportController)
+            cell.configureCell(sportController: triathlonController)
             
             cell.saveButtonCallBack = { [unowned self] in
                 self.saveSportResult()

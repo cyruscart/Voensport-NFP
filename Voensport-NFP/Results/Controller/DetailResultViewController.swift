@@ -140,9 +140,9 @@ extension DetailResultViewController {
         guard let sportResult = sportResult else { return }
         
         let triathlonVC = TriathlonViewController()
-        triathlonVC.sportController = TriathlonController(sportResult: sportResult)
-        triathlonVC.sportController.editingResultIndex = editingResultIndexPath
-        triathlonVC.sportController.editingResultDate = sportResult.date
+        triathlonVC.triathlonController = TriathlonController(sportResult: sportResult)
+        triathlonVC.triathlonController.editingResultIndex = editingResultIndexPath
+        triathlonVC.triathlonController.editingResultDate = sportResult.date
         triathlonVC.updateUIAfterEditingDelegate = self
         
         let navVC = UINavigationController(rootViewController: triathlonVC)
