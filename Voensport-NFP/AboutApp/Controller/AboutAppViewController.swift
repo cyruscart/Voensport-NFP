@@ -17,7 +17,6 @@ enum AboutAppSectionKind: CaseIterable  {
 }
 
 final class AboutAppViewController: UIViewController {
-    
     private var collectionView: UICollectionView!
     private var smallPaymentRequest = PKPaymentRequest()
     private var mediumPaymentRequest =  PKPaymentRequest()

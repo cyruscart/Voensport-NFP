@@ -8,7 +8,6 @@
 import UIKit
 
 class SportListViewController: UIViewController {
-    
     private var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -17,11 +16,6 @@ class SportListViewController: UIViewController {
         title = "Военный спорт"
         navigationController?.navigationBar.prefersLargeTitles = true
         setTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     private func setTableView() {

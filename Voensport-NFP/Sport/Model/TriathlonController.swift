@@ -9,61 +9,37 @@ import UIKit
 
 final class TriathlonController {
     var triathlonType: TriathlonType = .summer
-    
     var isEditing = false
+    var editingResultIndex = IndexPath()
+    var editingResultDate = ""
+    var ageCategory: TriathlonAgeCategory = .lessThirty
+    var exercises: [TriathlonExercise] = []
     
     var date: String {
         isEditing ? editingResultDate : getDate()
     }
     
-    var editingResultIndex = IndexPath()
-    var editingResultDate = ""
-    
     var sportType: SportType {
         triathlonType == .summer ? .summerTriathlon : .winterTriathlon
     }
     
-    var ageCategory: TriathlonAgeCategory = .lessThirty
-    var exercises: [TriathlonExercise] = []
-    
-    private var summerTriathlonExercises: [TriathlonExercise] = []
-    private var winterTriathlonExercises: [TriathlonExercise] = []
-    
     var totalScore: Int {
         exercises.compactMap { $0.score }.reduce(0, +)
     }
+    
+    private var summerTriathlonExercises: [TriathlonExercise] = []
+    private var winterTriathlonExercises: [TriathlonExercise] = []
     
     init(sportResult: SportResult) {
         exercises = sportResult.sportExercises
         isEditing = true
         triathlonType = sportResult.triathlonType ?? .summer
         ageCategory = sportResult.ageTriathlonCategory ?? .lessForty
-        print("TriathlonVC has been allocated")
     }
     
     init() {}
     
-    //MARK: - Triathlon methods
-    
-    private func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_Ru")
-        return dateFormatter.string(from: Date())
-    }
-    
-    func generateSportResult() -> SportResult {
-        SportResult(
-            sportType: sportType,
-            totalScore: totalScore,
-            grade: calculateTriathlonGrade(),
-            date: date,
-            ageTriathlonCategory: ageCategory,
-            triathlonType: triathlonType,
-            sportExercises: exercises
-        )
-    }
+    //MARK: - Initial data methods
     
     func updateTriathlonExercises() {
         if !isEditing {
@@ -87,6 +63,34 @@ final class TriathlonController {
             }
         }
     }
+    
+    //MARK: - Return data methods
+    
+    func shouldShowTotalScore() -> Bool {
+        exercises.filter { $0.score == 0 }.count < 3
+    }
+    
+    func generateSportResult() -> SportResult {
+        SportResult(
+            sportType: sportType,
+            totalScore: totalScore,
+            grade: calculateTriathlonGrade(),
+            date: date,
+            ageTriathlonCategory: ageCategory,
+            triathlonType: triathlonType,
+            sportExercises: exercises
+        )
+    }
+    
+    private func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter.string(from: Date())
+    }
+    
+    //MARK: - Calculation methods
     
     func calculateTriathlonGrade() -> String {
         switch ageCategory {
@@ -210,8 +214,5 @@ final class TriathlonController {
         }
     }
     
-    func shouldShowTotalScore() -> Bool {
-        exercises.filter { $0.score == 0 }.count < 3
-    }
 }
 

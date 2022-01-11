@@ -8,7 +8,6 @@
 import UIKit
 
 final class AboutImageCell: UICollectionViewCell {
-    
     static let identifier = "AboutImageCell"
     private let imageView = UIImageView()
     

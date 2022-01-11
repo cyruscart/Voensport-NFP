@@ -9,12 +9,6 @@ import UIKit
 
 final class SportExerciseCell: UITableViewCell  {
     static let identifier = "SportExerciseCell"
-    var exercise: TriathlonExercise!
-    var callBackForUpdatingTotalScore: (() -> Void) = {}
-    
-    var exerciseNameLabel = UILabel()
-    var scoreLabel = UILabel()
-    private var picker = UIPickerView()
     
     let resultTextField: UITextField = {
         let tf = UITextField()
@@ -22,6 +16,12 @@ final class SportExerciseCell: UITableViewCell  {
         tf.placeholder = "Выберите результат"
         return tf
     }()
+    
+    var exercise: TriathlonExercise!
+    var callBackForUpdatingTotalScore: (() -> Void) = {}
+    var exerciseNameLabel = UILabel()
+    var scoreLabel = UILabel()
+    private var picker = UIPickerView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +34,6 @@ final class SportExerciseCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        
         [exerciseNameLabel, scoreLabel, resultTextField].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)

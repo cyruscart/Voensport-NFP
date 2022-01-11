@@ -8,7 +8,6 @@
 import Foundation
 
 final class NfpController {
-    
     let settings: Settings
     var exercises: [[NfpExercise]] = []
     var selectedExercises: [NfpExercise] = []
@@ -91,22 +90,12 @@ final class NfpController {
         self.settings = settings
     }
     
-    
-    //MARK: - Methods
-    
-    private func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_Ru")
-        return dateFormatter.string(from: Date())
-    }
+    //MARK: - Initial data methods
     
     func loadInitialData() {
         if !isEditing {
             loadExercises()
         }
-        
         loadInitialSelectedExercise()
     }
     
@@ -128,14 +117,12 @@ final class NfpController {
             var exercises: [NfpExercise] = []
             
             exerciseTypes.forEach { type in
-                
                 if settings.sex == .male {
                     exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
                     
                     exercises = settings.isManOlderThirtyFive
                     ? exercises.filter { $0.forManOlderThirtyFive != false }
                     : exercises.filter { $0.forManOlderThirtyFive != true }
-                    
                 } else {
                     exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
                     
@@ -144,15 +131,22 @@ final class NfpController {
                     : exercises.filter { $0.forWomanOlderThirty != true }
                 }
             }
-            
-            let changingType = exerciseTypes.removeFirst() // криво
+            let changingType = exerciseTypes.removeFirst()
             exerciseTypes.append(changingType)
-            
             exercisesList.append(exercises)
         }
         exercises = exercisesList
     }
     
+    //MARK: - Return data methods
+    
+    private func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter.string(from: Date())
+    }
     
     func generateNfpResult() -> NfpResult {
         NfpResult(totalScore: totalScore,
@@ -165,7 +159,6 @@ final class NfpController {
                   date: date,
                   nfpExercises: selectedExercises,
                   tariff: settings.tariff)
-        
     }
     
     func getGradeForTotalScoreLabel() -> String {
@@ -199,9 +192,10 @@ final class NfpController {
         : "\(["1 упражнение", "2 упражнение", "3 упражнение", "4 упражнение", "5 упражнение"][section])"
     }
     
+    //MARK: - Base calculation methods
     
     func calculateGrade() -> String {
-        
+
         if !selectedExercises.filter({ $0.score < minimumScore }).isEmpty {
             return Grade.two.rawValue
         }
@@ -260,7 +254,7 @@ final class NfpController {
         }
     }
     
-    //MARK: - Private methods for man
+    //MARK: - Man calculation methods
     
     private func calculateCandidateGrade() -> String {
         var localGrade = ""
@@ -1559,8 +1553,7 @@ final class NfpController {
         return localGrade
     }
     
-    
-    //MARK: - Private methods for woman
+    //MARK: - Woman calculation methods
     
     private func calculateWomanCandidateGrade() -> String {
         var localGrade = ""
@@ -1715,8 +1708,7 @@ final class NfpController {
     }
     
     
-    //MARK: - Calculating money
-    
+    //MARK: - Money calculation methods
     
     func shouldShowMoneyButton() -> Bool {
         calculateGrade() == "Высший уровень"

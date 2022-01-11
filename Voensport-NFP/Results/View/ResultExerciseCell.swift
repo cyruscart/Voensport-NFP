@@ -10,9 +10,6 @@ import UIKit
 final class ResultExerciseCell: UICollectionViewCell {
     static let identifier = "ResultNfpExerciseCell"
     
-    var saveButtonCallBack: (() -> Void) = {}
-    var editButtonCallBack: (() -> Void) = {}
-    
     private let exerciseNumberLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -44,6 +41,9 @@ final class ResultExerciseCell: UICollectionViewCell {
         label.textAlignment = .left
         return label
     }()
+    
+    var saveButtonCallBack: (() -> Void) = {}
+    var editButtonCallBack: (() -> Void) = {}
     
     override init(frame: CGRect) {
         super.init(frame: frame)

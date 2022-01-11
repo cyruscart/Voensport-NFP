@@ -11,7 +11,6 @@ final class TriathlonExercise: Codable {
     let name: String
     let triathlonAgeCategory: TriathlonAgeCategory
     var result = ""
-    
     let scoreList: [String: Int]
     
     var score: Int {

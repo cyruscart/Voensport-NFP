@@ -9,9 +9,6 @@ import UIKit
 
 final class TotalScoreSportCell: UITableViewCell  {
     static let identifier = "TotalScoreSportCell"
-    
-    var saveButtonCallBack: (() -> Void) = {}
-    
     private let totalScoreLabel = UILabel()
     private let gradeLabel = UILabel()
     
@@ -21,11 +18,12 @@ final class TotalScoreSportCell: UITableViewCell  {
         return button
     }()
     
+    var saveButtonCallBack: (() -> Void) = {}
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         setupCell()
-        
     }
     
     required init?(coder: NSCoder) {
