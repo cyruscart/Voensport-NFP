@@ -40,13 +40,13 @@ class SportListViewController: UIViewController {
 extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sportTypes.allCases.count
+        SportType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = sportTypes.allCases[indexPath.row].rawValue
+        content.text = SportType.allCases[indexPath.row].rawValue
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         return cell

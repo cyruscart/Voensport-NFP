@@ -123,11 +123,25 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @objc private func scrollUp() {
-        picker.selectRow(0, inComponent: 0, animated: true)
+        let rowsCount = picker.numberOfRows(inComponent: 0)
+        let currentRow = picker.selectedRow(inComponent: 0)
+        let step = rowsCount / 5
+        let newRow = currentRow - step < 0
+        ? 0
+        : currentRow - step
+        
+        picker.selectRow(newRow, inComponent: 0, animated: true)
     }
     
     @objc private func scrollDown() {
-        picker.selectRow(exercise.getScoreList().count - 1, inComponent: 0, animated: true)
+        let rowsCount = picker.numberOfRows(inComponent: 0)
+        let currentRow = picker.selectedRow(inComponent: 0)
+        let step = rowsCount / 5
+        let newRow = currentRow + step > exercise.getScoreList().count - 1
+        ? exercise.getScoreList().count - 1
+        : currentRow + step
+        
+        picker.selectRow(newRow, inComponent: 0, animated: true)
     }
     
     @objc private func clearPressed() {

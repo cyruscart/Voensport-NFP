@@ -89,53 +89,125 @@ final class TriathlonController {
     }
     
     func calculateTriathlonGrade() -> String {
-        var grade = ""
-        
+        switch ageCategory {
+        case .lessThirty:
+            return calculateLessThirtyGrade()
+        case .lessForty:
+            return calculateLessFortyGrade()
+        case .moreForty:
+            return calculateMoreFortyGrade()
+        }
+    }
+    
+    private func calculateLessThirtyGrade() -> String {
         switch totalScore {
         case 2800...:
-            if exercises.filter({$0.score < 600}).isEmpty {
-                grade = SportGrade.ms.rawValue
-            } else if exercises.filter({$0.score < 500}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            } else if exercises.filter({$0.score < 400}).isEmpty {
-                grade = SportGrade.firstGrade.rawValue
-            } else if exercises.filter({$0.score < 300}).isEmpty {
-                grade = SportGrade.secondGrade.rawValue
-            } else if exercises.filter({$0.score < 200}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            }
+            return calculateMS()
         case 2600...2799:
-            if exercises.filter({$0.score < 500}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            } else if exercises.filter({$0.score < 400}).isEmpty {
-                grade = SportGrade.firstGrade.rawValue
-            } else if exercises.filter({$0.score < 300}).isEmpty {
-                grade = SportGrade.secondGrade.rawValue
-            } else if exercises.filter({$0.score < 200}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            }
+            return calculateKMS()
         case 2300...2599:
-            if exercises.filter({$0.score < 400}).isEmpty {
-                grade = SportGrade.firstGrade.rawValue
-            } else if exercises.filter({$0.score < 300}).isEmpty {
-                grade = SportGrade.secondGrade.rawValue
-            } else if exercises.filter({$0.score < 200}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            }
+            return calculateFirstGrade()
         case 2100...2299:
-            if exercises.filter({$0.score < 300}).isEmpty {
-                grade = SportGrade.secondGrade.rawValue
-            } else if exercises.filter({$0.score < 200}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            }
+            return calculateSecondGrade()
         case 1700...2099:
-            if exercises.filter({$0.score < 200}).isEmpty {
-                grade = SportGrade.kms.rawValue
-            }
+            return calculateThirdGrade()
         default:
-            break
+            return ""
         }
-        return grade
+    }
+    
+    private func calculateLessFortyGrade() -> String {
+        switch totalScore {
+        case 2800...:
+            return calculateMS()
+        case 2600...2799:
+            return calculateKMS()
+        case 2200...2599:
+            return calculateFirstGrade()
+        case 2000...2199:
+            return calculateSecondGrade()
+        case 1600...1999:
+            return calculateThirdGrade()
+        default:
+            return ""
+        }
+    }
+    
+    private func calculateMoreFortyGrade() -> String {
+        switch totalScore {
+        case 2800...:
+            return calculateMS()
+        case 2600...2799:
+            return calculateKMS()
+        case 2000...2599:
+            return calculateFirstGrade()
+        case 1900...1999:
+            return calculateSecondGrade()
+        case 1500...1899:
+            return calculateThirdGrade()
+        default:
+            return ""
+        }
+    }
+    
+    private func calculateMS() -> String {
+        if exercises.filter({$0.score < 600}).isEmpty {
+            return SportGrade.ms.rawValue
+        } else if exercises.filter({$0.score < 500}).isEmpty {
+            return SportGrade.kms.rawValue
+        } else if exercises.filter({$0.score < 400}).isEmpty {
+            return SportGrade.firstGrade.rawValue
+        } else if exercises.filter({$0.score < 300}).isEmpty {
+            return SportGrade.secondGrade.rawValue
+        } else if exercises.filter({$0.score < 200}).isEmpty {
+            return SportGrade.thirdGrade.rawValue
+        } else {
+            return ""
+        }
+    }
+    
+    private func calculateKMS() -> String {
+        if exercises.filter({$0.score < 500}).isEmpty {
+            return SportGrade.kms.rawValue
+        } else if exercises.filter({$0.score < 400}).isEmpty {
+            return SportGrade.firstGrade.rawValue
+        } else if exercises.filter({$0.score < 300}).isEmpty {
+            return SportGrade.secondGrade.rawValue
+        } else if exercises.filter({$0.score < 200}).isEmpty {
+            return SportGrade.thirdGrade.rawValue
+        } else {
+            return ""
+        }
+    }
+    
+    private func calculateFirstGrade() -> String {
+        if exercises.filter({$0.score < 400}).isEmpty {
+            return SportGrade.firstGrade.rawValue
+        } else if exercises.filter({$0.score < 300}).isEmpty {
+            return SportGrade.secondGrade.rawValue
+        } else if exercises.filter({$0.score < 200}).isEmpty {
+            return SportGrade.thirdGrade.rawValue
+        } else {
+            return ""
+        }
+    }
+    
+    private func calculateSecondGrade() -> String {
+        if exercises.filter({$0.score < 300}).isEmpty {
+            return SportGrade.secondGrade.rawValue
+        } else if exercises.filter({$0.score < 200}).isEmpty {
+            return SportGrade.thirdGrade.rawValue
+        } else {
+            return ""
+        }
+    }
+    
+    private func calculateThirdGrade() -> String {
+        if exercises.filter({$0.score < 200}).isEmpty {
+            return SportGrade.thirdGrade.rawValue
+        } else {
+            return ""
+        }
     }
     
     func shouldShowTotalScore() -> Bool {
