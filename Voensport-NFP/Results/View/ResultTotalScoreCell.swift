@@ -10,9 +10,6 @@ import UIKit
 final class ResultTotalScoreCell: UICollectionViewCell {
     static let identifier = "ResultTotalScoreCell"
     
-    var saveButtonCallBack: (() -> Void) = {}
-    var editButtonCallBack: (() -> Void) = {}
-    
     private let totalScoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -43,6 +40,9 @@ final class ResultTotalScoreCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
     }()
+    
+    var saveButtonCallBack: (() -> Void) = {}
+    var editButtonCallBack: (() -> Void) = {}
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PassKit
 
 final class DonateCell: UICollectionViewCell  {
     static let identifier = "DonateCell"

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SportType: String, Codable {
+enum SportType: String, CaseIterable, Codable {
     case summerTriathlon = "Летнее офицерское троеборье"
     case winterTriathlon = "Зимнее офицерское троеборье"
 }

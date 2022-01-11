@@ -65,8 +65,7 @@ final class StorageManager {
         } catch {
             print(error.localizedDescription)
         }
-        return(summerExercises, winterExercises )
-        
+        return(summerExercises, winterExercises)
     }
     
     //MARK: - Results

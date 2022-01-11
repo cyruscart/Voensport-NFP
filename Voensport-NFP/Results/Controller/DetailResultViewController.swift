@@ -16,7 +16,6 @@ final class DetailResultViewController: UIViewController  {
     var nfpResult: NfpResult?
     var editingResultIndexPath = IndexPath()
     var numberOfSectionForLayout = 3
-    
     private var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -25,11 +24,6 @@ final class DetailResultViewController: UIViewController  {
         setupNavigationBar()
         setupCollectionView()
     }
-    
-//    override func viewWillAppear(_ animated: Bool) {
-//        super.viewWillAppear(animated)
-//
-//    }
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: ResultsCompositionalLayout.createLayout(numberOfSection: numberOfSectionForLayout))
@@ -41,7 +35,6 @@ final class DetailResultViewController: UIViewController  {
         collectionView.showsVerticalScrollIndicator = false
         view.addSubview(collectionView)
     }
-    
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -95,8 +88,8 @@ extension DetailResultViewController: UICollectionViewDataSource, UICollectionVi
             
             return cell
         }
-        
     }
+    
 }
 
 //MARK: - Navigation
@@ -151,7 +144,7 @@ extension DetailResultViewController {
     
 }
 
-//MARK: - UpdateUIAfterEditingDelegate
+//MARK: - UpdateUIAfterEditing
 
 extension DetailResultViewController: UpdateUIAfterEditingDelegate {
     
@@ -167,7 +160,6 @@ extension DetailResultViewController: UpdateUIAfterEditingDelegate {
         }
         
         collectionView.reloadData()
-
     }
     
 }

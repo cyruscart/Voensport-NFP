@@ -8,7 +8,6 @@
 import UIKit
 
 class SportListViewController: UIViewController {
-    
     private var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -17,11 +16,6 @@ class SportListViewController: UIViewController {
         title = "Военный спорт"
         navigationController?.navigationBar.prefersLargeTitles = true
         setTableView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     private func setTableView() {
@@ -40,13 +34,13 @@ class SportListViewController: UIViewController {
 extension SportListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        sportTypes.allCases.count
+        SportType.allCases.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         var content = cell.defaultContentConfiguration()
-        content.text = sportTypes.allCases[indexPath.row].rawValue
+        content.text = SportType.allCases[indexPath.row].rawValue
         cell.contentConfiguration = content
         cell.accessoryType = .disclosureIndicator
         return cell

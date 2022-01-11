@@ -11,7 +11,7 @@ class TotalScoreCell: UICollectionViewCell {
     static let identifier = "TotalScoreCell"
     var saveButtonCallBack: (() -> Void) = {}
     
-    private var totalScoreLabel: UILabel = {
+    private let totalScoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textAlignment = .left
@@ -20,8 +20,7 @@ class TotalScoreCell: UICollectionViewCell {
         return label
     }()
     
-    
-    private var markLabel: UILabel = {
+    private let markLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .right
         label.font = UIFont.boldSystemFont(ofSize: 80)
@@ -30,7 +29,7 @@ class TotalScoreCell: UICollectionViewCell {
         return label
     }()
     
-    private var gradeLabel: UILabel = {
+    private let gradeLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.adjustsFontSizeToFitWidth = true
@@ -39,13 +38,13 @@ class TotalScoreCell: UICollectionViewCell {
         return label
     }()
     
-    var saveButton: UIButton = {
+    let saveButton: UIButton = {
         let button = UIButton.createSaveButton()
         button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
         return button
     }()
     
-    var moneyButton: UIButton = {
+    let moneyButton: UIButton = {
         let button = UIButton.createSaveButton()
         button.setTitle("\u{20BD}", for: .normal)
         return button

@@ -9,12 +9,6 @@ import UIKit
 
 final class SportExerciseCell: UITableViewCell  {
     static let identifier = "SportExerciseCell"
-    var exercise: TriathlonExercise!
-    var callBackForUpdatingTotalScore: (() -> Void) = {}
-    
-    var exerciseNameLabel = UILabel()
-    var scoreLabel = UILabel()
-    private var picker = UIPickerView()
     
     let resultTextField: UITextField = {
         let tf = UITextField()
@@ -22,6 +16,12 @@ final class SportExerciseCell: UITableViewCell  {
         tf.placeholder = "Выберите результат"
         return tf
     }()
+    
+    var exercise: TriathlonExercise!
+    var callBackForUpdatingTotalScore: (() -> Void) = {}
+    var exerciseNameLabel = UILabel()
+    var scoreLabel = UILabel()
+    private var picker = UIPickerView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,7 +34,6 @@ final class SportExerciseCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        
         [exerciseNameLabel, scoreLabel, resultTextField].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)
@@ -123,11 +122,25 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     @objc private func scrollUp() {
-        picker.selectRow(0, inComponent: 0, animated: true)
+        let rowsCount = picker.numberOfRows(inComponent: 0)
+        let currentRow = picker.selectedRow(inComponent: 0)
+        let step = rowsCount / 5
+        let newRow = currentRow - step < 0
+        ? 0
+        : currentRow - step
+        
+        picker.selectRow(newRow, inComponent: 0, animated: true)
     }
     
     @objc private func scrollDown() {
-        picker.selectRow(exercise.getScoreList().count - 1, inComponent: 0, animated: true)
+        let rowsCount = picker.numberOfRows(inComponent: 0)
+        let currentRow = picker.selectedRow(inComponent: 0)
+        let step = rowsCount / 5
+        let newRow = currentRow + step > exercise.getScoreList().count - 1
+        ? exercise.getScoreList().count - 1
+        : currentRow + step
+        
+        picker.selectRow(newRow, inComponent: 0, animated: true)
     }
     
     @objc private func clearPressed() {

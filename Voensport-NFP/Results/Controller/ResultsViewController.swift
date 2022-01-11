@@ -8,7 +8,6 @@
 import UIKit
 
 final class ResultsViewController: UIViewController {
-    
     var resultsController: ResultsController!
     private var tableView: UITableView!
    

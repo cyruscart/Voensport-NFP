@@ -8,12 +8,9 @@
 import UIKit
 
 class ExerciseCell: UICollectionViewCell {
-    
     static let identifier = "ExerciseCell"
-    
     var callback: ((_ exercise: NfpExercise) -> Void)!
     var exercise: NfpExercise!
-    
     private var backGroundImageView = UIImageView()
     
     var descriptionButton: UIButton = {
@@ -22,7 +19,6 @@ class ExerciseCell: UICollectionViewCell {
         button.addTarget(self, action: #selector(descriptionButtonTapped), for: .touchUpInside)
         return button
     }()
-    
     
     private var exerciseNumberLabel: UILabel = {
         let label = UILabel()

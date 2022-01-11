@@ -8,7 +8,6 @@
 import UIKit
 
 final class OnboardingCell: UICollectionViewCell {
-    
     static let identifier = "OnbordingCell"
     private let onboardingView = UIImageView()
     

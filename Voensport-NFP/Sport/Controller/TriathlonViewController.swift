@@ -8,10 +8,9 @@
 import UIKit
 
 class TriathlonViewController: UIViewController {
-    
-    private var tableView: UITableView!
     var triathlonController: TriathlonController!
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
+    private var tableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +37,6 @@ class TriathlonViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        
         if triathlonController.isEditing {
             navigationController?.navigationBar.prefersLargeTitles = true
             title = triathlonController.editingResultDate
@@ -46,15 +44,13 @@ class TriathlonViewController: UIViewController {
             let closeAction = UIAction { [ unowned self ] _ in
                 self.dismiss(animated: true, completion: nil)
                 updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
-               
             }
-            
+    
             let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
             navigationItem.rightBarButtonItem = closeButton
-            
         } else {
             navigationItem.largeTitleDisplayMode = .never
-            
+    
             title = triathlonController.triathlonType == .summer
             ? "Летнее офицерское троеборье"
             : "Зимнее офицерское троеборье"
@@ -105,7 +101,6 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
         switch indexPath.row {
         case 0:
             return 45
@@ -117,7 +112,6 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: SegmentedViewCell.identifier, for: indexPath) as! SegmentedViewCell

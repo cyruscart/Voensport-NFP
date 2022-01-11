@@ -17,12 +17,12 @@ enum ExerciseType: String, CaseIterable, Codable, Hashable {
 
 final class NfpExercise: Codable {
     let number: String
-    var name: String
     let type: ExerciseType
-    var forWomanOlderThirty: Bool? = nil
-    var forManOlderThirtyFive: Bool? = nil
-    var exerciseDescription: String? = nil
     let scoreList: [String: Int]
+    var name: String
+    var forWomanOlderThirty: Bool?
+    var forManOlderThirtyFive: Bool?
+    var exerciseDescription: String?
     var score = 0
     
     var result: String? {
