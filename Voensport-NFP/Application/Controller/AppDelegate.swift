@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func generateTabBarController(settings: Settings) -> UITabBarController {
         let tabBarVC = UITabBarController()
         
-        let nfpViewController = NfpViewController()
-        nfpViewController.nfpController = NfpController(settings: settings)
+        let nfpController = NfpController(settings: settings)
+        let nfpViewController = NfpViewController(nfpController)
         let nfpTabBarImage = UIImage(named: "nfp")
         
         let sportListVC = SportListViewController()

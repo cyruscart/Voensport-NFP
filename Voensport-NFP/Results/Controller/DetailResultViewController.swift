@@ -117,8 +117,7 @@ extension DetailResultViewController {
         settings.category = nfpResult.category
         settings.tariff = nfpResult.tariff
         
-        let nfpVC = NfpViewController()
-        nfpVC.nfpController = NfpController(settings: settings)
+        let nfpVC = NfpViewController(NfpController(settings: settings))
         nfpVC.nfpController.exercises = nfpResult.getExerciseForEditing()
         nfpVC.nfpController.isEditing = true
         nfpVC.nfpController.editingResultIndex = editingResultIndexPath
