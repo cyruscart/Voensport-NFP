@@ -10,7 +10,6 @@ import UIKit
 final class NfpViewController: UIViewController  {
     let nfpController: NfpController
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
-    
     private var shouldObserveVisibleCells = false
     private var collectionView: UICollectionView!
     private var feedbackGenerator: UISelectionFeedbackGenerator?
@@ -309,7 +308,6 @@ extension NfpViewController: UICollectionViewDelegate {
 extension NfpViewController {
     
     @objc private func showSettings() {
-//        shouldObserveVisibleCells = false
         let settingsVC = SettingsViewController()
         settingsVC.settings = nfpController.settings
         navigationController?.pushViewController(settingsVC, animated: true)
