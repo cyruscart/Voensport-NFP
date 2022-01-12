@@ -128,7 +128,7 @@ final class NfpViewController: UIViewController  {
         collectionView.visibleCells.forEach { cell in
             if let totalCell = cell as? TotalScoreCell {
                 totalCell.configureCell(with: nfpController)
-                totalCell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
+                totalCell.moneyButton.alpha = nfpController.shouldCalculateMoney() ? 1 : 0.4
             }
         }
     }
@@ -207,7 +207,7 @@ extension NfpViewController: UICollectionViewDataSource {
         if indexPath.section == nfpController.settings.getIntegerNumberOfExercises() {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalScoreCell.identifier, for: indexPath) as! TotalScoreCell
             cell.configureCell(with: self.nfpController)
-            cell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
+            cell.moneyButton.alpha = nfpController.shouldCalculateMoney() ? 1 : 0.4
             cell.moneyButton.addTarget(self, action: #selector(showAlert), for: .touchUpInside)
             cell.saveButtonCallBack = { [unowned self] in
                 self.saveResults()
@@ -273,7 +273,7 @@ extension NfpViewController: UICollectionViewDelegate {
         
         guard let totalCell = cell as? TotalScoreCell else { return }
         totalCell.configureCell(with: nfpController)
-        totalCell.moneyButton.alpha = nfpController.shouldShowMoneyButton() ? 1 : 0.4
+        totalCell.moneyButton.alpha = nfpController.shouldCalculateMoney() ? 1 : 0.4
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -322,7 +322,7 @@ extension NfpViewController {
     }
 
     @objc private func showAlert() {
-        if nfpController.shouldShowMoneyButton() {
+        if nfpController.shouldCalculateMoney() {
             nfpController.settings.tariff == 0 ? showSettingsAlert() : showMoneyAlert()
         }
     }

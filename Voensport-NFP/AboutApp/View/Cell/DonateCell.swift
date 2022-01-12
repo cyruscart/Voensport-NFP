@@ -52,20 +52,20 @@ final class DonateCell: UICollectionViewCell  {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        setupCell()
         contentView.backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         layer.cornerRadius = 15
         layer.masksToBounds = false
         setViewShadows()
+        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func setupCell() {
+    func configureCellForPay() {
         configureStackView()
         
         [messageLabel, buttonStackView].forEach { subview in
@@ -83,9 +83,30 @@ final class DonateCell: UICollectionViewCell  {
             buttonStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -30),
             buttonStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
+        
+        messageLabel.text = """
+        Нравится приложение?
+        Вы можете поддержать разработчика
+        """
     }
     
-    func configureStackView() {
+    func configureCellAfterPay() {
+        messageLabel.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(messageLabel)
+    
+    NSLayoutConstraint.activate([
+        messageLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+        messageLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+        messageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -10),
+        messageLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
+    ])
+        
+        messageLabel.text = "Спасибо за поддержку!"
+        messageLabel.font = UIFont.boldSystemFont(ofSize: 20)
+    }
+    
+    
+    private func configureStackView() {
         var size = CGFloat(UIScreen.main.bounds.width / 7)
         [smallDonateButton, mediumDonateButton, largeDonateButton].forEach { button in
             buttonStackView.addArrangedSubview(button)

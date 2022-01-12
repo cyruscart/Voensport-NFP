@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TabBarControllerFactory {
+struct TabBarControllerFactory {
     
     static func generate(settings: Settings) -> UITabBarController {
         let tabBarVC = UITabBarController()
