@@ -46,8 +46,24 @@ class DetailSettingsViewController: UIViewController {
             title = "Тарифный разряд"
         default:
             title = "Категория"
-            
+            setInfoButton()
         }
+    }
+    
+    private func setInfoButton() {
+        let infoButton = UIBarButtonItem(
+            image: UIImage(systemName: "info.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(showInfo))
+        
+        navigationItem.rightBarButtonItem = infoButton
+    }
+    
+    @objc private func showInfo() {
+        let descriptionVC = DescriptionViewController()
+        descriptionVC.configure(with: Info.categoryInfo)
+        present(descriptionVC, animated: true)
     }
     
 }

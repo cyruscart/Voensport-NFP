@@ -1710,7 +1710,7 @@ final class NfpController {
     
     //MARK: - Money calculation methods
     
-    func shouldShowMoneyButton() -> Bool {
+    func shouldCalculateMoney() -> Bool {
         calculateGrade() == "Высший уровень"
         || calculateGrade() == "1 уровень"
         || calculateGrade() == "2 уровень"
@@ -1721,7 +1721,6 @@ final class NfpController {
         var money = 0
         
         switch calculateGrade() {
-            
         case "Высший уровень":
             if settings.sportGrade == .ms {
                 money = Int(tariff * 0.87)
@@ -1732,13 +1731,10 @@ final class NfpController {
             } else {
                 money = Int(tariff * 0.7 * 0.87)
             }
-            
         case "1 уровень":
             money = Int(tariff * 0.3 * 0.87)
-            
         case "2 уровень":
             money = Int(tariff * 0.15 * 0.87)
-            
         default:
             money = 0
         }

@@ -7,10 +7,9 @@
 
 import UIKit
 
-class ExerciseDescriptionViewController: UIViewController {
+class DescriptionViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
     private let exerciseImage = UIImageView()
     
     private let descriptionLabel: UILabel = {
@@ -83,6 +82,10 @@ class ExerciseDescriptionViewController: UIViewController {
                 descriptionLabel.text = descriptionText
             }
             exerciseImage.image = UIImage(named: "\(exercise.number)")
+    }
+    
+    func configure(with info: Info) {
+        descriptionLabel.text = info.message
     }
     
     @objc private func okButtonPressed() {
