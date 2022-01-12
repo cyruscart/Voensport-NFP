@@ -31,7 +31,6 @@
 		6E50C0102770CBE900C3D04C /* SegmentedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C00F2770CBE900C3D04C /* SegmentedViewCell.swift */; };
 		6E50C0122770CF5200C3D04C /* SportExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E50C0112770CF5200C3D04C /* SportExerciseCell.swift */; };
 		6E56A6F6277B111400362073 /* AboutImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F5277B111400362073 /* AboutImageCell.swift */; };
-		6E56A6F8277B128F00362073 /* DonateCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F7277B128F00362073 /* DonateCell.swift */; };
 		6E56A6FA277B13FE00362073 /* AboutAppCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6F9277B13FE00362073 /* AboutAppCompositionalLayout.swift */; };
 		6E56A6FF277B150C00362073 /* AboutAppHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A6FE277B150C00362073 /* AboutAppHeaderView.swift */; };
 		6E56A701277C2A6900362073 /* Extension+UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A700277C2A6900362073 /* Extension+UIButton.swift */; };
@@ -92,7 +91,6 @@
 		6E50C00F2770CBE900C3D04C /* SegmentedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedViewCell.swift; sourceTree = "<group>"; };
 		6E50C0112770CF5200C3D04C /* SportExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportExerciseCell.swift; sourceTree = "<group>"; };
 		6E56A6F5277B111400362073 /* AboutImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutImageCell.swift; sourceTree = "<group>"; };
-		6E56A6F7277B128F00362073 /* DonateCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonateCell.swift; sourceTree = "<group>"; };
 		6E56A6F9277B13FE00362073 /* AboutAppCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppCompositionalLayout.swift; sourceTree = "<group>"; };
 		6E56A6FE277B150C00362073 /* AboutAppHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppHeaderView.swift; sourceTree = "<group>"; };
 		6E56A700277C2A6900362073 /* Extension+UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIButton.swift"; sourceTree = "<group>"; };
@@ -188,7 +186,6 @@
 			isa = PBXGroup;
 			children = (
 				6E56A6F5277B111400362073 /* AboutImageCell.swift */,
-				6E56A6F7277B128F00362073 /* DonateCell.swift */,
 				6E56A704277C4C5B00362073 /* OnboardingCell.swift */,
 			);
 			path = Cell;
@@ -601,7 +598,6 @@
 				6E7E8573278E8B2400CC8111 /* Info.swift in Sources */,
 				6EAAFE62277DE4ED00809FED /* Extension+UIView.swift in Sources */,
 				6E50C0122770CF5200C3D04C /* SportExerciseCell.swift in Sources */,
-				6E56A6F8277B128F00362073 /* DonateCell.swift in Sources */,
 				6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */,
 				6E50C0062770A6FC00C3D04C /* SportListViewController.swift in Sources */,
 				6ED0454F275C6C2A00D048B4 /* SettingsViewController.swift in Sources */,

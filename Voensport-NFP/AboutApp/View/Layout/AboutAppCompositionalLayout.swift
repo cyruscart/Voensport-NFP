@@ -61,18 +61,6 @@ final class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                 
                 section.boundarySupplementaryItems = [sectionHeader]
                 section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
-                
-            case .donate:
-                let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                      heightDimension: .estimated(200))
-                let item = NSCollectionLayoutItem(layoutSize: itemSize)
-            
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                               heightDimension: .estimated(200))
-                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-                
-                section = NSCollectionLayoutSection(group: group)
-                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 50, trailing: 20)
             }
             return section
         }
