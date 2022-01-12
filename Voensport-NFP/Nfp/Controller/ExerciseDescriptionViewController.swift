@@ -10,7 +10,6 @@ import UIKit
 class ExerciseDescriptionViewController: UIViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
     private let exerciseImage = UIImageView()
     
     private let descriptionLabel: UILabel = {

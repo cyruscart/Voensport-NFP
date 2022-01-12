@@ -41,6 +41,7 @@
 		6E56A70B277C5BB300362073 /* OnboardingCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E56A70A277C5BB200362073 /* OnboardingCompositionalLayout.swift */; };
 		6E5F27F127734ED700926FC1 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F27F027734ED700926FC1 /* ResultsViewController.swift */; };
 		6E5F27F3277350FD00926FC1 /* ResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F27F2277350FD00926FC1 /* ResultsController.swift */; };
+		6E7E8571278E84DD00CC8111 /* TabBarControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */; };
 		6E80DAF92769AD7D006C21F0 /* NfpExerciseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAF82769AD7D006C21F0 /* NfpExerciseHeaderView.swift */; };
 		6E80DAFC2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */; };
 		6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */; };
@@ -101,6 +102,7 @@
 		6E56A70A277C5BB200362073 /* OnboardingCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompositionalLayout.swift; sourceTree = "<group>"; };
 		6E5F27F027734ED700926FC1 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		6E5F27F2277350FD00926FC1 /* ResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsController.swift; sourceTree = "<group>"; };
+		6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerFactory.swift; sourceTree = "<group>"; };
 		6E80DAF82769AD7D006C21F0 /* NfpExerciseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpExerciseHeaderView.swift; sourceTree = "<group>"; };
 		6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDescriptionViewController.swift; sourceTree = "<group>"; };
 		6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 		6EC4BAAD275B7DA800A4FD4A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */,
 				6E330B93276DA0F9008DEC4F /* SportGrade.swift */,
 				6EB46012276E0EC600DC5C77 /* Tariff.swift */,
 				6EBAF098277480350034999F /* SportType.swift */,
@@ -554,6 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6E7E8571278E84DD00CC8111 /* TabBarControllerFactory.swift in Sources */,
 				6EEC5E66277192C4006C532E /* TotalScoreSportCell.swift in Sources */,
 				6E21297E27635E7C0016B24A /* NfpManExercises.json in Sources */,
 				6EBAF09D2774CF1B0034999F /* ResultTotalScoreCell.swift in Sources */,

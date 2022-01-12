@@ -309,7 +309,7 @@ extension NfpViewController: UICollectionViewDelegate {
 extension NfpViewController {
     
     @objc private func showSettings() {
-        shouldObserveVisibleCells = false
+//        shouldObserveVisibleCells = false
         let settingsVC = SettingsViewController()
         settingsVC.settings = nfpController.settings
         navigationController?.pushViewController(settingsVC, animated: true)
