@@ -42,8 +42,9 @@
 		6E5F27F127734ED700926FC1 /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F27F027734ED700926FC1 /* ResultsViewController.swift */; };
 		6E5F27F3277350FD00926FC1 /* ResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E5F27F2277350FD00926FC1 /* ResultsController.swift */; };
 		6E7E8571278E84DD00CC8111 /* TabBarControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */; };
+		6E7E8573278E8B2400CC8111 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7E8572278E8B2400CC8111 /* Info.swift */; };
 		6E80DAF92769AD7D006C21F0 /* NfpExerciseHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAF82769AD7D006C21F0 /* NfpExerciseHeaderView.swift */; };
-		6E80DAFC2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */; };
+		6E80DAFC2769BCF5006C21F0 /* DescriptionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E80DAFB2769BCF5006C21F0 /* DescriptionViewController.swift */; };
 		6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */; };
 		6E90DDF4275F3201004B618A /* NfpExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF3275F3201004B618A /* NfpExercise.swift */; };
 		6E90DDF6275F4BBE004B618A /* NfpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF5275F4BBE004B618A /* NfpController.swift */; };
@@ -57,7 +58,6 @@
 		6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C6002762064200D51135 /* TotalScoreCell.swift */; };
 		6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */; };
 		6EB46013276E0EC600DC5C77 /* Tariff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB46012276E0EC600DC5C77 /* Tariff.swift */; };
-		6EBAF099277480350034999F /* SportType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAF098277480350034999F /* SportType.swift */; };
 		6EBAF09B2774C5110034999F /* ResultExerciseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAF09A2774C5110034999F /* ResultExerciseCell.swift */; };
 		6EBAF09D2774CF1B0034999F /* ResultTotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAF09C2774CF1B0034999F /* ResultTotalScoreCell.swift */; };
 		6EBAF09F2774D2540034999F /* DetailResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBAF09E2774D2540034999F /* DetailResultViewController.swift */; };
@@ -103,8 +103,9 @@
 		6E5F27F027734ED700926FC1 /* ResultsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		6E5F27F2277350FD00926FC1 /* ResultsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsController.swift; sourceTree = "<group>"; };
 		6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarControllerFactory.swift; sourceTree = "<group>"; };
+		6E7E8572278E8B2400CC8111 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
 		6E80DAF82769AD7D006C21F0 /* NfpExerciseHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpExerciseHeaderView.swift; sourceTree = "<group>"; };
-		6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDescriptionViewController.swift; sourceTree = "<group>"; };
+		6E80DAFB2769BCF5006C21F0 /* DescriptionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionViewController.swift; sourceTree = "<group>"; };
 		6E90DDF0275F1A2D004B618A /* ExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCell.swift; sourceTree = "<group>"; };
 		6E90DDF3275F3201004B618A /* NfpExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpExercise.swift; sourceTree = "<group>"; };
 		6E90DDF5275F4BBE004B618A /* NfpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpController.swift; sourceTree = "<group>"; };
@@ -118,7 +119,6 @@
 		6EB3C6002762064200D51135 /* TotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreCell.swift; sourceTree = "<group>"; };
 		6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6EB46012276E0EC600DC5C77 /* Tariff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tariff.swift; sourceTree = "<group>"; };
-		6EBAF098277480350034999F /* SportType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportType.swift; sourceTree = "<group>"; };
 		6EBAF09A2774C5110034999F /* ResultExerciseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultExerciseCell.swift; sourceTree = "<group>"; };
 		6EBAF09C2774CF1B0034999F /* ResultTotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultTotalScoreCell.swift; sourceTree = "<group>"; };
 		6EBAF09E2774D2540034999F /* DetailResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailResultViewController.swift; sourceTree = "<group>"; };
@@ -372,7 +372,7 @@
 				6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */,
 				6E330B93276DA0F9008DEC4F /* SportGrade.swift */,
 				6EB46012276E0EC600DC5C77 /* Tariff.swift */,
-				6EBAF098277480350034999F /* SportType.swift */,
+				6E7E8572278E8B2400CC8111 /* Info.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -409,7 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				6ED04548275C6B4700D048B4 /* NfpViewController.swift */,
-				6E80DAFB2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift */,
+				6E80DAFB2769BCF5006C21F0 /* DescriptionViewController.swift */,
 				6E95955227777BB80085BD08 /* AlertController.swift */,
 			);
 			path = Controller;
@@ -575,7 +575,6 @@
 				6E50C0102770CBE900C3D04C /* SegmentedViewCell.swift in Sources */,
 				6E21298127635E7C0016B24A /* WinterTriathlonExercises.json in Sources */,
 				6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */,
-				6EBAF099277480350034999F /* SportType.swift in Sources */,
 				6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */,
 				6E80DAF92769AD7D006C21F0 /* NfpExerciseHeaderView.swift in Sources */,
 				6E07426C275CB35C00907B35 /* SwitchTableViewCell.swift in Sources */,
@@ -599,6 +598,7 @@
 				6E07426A275C962C00907B35 /* NumberOfExercises.swift in Sources */,
 				6E56A701277C2A6900362073 /* Extension+UIButton.swift in Sources */,
 				6E074264275C957C00907B35 /* MaleAgeCategory.swift in Sources */,
+				6E7E8573278E8B2400CC8111 /* Info.swift in Sources */,
 				6EAAFE62277DE4ED00809FED /* Extension+UIView.swift in Sources */,
 				6E50C0122770CF5200C3D04C /* SportExerciseCell.swift in Sources */,
 				6E56A6F8277B128F00362073 /* DonateCell.swift in Sources */,
@@ -608,7 +608,7 @@
 				6ED04551275C6C4500D048B4 /* DetailSettingsViewController.swift in Sources */,
 				6E95955927783E0C0085BD08 /* AboutAppViewController.swift in Sources */,
 				6EB46013276E0EC600DC5C77 /* Tariff.swift in Sources */,
-				6E80DAFC2769BCF5006C21F0 /* ExerciseDescriptionViewController.swift in Sources */,
+				6E80DAFC2769BCF5006C21F0 /* DescriptionViewController.swift in Sources */,
 				6E90DDF6275F4BBE004B618A /* NfpController.swift in Sources */,
 				6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */,
 				6E074268275C95F100907B35 /* Category.swift in Sources */,

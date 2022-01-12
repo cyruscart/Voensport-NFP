@@ -316,7 +316,7 @@ extension NfpViewController {
     }
     
     private func showDescription(with exercise: NfpExercise) {
-        let descriptionVC = ExerciseDescriptionViewController()
+        let descriptionVC = DescriptionViewController()
         descriptionVC.configure(with: exercise)
         present(descriptionVC, animated: true)
     }
