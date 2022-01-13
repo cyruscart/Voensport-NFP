@@ -16,13 +16,12 @@ final class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
             let section: NSCollectionLayoutSection
             
             switch sectionKind {
-            
             case .onboarding:
                 let screenRatio = UIScreen.main.bounds.width / UIScreen.main.bounds.height
                 
                 let totalItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                            heightDimension: .fractionalHeight(1))
-
+                
                 let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)
                 let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.53),
                                                             heightDimension: .fractionalHeight(screenRatio))
@@ -42,11 +41,11 @@ final class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                 
             case .logo:
                 let logoItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
-                                                              heightDimension: .fractionalHeight(1))
+                                                          heightDimension: .fractionalHeight(1))
                 let logoItem = NSCollectionLayoutItem(layoutSize: logoItemSize)
-            
+                
                 let logoGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.8),
-                                                               heightDimension: .fractionalWidth(0.8))
+                                                           heightDimension: .fractionalWidth(0.8))
                 let logoGroup = NSCollectionLayoutGroup.horizontal(layoutSize: logoGroupSize, subitems: [logoItem])
                 logoGroup.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
                 

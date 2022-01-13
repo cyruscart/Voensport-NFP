@@ -16,9 +16,10 @@ class NfpExerciseHeaderView: UICollectionReusableView {
         label.adjustsFontSizeToFitWidth = true
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         configure()
     }
     

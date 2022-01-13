@@ -12,11 +12,11 @@ class NfpCompositionalLayout: UICollectionViewCompositionalLayout {
     static func createLayout(numberOfSections: Int) -> UICollectionViewCompositionalLayout {
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
+            
             let sectionKind = Array(0...numberOfSections)[sectionIndex]
             let section: NSCollectionLayoutSection
             
             if sectionKind == numberOfSections  {
-                
                 let totalItemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1),
                                                            heightDimension: .fractionalHeight(1))
                 let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)

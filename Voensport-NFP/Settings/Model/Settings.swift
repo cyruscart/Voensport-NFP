@@ -8,7 +8,6 @@
 import Foundation
 
 final class Settings: Codable {
-    
     var sex: Sex = .male
     var maleAgeCategory: MaleAgeCategory = .firstAgeGroup
     var femaleAgeCategory: FemaleAgeCategory = .firstAgeGroup
@@ -23,18 +22,18 @@ final class Settings: Codable {
     }
     
     var isManOlderThirtyFive: Bool {
-        maleAgeCategory == .fourthAgeGroup
-        || maleAgeCategory == .fifthAgeGroup
-        || maleAgeCategory == .sixthAgeGroup
-        || maleAgeCategory == .seventhAgeGroup
-        || maleAgeCategory == .eighthAgeGroup
+        maleAgeCategory == .fourthAgeGroup ||
+        maleAgeCategory == .fifthAgeGroup ||
+        maleAgeCategory == .sixthAgeGroup ||
+        maleAgeCategory == .seventhAgeGroup ||
+        maleAgeCategory == .eighthAgeGroup
     }
     
     var isWomanOlderThirty: Bool {
-        femaleAgeCategory == .thirdAgeGroup
-        || femaleAgeCategory == .fourthAgeGroup
-        || femaleAgeCategory == .fifthAgeGroup
-        || femaleAgeCategory == .sixthAgeGroup
+        femaleAgeCategory == .thirdAgeGroup ||
+        femaleAgeCategory == .fourthAgeGroup ||
+        femaleAgeCategory == .fifthAgeGroup ||
+        femaleAgeCategory == .sixthAgeGroup
     }
     
     private var shouldShowCategoryInsteadExercise: Bool {
@@ -114,12 +113,9 @@ final class Settings: Codable {
     
     func getIntegerNumberOfExercises() -> Int {
         switch numberOfExercise {
-        case .three:
-            return 3
-        case .four:
-            return 4
-        case .five:
-            return 5
+        case .three: return 3
+        case .four: return 4
+        case .five: return 5
         }
     }
     
@@ -180,7 +176,6 @@ final class Settings: Codable {
     }
     
     func getNumberOfRowsForDetailSettings(_ currentSetting: String) -> Int {
-        
         switch currentSetting {
         case "sex":
             return Sex.allCases.count
@@ -191,14 +186,13 @@ final class Settings: Codable {
         case "numberOfExercise":
             return getNumberOfExerciseList().count
         case "tariff":
-           return 3
+            return 3
         default:
             return Category.allCases.count
         }
     }
     
     func getTitleForSectionForSettingsList(section: Int) -> String? {
-        
         if section == getNumberOfSectionForSettings() - 1 {
             return "Тактильный отклик"
         } else if section == getNumberOfSectionForSettings() - 2 {
@@ -211,7 +205,6 @@ final class Settings: Codable {
     }
     
     func getTextForCell(section: Int) -> String {
-        
         switch section {
         case getNumberOfSectionForSettings() - 2:
             return tariff == 0

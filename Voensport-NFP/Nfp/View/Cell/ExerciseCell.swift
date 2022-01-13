@@ -9,6 +9,7 @@ import UIKit
 
 class ExerciseCell: UICollectionViewCell {
     static let identifier = "ExerciseCell"
+    
     var callback: ((_ exercise: NfpExercise) -> Void)!
     var exercise: NfpExercise!
     private var backGroundImageView = UIImageView()
@@ -41,6 +42,7 @@ class ExerciseCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         clipsToBounds = true
         setupCell()
         setupConstraints()
@@ -87,7 +89,6 @@ class ExerciseCell: UICollectionViewCell {
         exerciseNameLabel.text = exercise.name
         exerciseNumberLabel.text = exercise.number
         descriptionButton.isHidden = exercise.exerciseDescription == nil
-        
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         layer.cornerRadius = 15
@@ -96,6 +97,10 @@ class ExerciseCell: UICollectionViewCell {
         setViewShadows()
         layer.shadowRadius = 10
         
+        setImages()
+    }
+    
+    private func setImages() {
         switch exercise.type {
         case .power:
             backGroundImageView.image = UIImage(named: "power")

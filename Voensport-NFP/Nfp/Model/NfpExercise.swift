@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ExerciseType: String, CaseIterable, Codable, Hashable {
+enum ExerciseType: String, CaseIterable, Codable {
     case power = "Сила"
     case agility = "Ловкость"
     case speed = "Быстрота"

@@ -8,9 +8,8 @@
 import UIKit
 
 class DetailSettingsViewController: UIViewController {
-    
-    var settings: Settings!
-    var currentSetting: String!
+    var settings: Settings
+    var currentSetting = ""
     private var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -18,6 +17,16 @@ class DetailSettingsViewController: UIViewController {
         
         setNavigationTitle()
         setTableView()
+    }
+    
+    init(_ settings: Settings) {
+        self.settings = settings
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func setTableView() {

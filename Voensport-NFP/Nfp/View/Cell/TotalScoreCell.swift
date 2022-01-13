@@ -9,32 +9,32 @@ import UIKit
 
 class TotalScoreCell: UICollectionViewCell {
     static let identifier = "TotalScoreCell"
+    
     var saveButtonCallBack: (() -> Void) = {}
     
     let labelStackView: UIStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .vertical
-            stackView.alignment = .leading
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .leading
         stackView.distribution = .fillEqually
-            stackView.spacing = 20
-            return stackView
-        }()
+        stackView.spacing = 20
+        return stackView
+    }()
     
     let mainStackView: UIStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .horizontal
-            stackView.alignment = .center
-            stackView.distribution = .equalSpacing
-            stackView.spacing = 20
-            return stackView
-        }()
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.alignment = .center
+        stackView.distribution = .equalSpacing
+        stackView.spacing = 20
+        return stackView
+    }()
     
     private let totalScoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
-        
         return label
     }()
     
@@ -43,7 +43,6 @@ class TotalScoreCell: UICollectionViewCell {
         label.textAlignment = .right
         label.font = UIFont.boldSystemFont(ofSize: 80)
         label.adjustsFontSizeToFitWidth = true
-        
         return label
     }()
     
@@ -51,7 +50,6 @@ class TotalScoreCell: UICollectionViewCell {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 23)
         label.adjustsFontSizeToFitWidth = true
-        
         label.textAlignment = .left
         return label
     }()

@@ -12,12 +12,13 @@ final class StorageManager {
     private init() {}
     
     //MARK: - Settings
+    
     func saveSettings(_ settings: Settings) {
         guard let data = try? JSONEncoder().encode(settings) else { return }
         UserDefaults.standard.set(data, forKey: "settings")
     }
     
-    func getSettings() -> Settings {
+    func fetchSettings() -> Settings {
         guard let data = UserDefaults.standard.data(forKey: "settings") else { return Settings() }
         guard let settings = try? JSONDecoder().decode(Settings.self, from: data) else { return Settings()}
         
@@ -37,22 +38,17 @@ final class StorageManager {
             } catch {
                 print(error.localizedDescription)
             }
-        } else {
-            fatalError("File not found")
         }
-        
         return exercises
     }
     
     //MARK: - Sport
     
     func getSportExercisesFromJsonFile() -> (summerExercises: [TriathlonExercise], winterExercises: [TriathlonExercise]) {
-        
         var summerExercises: [TriathlonExercise] = []
         var winterExercises: [TriathlonExercise] = []
         
         guard let winterPath = Bundle.main.path(forResource: "WinterTriathlonExercises", ofType: "json") else { return ([], []) }
-        
         guard let summerPath = Bundle.main.path(forResource: "SummerTriathlonExercises", ofType: "json") else { return ([], []) }
         
         do {
@@ -61,7 +57,6 @@ final class StorageManager {
             
             guard let winterData = try String(contentsOfFile: winterPath).data(using: .utf8) else { return ([], []) }
             winterExercises = try JSONDecoder().decode([TriathlonExercise].self, from: winterData)
-            
         } catch {
             print(error.localizedDescription)
         }
@@ -78,7 +73,6 @@ final class StorageManager {
     func getResults() -> ResultsController {
         guard let data = UserDefaults.standard.data(forKey: "results") else { return ResultsController() }
         guard let results = try? JSONDecoder().decode(ResultsController.self, from: data) else { return ResultsController() }
-        
         return results
     }
     

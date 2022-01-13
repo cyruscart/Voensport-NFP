@@ -23,7 +23,7 @@ final class AboutAppViewController: UIViewController {
         
         setupNavigationBar()
         setupCollectionView()
-
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -34,12 +34,16 @@ final class AboutAppViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: AboutAppCompositionalLayout.createLayout())
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.register(AboutImageCell.self, forCellWithReuseIdentifier: AboutImageCell.identifier)
         collectionView.register(AboutAppHeaderView.self, forSupplementaryViewOfKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier)
+        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
+        
         view.addSubview(collectionView)
     }
     
@@ -63,7 +67,6 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         switch AboutAppSectionKind.allCases[indexPath.section] {
             
         case .onboarding:
@@ -79,10 +82,9 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier, for: indexPath) as! AboutAppHeaderView
         view.headingLabel.text = ["Возможности", "Логотип"][indexPath.section]
-        view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие еще крутые варианты она нарисовала"][indexPath.section]
+        view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие крутые варианты она еще нарисовала"][indexPath.section]
         return view
     }
     

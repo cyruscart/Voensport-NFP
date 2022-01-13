@@ -105,7 +105,7 @@ extension SportExerciseCell: UIPickerViewDelegate, UIPickerViewDataSource {
         
         let downImage = UIImage(systemName: "chevron.down")
         let scrollDownButton = UIBarButtonItem(image: downImage, style: .plain, target: nil, action: #selector(scrollDown))
-            
+        
         let clearButton = UIBarButtonItem(title: "Очистить", style: .done, target: nil, action: #selector(clearPressed))
         let doneButton = UIBarButtonItem(title: "Готово", style: .done, target: nil, action: #selector(donePressed))
         let flexButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)

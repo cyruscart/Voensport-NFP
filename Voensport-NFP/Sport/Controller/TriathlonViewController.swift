@@ -8,7 +8,7 @@
 import UIKit
 
 class TriathlonViewController: UIViewController {
-    var triathlonController: TriathlonController!
+    var triathlonController = TriathlonController()
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     private var tableView: UITableView!
     
@@ -45,12 +45,12 @@ class TriathlonViewController: UIViewController {
                 self.dismiss(animated: true, completion: nil)
                 updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
             }
-    
+            
             let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
             navigationItem.rightBarButtonItem = closeButton
         } else {
             navigationItem.largeTitleDisplayMode = .never
-    
+            
             title = triathlonController.triathlonType == .summer
             ? "Летнее офицерское троеборье"
             : "Зимнее офицерское троеборье"
@@ -102,12 +102,9 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
-        case 0:
-            return 45
-        case 4:
-            return 140
-        default:
-            return 100
+        case 0: return 45
+        case 4: return 140
+        default: return 100
         }
     }
     
@@ -121,7 +118,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             cell.configure(triathlonController.ageCategory)
-            cell.ageSegmented.isEnabled = !triathlonController.isEditing
+            cell.ageSegmentedControl.isEnabled = !triathlonController.isEditing
             cell.selectionStyle = .none
             return cell
             

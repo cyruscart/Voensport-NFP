@@ -48,6 +48,8 @@
 		6E90DDF4275F3201004B618A /* NfpExercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF3275F3201004B618A /* NfpExercise.swift */; };
 		6E90DDF6275F4BBE004B618A /* NfpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF5275F4BBE004B618A /* NfpController.swift */; };
 		6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E90DDF7275F50F1004B618A /* ResultCellView.swift */; };
+		6E951F5627906417005C8559 /* NfpResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E951F5527906417005C8559 /* NfpResult.swift */; };
+		6E951F5827906431005C8559 /* SportResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E951F5727906431005C8559 /* SportResult.swift */; };
 		6E95955127774AD90085BD08 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6E95955027774AD90085BD08 /* Assets.xcassets */; };
 		6E95955327777BB80085BD08 /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E95955227777BB80085BD08 /* AlertController.swift */; };
 		6E95955927783E0C0085BD08 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E95955827783E0C0085BD08 /* AboutAppViewController.swift */; };
@@ -108,6 +110,8 @@
 		6E90DDF3275F3201004B618A /* NfpExercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpExercise.swift; sourceTree = "<group>"; };
 		6E90DDF5275F4BBE004B618A /* NfpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpController.swift; sourceTree = "<group>"; };
 		6E90DDF7275F50F1004B618A /* ResultCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultCellView.swift; sourceTree = "<group>"; };
+		6E951F5527906417005C8559 /* NfpResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpResult.swift; sourceTree = "<group>"; };
+		6E951F5727906431005C8559 /* SportResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportResult.swift; sourceTree = "<group>"; };
 		6E95955027774AD90085BD08 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6E95955227777BB80085BD08 /* AlertController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
 		6E95955827783E0C0085BD08 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +160,7 @@
 		6E50C0022770A6BA00C3D04C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				6E330B93276DA0F9008DEC4F /* SportGrade.swift */,
 				6E50C00B2770A96C00C3D04C /* TriathlonType.swift */,
 				6E50C0072770A7F200C3D04C /* TriathlonController.swift */,
 				6E50C0092770A83900C3D04C /* TriathlonExercise.swift */,
@@ -223,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				6E5F27F2277350FD00926FC1 /* ResultsController.swift */,
+				6E951F5727906431005C8559 /* SportResult.swift */,
+				6E951F5527906417005C8559 /* NfpResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -367,7 +374,6 @@
 			isa = PBXGroup;
 			children = (
 				6E7E8570278E84DD00CC8111 /* TabBarControllerFactory.swift */,
-				6E330B93276DA0F9008DEC4F /* SportGrade.swift */,
 				6EB46012276E0EC600DC5C77 /* Tariff.swift */,
 				6E7E8572278E8B2400CC8111 /* Info.swift */,
 			);
@@ -573,6 +579,7 @@
 				6E21298127635E7C0016B24A /* WinterTriathlonExercises.json in Sources */,
 				6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */,
 				6E074266275C95D500907B35 /* FemaleAgeCategory.swift in Sources */,
+				6E951F5827906431005C8559 /* SportResult.swift in Sources */,
 				6E80DAF92769AD7D006C21F0 /* NfpExerciseHeaderView.swift in Sources */,
 				6E07426C275CB35C00907B35 /* SwitchTableViewCell.swift in Sources */,
 				6E95955327777BB80085BD08 /* AlertController.swift in Sources */,
@@ -607,6 +614,7 @@
 				6E80DAFC2769BCF5006C21F0 /* DescriptionViewController.swift in Sources */,
 				6E90DDF6275F4BBE004B618A /* NfpController.swift in Sources */,
 				6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */,
+				6E951F5627906417005C8559 /* NfpResult.swift in Sources */,
 				6E074268275C95F100907B35 /* Category.swift in Sources */,
 				6E50C00E2770C9E400C3D04C /* TriathlonViewController.swift in Sources */,
 			);

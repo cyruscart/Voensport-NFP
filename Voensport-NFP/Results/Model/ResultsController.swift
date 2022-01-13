@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum ResultType {
+    case nfp
+    case sport
+}
+
 struct ResultsController: Codable {
     var nfpResults: [NfpResult] = []
     var sportResults: [SportResult] = []
@@ -24,43 +29,4 @@ struct ResultsController: Codable {
         }
     }
     
-}
-
-struct NfpResult: Codable {
-    let totalScore: Int
-    let grade: String
-    let sex: Sex
-    let maleAgeCategory: MaleAgeCategory
-    let femaleAgeCategory: FemaleAgeCategory
-    let numberOfExercise: NumberOfExercise
-    let category: Category
-    let date: String
-    let nfpExercises: [NfpExercise]
-    let tariff: Int
-    
-    func getExerciseForEditing() -> [[NfpExercise]] {
-        var exercises: [[NfpExercise]] = []
-        
-        nfpExercises.forEach { exercise in
-            exercises.append([exercise])
-        }
-        
-        return exercises
-    }
-    
-}
-
-struct SportResult: Codable {
-    let sportType: SportType
-    let totalScore: Int
-    let grade: String
-    var date: String
-    var ageTriathlonCategory: TriathlonAgeCategory? = nil
-    var triathlonType: TriathlonType? = nil
-    var sportExercises: [TriathlonExercise] = []
-}
-
-enum ResultType {
-    case nfp
-    case sport
 }

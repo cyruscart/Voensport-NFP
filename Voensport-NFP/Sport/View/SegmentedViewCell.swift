@@ -11,14 +11,14 @@ class SegmentedViewCell: UITableViewCell {
     static let identifier = "SegmentedViewCell"
     var callBack: ((Int) -> Void)?
     
-    let ageSegmented: UISegmentedControl = {
+    let ageSegmentedControl: UISegmentedControl = {
         let segmented = UISegmentedControl()
         
         segmented.insertSegment(withTitle: "До 30 лет", at: 0, animated: false)
         segmented.insertSegment(withTitle: "30 - 40 лет", at: 1, animated: false)
         segmented.insertSegment(withTitle: "Свыше 40 лет", at: 2, animated: false)
         
-        segmented.addTarget(self, action: #selector(segmentedSelected) , for: .valueChanged)
+        segmented.addTarget(self, action: #selector(segmentSelected) , for: .valueChanged)
         return segmented
     }()
     
@@ -33,31 +33,31 @@ class SegmentedViewCell: UITableViewCell {
     }
     
     private func setupCell() {
-        ageSegmented.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(ageSegmented)
+        ageSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(ageSegmentedControl)
         
         NSLayoutConstraint.activate([
-            ageSegmented.topAnchor.constraint(equalTo: topAnchor, constant: 5),
-            ageSegmented.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            ageSegmented.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            ageSegmented.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            ageSegmentedControl.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            ageSegmentedControl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
+            ageSegmentedControl.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
+            ageSegmentedControl.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
         ])
     }
     
     func configure(_ age: TriathlonAgeCategory) {
         switch age {
         case .lessThirty:
-            ageSegmented.selectedSegmentIndex = 0
+            ageSegmentedControl.selectedSegmentIndex = 0
         case .lessForty:
-            ageSegmented.selectedSegmentIndex = 1
+            ageSegmentedControl.selectedSegmentIndex = 1
         case .moreForty:
-            ageSegmented.selectedSegmentIndex = 2
+            ageSegmentedControl.selectedSegmentIndex = 2
         }
     }
     
-    @objc func segmentedSelected() {
+    @objc func segmentSelected() {
         guard let callBack = callBack else { return }
-        callBack(ageSegmented.selectedSegmentIndex)
+        callBack(ageSegmentedControl.selectedSegmentIndex)
     }
     
 }

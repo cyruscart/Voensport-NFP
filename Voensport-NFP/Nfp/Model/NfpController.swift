@@ -24,56 +24,7 @@ final class NfpController {
     }
     
     var minimumScore: Int {
-        if settings.sex == .male {
-            switch settings.maleAgeCategory {
-            case .candidate:
-                return 26
-            case .solderLessSixMonths:
-                return 26
-            case .solderMoreSixMonths:
-                return 28
-            case .cadetFirstYear:
-                return 28
-            case .cadetSecondYear:
-                return 30
-            case .cadetThirdYearAndOlder:
-                return 32
-            case .firstAgeGroup:
-                return 30
-            case .secondAgeGroup:
-                return 28
-            case .thirdAgeGroup:
-                return 24
-            case .fourthAgeGroup:
-                return 22
-            case .fifthAgeGroup:
-                return 20
-            case .sixthAgeGroup:
-                return 16
-            case .seventhAgeGroup:
-                return 12
-            case .eighthAgeGroup:
-                return 6
-            }
-            
-        } else {
-            switch settings.femaleAgeCategory {
-            case .candidate:
-                return 26
-            case .firstAgeGroup:
-                return 28
-            case .secondAgeGroup:
-                return 26
-            case .thirdAgeGroup:
-                return 24
-            case .fourthAgeGroup:
-                return 22
-            case .fifthAgeGroup:
-                return 20
-            case .sixthAgeGroup:
-                return 18
-            }
-        }
+        settings.sex == .male ? getMinimumScoreForMan() : getMinimumScoreForWoman()
     }
     
     private enum Grade: String, CaseIterable  {
@@ -140,14 +91,6 @@ final class NfpController {
     
     //MARK: - Return data methods
     
-    private func getDate() -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        dateFormatter.timeStyle = .none
-        dateFormatter.locale = Locale(identifier: "ru_Ru")
-        return dateFormatter.string(from: Date())
-    }
-    
     func generateNfpResult() -> NfpResult {
         NfpResult(totalScore: totalScore,
                   grade: calculateGrade(),
@@ -192,69 +135,96 @@ final class NfpController {
         : "\(["1 упражнение", "2 упражнение", "3 упражнение", "4 упражнение", "5 упражнение"][section])"
     }
     
+    private func getDate() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateStyle = .medium
+        dateFormatter.timeStyle = .none
+        dateFormatter.locale = Locale(identifier: "ru_Ru")
+        return dateFormatter.string(from: Date())
+    }
+    
     //MARK: - Base calculation methods
     
     func calculateGrade() -> String {
-
         if !selectedExercises.filter({ $0.score < minimumScore }).isEmpty {
             return Grade.two.rawValue
         }
         
-        if settings.sex == .male {
-            
-            switch settings.maleAgeCategory {
-            case .candidate: return
-                calculateCandidateGrade()
-            case .solderLessSixMonths:
-                return calculateLessSixMonthGrade()
-            case .solderMoreSixMonths:
-                return calculateMoreSixMonthGrade()
-            case .cadetFirstYear:
-                return calculateCadetFirstYearGrade()
-            case .cadetSecondYear:
-                return calculateCadetSecondYearGrade()
-            case .cadetThirdYearAndOlder:
-                return calculateCadetThirdYearGrade()
-            case .firstAgeGroup:
-                return calculateFirstGroupGrade()
-            case .secondAgeGroup:
-                return calculateSecondGroupGrade()
-            case .thirdAgeGroup:
-                return calculateThirdGroupGrade()
-            case .fourthAgeGroup:
-                return calculateFourthGroupGrade()
-            case .fifthAgeGroup:
-                return calculateFifthGroupGrade()
-            case .sixthAgeGroup:
-                return calculateSixthGroupGrade()
-            case .seventhAgeGroup:
-                return calculateSeventhGroupGrade()
-            case .eighthAgeGroup:
-                return calculateEighthGroupGrade()
-            }
-            
-        } else {
-            
-            switch settings.femaleAgeCategory {
-            case .candidate:
-                return calculateWomanCandidateGrade()
-            case .firstAgeGroup:
-                return calculateWomanFirstGroupGrade()
-            case .secondAgeGroup:
-                return calculateWomanSecondGroupGrade()
-            case .thirdAgeGroup:
-                return calculateWomanThirdGroupGrade()
-            case .fourthAgeGroup:
-                return calculateWomanFourthGroupGrade()
-            case .fifthAgeGroup:
-                return calculateWomanFifthGroupGrade()
-            case .sixthAgeGroup:
-                return calculateWomanSixthGroupGrade()
-            }
+        return settings.sex == .male ? calculateManGrade() : calculateWomanGrade()
+    }
+    
+    private func calculateManGrade() -> String {
+        switch settings.maleAgeCategory {
+        case .candidate: return
+            calculateCandidateGrade()
+        case .solderLessSixMonths:
+            return calculateLessSixMonthGrade()
+        case .solderMoreSixMonths:
+            return calculateMoreSixMonthGrade()
+        case .cadetFirstYear:
+            return calculateCadetFirstYearGrade()
+        case .cadetSecondYear:
+            return calculateCadetSecondYearGrade()
+        case .cadetThirdYearAndOlder:
+            return calculateCadetThirdYearGrade()
+        case .firstAgeGroup:
+            return calculateFirstGroupGrade()
+        case .secondAgeGroup:
+            return calculateSecondGroupGrade()
+        case .thirdAgeGroup:
+            return calculateThirdGroupGrade()
+        case .fourthAgeGroup:
+            return calculateFourthGroupGrade()
+        case .fifthAgeGroup:
+            return calculateFifthGroupGrade()
+        case .sixthAgeGroup:
+            return calculateSixthGroupGrade()
+        case .seventhAgeGroup:
+            return calculateSeventhGroupGrade()
+        case .eighthAgeGroup:
+            return calculateEighthGroupGrade()
+        }
+    }
+    
+    private func calculateWomanGrade() -> String {
+        switch settings.femaleAgeCategory {
+        case .candidate:
+            return calculateWomanCandidateGrade()
+        case .firstAgeGroup:
+            return calculateWomanFirstGroupGrade()
+        case .secondAgeGroup:
+            return calculateWomanSecondGroupGrade()
+        case .thirdAgeGroup:
+            return calculateWomanThirdGroupGrade()
+        case .fourthAgeGroup:
+            return calculateWomanFourthGroupGrade()
+        case .fifthAgeGroup:
+            return calculateWomanFifthGroupGrade()
+        case .sixthAgeGroup:
+            return calculateWomanSixthGroupGrade()
         }
     }
     
     //MARK: - Man calculation methods
+    
+    private func getMinimumScoreForMan() -> Int {
+        switch settings.maleAgeCategory {
+        case .candidate: return 26
+        case .solderLessSixMonths: return 26
+        case .solderMoreSixMonths: return 28
+        case .cadetFirstYear: return 28
+        case .cadetSecondYear: return 30
+        case .cadetThirdYearAndOlder: return 32
+        case .firstAgeGroup: return 30
+        case .secondAgeGroup: return 28
+        case .thirdAgeGroup: return 24
+        case .fourthAgeGroup: return 22
+        case .fifthAgeGroup: return 20
+        case .sixthAgeGroup: return 16
+        case .seventhAgeGroup: return 12
+        case .eighthAgeGroup: return 6
+        }
+    }
     
     private func calculateCandidateGrade() -> String {
         var localGrade = ""
@@ -1555,6 +1525,18 @@ final class NfpController {
     
     //MARK: - Woman calculation methods
     
+    private func getMinimumScoreForWoman() -> Int {
+        switch settings.femaleAgeCategory {
+        case .candidate: return 26
+        case .firstAgeGroup: return 28
+        case .secondAgeGroup: return 26
+        case .thirdAgeGroup: return 24
+        case .fourthAgeGroup: return 22
+        case .fifthAgeGroup: return 20
+        case .sixthAgeGroup: return 18
+        }
+    }
+    
     private func calculateWomanCandidateGrade() -> String {
         var localGrade = ""
         
@@ -1588,7 +1570,6 @@ final class NfpController {
     }
     
     private func calculateWomanFirstGroupGrade() -> String {
-        
         switch totalScore {
         case 110...139:
             return Grade.three.rawValue
@@ -1608,7 +1589,6 @@ final class NfpController {
     }
     
     private func calculateWomanSecondGroupGrade() -> String {
-        
         switch totalScore {
         case 90...119:
             return Grade.three.rawValue
@@ -1706,7 +1686,6 @@ final class NfpController {
             return Grade.two.rawValue
         }
     }
-    
     
     //MARK: - Money calculation methods
     

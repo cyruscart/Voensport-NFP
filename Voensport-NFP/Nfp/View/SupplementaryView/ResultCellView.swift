@@ -8,7 +8,6 @@
 import UIKit
 
 class ResultCellView: UICollectionReusableView {
-    
     static let identifier = "ResultCellView"
     
     var exercise: NfpExercise!
@@ -39,8 +38,8 @@ class ResultCellView: UICollectionReusableView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupCell()
         
+        setupCell()
         backgroundColor = .systemBackground
     }
     
@@ -80,7 +79,6 @@ class ResultCellView: UICollectionReusableView {
     }
     
     private func setSliderTrackColor() {
-        
         resultSlider.minimumTrackTintColor = lrintf(resultSlider.value) < minimumScore ?
         UIColor.systemRed :
         UIColor.systemBlue

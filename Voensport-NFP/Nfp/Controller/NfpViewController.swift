@@ -9,6 +9,7 @@ import UIKit
 
 final class NfpViewController: UIViewController  {
     let nfpController: NfpController
+    
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     private var shouldObserveVisibleCells = false
     private var collectionView: UICollectionView!
@@ -19,7 +20,7 @@ final class NfpViewController: UIViewController  {
         
         super.init(nibName: nil, bundle: nil)
     }
-   
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -38,8 +39,6 @@ final class NfpViewController: UIViewController  {
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
-        collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
         collectionView.reloadData()
     }
     
@@ -72,10 +71,6 @@ final class NfpViewController: UIViewController  {
         view.addSubview(collectionView)
     }
     
-    private func updateCompositionalLayout() {
-        let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
-        collectionView.setCollectionViewLayout(layout, animated: false)
-    }
     
     private func setupNavigationBar() {
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -122,6 +117,13 @@ final class NfpViewController: UIViewController  {
     }
     
     //MARK: - Update UI
+    
+    private func updateCompositionalLayout() {
+        let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
+        collectionView.setCollectionViewLayout(layout, animated: false)
+        collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
+        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
+    }
     
     private func updateTotalScoreCell() {
         collectionView.visibleCells.forEach { cell in
@@ -308,8 +310,7 @@ extension NfpViewController: UICollectionViewDelegate {
 extension NfpViewController {
     
     @objc private func showSettings() {
-        let settingsVC = SettingsViewController()
-        settingsVC.settings = nfpController.settings
+        let settingsVC = SettingsViewController(nfpController.settings)
         navigationController?.pushViewController(settingsVC, animated: true)
     }
     
@@ -318,7 +319,7 @@ extension NfpViewController {
         descriptionVC.configure(with: exercise)
         present(descriptionVC, animated: true)
     }
-
+    
     @objc private func showAlert() {
         if nfpController.shouldCalculateMoney() {
             nfpController.settings.tariff == 0 ? showSettingsAlert() : showMoneyAlert()

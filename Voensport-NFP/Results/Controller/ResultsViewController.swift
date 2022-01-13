@@ -8,9 +8,19 @@
 import UIKit
 
 final class ResultsViewController: UIViewController {
-    var resultsController: ResultsController!
+    var resultsController: ResultsController
     private var tableView: UITableView!
    
+    init(_ resultsController: ResultsController) {
+        self.resultsController = resultsController
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -61,11 +61,11 @@ final class TotalScoreSportCell: UITableViewCell  {
         totalScoreLabel.isHidden = !sportController.shouldShowTotalScore()
     }
     
-        @objc private func saveButtonPressed() {
-            if saveButton.title(for: .normal) == "Сохранить" {
-                saveButton.pulsate()
-                saveButton.setTitle("Сохранено", for: .normal)
-                saveButtonCallBack()
-            }
+    @objc private func saveButtonPressed() {
+        if saveButton.title(for: .normal) == "Сохранить" {
+            saveButton.pulsate()
+            saveButton.setTitle("Сохранено", for: .normal)
+            saveButtonCallBack()
         }
     }
+}

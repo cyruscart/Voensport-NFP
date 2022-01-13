@@ -10,8 +10,8 @@ import Foundation
 final class TriathlonExercise: Codable {
     let name: String
     let triathlonAgeCategory: TriathlonAgeCategory
-    var result = ""
     let scoreList: [String: Int]
+    var result = ""
     
     var score: Int {
         scoreList.first(where: {$0.key == result })?.value ?? 0

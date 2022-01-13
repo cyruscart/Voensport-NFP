@@ -9,7 +9,7 @@ import UIKit
 
 class SwitchTableViewCell: UITableViewCell {
     static let identifier = "HapticTableViewCell"
-   
+    
     var switchStatement = UISwitch()
     var settingNameLabel = UILabel()
     

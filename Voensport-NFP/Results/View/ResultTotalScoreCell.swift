@@ -49,11 +49,6 @@ final class ResultTotalScoreCell: UICollectionViewCell {
         
         setupCell()
         setupConstraints()
-        backgroundColor = .systemBackground
-        contentView.layer.cornerRadius = 15
-        contentView.layer.masksToBounds = true
-        layer.cornerRadius = 15
-        layer.masksToBounds = false
         setViewShadows()
     }
     
@@ -66,6 +61,12 @@ final class ResultTotalScoreCell: UICollectionViewCell {
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)
         }
+        
+        backgroundColor = .systemBackground
+        contentView.layer.cornerRadius = 15
+        contentView.layer.masksToBounds = true
+        layer.cornerRadius = 15
+        layer.masksToBounds = false
     }
     
     private func setupConstraints() {

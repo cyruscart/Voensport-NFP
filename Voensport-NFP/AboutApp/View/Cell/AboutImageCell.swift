@@ -9,10 +9,12 @@ import UIKit
 
 final class AboutImageCell: UICollectionViewCell {
     static let identifier = "AboutImageCell"
+    
     private let imageView = UIImageView()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         clipsToBounds = true
         setupCell()
         setupConstraints()
@@ -61,7 +63,7 @@ final class AboutImageCell: UICollectionViewCell {
         
         imageView.animationImages = logoImages
         imageView.animationDuration = 4
-        imageView.animationRepeatCount = 10
+        imageView.animationRepeatCount = 20
         imageView.startAnimating()
     }
 }
