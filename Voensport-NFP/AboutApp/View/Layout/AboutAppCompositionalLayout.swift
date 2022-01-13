@@ -60,7 +60,7 @@ final class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
                                                                                 alignment: .top)
                 
                 section.boundarySupplementaryItems = [sectionHeader]
-                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 0, trailing: 0)
+                section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 0, bottom: 50, trailing: 0)
             }
             return section
         }

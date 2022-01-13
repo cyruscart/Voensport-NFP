@@ -50,6 +50,9 @@ final class TotalScoreSportCell: UITableViewCell  {
     }
     
     func configureCell(sportController: TriathlonController) {
+        totalScoreLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        gradeLabel.font = UIFont.boldSystemFont(ofSize: 20)
+        
         totalScoreLabel.text = "Сумма баллов: \(sportController.totalScore)"
         gradeLabel.text = sportController.calculateTriathlonGrade()
         

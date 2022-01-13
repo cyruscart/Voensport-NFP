@@ -11,9 +11,27 @@ class TotalScoreCell: UICollectionViewCell {
     static let identifier = "TotalScoreCell"
     var saveButtonCallBack: (() -> Void) = {}
     
+    let labelStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.axis = .vertical
+            stackView.alignment = .leading
+        stackView.distribution = .fillEqually
+            stackView.spacing = 20
+            return stackView
+        }()
+    
+    let mainStackView: UIStackView = {
+            let stackView = UIStackView()
+            stackView.axis = .horizontal
+            stackView.alignment = .center
+            stackView.distribution = .equalSpacing
+            stackView.spacing = 20
+            return stackView
+        }()
+    
     private let totalScoreLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.textAlignment = .left
         label.adjustsFontSizeToFitWidth = true
         
@@ -31,7 +49,7 @@ class TotalScoreCell: UICollectionViewCell {
     
     private let gradeLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.font = UIFont.boldSystemFont(ofSize: 23)
         label.adjustsFontSizeToFitWidth = true
         
         label.textAlignment = .left
@@ -70,10 +88,11 @@ class TotalScoreCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        [totalScoreLabel, gradeLabel, markLabel, saveButton, moneyButton].forEach { subview in
+        [mainStackView, saveButton, moneyButton].forEach { subview in
             subview.translatesAutoresizingMaskIntoConstraints = false
             contentView.addSubview(subview)
         }
+        configureStackView()
     }
     
     private func setupConstraints() {
@@ -81,24 +100,29 @@ class TotalScoreCell: UICollectionViewCell {
         let width = UIScreen.main.bounds.width - inset * 2
         
         NSLayoutConstraint.activate([
-            totalScoreLabel.topAnchor.constraint(equalTo: markLabel.topAnchor),
-            totalScoreLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
+            mainStackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            mainStackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
+            mainStackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
+            mainStackView.bottomAnchor.constraint(equalTo: saveButton.topAnchor, constant: 0),
             
-            gradeLabel.bottomAnchor.constraint(equalTo: markLabel.bottomAnchor),
-            gradeLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
-            
-            markLabel.topAnchor.constraint(equalTo: topAnchor, constant: inset),
-            markLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset * 3),
-            
-            saveButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: moneyButton.trailingAnchor, constant: inset / 2),
             saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -inset),
             saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -inset),
             
-            moneyButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
+            moneyButton.centerYAnchor.constraint(equalTo: saveButton.centerYAnchor),
             moneyButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: inset),
             moneyButton.widthAnchor.constraint(equalToConstant: width / 5 - inset / 2),
         ])
+    }
+    
+    private func configureStackView() {
+        [totalScoreLabel, gradeLabel].forEach { subview in
+            labelStackView.addArrangedSubview(subview)
+        }
+        
+        [labelStackView, markLabel].forEach { subview in
+            mainStackView.addArrangedSubview(subview)
+        }
     }
     
     func configureCell(with nfpController: NfpController) {
