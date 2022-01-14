@@ -41,7 +41,7 @@ final class OnBoardingFooter: UICollectionReusableView {
         }
         
         NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            messageLabel.topAnchor.constraint(equalTo: topAnchor),
             messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             

@@ -27,10 +27,10 @@ final class NfpViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print("nfp did load")
+        showOnboarding()
         setupNavigationBar()
         setupCollectionView()
-        showOnboarding()
     }
     
     override func viewWillAppear(_ animated: Bool) {

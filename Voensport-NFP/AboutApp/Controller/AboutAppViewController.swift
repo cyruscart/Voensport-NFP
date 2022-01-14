@@ -84,7 +84,7 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier, for: indexPath) as! AboutAppHeaderView
         view.headingLabel.text = ["Возможности", "Логотип"][indexPath.section]
-        view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие прекрасные варианты она еще нарисовала"][indexPath.section]
+        view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие еще крутые варианты она нарисовала"][indexPath.section]
         return view
     }
     

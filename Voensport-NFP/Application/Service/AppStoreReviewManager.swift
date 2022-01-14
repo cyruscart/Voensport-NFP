@@ -9,7 +9,7 @@ import Foundation
 import StoreKit
 
 enum AppStoreReviewManager {
-    static let minimumReviewWorthyActionCount = 3
+    static let minimumReviewWorthyActionCount = 10
     
     static func requestReview(in viewController: UIViewController) {
         var actionCount = StorageManager.shared.getReviewActionCount()

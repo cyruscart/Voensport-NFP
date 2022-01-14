@@ -105,7 +105,7 @@ extension TriathlonViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         switch indexPath.row {
         case 0: return 45
-        case 4: return 140
+        case 4: return 180
         default: return 100
         }
     }

@@ -45,7 +45,8 @@ final class TotalScoreSportCell: UITableViewCell  {
             
             saveButton.topAnchor.constraint(equalTo: gradeLabel.bottomAnchor, constant: 20),
             saveButton.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 20),
-            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20)
+            saveButton.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -20),
+            saveButton.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -40)
         ])
     }
     

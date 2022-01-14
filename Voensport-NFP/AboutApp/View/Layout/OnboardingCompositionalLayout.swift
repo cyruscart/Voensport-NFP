@@ -17,8 +17,11 @@ final class OnboardingCompositionalLayout: UICollectionViewCompositionalLayout {
                                                        heightDimension: .fractionalHeight(1))
             let totalItem = NSCollectionLayoutItem(layoutSize: totalItemSize)
             
-            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(0.45),
-                                                        heightDimension: .fractionalHeight(0.7))
+//            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(0.45),
+//                                                        heightDimension: .fractionalHeight(0.7))
+            
+            let totalGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalHeight(0.47),
+                                                        heightDimension: .fractionalHeight(0.73))
             
             let totalGroup = NSCollectionLayoutGroup.horizontal(layoutSize: totalGroupSize, subitems: [totalItem])
             totalGroup.contentInsets = NSDirectionalEdgeInsets(top: 40, leading: 40, bottom: 0, trailing: 40)
