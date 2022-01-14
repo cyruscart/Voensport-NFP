@@ -1,5 +1,5 @@
 //
-//  Extension+UIView.swift
+//  UIView+Shadows.swift
 //  Voensport-NFP
 //
 //  Created by Кирилл on 30.12.2021.

@@ -114,6 +114,8 @@ final class NfpViewController: UIViewController  {
             StorageManager.shared.saveResults(results: resultsController)
         }
         
+        AppStoreReviewManager.requestReview(in: self)
+        
     }
     
     //MARK: - Update UI

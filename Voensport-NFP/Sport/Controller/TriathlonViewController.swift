@@ -89,6 +89,8 @@ class TriathlonViewController: UIViewController {
             resultsController.sportResults.insert(sportResult, at: 0)
             StorageManager.shared.saveResults(results: resultsController)
         }
+        
+        AppStoreReviewManager.requestReview(in: self)
     }
 }
 

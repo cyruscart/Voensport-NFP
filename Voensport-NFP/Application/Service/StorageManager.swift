@@ -11,15 +11,23 @@ final class StorageManager {
     static let shared = StorageManager()
     private init() {}
     
+    private enum Key: String {
+        case settings
+        case results
+        case onBoardingShowed
+        case reviewWorthyActionCount
+        case lastReviewRequestAppVersion
+    }
+    
     //MARK: - Settings
     
     func saveSettings(_ settings: Settings) {
         guard let data = try? JSONEncoder().encode(settings) else { return }
-        UserDefaults.standard.set(data, forKey: "settings")
+        UserDefaults.standard.set(data, forKey: Key.settings.rawValue)
     }
     
     func fetchSettings() -> Settings {
-        guard let data = UserDefaults.standard.data(forKey: "settings") else { return Settings() }
+        guard let data = UserDefaults.standard.data(forKey: Key.settings.rawValue) else { return Settings() }
         guard let settings = try? JSONDecoder().decode(Settings.self, from: data) else { return Settings()}
         
         return settings
@@ -67,11 +75,11 @@ final class StorageManager {
     
     func saveResults(results: ResultsController) {
         guard let data = try? JSONEncoder().encode(results) else { return }
-        UserDefaults.standard.set(data, forKey: "results")
+        UserDefaults.standard.set(data, forKey: Key.results.rawValue)
     }
     
     func getResults() -> ResultsController {
-        guard let data = UserDefaults.standard.data(forKey: "results") else { return ResultsController() }
+        guard let data = UserDefaults.standard.data(forKey: Key.results.rawValue) else { return ResultsController() }
         guard let results = try? JSONDecoder().decode(ResultsController.self, from: data) else { return ResultsController() }
         return results
     }
@@ -103,11 +111,30 @@ final class StorageManager {
     //MARK: - Onboarding
     
     func shouldShowOnboarding() -> Bool {
-        if let _ = UserDefaults.standard.string(forKey: "onBoardingShowed") {
+        if let _ = UserDefaults.standard.string(forKey: Key.onBoardingShowed.rawValue) {
             return false
         } else {
-            UserDefaults.standard.set("showed", forKey: "onBoardingShowed")
+            UserDefaults.standard.set("showed", forKey: Key.onBoardingShowed.rawValue)
             return true
         }
+    }
+    
+    //MARK: - AppReview
+    
+    func getReviewActionCount() -> Int {
+        UserDefaults.standard.integer(forKey: Key.reviewWorthyActionCount.rawValue)
+    }
+    
+    
+    func setReviewActionCount(_ value: Int) {
+        UserDefaults.standard.set(value, forKey: Key.reviewWorthyActionCount.rawValue)
+    }
+    
+    func setReviewRequestAppVersion(_ version: String?) {
+        UserDefaults.standard.set(version, forKey: Key.lastReviewRequestAppVersion.rawValue)
+    }
+    
+    func getLastReviewRequestAppVersion() -> String? {
+        UserDefaults.standard.string(forKey: Key.lastReviewRequestAppVersion.rawValue)
     }
 }
