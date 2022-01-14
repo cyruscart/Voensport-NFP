@@ -37,25 +37,39 @@ class TriathlonViewController: UIViewController {
     }
     
     private func setupNavigationBar() {
-        if triathlonController.isEditing {
-            navigationController?.navigationBar.prefersLargeTitles = true
-            title = triathlonController.editingResultDate
-            
-            let closeAction = UIAction { [ unowned self ] _ in
-                self.dismiss(animated: true, completion: nil)
-                updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
-            }
-            
-            let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
-            navigationItem.rightBarButtonItem = closeButton
-        } else {
-            navigationItem.largeTitleDisplayMode = .never
-            
-            title = triathlonController.triathlonType == .summer
-            ? "Летнее офицерское троеборье"
-            : "Зимнее офицерское троеборье"
-        }
+        triathlonController.isEditing
+        ? setNavBarForEditing()
+        : setBaseNavBar()
     }
+    
+    private func setNavBarForEditing() {
+        navigationController?.navigationBar.prefersLargeTitles = true
+        title = triathlonController.editingResultDate
+        
+        let closeAction = UIAction { [ unowned self ] _ in
+            self.dismiss(animated: true, completion: nil)
+            updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
+        }
+        
+        let closeButton = UIBarButtonItem(systemItem: .close, primaryAction: closeAction, menu: nil)
+        navigationItem.rightBarButtonItem = closeButton
+    }
+    
+    private func setBaseNavBar() {
+        let infoButton = UIBarButtonItem(
+            image: UIImage(systemName: "info.circle"),
+            style: .plain,
+            target: self,
+            action: #selector(showInfo))
+        
+        navigationItem.rightBarButtonItem = infoButton
+        navigationItem.largeTitleDisplayMode = .never
+        
+        title = triathlonController.triathlonType == .summer
+        ? "Летнее офицерское троеборье"
+        : "Зимнее офицерское троеборье"
+    }
+    
     
     private func updateAfterAgeSegmentSelected(_ selectedSegment: Int) {
         triathlonController.ageCategory = TriathlonAgeCategory.allCases[selectedSegment]
@@ -91,6 +105,12 @@ class TriathlonViewController: UIViewController {
         }
         
         AppStoreReviewManager.requestReview(in: self)
+    }
+    
+    @objc private func showInfo() {
+        let descriptionVC = DescriptionViewController()
+        descriptionVC.configure(with: Info.triathlonInfo)
+        present(descriptionVC, animated: true)
     }
 }
 
