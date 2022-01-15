@@ -339,8 +339,8 @@
 			children = (
 				6EC4BAA8275B7C2B00A4FD4A /* Application */,
 				6ED04544275C6AB800D048B4 /* Nfp */,
-				6ED0454A275C6BAF00D048B4 /* Settings */,
 				6E50C0012770A6AD00C3D04C /* Sport */,
+				6ED0454A275C6BAF00D048B4 /* Settings */,
 				6E5F27EC27734A9E00926FC1 /* Results */,
 				6E95955427783DC00085BD08 /* AboutApp */,
 				6EC4BAAC275B7CB300A4FD4A /* Resources */,
@@ -786,7 +786,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = B5K6K9GB7Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Voensport-NFP/Resources/Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Военспорт НФП";
