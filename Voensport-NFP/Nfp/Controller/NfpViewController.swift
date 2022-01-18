@@ -11,6 +11,7 @@ final class NfpViewController: UIViewController  {
     let nfpController: NfpController
     
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
+    
     private var shouldObserveVisibleCells = false
     private var collectionView: UICollectionView!
     private var feedbackGenerator: UISelectionFeedbackGenerator?
@@ -56,6 +57,7 @@ final class NfpViewController: UIViewController  {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises()))
+        view.addSubview(collectionView)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -67,8 +69,6 @@ final class NfpViewController: UIViewController  {
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
-        
-        view.addSubview(collectionView)
     }
     
     
@@ -122,6 +122,7 @@ final class NfpViewController: UIViewController  {
     
     private func updateCompositionalLayout() {
         let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
+        
         collectionView.setCollectionViewLayout(layout, animated: false)
         collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
         collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
@@ -137,7 +138,6 @@ final class NfpViewController: UIViewController  {
     }
     
     private func updateSupplementaryView(_ collectionView: UICollectionView, indexPath: IndexPath) {
-        
         collectionView.visibleSupplementaryViews(ofKind: "Footer").forEach { supplView in
             let view = supplView as! ResultCellView
             

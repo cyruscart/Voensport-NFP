@@ -12,7 +12,7 @@ class TotalScoreCell: UICollectionViewCell {
     
     var saveButtonCallBack: (() -> Void) = {}
     
-    let labelStackView: UIStackView = {
+    private let labelStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.alignment = .leading
@@ -21,7 +21,7 @@ class TotalScoreCell: UICollectionViewCell {
         return stackView
     }()
     
-    let mainStackView: UIStackView = {
+    private let mainStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.alignment = .center
@@ -86,10 +86,7 @@ class TotalScoreCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        [mainStackView, saveButton, moneyButton].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(subview)
-        }
+        setSubviews(on: contentView, mainStackView, saveButton, moneyButton)
         configureStackView()
     }
     

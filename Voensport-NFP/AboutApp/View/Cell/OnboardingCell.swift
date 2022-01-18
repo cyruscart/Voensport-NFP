@@ -9,6 +9,7 @@ import UIKit
 
 final class OnboardingCell: UICollectionViewCell {
     static let identifier = "OnbordingCell"
+    
     private let onboardingView = UIImageView()
     
     override init(frame: CGRect) {
@@ -22,8 +23,7 @@ final class OnboardingCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        onboardingView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(onboardingView)
+        setSubviews(on: contentView, onboardingView)
         setViewShadows()
         
         NSLayoutConstraint.activate([

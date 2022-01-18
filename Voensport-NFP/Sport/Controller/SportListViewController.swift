@@ -20,11 +20,14 @@ class SportListViewController: UIViewController {
     
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        view.addSubview(tableView)
+        
         tableView.dataSource = self
         tableView.delegate = self
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        
         tableView.separatorStyle = .singleLine
-        view.addSubview(tableView)
     }
     
 }

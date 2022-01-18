@@ -10,18 +10,18 @@ import UIKit
 final class SportExerciseCell: UITableViewCell  {
     static let identifier = "SportExerciseCell"
     
-    let resultTextField: UITextField = {
-        let tf = UITextField()
-        tf.borderStyle = .roundedRect
-        tf.placeholder = "Выберите результат"
-        return tf
+    private let resultTextField: UITextField = {
+        let textfield = UITextField()
+        textfield.borderStyle = .roundedRect
+        textfield.placeholder = "Выберите результат"
+        return textfield
     }()
     
     var exercise: TriathlonExercise!
     var callBackForUpdatingTotalScore: (() -> Void) = {}
-    var exerciseNameLabel = UILabel()
-    var scoreLabel = UILabel()
-    private var picker = UIPickerView()
+    private let exerciseNameLabel = UILabel()
+    private let scoreLabel = UILabel()
+    var picker = UIPickerView()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,10 +34,7 @@ final class SportExerciseCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        [exerciseNameLabel, scoreLabel, resultTextField].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(subview)
-        }
+        setSubviews(on: contentView, exerciseNameLabel, scoreLabel, resultTextField)
         
         NSLayoutConstraint.activate([
             exerciseNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),

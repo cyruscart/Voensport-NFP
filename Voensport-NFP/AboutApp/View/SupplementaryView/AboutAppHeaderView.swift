@@ -10,7 +10,7 @@ import UIKit
 final class AboutAppHeaderView: UICollectionReusableView {
     static let identifier = "AboutAppHeaderView"
    
-    let headingLabel: UILabel = {
+    let headLabel: UILabel = {
         let label = UILabel()
         label.font = .boldSystemFont(ofSize: 25)
         label.adjustsFontSizeToFitWidth = true
@@ -26,6 +26,7 @@ final class AboutAppHeaderView: UICollectionReusableView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupView()
     }
     
@@ -34,17 +35,14 @@ final class AboutAppHeaderView: UICollectionReusableView {
     }
     
     private func setupView() {
-        [headingLabel, messageLabel].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(subview)
-        }
+        setSubviews(on: self, headLabel, messageLabel )
         
         NSLayoutConstraint.activate([
-            headingLabel.topAnchor.constraint(equalTo: topAnchor),
-            headingLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            headingLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
+            headLabel.topAnchor.constraint(equalTo: topAnchor),
+            headLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             
-            messageLabel.topAnchor.constraint(equalTo: headingLabel.bottomAnchor, constant: 10),
+            messageLabel.topAnchor.constraint(equalTo: headLabel.bottomAnchor, constant: 10),
             messageLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
             messageLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
             messageLabel.bottomAnchor.constraint(equalTo: bottomAnchor)

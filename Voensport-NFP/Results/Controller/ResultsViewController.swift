@@ -9,6 +9,7 @@ import UIKit
 
 final class ResultsViewController: UIViewController {
     var resultsController: ResultsController
+    
     private var tableView: UITableView!
    
     init(_ resultsController: ResultsController) {
@@ -39,8 +40,10 @@ final class ResultsViewController: UIViewController {
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
         view.addSubview(tableView)
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
+        
         tableView.dataSource = self
         tableView.delegate = self
     }

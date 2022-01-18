@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import PassKit
 
 enum AboutAppSectionKind: CaseIterable  {
     case onboarding
@@ -34,6 +33,7 @@ final class AboutAppViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: AboutAppCompositionalLayout.createLayout())
+        view.addSubview(collectionView)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -43,8 +43,6 @@ final class AboutAppViewController: UIViewController {
         
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
-        
-        view.addSubview(collectionView)
     }
     
     private func setupNavigationBar() {
@@ -83,7 +81,7 @@ extension AboutAppViewController: UICollectionViewDataSource, UICollectionViewDe
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: "AboutAppHeaderView", withReuseIdentifier: AboutAppHeaderView.identifier, for: indexPath) as! AboutAppHeaderView
-        view.headingLabel.text = ["Возможности", "Логотип"][indexPath.section]
+        view.headLabel.text = ["Возможности", "Логотип"][indexPath.section]
         view.messageLabel.text = ["", "Вы могли заметить, какой необычный логотип у этого приложения. Он был сгенерирован нейросетью ruDALL-E по текстовому запросу. Посмотрите, какие еще крутые варианты она нарисовала"][indexPath.section]
         return view
     }

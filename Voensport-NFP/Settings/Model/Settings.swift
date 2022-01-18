@@ -227,6 +227,23 @@ final class Settings: Codable {
         }
     }
     
+   func getNavigationTitle(for currentSettings: String) -> String {
+        switch currentSettings {
+        case "sex":
+            return "Пол"
+        case "maleAge":
+            return "Возрастная категория"
+        case "femaleAge":
+            return "Возрастная категория"
+        case "numberOfExercise":
+            return "Количество упражнений"
+        case "tariff":
+            return "Тарифный разряд"
+        default:
+            return "Категория"
+        }
+    }
+    
     func setNumberOfExercise() {
         if sex == .female || shouldShowCategoryInsteadExercise {
             numberOfExercise = .three

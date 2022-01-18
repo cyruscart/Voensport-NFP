@@ -10,6 +10,7 @@ import UIKit
 class TriathlonViewController: UIViewController {
     var triathlonController = TriathlonController()
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
+    
     private var tableView: UITableView!
     
     override func viewDidLoad() {

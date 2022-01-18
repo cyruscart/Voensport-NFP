@@ -41,20 +41,9 @@ class DetailSettingsViewController: UIViewController {
     
     private func setNavigationTitle() {
         navigationItem.largeTitleDisplayMode = .never
+        title = settings.getNavigationTitle(for: currentSetting)
         
-        switch currentSetting {
-        case "sex":
-            title = "Пол"
-        case "maleAge":
-            title = "Возрастная категория"
-        case "femaleAge":
-            title = "Возрастная категория"
-        case "numberOfExercise":
-            title = "Количество упражнений"
-        case "tariff":
-            title = "Тарифный разряд"
-        default:
-            title = "Категория"
+        if title == "Категория" {
             setInfoButton()
         }
     }

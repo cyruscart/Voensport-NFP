@@ -14,7 +14,7 @@ class ResultCellView: UICollectionReusableView {
     var minimumScore = 0
     var callback: (() -> Void) = {}
     
-    private var resultLabel: UILabel = {
+    private let resultLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 18)
@@ -22,7 +22,7 @@ class ResultCellView: UICollectionReusableView {
         return label
     }()
     
-    private var scoreLabel: UILabel = {
+    private let scoreLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
         label.font = .systemFont(ofSize: 18)
@@ -30,7 +30,7 @@ class ResultCellView: UICollectionReusableView {
         return label
     }()
     
-    private var resultSlider: UISlider = {
+    private let resultSlider: UISlider = {
         let slider = UISlider()
         slider.addTarget(self, action: #selector(resultSliderMoved), for: .valueChanged)
         return slider
@@ -48,10 +48,7 @@ class ResultCellView: UICollectionReusableView {
     }
     
     private func setupCell() {
-        [ resultLabel, resultSlider, scoreLabel].forEach { subView in
-            subView.translatesAutoresizingMaskIntoConstraints = false
-            self.addSubview(subView)
-        }
+        setSubviews(on: self, resultLabel, resultSlider, scoreLabel)
         
         let width = UIScreen.main.bounds.width - 30
         
@@ -96,6 +93,7 @@ class ResultCellView: UICollectionReusableView {
             exercise.score = lrintf(resultSlider.value)
             callback()
         }
+        
         setResults()
     }
     
