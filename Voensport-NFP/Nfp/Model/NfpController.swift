@@ -89,6 +89,7 @@ final class NfpController {
         exercises = exercisesList
     }
     
+    
     //MARK: - Return data methods
     
     func generateNfpResult() -> NfpResult {

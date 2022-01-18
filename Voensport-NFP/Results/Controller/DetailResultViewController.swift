@@ -16,6 +16,7 @@ final class DetailResultViewController: UIViewController  {
     var nfpResult: NfpResult?
     var editingResultIndexPath = IndexPath()
     var numberOfSectionForLayout = 3
+    
     private var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -27,13 +28,16 @@ final class DetailResultViewController: UIViewController  {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: ResultsCompositionalLayout.createLayout(numberOfSection: numberOfSectionForLayout))
+        view.addSubview(collectionView)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.register(ResultExerciseCell.self, forCellWithReuseIdentifier: ResultExerciseCell.identifier)
         collectionView.register(ResultTotalScoreCell.self, forCellWithReuseIdentifier: ResultTotalScoreCell.identifier)
+        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
-        view.addSubview(collectionView)
     }
     
     private func setupNavigationBar() {

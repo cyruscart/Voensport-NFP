@@ -84,9 +84,11 @@ final class TriathlonController {
     
     private func getDate() -> String {
         let dateFormatter = DateFormatter()
+        
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         dateFormatter.locale = Locale(identifier: "ru_Ru")
+        
         return dateFormatter.string(from: Date())
     }
     

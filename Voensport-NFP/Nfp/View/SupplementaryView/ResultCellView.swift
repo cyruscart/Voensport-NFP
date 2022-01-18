@@ -70,7 +70,7 @@ class ResultCellView: UICollectionReusableView {
     func configureCell() {
         resultSlider.minimumValue = Float(exercise.getScoreList().first ?? 0)
         resultSlider.maximumValue = Float(exercise.getScoreList().last ?? 100)
-        resultSlider.value = Float(exercise.score)
+        resultSlider.setValue(Float(exercise.score), animated: true)
         setSliderTrackColor()
         setResults()
     }
