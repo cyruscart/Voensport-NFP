@@ -49,7 +49,7 @@ final class ResultExerciseCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupCell()
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor.AppColor.white
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         layer.cornerRadius = 15

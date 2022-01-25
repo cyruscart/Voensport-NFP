@@ -59,7 +59,7 @@ final class ResultTotalScoreCell: UICollectionViewCell {
     private func setupCell() {
         setSubviews(on: contentView, totalScoreLabel, gradeLabel, saveButton, editButton)
         
-        backgroundColor = .systemBackground
+        backgroundColor = .AppColor.white
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         layer.cornerRadius = 15
