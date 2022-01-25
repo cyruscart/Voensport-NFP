@@ -9,6 +9,8 @@ import Foundation
 
 final class NfpController {
     let settings: Settings
+    var dataFetcher: NfpDataFetcher
+    
     var exercises: [[NfpExercise]] = []
     var selectedExercises: [NfpExercise] = []
     var isEditing = false
@@ -39,6 +41,7 @@ final class NfpController {
     
     init(settings: Settings) {
         self.settings = settings
+        self.dataFetcher = NfpDataFetcher()
     }
     
     //MARK: - Initial data methods
@@ -64,7 +67,7 @@ final class NfpController {
         var exercisesList: [[NfpExercise]] = []
         
         for _ in 1...settings.getIntegerNumberOfExercises() {
-            let exercisesFromJSON = StorageManager.shared.getNfpExercisesFromJsonFile(settings.sex)
+            guard let exercisesFromJSON = dataFetcher.fetchNfpExercisesFromJsonFile(settings.sex) else { return }
             var exercises: [NfpExercise] = []
             
             exerciseTypes.forEach { type in

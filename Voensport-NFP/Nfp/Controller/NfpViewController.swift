@@ -9,6 +9,9 @@ import UIKit
 
 final class NfpViewController: UIViewController  {
     let nfpController: NfpController
+    private var storage: ResultsStorageManager
+    private var appStoreReviewManager: AppStoreReviewManager
+    private var onboardingManager: OnboardingManager
     
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     
@@ -18,6 +21,9 @@ final class NfpViewController: UIViewController  {
     
     init(_ nfpController: NfpController) {
         self.nfpController = nfpController
+        self.storage = ResultsStorageManager()
+        self.appStoreReviewManager = AppStoreReviewManager()
+        self.onboardingManager = OnboardingManager()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -105,17 +111,13 @@ final class NfpViewController: UIViewController  {
         let nfpResult = nfpController.generateNfpResult()
         
         if nfpController.isEditing {
-            StorageManager.shared.editNfpResult(with: nfpController.editingResultIndex, and: nfpResult)
+            storage.editNfpResult(for: nfpController.editingResultIndex, and: nfpResult)
             updateUIAfterEditingDelegate?.updateUI(indexPath: nfpController.editingResultIndex)
             dismiss(animated: true)
         } else {
-            var resultsController = StorageManager.shared.getResults()
-            resultsController.nfpResults.insert(nfpResult, at: 0)
-            StorageManager.shared.saveResults(results: resultsController)
+            storage.saveNfpResult(result: nfpResult)
         }
-        
-        AppStoreReviewManager.requestReview(in: self)
-        
+        appStoreReviewManager.requestReview(in: self)
     }
     
     //MARK: - Update UI
@@ -345,7 +347,7 @@ extension NfpViewController {
     }
     
     private func showOnboarding() {
-        if StorageManager.shared.shouldShowOnboarding() {
+        if onboardingManager.shouldShowOnboarding() {
             let onboardingVC = OnboardingViewController()
             onboardingVC.modalPresentationStyle = .fullScreen
             present(onboardingVC, animated: true, completion: nil)

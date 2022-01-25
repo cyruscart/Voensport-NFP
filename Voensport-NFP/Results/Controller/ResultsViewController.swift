@@ -8,12 +8,14 @@
 import UIKit
 
 final class ResultsViewController: UIViewController {
-    var resultsController: ResultsController
-    
+    private var storage: ResultsStorageManager
+    private var resultsController: ResultsController
+
     private var tableView: UITableView!
    
-    init(_ resultsController: ResultsController) {
-        self.resultsController = resultsController
+    init() {
+        self.storage = ResultsStorageManager()
+        self.resultsController = ResultsController()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -33,7 +35,7 @@ final class ResultsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
       
-        resultsController = StorageManager.shared.getResults()
+        resultsController = storage.fetchResults()
         tableView.reloadData()
     }
     
@@ -86,8 +88,8 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
      func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { _, _, _ in
-            StorageManager.shared.deleteResult(with: indexPath)
+        let deleteAction = UIContextualAction(style: .destructive, title: "Удалить") { [unowned self] _, _, _ in
+            self.storage.deleteResult(for: indexPath)
             
             if indexPath.section == 0 {
                 self.resultsController.nfpResults.remove(at: indexPath.row)
@@ -107,7 +109,7 @@ extension ResultsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailResultVC = DetailResultViewController()
         detailResultVC.editingResultIndexPath = indexPath
-        
+                
         if indexPath.section == 0 {
             let nfpResult = resultsController.nfpResults[indexPath.row]
             detailResultVC.nfpResult = nfpResult

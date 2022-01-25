@@ -19,6 +19,7 @@ final class NfpExercise: Codable {
     let number: String
     let type: ExerciseType
     let scoreList: [String: Int]
+    
     var name: String
     var forWomanOlderThirty: Bool?
     var forManOlderThirtyFive: Bool?

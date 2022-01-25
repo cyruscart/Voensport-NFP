@@ -8,6 +8,7 @@
 import Foundation
 
 final class Settings: Codable {
+    
     var sex: Sex = .male
     var maleAgeCategory: MaleAgeCategory = .firstAgeGroup
     var femaleAgeCategory: FemaleAgeCategory = .firstAgeGroup
@@ -16,6 +17,7 @@ final class Settings: Codable {
     var hapticOn = true
     var tariff = 0
     var sportGrade: SportGrade? = nil
+    var shouldShowOnboarding = true
     
     var sectionKind: [Int] {
         Array(0..<getIntegerNumberOfExercises())
@@ -77,6 +79,7 @@ final class Settings: Codable {
         (sex == .male && shouldShowCategory && shouldShowNumberOfExercise)
     }
     
+
     //MARK: - Enumerations
     
     enum SettingTitle: String, CaseIterable {
@@ -148,21 +151,17 @@ final class Settings: Codable {
         switch currentSetting {
         case "sex":
             sex = Sex.allCases[indexPath.row]
-            StorageManager.shared.saveSettings(self)
         case "maleAge":
             maleAgeCategory = MaleAgeCategory.allCases[indexPath.row]
             changeNumberOfExercise()
-            StorageManager.shared.saveSettings(self)
         case "femaleAge":
             femaleAgeCategory = FemaleAgeCategory.allCases[indexPath.row]
-            StorageManager.shared.saveSettings(self)
         case "numberOfExercise":
             numberOfExercise = NumberOfExercise.allCases[indexPath.row]
-            StorageManager.shared.saveSettings(self)
         default:
             category = Category.allCases[indexPath.row]
-            StorageManager.shared.saveSettings(self)
         }
+        
     }
     
     func getNumberOfSectionForSettings() -> Int {

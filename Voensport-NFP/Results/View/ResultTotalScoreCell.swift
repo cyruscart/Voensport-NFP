@@ -12,7 +12,7 @@ final class ResultTotalScoreCell: UICollectionViewCell {
     
     let editButton: UIButton = {
         let button = UIButton.createSaveButton()
-        button.backgroundColor = AppColor.green
+        button.backgroundColor = UIColor.AppColor.green
         button.setTitle("Изменить", for: .normal)
         button.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
         return button

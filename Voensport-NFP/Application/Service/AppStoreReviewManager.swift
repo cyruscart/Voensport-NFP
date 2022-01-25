@@ -8,25 +8,32 @@
 import Foundation
 import StoreKit
 
-enum AppStoreReviewManager {
-    static let minimumReviewWorthyActionCount = 10
+class AppStoreReviewManager {
+    let minimumReviewWorthyActionCount = 10
     
-    static func requestReview(in viewController: UIViewController) {
-        var actionCount = StorageManager.shared.getReviewActionCount()
+    private var storage: AppStoreReviewStorageManager
+    
+    init(storage: AppStoreReviewStorageManager = AppStoreReviewStorageManager()) {
+        self.storage = storage
+    }
+    
+    
+    func requestReview(in viewController: UIViewController) {
+        var actionCount = storage.getReviewActionCount()
         actionCount += 1
-        StorageManager.shared.setReviewActionCount(actionCount)
+        storage.setReviewActionCount(actionCount)
         
         guard actionCount >= minimumReviewWorthyActionCount else { return }
         guard let window = viewController.view.window?.windowScene else { return }
         
         let bundleVersionKey = kCFBundleVersionKey as String
         let currentVersion = Bundle.main.object(forInfoDictionaryKey: bundleVersionKey) as? String
-        let lastVersion = StorageManager.shared.getLastReviewRequestAppVersion()
+        let lastVersion = storage.getLastReviewRequestAppVersion()
         guard lastVersion == nil || lastVersion != currentVersion else { return }
         
         SKStoreReviewController.requestReview(in: window)
         
-        StorageManager.shared.setReviewRequestAppVersion(currentVersion)
+        storage.setReviewRequestAppVersion(currentVersion)
         
     }
     

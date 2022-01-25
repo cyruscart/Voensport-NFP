@@ -56,6 +56,14 @@
 		6E95955927783E0C0085BD08 /* AboutAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E95955827783E0C0085BD08 /* AboutAppViewController.swift */; };
 		6E95955B27784CBD0085BD08 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E95955A27784CBD0085BD08 /* OnboardingViewController.swift */; };
 		6EAAFE62277DE4ED00809FED /* UIView+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EAAFE61277DE4ED00809FED /* UIView+Extension.swift */; };
+		6EADA7A7279F305200755E15 /* DataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7A6279F305200755E15 /* DataFetcher.swift */; };
+		6EADA7A9279F322300755E15 /* ResultsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7A8279F322300755E15 /* ResultsStorageManager.swift */; };
+		6EADA7AB279F387900755E15 /* AppStoreReviewStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7AA279F387900755E15 /* AppStoreReviewStorageManager.swift */; };
+		6EADA7AD279F4B1100755E15 /* SettingsStorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7AC279F4B1100755E15 /* SettingsStorageManager.swift */; };
+		6EADA7AF27A0341F00755E15 /* OnboardingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7AE27A0341F00755E15 /* OnboardingManager.swift */; };
+		6EADA7B127A038BE00755E15 /* SportDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7B027A038BE00755E15 /* SportDataFetcher.swift */; };
+		6EADA7B327A0394000755E15 /* NfpDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7B227A0394000755E15 /* NfpDataFetcher.swift */; };
+		6EADA7B927A03F3A00755E15 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7B827A03F3A00755E15 /* UIColor+Extension.swift */; };
 		6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */; };
 		6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C6002762064200D51135 /* TotalScoreCell.swift */; };
 		6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */; };
@@ -119,6 +127,14 @@
 		6E95955827783E0C0085BD08 /* AboutAppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAppViewController.swift; sourceTree = "<group>"; };
 		6E95955A27784CBD0085BD08 /* OnboardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		6EAAFE61277DE4ED00809FED /* UIView+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extension.swift"; sourceTree = "<group>"; };
+		6EADA7A6279F305200755E15 /* DataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataFetcher.swift; sourceTree = "<group>"; };
+		6EADA7A8279F322300755E15 /* ResultsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStorageManager.swift; sourceTree = "<group>"; };
+		6EADA7AA279F387900755E15 /* AppStoreReviewStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreReviewStorageManager.swift; sourceTree = "<group>"; };
+		6EADA7AC279F4B1100755E15 /* SettingsStorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsStorageManager.swift; sourceTree = "<group>"; };
+		6EADA7AE27A0341F00755E15 /* OnboardingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingManager.swift; sourceTree = "<group>"; };
+		6EADA7B027A038BE00755E15 /* SportDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDataFetcher.swift; sourceTree = "<group>"; };
+		6EADA7B227A0394000755E15 /* NfpDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpDataFetcher.swift; sourceTree = "<group>"; };
+		6EADA7B827A03F3A00755E15 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpCompositionalLayout.swift; sourceTree = "<group>"; };
 		6EB3C6002762064200D51135 /* TotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreCell.swift; sourceTree = "<group>"; };
 		6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -155,6 +171,7 @@
 				6E50C0022770A6BA00C3D04C /* Model */,
 				6E50C0032770A6C100C3D04C /* View */,
 				6E50C0042770A6C900C3D04C /* Controller */,
+				6EADA7B527A039E900755E15 /* Service */,
 			);
 			path = Sport;
 			sourceTree = "<group>";
@@ -222,6 +239,7 @@
 				6E5F27ED27734C0C00926FC1 /* Model */,
 				6E5F27EE27734C1700926FC1 /* View */,
 				6E5F27EF27734C2200926FC1 /* Controller */,
+				6EADA7B727A03A5100755E15 /* Service */,
 			);
 			path = Results;
 			sourceTree = "<group>";
@@ -299,6 +317,38 @@
 				6E56A706277C4EA900362073 /* OnboardingItem.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		6EADA7B427A0398C00755E15 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6EADA7B227A0394000755E15 /* NfpDataFetcher.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6EADA7B527A039E900755E15 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6EADA7B027A038BE00755E15 /* SportDataFetcher.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6EADA7B627A03A0F00755E15 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6EADA7AC279F4B1100755E15 /* SettingsStorageManager.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		6EADA7B727A03A5100755E15 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				6EADA7A8279F322300755E15 /* ResultsStorageManager.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		6EB3C5FE276203A100D51135 /* Layout */ = {
@@ -388,6 +438,7 @@
 				6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */,
 				6E56A700277C2A6900362073 /* UIButton+Extension.swift */,
 				6EAAFE61277DE4ED00809FED /* UIView+Extension.swift */,
+				6EADA7B827A03F3A00755E15 /* UIColor+Extension.swift */,
 			);
 			path = Veiw;
 			sourceTree = "<group>";
@@ -406,6 +457,7 @@
 				6ED04547275C6AEC00D048B4 /* Model */,
 				6ED04546275C6AE500D048B4 /* View */,
 				6ED04545275C6ADA00D048B4 /* Controller */,
+				6EADA7B427A0398C00755E15 /* Service */,
 			);
 			path = Nfp;
 			sourceTree = "<group>";
@@ -445,6 +497,7 @@
 				6ED0454D275C6BCD00D048B4 /* Model */,
 				6ED0454C275C6BC500D048B4 /* View */,
 				6ED0454B275C6BBC00D048B4 /* ViewController */,
+				6EADA7B627A03A0F00755E15 /* Service */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -484,7 +537,10 @@
 			isa = PBXGroup;
 			children = (
 				6ED04557275C922100D048B4 /* StorageManager.swift */,
+				6EADA7AA279F387900755E15 /* AppStoreReviewStorageManager.swift */,
+				6EADA7A6279F305200755E15 /* DataFetcher.swift */,
 				6E951F5B2791382C005C8559 /* AppStoreReviewManager.swift */,
+				6EADA7AE27A0341F00755E15 /* OnboardingManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -563,9 +619,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6EADA7A9279F322300755E15 /* ResultsStorageManager.swift in Sources */,
 				6E7E8571278E84DD00CC8111 /* TabBarControllerFactory.swift in Sources */,
 				6EEC5E66277192C4006C532E /* TotalScoreSportCell.swift in Sources */,
+				6EADA7B927A03F3A00755E15 /* UIColor+Extension.swift in Sources */,
 				6E21297E27635E7C0016B24A /* NfpManExercises.json in Sources */,
+				6EADA7B127A038BE00755E15 /* SportDataFetcher.swift in Sources */,
 				6EBAF09D2774CF1B0034999F /* ResultTotalScoreCell.swift in Sources */,
 				6EBAF0A12774D9D70034999F /* ResultsCompositionalLayout.swift in Sources */,
 				6E21297F27635E7C0016B24A /* NfpWomanExercises.json in Sources */,
@@ -594,11 +653,13 @@
 				6E330B96276DE681008DEC4F /* PickerTableViewCell.swift in Sources */,
 				6ED04558275C922100D048B4 /* StorageManager.swift in Sources */,
 				6E074262275C953E00907B35 /* Sex.swift in Sources */,
+				6EADA7AB279F387900755E15 /* AppStoreReviewStorageManager.swift in Sources */,
 				6E56A70B277C5BB300362073 /* OnboardingCompositionalLayout.swift in Sources */,
 				6E95955B27784CBD0085BD08 /* OnboardingViewController.swift in Sources */,
 				6E56A6F6277B111400362073 /* AboutImageCell.swift in Sources */,
 				6E90DDF4275F3201004B618A /* NfpExercise.swift in Sources */,
 				6E56A705277C4C5B00362073 /* OnboardingCell.swift in Sources */,
+				6EADA7AD279F4B1100755E15 /* SettingsStorageManager.swift in Sources */,
 				6EBAF09B2774C5110034999F /* ResultExerciseCell.swift in Sources */,
 				6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */,
 				6EBAF09F2774D2540034999F /* DetailResultViewController.swift in Sources */,
@@ -610,10 +671,13 @@
 				6E50C0122770CF5200C3D04C /* SportExerciseCell.swift in Sources */,
 				6E90DDF1275F1A2D004B618A /* ExerciseCell.swift in Sources */,
 				6E50C0062770A6FC00C3D04C /* SportListViewController.swift in Sources */,
+				6EADA7A7279F305200755E15 /* DataFetcher.swift in Sources */,
+				6EADA7AF27A0341F00755E15 /* OnboardingManager.swift in Sources */,
 				6ED0454F275C6C2A00D048B4 /* SettingsViewController.swift in Sources */,
 				6ED04551275C6C4500D048B4 /* DetailSettingsViewController.swift in Sources */,
 				6E95955927783E0C0085BD08 /* AboutAppViewController.swift in Sources */,
 				6EB46013276E0EC600DC5C77 /* Tariff.swift in Sources */,
+				6EADA7B327A0394000755E15 /* NfpDataFetcher.swift in Sources */,
 				6E80DAFC2769BCF5006C21F0 /* DescriptionViewController.swift in Sources */,
 				6E90DDF6275F4BBE004B618A /* NfpController.swift in Sources */,
 				6E90DDF8275F50F1004B618A /* ResultCellView.swift in Sources */,

@@ -14,6 +14,9 @@ final class TriathlonController {
     var editingResultDate = ""
     var ageCategory: TriathlonAgeCategory = .lessThirty
     var exercises: [TriathlonExercise] = []
+    private var dataFetcher: SportDataFetcher
+    private var summerTriathlonExercises: [TriathlonExercise] = []
+    private var winterTriathlonExercises: [TriathlonExercise] = []
     
     var date: String {
         isEditing ? editingResultDate : getDate()
@@ -27,25 +30,26 @@ final class TriathlonController {
         exercises.compactMap { $0.score }.reduce(0, +)
     }
     
-    private var summerTriathlonExercises: [TriathlonExercise] = []
-    private var winterTriathlonExercises: [TriathlonExercise] = []
     
     init(sportResult: SportResult) {
         exercises = sportResult.sportExercises
         isEditing = true
         triathlonType = sportResult.triathlonType ?? .summer
         ageCategory = sportResult.ageTriathlonCategory ?? .lessForty
+        self.dataFetcher = SportDataFetcher()
     }
     
-    init() {}
+    init(dataFetcher: SportDataFetcher = SportDataFetcher()) {
+        self.dataFetcher = dataFetcher
+    }
     
     //MARK: - Initial data methods
     
     func updateTriathlonExercises() {
         if !isEditing {
-            let sportExercises = StorageManager.shared.getSportExercisesFromJsonFile()
-            summerTriathlonExercises = sportExercises.summerExercises
-            winterTriathlonExercises = sportExercises.winterExercises
+           
+            summerTriathlonExercises = dataFetcher.fetchSummerTriathlonExercises() ?? []
+            winterTriathlonExercises = dataFetcher.fetchWinterTriathlonExercises() ?? []
             
             switch ageCategory {
             case .lessThirty:

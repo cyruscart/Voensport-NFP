@@ -17,7 +17,18 @@ final class DetailResultViewController: UIViewController  {
     var editingResultIndexPath = IndexPath()
     var numberOfSectionForLayout = 3
     
+    private var storage: ResultsStorageManager
     private var collectionView: UICollectionView!
+    
+    init() {
+        self.storage = ResultsStorageManager()
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,12 +164,12 @@ extension DetailResultViewController: UpdateUIAfterEditingDelegate {
     
     func updateUI(indexPath: IndexPath) {
         if let _ = nfpResult {
-            let updatedNfpResult = StorageManager.shared.getResults().nfpResults[indexPath.row]
+            let updatedNfpResult = storage.fetchResults().nfpResults[indexPath.row]
             nfpResult = updatedNfpResult
         }
         
         if let _ = sportResult {
-            let updatedSportResult = StorageManager.shared.getResults().sportResults[indexPath.row]
+            let updatedSportResult = storage.fetchResults().sportResults[indexPath.row]
             sportResult = updatedSportResult
         }
         
