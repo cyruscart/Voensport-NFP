@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class StorageManager {
     
     private let storage = UserDefaults.standard
@@ -42,7 +43,7 @@ class StorageManager {
     func save<T>(_ value: T?, for key: StorageKey) {
         storage.set(value, forKey: key.rawValue)
     }
-    
+
     func isOnboardingShowed() -> Bool {
             if let _ = storage.string(forKey: StorageKey.onBoardingShowed.rawValue) {
                 return true

@@ -11,8 +11,8 @@ class OnboardingManager {
     
     private var storage: StorageManager
     
-    init(storage: StorageManager = StorageManager()) {
-        self.storage = storage
+    init() {
+        self.storage = StorageManager()
     }
     
     func shouldShowOnboarding() -> Bool {

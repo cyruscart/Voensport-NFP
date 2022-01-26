@@ -21,25 +21,4 @@ class DataFetcher {
         }
     }
     
-    
-    
-    
-    //    func getSportExercisesFromJsonFile() -> (summerExercises: [TriathlonExercise], winterExercises: [TriathlonExercise]) {
-    //        var winterExercises: [TriathlonExercise] = []
-    //
-    //        guard let winterPath = Bundle.main.path(forResource: "WinterTriathlonExercises", ofType: "json") else { return ([], []) }
-    //        guard let summerPath = Bundle.main.path(forResource: "SummerTriathlonExercises", ofType: "json") else { return ([], []) }
-    //
-    //        do {
-    //            guard let summerData = try String(contentsOfFile: summerPath).data(using: .utf8) else { return ([], []) }
-    //            summerExercises = try JSONDecoder().decode([TriathlonExercise].self, from: summerData)
-    //
-    //            guard let winterData = try String(contentsOfFile: winterPath).data(using: .utf8) else { return ([], []) }
-    //            winterExercises = try JSONDecoder().decode([TriathlonExercise].self, from: winterData)
-    //        } catch {
-    //            print(error.localizedDescription)
-    //        }
-    //        return(summerExercises, winterExercises)
-    //    }
-    
 }

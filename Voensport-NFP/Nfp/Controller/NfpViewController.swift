@@ -269,7 +269,10 @@ extension NfpViewController: UICollectionViewDataSource {
 extension NfpViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating
+
+        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !nfpController.isEditing
+        
+        print("willDisplay - \(shouldReplaceSelectedItem)")
         
         if shouldReplaceSelectedItem {
             updateSelectedExercises(collectionView, forItemAt: indexPath)
@@ -282,6 +285,7 @@ extension NfpViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    
         //        Scroll right
         //                [1, 2]             - didEndDisplaying cell
         //                [[1, 3], [1, 4]]   - sorted visible cells
@@ -294,13 +298,13 @@ extension NfpViewController: UICollectionViewDelegate {
             .sorted {$0.row < $1.row}
         let isCellScrollToLeft = indexPath.row > sortedIndexPathForVisibleItems.first?.row ?? 0
         let isDidEndDisplayingTotalScoreCell = indexPath.section == nfpController.settings.getIntegerNumberOfExercises()
-        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !isDidEndDisplayingTotalScoreCell
-        
+        let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !isDidEndDisplayingTotalScoreCell && !nfpController.isEditing
+        print("didEndDisplaying - \(shouldReplaceSelectedItem)")
         if shouldReplaceSelectedItem {
             if indexPath.row == 2 && isCellScrollToLeft {
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
-            } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 && !isCellScrollToLeft{
+            } else if indexPath.row == nfpController.exercises[indexPath.section].count - 3 && !isCellScrollToLeft && !nfpController.isEditing {
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][nfpController.exercises[indexPath.section].count - 1]
                 updateSupplementaryView(collectionView, indexPath: indexPath)
             }

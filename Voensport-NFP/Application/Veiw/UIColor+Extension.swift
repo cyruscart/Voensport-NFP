@@ -20,7 +20,7 @@ extension UIColor {
                              blue: 58/255,
                              alpha: 1)
         
-        static let white = #colorLiteral(red: 0.9966184497, green: 0.9924407601, blue: 0.9882593751, alpha: 0.3247102649)
+        static let white = #colorLiteral(red: 0.9966184497, green: 0.9924407601, blue: 0.9882593751, alpha: 0.2031508692)
         
     }
 }

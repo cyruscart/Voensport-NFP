@@ -8,15 +8,19 @@
 import Foundation
 
 class SettingsStorageManager {
-    
+
     private var storage: StorageManager
-    
+
     init(storage: StorageManager = StorageManager()) {
         self.storage = storage
     }
-    
+
     func save(_ settings: Settings) {
-        storage.save(settings, for: .settings)
+        storage.save(object: settings, key: .settings)
     }
     
+    func fetch() -> Settings? {
+        storage.fetch(key: .settings)
+    }
+
 }

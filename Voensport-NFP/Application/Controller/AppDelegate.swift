@@ -11,17 +11,18 @@ import UIKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
-    private var settings: Settings?
-    private var storage: StorageManager?
+    private var settings = Settings()
+    private var storage = SettingsStorageManager()
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow()
         window?.makeKeyAndVisible()
+    
+        if let fetchedSettings = storage.fetch()  {
+            settings = fetchedSettings
+        }
         
-        storage = StorageManager()
-        settings = storage?.fetch(key: .settings)
-        
-        let mainTabBarVC = TabBarControllerFactory.generate(settings: settings ?? Settings())
+        let mainTabBarVC = TabBarControllerFactory.generate(settings: settings)
         window?.rootViewController = mainTabBarVC
         
         return true
@@ -32,10 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        if let settings = settings {
-            storage?.save(object: settings, key: .settings)
-        }
-        
+        storage.save(settings)
     }
 
 }

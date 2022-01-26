@@ -13,8 +13,8 @@ class AppStoreReviewManager {
     
     private var storage: AppStoreReviewStorageManager
     
-    init(storage: AppStoreReviewStorageManager = AppStoreReviewStorageManager()) {
-        self.storage = storage
+    init() {
+        self.storage = AppStoreReviewStorageManager()
     }
     
     

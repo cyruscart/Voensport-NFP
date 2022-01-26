@@ -64,6 +64,8 @@
 		6EADA7B127A038BE00755E15 /* SportDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7B027A038BE00755E15 /* SportDataFetcher.swift */; };
 		6EADA7B327A0394000755E15 /* NfpDataFetcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7B227A0394000755E15 /* NfpDataFetcher.swift */; };
 		6EADA7B927A03F3A00755E15 /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7B827A03F3A00755E15 /* UIColor+Extension.swift */; };
+		6EADA7BB27A137AB00755E15 /* NfpCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7BA27A137AB00755E15 /* NfpCalculator.swift */; };
+		6EADA7C127A1528100755E15 /* Grade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EADA7C027A1528100755E15 /* Grade.swift */; };
 		6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */; };
 		6EB3C6012762064200D51135 /* TotalScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EB3C6002762064200D51135 /* TotalScoreCell.swift */; };
 		6EB3C61E2762227900D51135 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */; };
@@ -135,6 +137,8 @@
 		6EADA7B027A038BE00755E15 /* SportDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SportDataFetcher.swift; sourceTree = "<group>"; };
 		6EADA7B227A0394000755E15 /* NfpDataFetcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpDataFetcher.swift; sourceTree = "<group>"; };
 		6EADA7B827A03F3A00755E15 /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		6EADA7BA27A137AB00755E15 /* NfpCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpCalculator.swift; sourceTree = "<group>"; };
+		6EADA7C027A1528100755E15 /* Grade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grade.swift; sourceTree = "<group>"; };
 		6EB3C5FC2762023600D51135 /* NfpCompositionalLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NfpCompositionalLayout.swift; sourceTree = "<group>"; };
 		6EB3C6002762064200D51135 /* TotalScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalScoreCell.swift; sourceTree = "<group>"; };
 		6EB3C61D2762227900D51135 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -335,14 +339,6 @@
 			path = Service;
 			sourceTree = "<group>";
 		};
-		6EADA7B627A03A0F00755E15 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				6EADA7AC279F4B1100755E15 /* SettingsStorageManager.swift */,
-			);
-			path = Service;
-			sourceTree = "<group>";
-		};
 		6EADA7B727A03A5100755E15 /* Service */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +483,8 @@
 			children = (
 				6E90DDF3275F3201004B618A /* NfpExercise.swift */,
 				6E90DDF5275F4BBE004B618A /* NfpController.swift */,
+				6EADA7BA27A137AB00755E15 /* NfpCalculator.swift */,
+				6EADA7C027A1528100755E15 /* Grade.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -497,7 +495,6 @@
 				6ED0454D275C6BCD00D048B4 /* Model */,
 				6ED0454C275C6BC500D048B4 /* View */,
 				6ED0454B275C6BBC00D048B4 /* ViewController */,
-				6EADA7B627A03A0F00755E15 /* Service */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -541,6 +538,7 @@
 				6EADA7A6279F305200755E15 /* DataFetcher.swift */,
 				6E951F5B2791382C005C8559 /* AppStoreReviewManager.swift */,
 				6EADA7AE27A0341F00755E15 /* OnboardingManager.swift */,
+				6EADA7AC279F4B1100755E15 /* SettingsStorageManager.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -637,6 +635,7 @@
 				6E56A707277C4EA900362073 /* OnboardingItem.swift in Sources */,
 				6E330B94276DA0F9008DEC4F /* SportGrade.swift in Sources */,
 				6E56A6FA277B13FE00362073 /* AboutAppCompositionalLayout.swift in Sources */,
+				6EADA7BB27A137AB00755E15 /* NfpCalculator.swift in Sources */,
 				6E50C0102770CBE900C3D04C /* SegmentedViewCell.swift in Sources */,
 				6E21298127635E7C0016B24A /* WinterTriathlonExercises.json in Sources */,
 				6EB3C5FD2762023600D51135 /* NfpCompositionalLayout.swift in Sources */,
@@ -663,6 +662,7 @@
 				6EBAF09B2774C5110034999F /* ResultExerciseCell.swift in Sources */,
 				6EC4BA92275B7BF000A4FD4A /* AppDelegate.swift in Sources */,
 				6EBAF09F2774D2540034999F /* DetailResultViewController.swift in Sources */,
+				6EADA7C127A1528100755E15 /* Grade.swift in Sources */,
 				6E07426A275C962C00907B35 /* NumberOfExercises.swift in Sources */,
 				6E56A701277C2A6900362073 /* UIButton+Extension.swift in Sources */,
 				6E074264275C957C00907B35 /* MaleAgeCategory.swift in Sources */,
