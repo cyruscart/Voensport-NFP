@@ -127,9 +127,7 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 : "\(settings.tariff) тарифный разряд"
             } else {
                 cell.pickerTextField.placeholder = "Выберите спортивный разряд"
-                cell.pickerTextField.text = settings.sportGrade == nil
-                ? ""
-                : settings.sportGrade?.rawValue
+                cell.pickerTextField.text = settings.sportGrade.rawValue
             }
             return cell
             
@@ -159,7 +157,7 @@ extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerView.tag == 0
-        ? Tariff.tariff.count
+        ? Tariff.tariffs.count
         : SportGrade.paidSportGrade.count
     }
     

@@ -9,7 +9,7 @@ import Foundation
 
 class ResultsStorageManager {
     
-    private var storage: StorageManager
+    private let storage: StorageManager
     
     init(storage: StorageManager = StorageManager()) {
         self.storage = storage
@@ -43,13 +43,13 @@ class ResultsStorageManager {
     func saveNfpResult(result: NfpResult) {
         var resultsController = fetchResults()
         resultsController.nfpResults.insert(result, at: 0)
-        storage.save(object: result, key: .results)
+        storage.save(object: resultsController, key: .results)
     }
     
     func saveSportResult(result: SportResult) {
         var resultsController = fetchResults()
         resultsController.sportResults.insert(result, at: 0)
-        storage.save(object: result, key: .results)
+        storage.save(object: resultsController, key: .results)
     }
     
     func fetchResults() -> ResultsController {

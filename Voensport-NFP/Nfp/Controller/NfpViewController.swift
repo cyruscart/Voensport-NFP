@@ -9,9 +9,10 @@ import UIKit
 
 final class NfpViewController: UIViewController  {
     let nfpController: NfpController
-    private var storage: ResultsStorageManager
-    private var appStoreReviewManager: AppStoreReviewManager
-    private var onboardingManager: OnboardingManager
+    private let storage: ResultsStorageManager
+    private let appStoreReviewManager: AppStoreReviewManager
+    private let onboardingManager: OnboardingManager
+
     
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     

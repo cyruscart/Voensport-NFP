@@ -9,7 +9,7 @@ import Foundation
 
 class AppStoreReviewStorageManager {
     
-    private var storage: StorageManager
+    private let storage: StorageManager
     
     init() {
         self.storage = StorageManager()

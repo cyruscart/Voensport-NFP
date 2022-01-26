@@ -8,11 +8,10 @@
 import Foundation
 
 class SettingsStorageManager {
+    private let storage: StorageManager
 
-    private var storage: StorageManager
-
-    init(storage: StorageManager = StorageManager()) {
-        self.storage = storage
+    init() {
+        self.storage = StorageManager()
     }
 
     func save(_ settings: Settings) {

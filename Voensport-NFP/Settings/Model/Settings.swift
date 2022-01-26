@@ -16,7 +16,7 @@ final class Settings: Codable {
     var numberOfExercise: NumberOfExercise = .three
     var hapticOn = true
     var tariff = 0
-    var sportGrade: SportGrade? = nil
+    var sportGrade: SportGrade = .withoutGrade
     var shouldShowOnboarding = true
     
     var sectionKind: [Int] {

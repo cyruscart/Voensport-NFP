@@ -10,6 +10,7 @@ import Foundation
 final class NfpController {
     let settings: Settings
     let nfpCalculator: NfpCalculator
+    let moneyCalculator: MoneyCalculator
     
     var exercises: [[NfpExercise]] = []
     var selectedExercises: [NfpExercise] = []
@@ -30,6 +31,7 @@ final class NfpController {
     init(settings: Settings) {
         self.settings = settings
         dataFetcher = NfpDataFetcher()
+        moneyCalculator = MoneyCalculator()
         nfpCalculator = NfpCalculator()
         nfpCalculator.settings = settings
     }
@@ -162,29 +164,6 @@ final class NfpController {
     }
     
     func getAmountOfMoney() -> String {
-        guard let tariff = Tariff.tariff[String(settings.tariff)] else { return "tariff not found" }
-        var money = 0
-        
-        switch calculateGrade() {
-        case "Высший уровень":
-            if settings.sportGrade == .ms {
-                money = Int(tariff * 0.87)
-            } else if settings.sportGrade == .kms {
-                money = Int(tariff * 0.9 * 0.87)
-            } else if settings.sportGrade == .firstGrade {
-                money = Int(tariff * 0.8 * 0.87)
-            } else {
-                money = Int(tariff * 0.7 * 0.87)
-            }
-        case "1 уровень":
-            money = Int(tariff * 0.3 * 0.87)
-        case "2 уровень":
-            money = Int(tariff * 0.15 * 0.87)
-        default:
-            money = 0
-        }
-        
-        return String(money)
-    }
+        moneyCalculator.calculate(grade: calculateGrade(), sportGrade: settings.sportGrade, tariff: settings.tariff)
 }
-
+}

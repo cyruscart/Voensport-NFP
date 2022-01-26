@@ -9,9 +9,8 @@ import Foundation
 import StoreKit
 
 class AppStoreReviewManager {
-    let minimumReviewWorthyActionCount = 10
-    
-    private var storage: AppStoreReviewStorageManager
+    private let storage: AppStoreReviewStorageManager
+    private let minimumReviewWorthyActionCount = 10
     
     init() {
         self.storage = AppStoreReviewStorageManager()
