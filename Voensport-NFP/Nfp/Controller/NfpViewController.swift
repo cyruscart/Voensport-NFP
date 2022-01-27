@@ -12,7 +12,6 @@ final class NfpViewController: UIViewController  {
     private let storage: ResultsStorageManager
     private let appStoreReviewManager: AppStoreReviewManager
     private let onboardingManager: OnboardingManager
-
     
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     
@@ -35,7 +34,7 @@ final class NfpViewController: UIViewController  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("nfp did load")
+
         showOnboarding()
         setupNavigationBar()
         setupCollectionView()
@@ -43,7 +42,7 @@ final class NfpViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        print("viewWillAppear")
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
@@ -53,13 +52,13 @@ final class NfpViewController: UIViewController  {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        shouldObserveVisibleCells = true
+        shouldObserveVisibleCells = !nfpController.isEditing
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        shouldObserveVisibleCells = false
+        shouldObserveVisibleCells = nfpController.isEditing
     }
     
     private func setupCollectionView() {
@@ -179,10 +178,7 @@ final class NfpViewController: UIViewController  {
          
          */
         
-        let visibleItemsInSection = collectionView
-            .indexPathsForVisibleItems
-            .filter {$0.section == indexPath.section}
-            .sorted {$0.row < $1.row}
+        let visibleItemsInSection = sortVisibleItemIndexInSection(collectionView, indexPath)
         
         if visibleItemsInSection.count == 2 {
             let indexPathNextSelectedItem = visibleItemsInSection[1].row > indexPath.row
@@ -270,10 +266,8 @@ extension NfpViewController: UICollectionViewDataSource {
 extension NfpViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-
         let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !nfpController.isEditing
         
-        print("willDisplay - \(shouldReplaceSelectedItem)")
         
         if shouldReplaceSelectedItem {
             updateSelectedExercises(collectionView, forItemAt: indexPath)
@@ -286,7 +280,7 @@ extension NfpViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    
+      
         //        Scroll right
         //                [1, 2]             - didEndDisplaying cell
         //                [[1, 3], [1, 4]]   - sorted visible cells
@@ -295,12 +289,17 @@ extension NfpViewController: UICollectionViewDelegate {
         //               [1, 2]              - didEndDisplaying cell
         //               [[1, 0], [1, 1]]    - sorted visible cells
         
-        let sortedIndexPathForVisibleItems = collectionView.indexPathsForVisibleItems.filter {$0.section == indexPath.section}
-            .sorted {$0.row < $1.row}
+        let sortedIndexPathForVisibleItems = sortVisibleItemIndexInSection(collectionView, indexPath)
+        
+        
         let isCellScrollToLeft = indexPath.row > sortedIndexPathForVisibleItems.first?.row ?? 0
+        
+        
         let isDidEndDisplayingTotalScoreCell = indexPath.section == nfpController.settings.getIntegerNumberOfExercises()
+        
+        
         let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !isDidEndDisplayingTotalScoreCell && !nfpController.isEditing
-        print("didEndDisplaying - \(shouldReplaceSelectedItem)")
+        
         if shouldReplaceSelectedItem {
             if indexPath.row == 2 && isCellScrollToLeft {
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
@@ -310,6 +309,13 @@ extension NfpViewController: UICollectionViewDelegate {
                 updateSupplementaryView(collectionView, indexPath: indexPath)
             }
         }
+    }
+    
+    private func sortVisibleItemIndexInSection(_ collectionView: UICollectionView, _ indexPath: IndexPath) -> [IndexPath] {
+        collectionView
+            .indexPathsForVisibleItems
+            .filter {$0.section == indexPath.section}
+            .sorted {$0.row < $1.row}
     }
     
 }

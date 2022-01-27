@@ -28,7 +28,7 @@ final class NfpExercise: Codable {
         self.scoreList = scoreList
         self.type = type
     }
-    
+     
     func getScoreList() -> [Int] {
         scoreList.values.sorted()
     }

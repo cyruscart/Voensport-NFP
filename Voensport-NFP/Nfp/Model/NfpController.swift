@@ -166,4 +166,5 @@ final class NfpController {
     func getAmountOfMoney() -> String {
         moneyCalculator.calculate(grade: calculateGrade(), sportGrade: settings.sportGrade, tariff: settings.tariff)
 }
+    
 }

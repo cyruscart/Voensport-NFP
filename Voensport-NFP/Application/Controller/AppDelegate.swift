@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
     
         if let fetchedSettings = storage.fetch()  {
-            print(fetchedSettings.sex, fetchedSettings.hapticOn)
             settings = fetchedSettings
         }
         
@@ -34,8 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationWillTerminate(_ application: UIApplication) {
-        print(settings.sex, settings.hapticOn)
-        return storage.save(settings)
+        storage.save(settings)
     }
 
 }

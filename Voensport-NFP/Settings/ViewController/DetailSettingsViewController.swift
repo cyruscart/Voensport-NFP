@@ -12,13 +12,6 @@ class DetailSettingsViewController: UIViewController {
     var currentSetting = ""
     private var tableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setNavigationTitle()
-        setTableView()
-    }
-    
     init(_ settings: Settings) {
         self.settings = settings
         
@@ -28,6 +21,14 @@ class DetailSettingsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setNavigationTitle()
+        setTableView()
+    }
+    
     
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)

@@ -72,7 +72,7 @@ class TotalScoreCell: UICollectionViewCell {
         setupCell()
         setupConstraints()
         
-        backgroundColor = .AppColor.white
+        backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         layer.cornerRadius = 15
