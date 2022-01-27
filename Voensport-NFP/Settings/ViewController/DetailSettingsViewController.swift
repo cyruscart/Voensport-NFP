@@ -12,13 +12,6 @@ class DetailSettingsViewController: UIViewController {
     var currentSetting = ""
     private var tableView: UITableView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setNavigationTitle()
-        setTableView()
-    }
-    
     init(_ settings: Settings) {
         self.settings = settings
         
@@ -28,6 +21,14 @@ class DetailSettingsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setNavigationTitle()
+        setTableView()
+    }
+    
     
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
@@ -41,20 +42,9 @@ class DetailSettingsViewController: UIViewController {
     
     private func setNavigationTitle() {
         navigationItem.largeTitleDisplayMode = .never
+        title = settings.getNavigationTitle(for: currentSetting)
         
-        switch currentSetting {
-        case "sex":
-            title = "Пол"
-        case "maleAge":
-            title = "Возрастная категория"
-        case "femaleAge":
-            title = "Возрастная категория"
-        case "numberOfExercise":
-            title = "Количество упражнений"
-        case "tariff":
-            title = "Тарифный разряд"
-        default:
-            title = "Категория"
+        if title == "Категория" {
             setInfoButton()
         }
     }
@@ -138,9 +128,7 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
                 : "\(settings.tariff) тарифный разряд"
             } else {
                 cell.pickerTextField.placeholder = "Выберите спортивный разряд"
-                cell.pickerTextField.text = settings.sportGrade == nil
-                ? ""
-                : settings.sportGrade?.rawValue
+                cell.pickerTextField.text = settings.sportGrade.rawValue
             }
             return cell
             
@@ -170,7 +158,7 @@ extension DetailSettingsViewController: UIPickerViewDelegate, UIPickerViewDataSo
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerView.tag == 0
-        ? Tariff.tariff.count
+        ? Tariff.tariffs.count
         : SportGrade.paidSportGrade.count
     }
     

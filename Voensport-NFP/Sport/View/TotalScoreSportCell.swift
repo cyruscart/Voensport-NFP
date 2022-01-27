@@ -9,6 +9,7 @@ import UIKit
 
 final class TotalScoreSportCell: UITableViewCell  {
     static let identifier = "TotalScoreSportCell"
+    
     private let totalScoreLabel = UILabel()
     private let gradeLabel = UILabel()
     
@@ -31,10 +32,7 @@ final class TotalScoreSportCell: UITableViewCell  {
     }
     
     private func setupCell() {
-        [totalScoreLabel, gradeLabel, saveButton].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(subview)
-        }
+        setSubviews(on: contentView, totalScoreLabel, gradeLabel, saveButton)
         
         NSLayoutConstraint.activate([
             totalScoreLabel.topAnchor.constraint(equalTo: topAnchor, constant: 20),

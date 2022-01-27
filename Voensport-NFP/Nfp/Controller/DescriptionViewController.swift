@@ -35,11 +35,8 @@ class DescriptionViewController: UIViewController {
     }
     
     private func setupScrollView() {
-        scrollView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scrollView)
-        
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-        scrollView.addSubview(contentView)
+        view.setSubviews(on: view, scrollView)
+        view.setSubviews(on: scrollView, contentView)
         
         NSLayoutConstraint.activate([
             scrollView.centerXAnchor.constraint(equalTo: view.centerXAnchor),

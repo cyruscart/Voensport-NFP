@@ -10,7 +10,20 @@ import UIKit
 class TriathlonViewController: UIViewController {
     var triathlonController = TriathlonController()
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
+    private var storage: ResultsStorageManager
+    private var appStoreReviewManager: AppStoreReviewManager
     private var tableView: UITableView!
+    
+    init() {
+        self.storage = ResultsStorageManager()
+        self.appStoreReviewManager = AppStoreReviewManager()
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,16 +108,14 @@ class TriathlonViewController: UIViewController {
         let sportResult = triathlonController.generateSportResult()
         
         if triathlonController.isEditing {
-            StorageManager.shared.editSportResult(with: triathlonController.editingResultIndex, and: sportResult)
+            storage.editSportResult(for: triathlonController.editingResultIndex, and: sportResult)
             updateUIAfterEditingDelegate?.updateUI(indexPath: triathlonController.editingResultIndex)
             dismiss(animated: true)
         } else {
-            var resultsController = StorageManager.shared.getResults()
-            resultsController.sportResults.insert(sportResult, at: 0)
-            StorageManager.shared.saveResults(results: resultsController)
+            storage.saveSportResult(result: sportResult)
         }
-        
-        AppStoreReviewManager.requestReview(in: self)
+         
+        appStoreReviewManager.requestReview(in: self)
     }
     
     @objc private func showInfo() {

@@ -12,16 +12,16 @@ class ExerciseCell: UICollectionViewCell {
     
     var callback: ((_ exercise: NfpExercise) -> Void)!
     var exercise: NfpExercise!
-    private var backGroundImageView = UIImageView()
+    private let backGroundImageView = UIImageView()
     
-    var descriptionButton: UIButton = {
+    private let descriptionButton: UIButton = {
         let button = UIButton(type: .infoDark)
         button.tintColor = .black
         button.addTarget(self, action: #selector(descriptionButtonTapped), for: .touchUpInside)
         return button
     }()
     
-    private var exerciseNumberLabel: UILabel = {
+    private let exerciseNumberLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.textAlignment = .center
@@ -30,7 +30,7 @@ class ExerciseCell: UICollectionViewCell {
         return label
     }()
     
-    private var exerciseNameLabel: UILabel = {
+    private let exerciseNameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = .black
@@ -53,13 +53,8 @@ class ExerciseCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        backGroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(backGroundImageView)
-        
-        [descriptionButton,exerciseNumberLabel, exerciseNameLabel].forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
-            backGroundImageView.addSubview(view)
-        }
+        setSubviews(on: contentView, backGroundImageView)
+        setSubviews(on: backGroundImageView, descriptionButton,exerciseNumberLabel, exerciseNameLabel)
     }
     
     private func setupConstraints() {

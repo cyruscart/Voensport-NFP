@@ -28,8 +28,7 @@ class NfpExerciseHeaderView: UICollectionReusableView {
     }
     
     private func configure() {
-        addSubview(label)
-        label.translatesAutoresizingMaskIntoConstraints = false
+        setSubviews(on: self, label)
         
         NSLayoutConstraint.activate([
             label.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),

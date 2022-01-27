@@ -10,6 +10,21 @@ import UIKit
 final class ResultTotalScoreCell: UICollectionViewCell {
     static let identifier = "ResultTotalScoreCell"
     
+    let editButton: UIButton = {
+        let button = UIButton.createSaveButton()
+        button.backgroundColor = UIColor.AppColor.green
+        button.setTitle("Изменить", for: .normal)
+        button.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
+    let saveButton: UIButton = {
+        let button = UIButton.createSaveButton()
+        button.setTitle("Закрыть", for: .normal)
+        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    
     private let totalScoreLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -24,21 +39,6 @@ final class ResultTotalScoreCell: UICollectionViewCell {
         label.adjustsFontSizeToFitWidth = true
         label.textAlignment = .center
         return label
-    }()
-    
-    let editButton: UIButton = {
-        let button = UIButton.createSaveButton()
-        button.backgroundColor = AppColor.green
-        button.setTitle("Изменить", for: .normal)
-        button.addTarget(self, action: #selector(editButtonPressed), for: .touchUpInside)
-        return button
-    }()
-    
-    let saveButton: UIButton = {
-        let button = UIButton.createSaveButton()
-        button.setTitle("Закрыть", for: .normal)
-        button.addTarget(self, action: #selector(saveButtonPressed), for: .touchUpInside)
-        return button
     }()
     
     var saveButtonCallBack: (() -> Void) = {}
@@ -57,10 +57,7 @@ final class ResultTotalScoreCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        [totalScoreLabel, gradeLabel, saveButton, editButton].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(subview)
-        }
+        setSubviews(on: contentView, totalScoreLabel, gradeLabel, saveButton, editButton)
         
         backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 15

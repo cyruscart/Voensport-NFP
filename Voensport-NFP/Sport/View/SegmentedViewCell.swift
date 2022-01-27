@@ -9,6 +9,7 @@ import UIKit
 
 class SegmentedViewCell: UITableViewCell {
     static let identifier = "SegmentedViewCell"
+    
     var callBack: ((Int) -> Void)?
     
     let ageSegmentedControl: UISegmentedControl = {
@@ -33,8 +34,7 @@ class SegmentedViewCell: UITableViewCell {
     }
     
     private func setupCell() {
-        ageSegmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(ageSegmentedControl)
+        setSubviews(on: contentView, ageSegmentedControl)
         
         NSLayoutConstraint.activate([
             ageSegmentedControl.topAnchor.constraint(equalTo: topAnchor, constant: 5),

@@ -1,5 +1,5 @@
 //
-//  AlertController.swift
+//  AlertController+Extension.swift
 //  Voensport-NFP
 //
 //  Created by Кирилл on 25.12.2021.
@@ -8,11 +8,11 @@
 import UIKit
 
 extension UIAlertController {
-
+    
     static func createMoneyAlertController(money: String) -> UIAlertController {
         let alert = UIAlertController(title: "\(money) \u{20BD}",
-                          message: "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)",
-                          preferredStyle: .actionSheet)
+                                      message: "составит ежемесячная надбавка к денежному довольствию (после вычета налогов)",
+                                      preferredStyle: .actionSheet)
         
         let closeAction = UIAlertAction(title: "Понятно", style: .cancel)
         alert.addAction(closeAction)
@@ -22,8 +22,8 @@ extension UIAlertController {
     
     static func createSettingsAlertController() -> UIAlertController {
         let alert = UIAlertController(title: "Введите данные",
-                          message: "Вы можете их изменить в настройках",
-                          preferredStyle: .alert)
+                                      message: "Вы можете их изменить в настройках",
+                                      preferredStyle: .alert)
         
         return alert
     }
@@ -69,12 +69,12 @@ extension UIAlertController {
 extension UIAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-      1
+        1
     }
     
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return pickerView.tag == 0
-        ? Tariff.tariff.count
+        ? Tariff.tariffs.count
         : SportGrade.paidSportGrade.count
     }
     
@@ -120,11 +120,11 @@ extension UIAlertController: UIPickerViewDelegate, UIPickerViewDataSource {
     @objc private func donePressed() {
         guard let tariffTF = textFields?.first else { return }
         tariffTF.resignFirstResponder()
-            
+        
         guard let sportGradeTF = textFields?.last else { return }
         sportGradeTF.resignFirstResponder()
-        }
-    
     }
     
+}
+
 

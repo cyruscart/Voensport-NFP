@@ -10,8 +10,8 @@ import UIKit
 class SwitchTableViewCell: UITableViewCell {
     static let identifier = "HapticTableViewCell"
     
-    var switchStatement = UISwitch()
-    var settingNameLabel = UILabel()
+    let switchStatement = UISwitch()
+    let settingNameLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -23,12 +23,8 @@ class SwitchTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     private func setupCell() {
-        [switchStatement, settingNameLabel].forEach { view in
-            view.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(view)
-        }
+        setSubviews(on: contentView, switchStatement, settingNameLabel)
         
         NSLayoutConstraint.activate([
             settingNameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),

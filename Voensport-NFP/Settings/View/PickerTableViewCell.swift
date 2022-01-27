@@ -23,8 +23,7 @@ class PickerTableViewCell: UITableViewCell {
     }
     
     private func setupCell() {
-        pickerTextField.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(pickerTextField)
+        setSubviews(on: contentView, pickerTextField)
         
         NSLayoutConstraint.activate([
             pickerTextField.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),

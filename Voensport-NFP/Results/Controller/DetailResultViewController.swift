@@ -16,7 +16,19 @@ final class DetailResultViewController: UIViewController  {
     var nfpResult: NfpResult?
     var editingResultIndexPath = IndexPath()
     var numberOfSectionForLayout = 3
+    
+    private var storage: ResultsStorageManager
     private var collectionView: UICollectionView!
+    
+    init() {
+        self.storage = ResultsStorageManager()
+
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,13 +39,16 @@ final class DetailResultViewController: UIViewController  {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: ResultsCompositionalLayout.createLayout(numberOfSection: numberOfSectionForLayout))
+        view.addSubview(collectionView)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.register(ResultExerciseCell.self, forCellWithReuseIdentifier: ResultExerciseCell.identifier)
         collectionView.register(ResultTotalScoreCell.self, forCellWithReuseIdentifier: ResultTotalScoreCell.identifier)
+        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
-        view.addSubview(collectionView)
     }
     
     private func setupNavigationBar() {
@@ -149,12 +164,12 @@ extension DetailResultViewController: UpdateUIAfterEditingDelegate {
     
     func updateUI(indexPath: IndexPath) {
         if let _ = nfpResult {
-            let updatedNfpResult = StorageManager.shared.getResults().nfpResults[indexPath.row]
+            let updatedNfpResult = storage.fetchResults().nfpResults[indexPath.row]
             nfpResult = updatedNfpResult
         }
         
         if let _ = sportResult {
-            let updatedSportResult = StorageManager.shared.getResults().sportResults[indexPath.row]
+            let updatedSportResult = storage.fetchResults().sportResults[indexPath.row]
             sportResult = updatedSportResult
         }
         

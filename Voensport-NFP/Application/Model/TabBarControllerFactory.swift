@@ -19,8 +19,7 @@ struct TabBarControllerFactory {
         let sportListVC = SportListViewController()
         let sportTabBarImage = UIImage(named: "sport")
         
-        let resultsController = StorageManager.shared.getResults()
-        let resultsVC = ResultsViewController(resultsController)
+        let resultsVC = ResultsViewController()
         let resultTabBarImage = UIImage(systemName: "rectangle.stack.fill")
         
         let aboutAppVC = AboutAppViewController()

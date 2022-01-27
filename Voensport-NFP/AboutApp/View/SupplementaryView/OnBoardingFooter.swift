@@ -35,10 +35,7 @@ final class OnBoardingFooter: UICollectionReusableView {
     }
     
     private func setupView() {
-        [nextButton, messageLabel].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            addSubview(subview)
-        }
+        setSubviews(on: self, nextButton, messageLabel)
         
         NSLayoutConstraint.activate([
             messageLabel.topAnchor.constraint(equalTo: topAnchor),

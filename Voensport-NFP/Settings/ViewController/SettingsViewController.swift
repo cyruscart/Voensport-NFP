@@ -9,6 +9,7 @@ import UIKit
 
 class SettingsViewController: UIViewController {
     var settings: Settings
+    
     private var tableView: UITableView!
     private var selectedSetting = ""
     
@@ -38,12 +39,15 @@ class SettingsViewController: UIViewController {
     
     private func setTableView() {
         tableView = UITableView(frame: view.bounds, style: .insetGrouped)
+        view.addSubview(tableView)
+        
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.register(SwitchTableViewCell.self, forCellReuseIdentifier: SwitchTableViewCell.identifier)
+        
         tableView.dataSource = self
         tableView.delegate = self
+        
         tableView.separatorStyle = .none
-        view.addSubview(tableView)
     }
     
     @objc private func hapticSwitchDidChange(hapticSwitch: UISwitch) {

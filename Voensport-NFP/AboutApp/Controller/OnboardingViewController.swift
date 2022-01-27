@@ -18,14 +18,17 @@ final class OnboardingViewController: UIViewController {
     
     private func setupCollectionView() {
         collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: OnboardingCompositionalLayout.createLayout())
+        view.addSubview(collectionView)
+        
         collectionView.delegate = self
         collectionView.dataSource = self
+        
         collectionView.register(OnboardingCell.self, forCellWithReuseIdentifier: OnboardingCell.identifier)
         collectionView.register(OnBoardingFooter.self, forSupplementaryViewOfKind: "OnBoardingFooter", withReuseIdentifier: OnBoardingFooter.identifier)
+        
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.showsVerticalScrollIndicator = false
         collectionView.isScrollEnabled = false
-        view.addSubview(collectionView)
     }
     
 }

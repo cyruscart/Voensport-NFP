@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Tariff: Codable {
-   static let tariff: [String: Double] = [
+struct Tariff {
+    static let tariffs: [String: Double] = [
         "1" : 11588, "2" : 12745, "3" : 13905, "4" : 15064, "5" : 17381, "6" : 18539, "7" : 19698, "8" : 20277,
         "9" : 20856, "10" : 23173, "11" : 23753, "12" : 24333, "13" : 24911, "14" : 25490, "15" : 26071, "16" : 26649,
         "17" : 27228, "18" : 27809, "19" : 28387, "20" : 28966, "21" : 29546, "22" : 30125, "23" : 30705, "24" : 31284,
@@ -19,6 +19,6 @@ struct Tariff: Codable {
     ]
     
     static var tariffNumbers: [Int] {
-        tariff.keys.map { Int($0) ?? 0}.sorted()
+        tariffs.keys.map { Int($0) ?? 0}.sorted()
     }
 }

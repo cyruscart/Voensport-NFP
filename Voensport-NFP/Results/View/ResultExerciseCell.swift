@@ -49,7 +49,6 @@ final class ResultExerciseCell: UICollectionViewCell {
         super.init(frame: frame)
         
         setupCell()
-        setupConstraints()
         backgroundColor = .systemBackground
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
@@ -63,13 +62,8 @@ final class ResultExerciseCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        [exerciseNameLabel, exerciseNumberLabel, resultLabel, scoreLabel].forEach { subview in
-            subview.translatesAutoresizingMaskIntoConstraints = false
-            contentView.addSubview(subview)
-        }
-    }
+        setSubviews(on: contentView, exerciseNameLabel, exerciseNumberLabel, resultLabel, scoreLabel)
     
-    private func setupConstraints() {
         NSLayoutConstraint.activate([
             exerciseNumberLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             exerciseNumberLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
@@ -91,7 +85,6 @@ final class ResultExerciseCell: UICollectionViewCell {
     }
     
     func configureCell(nfpExercise: NfpExercise) {
-        setupConstraints()
         exerciseNameLabel.text = nfpExercise.name
         exerciseNumberLabel.text = nfpExercise.number
         scoreLabel.text = "Баллов: \(nfpExercise.score)"

@@ -17,7 +17,6 @@ final class AboutImageCell: UICollectionViewCell {
         
         clipsToBounds = true
         setupCell()
-        setupConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -25,11 +24,8 @@ final class AboutImageCell: UICollectionViewCell {
     }
     
     private func setupCell() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(imageView)
-    }
-    
-    private func setupConstraints() {
+        setSubviews(on: contentView, imageView)
+        
         NSLayoutConstraint.activate([
             imageView.trailingAnchor.constraint(equalTo: trailingAnchor),
             imageView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -63,7 +59,7 @@ final class AboutImageCell: UICollectionViewCell {
         
         imageView.animationImages = logoImages
         imageView.animationDuration = 4
-        imageView.animationRepeatCount = 20
+        imageView.animationRepeatCount = 50
         imageView.startAnimating()
     }
 }
