@@ -140,6 +140,7 @@ extension DetailResultViewController {
         nfpVC.updateUIAfterEditingDelegate = self
         
         let navVC = UINavigationController(rootViewController: nfpVC)
+        navVC.modalPresentationStyle = .fullScreen
         present(navVC, animated: true, completion: nil)
     }
     

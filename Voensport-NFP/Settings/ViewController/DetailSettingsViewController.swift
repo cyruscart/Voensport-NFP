@@ -27,6 +27,7 @@ class DetailSettingsViewController: UIViewController {
         
         setNavigationTitle()
         setTableView()
+        print(currentSetting)
     }
     
     
@@ -76,7 +77,9 @@ extension DetailSettingsViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        currentSetting == "tariff" ? 1 : settings.getNumberOfRowsForDetailSettings(currentSetting)
+        currentSetting == "tariff"
+        ? 1
+        : settings.getNumberOfRowsForDetailSettings(currentSetting)
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

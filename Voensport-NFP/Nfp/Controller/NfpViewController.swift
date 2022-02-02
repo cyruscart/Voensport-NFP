@@ -9,9 +9,10 @@ import UIKit
 
 final class NfpViewController: UIViewController  {
     let nfpController: NfpController
-    private let storage: ResultsStorageManager
-    private let appStoreReviewManager: AppStoreReviewManager
-    private let onboardingManager: OnboardingManager
+
+    private let storage = ResultsStorageManager()
+    private let appStoreReviewManager = AppStoreReviewManager()
+    private let onboardingManager = OnboardingManager()
     
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     
@@ -21,9 +22,6 @@ final class NfpViewController: UIViewController  {
     
     init(_ nfpController: NfpController) {
         self.nfpController = nfpController
-        self.storage = ResultsStorageManager()
-        self.appStoreReviewManager = AppStoreReviewManager()
-        self.onboardingManager = OnboardingManager()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,7 +40,7 @@ final class NfpViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
@@ -57,7 +55,7 @@ final class NfpViewController: UIViewController  {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        
+
         shouldObserveVisibleCells = nfpController.isEditing
     }
     
@@ -123,11 +121,11 @@ final class NfpViewController: UIViewController  {
     //MARK: - Update UI
     
     private func updateCompositionalLayout() {
-        let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
-        
-        collectionView.setCollectionViewLayout(layout, animated: false)
-        collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
-        collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
+            let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
+            
+            collectionView.setCollectionViewLayout(layout, animated: false)
+            collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
+            collectionView.scrollToItem(at: IndexPath(item: 0, section: 0), at: .top , animated: false)
     }
     
     private func updateTotalScoreCell() {
@@ -270,6 +268,7 @@ extension NfpViewController: UICollectionViewDelegate {
         
         
         if shouldReplaceSelectedItem {
+            print("willDisplay update")
             updateSelectedExercises(collectionView, forItemAt: indexPath)
             updateSupplementaryView(collectionView, indexPath: indexPath)
         }
@@ -301,6 +300,7 @@ extension NfpViewController: UICollectionViewDelegate {
         let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !isDidEndDisplayingTotalScoreCell && !nfpController.isEditing
         
         if shouldReplaceSelectedItem {
+            print("DidEndDisplay update")
             if indexPath.row == 2 && isCellScrollToLeft {
                 nfpController.selectedExercises[indexPath.section] = nfpController.exercises[indexPath.section][0]
                 updateSupplementaryView(collectionView, indexPath: indexPath)

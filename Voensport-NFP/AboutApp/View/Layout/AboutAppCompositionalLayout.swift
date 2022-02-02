@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class AboutAppCompositionalLayout: UICollectionViewCompositionalLayout {
+final class AboutAppCompositionalLayout {
     static func createLayout() -> UICollectionViewCompositionalLayout {
         
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in

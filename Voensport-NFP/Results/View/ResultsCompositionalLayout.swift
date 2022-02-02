@@ -7,7 +7,8 @@
 
 import UIKit
 
-final class ResultsCompositionalLayout: UICollectionViewCompositionalLayout {
+final class ResultsCompositionalLayout {
+    
     static func createLayout(numberOfSection: Int) -> UICollectionViewCompositionalLayout {
         let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             let sectionKind = Array(0...numberOfSection)[sectionIndex]
