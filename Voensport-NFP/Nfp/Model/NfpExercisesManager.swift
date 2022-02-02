@@ -49,22 +49,15 @@ class NfpExercisesManager {
         var sortedExercises = exercises
         let lastExercises = nfpResult.nfpExercises
         
-        // exerciseIndex - индекс массива упражнений одного типа
-        
         for exerciseIndex in 0..<exercises.count {
-            // упражнение из последнего сохраненного результата
             let lastExercise = lastExercises[exerciseIndex]
-            // массив упражнений одного типа
             var oneTypeExercises = exercises[exerciseIndex]
-            // индекс нужного упражнения в массиве
+            
             guard let needExerciseIndex = (oneTypeExercises.firstIndex { $0.name == lastExercise.name }) else { return exercises }
-            // удаление нужного упражнения из массива
             oneTypeExercises.remove(at: needExerciseIndex)
-            // установка дефолтного значения score
             lastExercise.score = 0
-            // вставка упражнения в начало массива упражнений одного типа
+            
             oneTypeExercises.insert(lastExercise, at: 0)
-            // замена полученного массива упражнений одного типа
             sortedExercises[exerciseIndex] = oneTypeExercises
         }
         return sortedExercises

@@ -8,7 +8,6 @@
 import Foundation
 
 final class Settings: Codable {
-    
     var sex: Sex = .male
     var maleAgeCategory: MaleAgeCategory = .firstAgeGroup
     var femaleAgeCategory: FemaleAgeCategory = .firstAgeGroup
@@ -17,8 +16,7 @@ final class Settings: Codable {
     var hapticOn = true
     var tariff = 0
     var sportGrade: SportGrade = .withoutGrade
-//    var shouldShowOnboarding = true
-    
+
     var sectionKind: [Int] {
         Array(0..<getIntegerNumberOfExercises())
     }

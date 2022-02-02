@@ -9,9 +9,10 @@ import UIKit
 
 final class NfpViewController: UIViewController  {
     let nfpController: NfpController
-    private let storage: ResultsStorageManager
-    private let appStoreReviewManager: AppStoreReviewManager
-    private let onboardingManager: OnboardingManager
+
+    private let storage = ResultsStorageManager()
+    private let appStoreReviewManager = AppStoreReviewManager()
+    private let onboardingManager = OnboardingManager()
     
     var updateUIAfterEditingDelegate: UpdateUIAfterEditingDelegate?
     
@@ -21,9 +22,6 @@ final class NfpViewController: UIViewController  {
     
     init(_ nfpController: NfpController) {
         self.nfpController = nfpController
-        self.storage = ResultsStorageManager()
-        self.appStoreReviewManager = AppStoreReviewManager()
-        self.onboardingManager = OnboardingManager()
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -42,7 +40,7 @@ final class NfpViewController: UIViewController  {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
+        
         navigationController?.navigationBar.prefersLargeTitles = true
         nfpController.loadInitialData()
         updateCompositionalLayout()
@@ -57,7 +55,7 @@ final class NfpViewController: UIViewController  {
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        print("viewDidDisappear")
+
         shouldObserveVisibleCells = nfpController.isEditing
     }
     
