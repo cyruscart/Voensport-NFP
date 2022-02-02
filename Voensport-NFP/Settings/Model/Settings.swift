@@ -17,7 +17,7 @@ final class Settings: Codable {
     var hapticOn = true
     var tariff = 0
     var sportGrade: SportGrade = .withoutGrade
-    var shouldShowOnboarding = true
+//    var shouldShowOnboarding = true
     
     var sectionKind: [Int] {
         Array(0..<getIntegerNumberOfExercises())
@@ -68,7 +68,8 @@ final class Settings: Codable {
         maleAgeCategory == .secondAgeGroup ||
         maleAgeCategory == .thirdAgeGroup ||
         maleAgeCategory == .fourthAgeGroup ||
-        maleAgeCategory == .fifthAgeGroup
+        maleAgeCategory == .fifthAgeGroup ||
+        femaleAgeCategory == .candidate
     }
     
     private var shouldShowOnlySexAndAge: Bool {
@@ -157,7 +158,9 @@ final class Settings: Codable {
         case "femaleAge":
             femaleAgeCategory = FemaleAgeCategory.allCases[indexPath.row]
         case "numberOfExercise":
+            print(numberOfExercise)
             numberOfExercise = NumberOfExercise.allCases[indexPath.row]
+            print(numberOfExercise)
         default:
             category = Category.allCases[indexPath.row]
         }
@@ -244,7 +247,7 @@ final class Settings: Codable {
     }
     
     func setNumberOfExercise() {
-        if sex == .female || shouldShowCategoryInsteadExercise {
+        if (sex == .female && femaleAgeCategory != .candidate) || shouldShowCategoryInsteadExercise {
             numberOfExercise = .three
         }
     }
