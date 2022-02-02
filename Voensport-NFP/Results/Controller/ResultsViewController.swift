@@ -25,6 +25,7 @@ final class ResultsViewController: UIViewController {
     }
     
     override func viewDidLoad() {
+        print("ResultsViewController viewDidLoad")
         super.viewDidLoad()
         
         navigationController?.navigationBar.prefersLargeTitles = true
@@ -34,6 +35,7 @@ final class ResultsViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        print("ResultsViewController viewWillAppear")
       
         resultsController = storage.fetchResults()
         tableView.reloadData()

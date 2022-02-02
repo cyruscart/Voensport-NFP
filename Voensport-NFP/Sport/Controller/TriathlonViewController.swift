@@ -122,6 +122,7 @@ class TriathlonViewController: UIViewController {
         let descriptionVC = DescriptionViewController()
         descriptionVC.configure(with: Info.triathlonInfo)
         present(descriptionVC, animated: true)
+        view.endEditing(true)
     }
 }
 

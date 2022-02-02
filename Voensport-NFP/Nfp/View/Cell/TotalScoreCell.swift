@@ -72,7 +72,7 @@ class TotalScoreCell: UICollectionViewCell {
         setupCell()
         setupConstraints()
         
-        backgroundColor = .systemBackground
+        backgroundColor = UIColor.cellColor(style: traitCollection.userInterfaceStyle)
         contentView.layer.cornerRadius = 15
         contentView.layer.masksToBounds = true
         layer.cornerRadius = 15
@@ -83,6 +83,12 @@ class TotalScoreCell: UICollectionViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        
+        backgroundColor = UIColor.cellColor(style: traitCollection.userInterfaceStyle)
     }
     
     private func setupCell() {

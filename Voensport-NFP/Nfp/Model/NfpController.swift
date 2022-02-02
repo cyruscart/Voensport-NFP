@@ -9,16 +9,15 @@ import Foundation
 
 final class NfpController {
     let settings: Settings
-    let nfpCalculator: NfpCalculator
-    let moneyCalculator: MoneyCalculator
+    let nfpCalculator = NfpCalculator()
+    let moneyCalculator = MoneyCalculator()
+    let nfpExercisesManager = NfpExercisesManager()
     
     var exercises: [[NfpExercise]] = []
     var selectedExercises: [NfpExercise] = []
     var isEditing = false
     var editingResultIndex = IndexPath()
     var editingResultDate = ""
-    
-    private let dataFetcher: NfpDataFetcher
     
     var date: String {
         return isEditing ? editingResultDate : getDate()
@@ -30,9 +29,6 @@ final class NfpController {
     
     init(settings: Settings) {
         self.settings = settings
-        dataFetcher = NfpDataFetcher()
-        moneyCalculator = MoneyCalculator()
-        nfpCalculator = NfpCalculator()
         nfpCalculator.settings = settings
     }
     
@@ -40,7 +36,7 @@ final class NfpController {
     
     func loadInitialData() {
         if !isEditing {
-            loadExercises()
+            exercises = nfpExercisesManager.getExercises(settings)
         }
         loadInitialSelectedExercise()
     }
@@ -52,36 +48,6 @@ final class NfpController {
                 selectedExercises.append(exercise)
             }
         }
-    }
-    
-    private func loadExercises() {
-        var exerciseTypes: [ExerciseType] = [.speed, .power, .endurance, .militarySkill, .agility]
-        var exercisesList: [[NfpExercise]] = []
-        
-        for _ in 1...settings.getIntegerNumberOfExercises() {
-            guard let exercisesFromJSON = dataFetcher.fetchNfpExercisesFromJsonFile(settings.sex) else { return }
-            var exercises: [NfpExercise] = []
-            
-            exerciseTypes.forEach { type in
-                if settings.sex == .male {
-                    exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
-                    
-                    exercises = settings.isManOlderThirtyFive
-                    ? exercises.filter { $0.forManOlderThirtyFive != false }
-                    : exercises.filter { $0.forManOlderThirtyFive != true }
-                } else {
-                    exercises.append(contentsOf: exercisesFromJSON.filter { $0.type == type })
-                    
-                    exercises = settings.isWomanOlderThirty
-                    ? exercises.filter { $0.forWomanOlderThirty != false }
-                    : exercises.filter { $0.forWomanOlderThirty != true }
-                }
-            }
-            let changingType = exerciseTypes.removeFirst()
-            exerciseTypes.append(changingType)
-            exercisesList.append(exercises)
-        }
-        exercises = exercisesList
     }
     
     
