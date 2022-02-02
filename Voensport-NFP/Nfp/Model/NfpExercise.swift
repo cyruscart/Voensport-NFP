@@ -33,4 +33,7 @@ final class NfpExercise: Codable {
         scoreList.values.sorted()
     }
     
+    deinit {
+        print("deinit ex - \(number)")
+    }
 }
