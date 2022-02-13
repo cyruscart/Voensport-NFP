@@ -26,7 +26,7 @@ class SportDataFetcher {
     }
     
     func fetchWinterTriathlonExercises() -> [TriathlonExercise]? {
-        guard let data = dataFetcher.getDataFromJSON(file: "SummerTriathlonExercises") else { return nil }
+        guard let data = dataFetcher.getDataFromJSON(file: "WinterTriathlonExercises") else { return nil }
         guard let exercises = try? JSONDecoder().decode([TriathlonExercise].self, from: data) else { return nil }
         
         return exercises
