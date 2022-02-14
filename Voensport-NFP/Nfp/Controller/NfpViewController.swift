@@ -60,7 +60,7 @@ final class NfpViewController: UIViewController  {
     }
     
     private func setupCollectionView() {
-        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises()))
+        collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.numberOfExercise.getIntegerNumberOfExercises()))
         view.addSubview(collectionView)
         
         collectionView.delegate = self
@@ -121,7 +121,7 @@ final class NfpViewController: UIViewController  {
     //MARK: - Update UI
     
     private func updateCompositionalLayout() {
-            let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.getIntegerNumberOfExercises())
+        let layout = NfpCompositionalLayout.createLayout(numberOfSections: nfpController.settings.numberOfExercise.getIntegerNumberOfExercises())
             
             collectionView.setCollectionViewLayout(layout, animated: false)
             collectionView.scrollToItem(at: IndexPath(item: 4, section: 0), at: .top , animated: false)
@@ -194,17 +194,17 @@ final class NfpViewController: UIViewController  {
 extension NfpViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        nfpController.settings.getIntegerNumberOfExercises() + 1
+        nfpController.settings.numberOfExercise.getIntegerNumberOfExercises() + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        section == nfpController.settings.getIntegerNumberOfExercises()
+        section == nfpController.settings.numberOfExercise.getIntegerNumberOfExercises()
         ? 1
         : nfpController.exercises[section].count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.section == nfpController.settings.getIntegerNumberOfExercises() {
+        if indexPath.section == nfpController.settings.numberOfExercise.getIntegerNumberOfExercises() {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: TotalScoreCell.identifier, for: indexPath) as! TotalScoreCell
             cell.configureCell(with: self.nfpController)
             cell.moneyButton.alpha = nfpController.shouldCalculateMoney() ? 1 : 0.4
@@ -294,7 +294,7 @@ extension NfpViewController: UICollectionViewDelegate {
         let isCellScrollToLeft = indexPath.row > sortedIndexPathForVisibleItems.first?.row ?? 0
         
         
-        let isDidEndDisplayingTotalScoreCell = indexPath.section == nfpController.settings.getIntegerNumberOfExercises()
+        let isDidEndDisplayingTotalScoreCell = indexPath.section == nfpController.settings.numberOfExercise.getIntegerNumberOfExercises()
         
         
         let shouldReplaceSelectedItem = shouldObserveVisibleCells && !collectionView.isDragging && !collectionView.isTracking && !collectionView.isDecelerating && !isDidEndDisplayingTotalScoreCell && !nfpController.isEditing

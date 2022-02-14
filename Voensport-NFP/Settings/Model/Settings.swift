@@ -18,7 +18,7 @@ final class Settings: Codable {
     var sportGrade: SportGrade = .withoutGrade
 
     var sectionKind: [Int] {
-        Array(0..<getIntegerNumberOfExercises())
+        Array(0..<numberOfExercise.getIntegerNumberOfExercises())
     }
     
     var isManOlderThirtyFive: Bool {
@@ -110,14 +110,6 @@ final class Settings: Codable {
             return [NumberOfExercise.three, NumberOfExercise.four]
         } else {
             return NumberOfExercise.allCases
-        }
-    }
-    
-    func getIntegerNumberOfExercises() -> Int {
-        switch numberOfExercise {
-        case .three: return 3
-        case .four: return 4
-        case .five: return 5
         }
     }
     

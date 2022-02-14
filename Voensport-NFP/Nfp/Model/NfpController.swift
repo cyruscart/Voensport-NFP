@@ -93,7 +93,7 @@ final class NfpController {
     }
     
     func getTitleForSection(with section: Int) -> String {
-        section == settings.getIntegerNumberOfExercises()
+        section == settings.numberOfExercise.getIntegerNumberOfExercises()
         ? ""
         : "\(["1 упражнение", "2 упражнение", "3 упражнение", "4 упражнение", "5 упражнение"][section])"
     }

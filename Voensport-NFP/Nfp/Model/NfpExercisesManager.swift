@@ -15,7 +15,7 @@ class NfpExercisesManager {
         var exerciseTypes: [ExerciseType] = [.speed, .power, .endurance, .militarySkill, .agility]
         var exercisesList: [[NfpExercise]] = []
         
-        for _ in 1...settings.getIntegerNumberOfExercises() {
+        for _ in 1...settings.numberOfExercise.getIntegerNumberOfExercises() {
             guard let exercisesFromJSON = dataFetcher.fetchNfpExercisesFromJsonFile(settings.sex) else { return []}
             var exercises: [NfpExercise] = []
             
