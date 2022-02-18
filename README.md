@@ -10,6 +10,10 @@
 ![3 2](https://user-images.githubusercontent.com/89061511/149820141-09696caa-8751-49ff-93e9-a8387814732a.png)
 ![4 2](https://user-images.githubusercontent.com/89061511/149820146-549aae99-73b6-4e89-94ea-b667ffd5300d.png)
 
+Приложение в AppStore: https://apps.apple.com/ru/app/военспорт-нфп/id1605099572
+
+![qr-code](https://user-images.githubusercontent.com/89061511/154671423-7b53ea0d-3d88-43bf-8c7f-ce8d20c413cb.png)
+
 
 По всем вопросам и предложениям обращаться:
 
