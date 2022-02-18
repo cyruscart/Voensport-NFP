@@ -12,8 +12,6 @@
 
 Приложение в AppStore: https://apps.apple.com/ru/app/военспорт-нфп/id1605099572
 
-![qr-code](https://user-images.githubusercontent.com/89061511/154671423-7b53ea0d-3d88-43bf-8c7f-ce8d20c413cb.png)
-
 
 По всем вопросам и предложениям обращаться:
 
