@@ -619,7 +619,7 @@ final class NfpCalculator {
                     localGrade = Grade.four.rawValue
                 case 250...269:
                     localGrade = Grade.five.rawValue
-                case 270...379:
+                case 270...279:
                     localGrade = Grade.secondLevel.rawValue
                 case 280...289:
                     localGrade = Grade.firstLevel.rawValue

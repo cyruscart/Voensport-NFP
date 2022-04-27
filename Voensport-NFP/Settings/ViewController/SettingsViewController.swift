@@ -13,6 +13,8 @@ class SettingsViewController: UIViewController {
     private var tableView: UITableView!
     private var selectedSetting = ""
     
+    private var storage = SettingsStorageManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Настройки"
@@ -35,6 +37,12 @@ class SettingsViewController: UIViewController {
         
         settings.setNumberOfExercise()
         tableView.reloadData()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        storage.save(settings)
     }
     
     private func setTableView() {
